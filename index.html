@@ -1,439 +1,1081 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>ĐỖ NGUYỆN VỌNG 1 ĐÓ</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kingda – Công Ty TNHH Thương Mại Công Nghệ</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 <style>
-  /* Reset & full màn hình */
-  html, body {
-    margin:0; padding:0; overflow:hidden; background: #000;
-    height: 100vh; width: 100vw;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent; /* Mobile no highlight */
-    -webkit-touch-callout: none; /* Disable callout */
-    touch-action: manipulation; /* Faster touch response */
+  :root {
+    --blue-dark: #0a2540;
+    --blue-mid: #0e4f8f;
+    --blue-brand: #1672cc;
+    --blue-light: #4fa3e0;
+    --cyan: #00c6ff;
+    --white: #ffffff;
+    --gray-soft: #f0f4f8;
+    --gray-text: #64748b;
+    --gold: #e8b94a;
+    --transition: 0.5s cubic-bezier(.25,.8,.25,1);
   }
-  canvas {
-    display: block;
-    position: absolute;
-    top:0; left:0;
-    width: 100vw;
-    height: 100vh;
-    background: radial-gradient(ellipse at center, #000 0%, #01010a 100%);
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--blue-dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 60px;
+    height: 70px;
+    background: rgba(10,37,64,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+  .nav-logo-circle {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue-brand), var(--cyan));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 800;
+    color: white; letter-spacing: 0.5px;
+  }
+  .nav-logo-text {
+    font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700;
+    color: white; letter-spacing: 1px;
+  }
+  .nav-links {
+    display: flex; gap: 36px; list-style: none;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none; font-size: 13.5px; font-weight: 500;
+    letter-spacing: 0.5px; text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--cyan); }
+  .nav-cta {
+    background: linear-gradient(135deg, var(--blue-brand), var(--cyan));
+    color: white; border: none; padding: 9px 22px; border-radius: 30px;
+    font-size: 13px; font-weight: 600; cursor: pointer; letter-spacing: 0.5px;
+    transition: opacity 0.3s;
+  }
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--blue-dark);
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(22,114,204,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 80% at 10% 80%, rgba(0,198,255,0.18) 0%, transparent 60%),
+      linear-gradient(135deg, #061525 0%, #0a2540 50%, #0d3a6a 100%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; opacity: 0.07;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  /* animated triangles */
+  .hero-shape {
+    position: absolute; opacity: 0.12;
+    animation: float 8s ease-in-out infinite;
+  }
+  .hero-shape:nth-child(1) { width: 180px; height: 180px; top: 10%; right: 15%; animation-delay: 0s; }
+  .hero-shape:nth-child(2) { width: 100px; height: 100px; top: 60%; right: 30%; animation-delay: -3s; }
+  .hero-shape:nth-child(3) { width: 60px; height: 60px; bottom: 20%; left: 10%; animation-delay: -5s; }
+  .hero-shape svg { width: 100%; height: 100%; }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    33% { transform: translateY(-20px) rotate(5deg); }
+    66% { transform: translateY(10px) rotate(-3deg); }
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center; padding: 0 20px;
+    max-width: 900px;
+    animation: heroIn 1.2s ease both;
+  }
+  @keyframes heroIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(0,198,255,0.15);
+    border: 1px solid rgba(0,198,255,0.4);
+    color: var(--cyan);
+    font-size: 12px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; padding: 6px 18px; border-radius: 30px;
+    margin-bottom: 28px;
+  }
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(38px, 6vw, 78px);
+    font-weight: 800; color: white; line-height: 1.08;
+    letter-spacing: -1px; margin-bottom: 24px;
+  }
+  .hero-title span { color: var(--cyan); }
+  .hero-sub {
+    font-size: 18px; color: rgba(255,255,255,0.65);
+    line-height: 1.7; margin-bottom: 44px; max-width: 620px; margin-inline: auto;
+  }
+  .hero-buttons {
+    display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--blue-brand), var(--cyan));
+    color: white; padding: 14px 36px; border-radius: 40px;
+    font-size: 15px; font-weight: 600; text-decoration: none;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 8px 30px rgba(22,114,204,0.5);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(22,114,204,0.7); }
+  .btn-outline {
+    border: 1.5px solid rgba(255,255,255,0.3); color: white;
+    padding: 14px 36px; border-radius: 40px; font-size: 15px; font-weight: 600;
+    text-decoration: none; transition: border-color 0.3s, background 0.3s;
+    backdrop-filter: blur(4px);
+  }
+  .btn-outline:hover { border-color: var(--cyan); background: rgba(0,198,255,0.08); }
+
+  .hero-stats {
+    position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 60px;
+    animation: heroIn 1.2s ease 0.4s both;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat-num {
+    font-family: 'Syne', sans-serif; font-size: 32px; font-weight: 800;
+    color: white; line-height: 1;
+  }
+  .hero-stat-num span { color: var(--cyan); }
+  .hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 6px; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* ── SECTION COMMONS ── */
+  section { padding: 100px 60px; }
+  .section-tag {
+    display: inline-block; font-size: 11.5px; font-weight: 700; letter-spacing: 3px;
+    text-transform: uppercase; color: var(--blue-brand);
+    background: rgba(22,114,204,0.08); padding: 6px 14px; border-radius: 4px;
+    margin-bottom: 18px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 46px); font-weight: 700;
+    color: var(--blue-dark); line-height: 1.15; margin-bottom: 18px;
+  }
+  .section-desc {
+    font-size: 16px; color: var(--gray-text); line-height: 1.8;
+    max-width: 580px;
+  }
+  .divider {
+    width: 52px; height: 3px; border-radius: 2px;
+    background: linear-gradient(90deg, var(--blue-brand), var(--cyan));
+    margin: 18px 0 28px;
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    background: var(--gray-soft);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .about-img-wrap {
+    position: relative;
+  }
+  .about-img-main {
+    width: 100%; height: 420px; object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 30px 80px rgba(10,37,64,0.18);
+  }
+  .about-img-badge {
+    position: absolute; bottom: -24px; right: -24px;
+    background: var(--blue-dark); color: white;
+    padding: 20px 28px; border-radius: 12px;
+    box-shadow: 0 16px 40px rgba(10,37,64,0.3);
+  }
+  .about-img-badge .big { font-family: 'Syne',sans-serif; font-size: 40px; font-weight: 800; color: var(--cyan); line-height:1; }
+  .about-img-badge .small { font-size: 13px; color: rgba(255,255,255,0.7); }
+  .about-features {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 36px;
+  }
+  .about-feature {
+    background: white; border-radius: 12px; padding: 20px;
+    border-left: 3px solid var(--blue-brand);
+    box-shadow: 0 4px 16px rgba(10,37,64,0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .about-feature:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(10,37,64,0.1); }
+  .about-feature h4 { font-size: 14px; font-weight: 700; color: var(--blue-dark); margin-bottom: 6px; }
+  .about-feature p { font-size: 12.5px; color: var(--gray-text); line-height: 1.6; }
+  .iso-badges { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
+  .iso-badge {
+    border: 1.5px solid var(--blue-brand); color: var(--blue-brand);
+    font-size: 11px; font-weight: 700; padding: 5px 14px; border-radius: 20px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline { background: var(--blue-dark); }
+  .timeline .section-title { color: white; }
+  .timeline .section-desc { color: rgba(255,255,255,0.6); }
+  .timeline .section-tag { background: rgba(0,198,255,0.12); color: var(--cyan); }
+  .tl-track {
+    position: relative; margin-top: 60px;
+    display: grid; grid-template-columns: repeat(7,1fr); gap: 0;
+  }
+  .tl-track::before {
+    content: ''; position: absolute; top: 36px; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--blue-brand), var(--cyan));
+    z-index: 0;
+  }
+  .tl-item {
+    position: relative; text-align: center; padding: 0 10px;
+  }
+  .tl-dot {
+    width: 18px; height: 18px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue-brand), var(--cyan));
+    margin: 27px auto 0;
+    position: relative; z-index: 1;
+    box-shadow: 0 0 0 4px rgba(22,114,204,0.25);
+    transition: transform 0.3s;
+  }
+  .tl-item:hover .tl-dot { transform: scale(1.4); }
+  .tl-year {
+    font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 800;
+    color: var(--cyan); margin-top: 16px;
+  }
+  .tl-text {
+    font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 8px; line-height: 1.6;
+  }
+
+  /* ── CULTURE ── */
+  .culture {
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: center;
+    background: white;
+  }
+  .culture-cards {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+  }
+  .culture-card {
+    background: var(--gray-soft); border-radius: 14px; padding: 26px;
+    position: relative; overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .culture-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--blue-brand), var(--cyan));
+  }
+  .culture-card:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(10,37,64,0.1); }
+  .culture-card-icon { font-size: 28px; margin-bottom: 14px; }
+  .culture-card h3 {
+    font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 800;
+    color: var(--blue-dark); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;
+  }
+  .culture-card p { font-size: 13px; color: var(--gray-text); line-height: 1.7; }
+  .culture-img {
+    width: 100%; height: 500px; object-fit: cover; border-radius: 20px;
+    box-shadow: 0 30px 80px rgba(10,37,64,0.15);
+  }
+
+  /* ── ADVANTAGES ── */
+  .advantages { background: var(--gray-soft); }
+  .advantages-grid {
+    display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; margin-top: 60px;
+  }
+  .adv-card {
+    background: white; border-radius: 16px; padding: 36px 28px;
+    box-shadow: 0 4px 24px rgba(10,37,64,0.06);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .adv-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--blue-brand), var(--cyan));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .adv-card:hover { transform: translateY(-6px); box-shadow: 0 18px 50px rgba(10,37,64,0.12); }
+  .adv-card:hover::after { transform: scaleX(1); }
+  .adv-icon {
+    width: 56px; height: 56px; border-radius: 14px;
+    background: linear-gradient(135deg, rgba(22,114,204,0.1), rgba(0,198,255,0.12));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; margin-bottom: 20px;
+  }
+  .adv-card h3 {
+    font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700;
+    color: var(--blue-dark); margin-bottom: 12px;
+  }
+  .adv-card p { font-size: 13.5px; color: var(--gray-text); line-height: 1.8; }
+
+  /* ── PRODUCTS ── */
+  .products { background: var(--blue-dark); }
+  .products .section-title { color: white; }
+  .products .section-desc { color: rgba(255,255,255,0.6); }
+  .products .section-tag { background: rgba(0,198,255,0.12); color: var(--cyan); }
+  .products .divider { background: linear-gradient(90deg, var(--cyan), white); }
+  .products-tabs {
+    display: flex; gap: 8px; margin: 40px 0 32px; flex-wrap: wrap;
+  }
+  .ptab {
+    background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.65);
+    border: 1px solid rgba(255,255,255,0.1); padding: 9px 22px; border-radius: 30px;
+    font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.3s;
+  }
+  .ptab.active, .ptab:hover {
+    background: linear-gradient(135deg, var(--blue-brand), var(--cyan));
+    color: white; border-color: transparent;
+  }
+  .products-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  }
+  .prod-card {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px; overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .prod-card:hover { transform: translateY(-6px); border-color: rgba(0,198,255,0.3); }
+  .prod-img {
+    width: 100%; height: 200px; object-fit: cover; display: block;
+    filter: brightness(0.85) saturate(1.1);
+  }
+  .prod-body { padding: 24px; }
+  .prod-tag {
+    font-size: 10.5px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--cyan); margin-bottom: 8px;
+  }
+  .prod-name {
+    font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700;
+    color: white; margin-bottom: 10px;
+  }
+  .prod-desc { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.7; }
+  .prod-features { margin-top: 16px; display: flex; flex-direction: column; gap: 6px; }
+  .prod-feat {
+    font-size: 12px; color: rgba(255,255,255,0.5);
+    display: flex; align-items: center; gap: 7px;
+  }
+  .prod-feat::before {
+    content: '✓'; color: var(--cyan); font-weight: 700; font-size: 11px;
+    flex-shrink: 0;
+  }
+
+  /* ── CLIENTS ── */
+  .clients { background: white; text-align: center; }
+  .clients .section-title { margin-inline: auto; }
+  .clients .section-desc { margin-inline: auto; }
+  .clients .divider { margin-inline: auto; }
+  .clients-marquee-wrap {
+    overflow: hidden; margin-top: 56px;
+    mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+  }
+  .clients-track {
+    display: flex; gap: 40px; align-items: center;
+    animation: marquee 22s linear infinite;
+    width: max-content;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .client-logo {
+    background: var(--gray-soft); border-radius: 12px;
+    padding: 18px 30px; display: flex; align-items: center; justify-content: center;
+    min-width: 150px; height: 70px;
+    font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 800;
+    color: var(--blue-dark); letter-spacing: 0.5px;
+    border: 1px solid rgba(10,37,64,0.06);
+    transition: background 0.3s, color 0.3s;
+    white-space: nowrap;
+  }
+  .client-logo:hover {
+    background: var(--blue-dark); color: var(--cyan);
+  }
+
+  /* ── CERTIFICATIONS ── */
+  .certs {
+    background: var(--gray-soft);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .certs-grid {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 18px;
+  }
+  .cert-card {
+    background: white; border-radius: 14px; padding: 24px 20px; text-align: center;
+    box-shadow: 0 4px 16px rgba(10,37,64,0.08);
+    border-top: 3px solid var(--blue-brand);
+    transition: transform 0.3s;
+  }
+  .cert-card:hover { transform: scale(1.04); }
+  .cert-card .cert-icon { font-size: 30px; margin-bottom: 12px; }
+  .cert-card h4 { font-family:'Syne',sans-serif; font-size: 13px; font-weight: 800; color: var(--blue-dark); }
+  .cert-card p { font-size: 11.5px; color: var(--gray-text); margin-top: 6px; }
+  .patents-row {
+    display: flex; gap: 20px; margin-top: 32px;
+  }
+  .patent-box {
+    flex: 1; background: white; border-radius: 14px; padding: 20px;
+    text-align: center; box-shadow: 0 4px 16px rgba(10,37,64,0.06);
+  }
+  .patent-box .num {
+    font-family: 'Syne', sans-serif; font-size: 34px; font-weight: 800;
+    color: var(--blue-brand); line-height: 1;
+  }
+  .patent-box .lbl { font-size: 12px; color: var(--gray-text); margin-top: 6px; line-height: 1.5; }
+
+  /* ── CONTACT ── */
+  .contact {
+    background: var(--blue-dark); color: white;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+  }
+  .contact .section-title { color: white; }
+  .contact .section-desc { color: rgba(255,255,255,0.6); }
+  .contact .section-tag { background: rgba(0,198,255,0.12); color: var(--cyan); }
+  .contact .divider { background: linear-gradient(90deg, var(--cyan), white); }
+  .contact-info { margin-top: 36px; display: flex; flex-direction: column; gap: 20px; }
+  .contact-item {
+    display: flex; align-items: flex-start; gap: 16px;
+  }
+  .contact-item-icon {
+    width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+    background: rgba(0,198,255,0.12); border: 1px solid rgba(0,198,255,0.2);
+    display: flex; align-items: center; justify-content: center; font-size: 18px;
+  }
+  .contact-item-text h4 { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+  .contact-item-text p { font-size: 15px; color: white; line-height: 1.5; }
+  .contact-form {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px; padding: 40px;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .form-field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+  .form-field label { font-size: 12.5px; color: rgba(255,255,255,0.6); font-weight: 500; }
+  .form-field input, .form-field textarea {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px; padding: 12px 16px; color: white; font-size: 14px;
+    font-family: 'DM Sans', sans-serif; outline: none;
+    transition: border-color 0.3s;
+  }
+  .form-field input:focus, .form-field textarea:focus {
+    border-color: var(--cyan);
+  }
+  .form-field textarea { resize: none; height: 110px; }
+  .form-submit {
+    width: 100%;
+    background: linear-gradient(135deg, var(--blue-brand), var(--cyan));
+    color: white; border: none; padding: 14px; border-radius: 10px;
+    font-size: 15px; font-weight: 600; cursor: pointer; font-family: 'DM Sans',sans-serif;
+    transition: opacity 0.3s;
+  }
+  .form-submit:hover { opacity: 0.85; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #060f1a; padding: 40px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .footer-logo {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .footer-logo-circle {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue-brand), var(--cyan));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne',sans-serif; font-size: 11px; font-weight: 800; color: white;
+  }
+  .footer-logo-text { font-family:'Syne',sans-serif; font-size:16px; font-weight:700; color:white; }
+  footer p { font-size: 13px; color: rgba(255,255,255,0.4); }
+  .footer-links { display: flex; gap: 28px; }
+  .footer-links a { font-size: 13px; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.3s; }
+  .footer-links a:hover { color: var(--cyan); }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal {
+    opacity: 0; transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1; transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+  .reveal-delay-3 { transition-delay: 0.45s; }
+  .reveal-delay-4 { transition-delay: 0.6s; }
+
+  @media (max-width: 1024px) {
+    section { padding: 70px 30px; }
+    nav { padding: 0 30px; }
+    .nav-links { display: none; }
+    .about, .culture, .certs, .contact { grid-template-columns: 1fr; gap: 40px; }
+    .tl-track { grid-template-columns: repeat(4,1fr); }
+    .tl-track .tl-item:nth-child(n+5) { display: none; }
+    .advantages-grid { grid-template-columns: 1fr 1fr; }
+    .products-grid { grid-template-columns: 1fr 1fr; }
+    footer { flex-direction: column; text-align: center; }
+    .hero-stats { gap: 30px; }
   }
 </style>
 </head>
 <body>
-<canvas id="canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-circle">KD</div>
+    <span class="nav-logo-text">KINGDA</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">Giới thiệu</a></li>
+    <li><a href="#products">Sản phẩm</a></li>
+    <li><a href="#advantages">Ưu thế</a></li>
+    <li><a href="#clients">Khách hàng</a></li>
+    <li><a href="#contact">Liên hệ</a></li>
+  </ul>
+  <button class="nav-cta">Liên hệ ngay</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <!-- decorative shapes -->
+  <div class="hero-shape"><svg viewBox="0 0 100 100"><polygon points="50,5 95,90 5,90" fill="rgba(0,198,255,0.8)"/></svg></div>
+  <div class="hero-shape"><svg viewBox="0 0 100 100"><polygon points="50,5 95,90 5,90" fill="rgba(22,114,204,0.9)"/></svg></div>
+  <div class="hero-shape"><svg viewBox="0 0 100 100"><polygon points="50,5 95,90 5,90" fill="rgba(0,198,255,0.7)"/></svg></div>
+
+  <div class="hero-content">
+    <div class="hero-badge">🏭 Công Ty TNHH Thương Mại Công Nghệ Kingda</div>
+    <h1 class="hero-title">
+      Giải Pháp Vật Liệu<br>
+      <span>In Điện Tử</span><br>Hàng Đầu
+    </h1>
+    <p class="hero-sub">
+      Hơn 15 năm nghiên cứu &amp; sản xuất mực in, sơn phủ chất lượng cao cho điện tử tiêu dùng, ô tô và smart home. Đối tác tin cậy của Huawei, Xiaomi, Samsung, BYD và hàng chục tập đoàn toàn cầu.
+    </p>
+    <div class="hero-buttons">
+      <a href="#products" class="btn-primary">Khám phá sản phẩm</a>
+      <a href="#about" class="btn-outline">Tìm hiểu thêm</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">15<span>+</span></div>
+      <div class="hero-stat-label">Năm kinh nghiệm</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">31<span>+</span></div>
+      <div class="hero-stat-label">Bằng sáng chế</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">20<span>+</span></div>
+      <div class="hero-stat-label">Đối tác lớn</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">3<span>x</span></div>
+      <div class="hero-stat-label">Chứng nhận ISO</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="reveal">
+    <span class="section-tag">Giới thiệu công ty</span>
+    <h2 class="section-title">Nền tảng vững chắc từ năm 2009</h2>
+    <div class="divider"></div>
+    <p class="section-desc">
+      Kingda là doanh nghiệp tư nhân chuyên về nghiên cứu, sản xuất, kinh doanh và cung cấp dịch vụ các sản phẩm mực in, sơn và vật liệu tương tự. Với vốn đăng ký 10 triệu NDT, công ty đã thiết lập quan hệ hợp tác bền vững với các thương hiệu hàng đầu thế giới.
+    </p>
+    <div class="about-features">
+      <div class="about-feature">
+        <h4>🔬 Nghiên cứu & Phát triển</h4>
+        <p>Trung tâm R&D hiện đại tại Songhu Zhigu với đội ngũ kỹ sư chuyên nghiệp</p>
+      </div>
+      <div class="about-feature">
+        <h4>🏭 Sản xuất chuẩn</h4>
+        <p>Nhà máy sản xuất quy mô lớn, dây chuyền hiện đại, kiểm soát chất lượng nghiêm ngặt</p>
+      </div>
+      <div class="about-feature">
+        <h4>🤝 Hợp tác học thuật</h4>
+        <p>Liên kết với Đại học Trịnh Châu, Đại học Hồ Nam trong các dự án nghiên cứu tiên tiến</p>
+      </div>
+      <div class="about-feature">
+        <h4>🌍 Mạng lưới toàn cầu</h4>
+        <p>Hiện diện tại Thâm Quyến, Đông Quan và Bắc Ninh – Việt Nam</p>
+      </div>
+    </div>
+    <div class="iso-badges">
+      <span class="iso-badge">ISO 9001:2015</span>
+      <span class="iso-badge">ISO 14001:2015</span>
+      <span class="iso-badge">ISO 45001:2018</span>
+      <span class="iso-badge">UL Certified</span>
+    </div>
+  </div>
+  <div class="about-img-wrap reveal reveal-delay-2">
+    <img class="about-img-main"
+      src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=700&q=80"
+      alt="Kingda facility" />
+    <div class="about-img-badge">
+      <div class="big">10M</div>
+      <div class="small">NDT vốn đăng ký</div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline" id="timeline">
+  <div class="reveal" style="text-align:center; max-width:700px; margin:0 auto 0;">
+    <span class="section-tag">Lịch sử phát triển</span>
+    <h2 class="section-title" style="color:white;">Hành trình 15 năm không ngừng đổi mới</h2>
+    <div class="divider" style="margin-inline:auto;"></div>
+  </div>
+  <div class="tl-track reveal">
+    <div class="tl-item">
+      <div class="tl-year">2009</div>
+      <div class="tl-dot"></div>
+      <div class="tl-text">Đăng ký tại Thâm Quyến, chuyên cung cấp giải pháp in ấn điện tử</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2015</div>
+      <div class="tl-dot"></div>
+      <div class="tl-text">Đạt chứng nhận ISO9001 / ISO14001 / ISO18001</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2016</div>
+      <div class="tl-dot"></div>
+      <div class="tl-text">Trở thành nhà cung cấp đạt chuẩn cho Lens &amp; OFILM (Huawei)</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2017</div>
+      <div class="tl-dot"></div>
+      <div class="tl-text">Thành lập Công ty Vật liệu Mới Kingda tại Đông Quan</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2018</div>
+      <div class="tl-dot"></div>
+      <div class="tl-text">Mua văn phòng 1.000 m² tại Songhu Zhigu làm trung tâm R&D</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2019</div>
+      <div class="tl-dot"></div>
+      <div class="tl-text">Văn phòng &amp; R&D chuyển đến Trung tâm Nghiên cứu Songhu Zhigu</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-year">2022</div>
+      <div class="tl-dot"></div>
+      <div class="tl-text">Vào kho tài nguyên OPPO &amp; VIVO, bắt đầu sản xuất đại trà</div>
+    </div>
+  </div>
+</section>
+
+<!-- CULTURE -->
+<section class="culture" id="culture">
+  <img class="culture-img reveal"
+    src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=700&q=80"
+    alt="Team Kingda" />
+  <div class="reveal reveal-delay-2">
+    <span class="section-tag">Văn hóa doanh nghiệp</span>
+    <h2 class="section-title">Trung thực · Tận tâm · Thiết thực · Sáng tạo</h2>
+    <div class="divider"></div>
+    <p class="section-desc">Chúng tôi kiên định với triết lý: "Chất lượng hàng đầu, dịch vụ xuất sắc, đổi mới sáng tạo, cùng nhau phát triển đôi bên cùng có lợi."</p>
+    <div class="culture-cards" style="margin-top:32px;">
+      <div class="culture-card">
+        <div class="culture-card-icon">🎯</div>
+        <h3>Định vị</h3>
+        <p>Tận tâm trở thành nhà cung cấp giải pháp ứng dụng vật liệu in điện tử hàng đầu</p>
+      </div>
+      <div class="culture-card">
+        <div class="culture-card-icon">🌟</div>
+        <h3>Sứ mệnh</h3>
+        <p>Tạo giá trị cho khách hàng, xây dựng thương hiệu và tạo dựng thành tựu cho nhân viên</p>
+      </div>
+      <div class="culture-card">
+        <div class="culture-card-icon">🏆</div>
+        <h3>Mục tiêu</h3>
+        <p>Xây dựng thương hiệu chuyên nghiệp, dẫn đầu ngành về quy mô và thị phần</p>
+      </div>
+      <div class="culture-card">
+        <div class="culture-card-icon">💡</div>
+        <h3>Phương châm</h3>
+        <p>Làm vững chắc → Củng cố &amp; Phát triển mạnh → Mở rộng quy mô toàn cầu</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADVANTAGES -->
+<section class="advantages" id="advantages">
+  <div style="text-align:center; max-width:620px; margin:0 auto;" class="reveal">
+    <span class="section-tag">Ưu thế cạnh tranh</span>
+    <h2 class="section-title">Vì sao chọn Kingda?</h2>
+    <div class="divider" style="margin-inline:auto;"></div>
+    <p class="section-desc" style="margin-inline:auto;">Bốn trụ cột cốt lõi tạo nên sức mạnh bền vững và lợi thế vượt trội trên thị trường</p>
+  </div>
+  <div class="advantages-grid">
+    <div class="adv-card reveal">
+      <div class="adv-icon">👥</div>
+      <h3>Đội ngũ chuyên nghiệp</h3>
+      <p>Cơ cấu kiến thức hợp lý, phân công rõ ràng, năng lực sáng tạo mạnh mẽ và kinh nghiệm thực chiến phong phú.</p>
+    </div>
+    <div class="adv-card reveal reveal-delay-1">
+      <div class="adv-icon">🔬</div>
+      <h3>Năng lực R&D vượt trội</h3>
+      <p>Đội ngũ R&D chuyên sâu cung cấp giải pháp hệ thống toàn diện, đáp ứng mọi yêu cầu tùy chỉnh của khách hàng.</p>
+    </div>
+    <div class="adv-card reveal reveal-delay-2">
+      <div class="adv-icon">✅</div>
+      <h3>Chất lượng ổn định</h3>
+      <p>Kiểm tra toàn bộ quy trình từ nguyên liệu đến thành phẩm. Chứng nhận ISO9001, ISO14001 và UL đầy đủ.</p>
+    </div>
+    <div class="adv-card reveal reveal-delay-3">
+      <div class="adv-icon">⚡</div>
+      <h3>Phản hồi nhanh 24/7</h3>
+      <p>Đội ngũ kỹ thuật xử lý sự cố tại hiện trường khách hàng mọi lúc. Dịch vụ chuỗi cung ứng hoàn thiện.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="reveal" style="max-width:620px;">
+    <span class="section-tag">Danh mục sản phẩm</span>
+    <h2 class="section-title">Giải pháp toàn diện cho mọi nhu cầu</h2>
+    <div class="divider"></div>
+    <p class="section-desc">Từ sơn gốc nước, mực in nổi, AG chống chói đến sơn phủ mạ chân không – Kingda cung cấp giải pháp đầy đủ cho điện tử tiêu dùng, ô tô và nhà thông minh.</p>
+  </div>
+  <div class="products-tabs">
+    <span class="ptab active">Tất cả</span>
+    <span class="ptab">Điện tử tiêu dùng</span>
+    <span class="ptab">Ô tô</span>
+    <span class="ptab">Kính &amp; Màn hình</span>
+    <span class="ptab">Nhà thông minh</span>
+  </div>
+  <div class="products-grid">
+    <div class="prod-card reveal">
+      <img class="prod-img"
+        src="https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=600&q=80"
+        alt="Water-based ink">
+      <div class="prod-body">
+        <div class="prod-tag">Sơn gốc nước</div>
+        <div class="prod-name">WS-30C Polyurethane Dispersions</div>
+        <div class="prod-desc">Dòng sơn cao su gốc nước với cảm giác bề mặt tốt, bám dính trực tiếp trên vật liệu nền, kháng hóa chất vượt trội.</div>
+        <div class="prod-features">
+          <span class="prod-feat">Độ mài mòn RCA 175gf / 250 lần</span>
+          <span class="prod-feat">Kháng hóa chất 30+ loại hóa chất</span>
+          <span class="prod-feat">QUV phân hủy 300 giờ</span>
+        </div>
+      </div>
+    </div>
+    <div class="prod-card reveal reveal-delay-1">
+      <img class="prod-img"
+        src="https://images.unsplash.com/photo-1585184394271-4c0a47dc59c9?w=600&q=80"
+        alt="Embossed texture">
+      <div class="prod-body">
+        <div class="prod-tag">In nổi 3D</div>
+        <div class="prod-name">Dung dịch In Nổi Áp Lực Cao 3D</div>
+        <div class="prod-desc">Tạo hoa văn trang trí cao cấp: vân cát ánh kim, vân tuyết, vân giả đá, vân CD cho điện thoại và thiết bị di động.</div>
+        <div class="prod-features">
+          <span class="prod-feat">Chịu tạo hình 3D áp lực cao</span>
+          <span class="prod-feat">Mài mòn nhung thép 1000gf/1000 lần</span>
+          <span class="prod-feat">Chống vân tay, góc tiếp xúc &gt;105°</span>
+        </div>
+      </div>
+    </div>
+    <div class="prod-card reveal reveal-delay-2">
+      <img class="prod-img"
+        src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80"
+        alt="AG coating">
+      <div class="prod-body">
+        <div class="prod-tag">AG Chống chói</div>
+        <div class="prod-name">Dung dịch AG Chống Chói Chịu Mài Mòn Cao</div>
+        <div class="prod-desc">Hiệu ứng bề mặt đẹp, mịn trong suốt, cảm giác trơn mượt. Điều chỉnh độ bóng linh hoạt ngay tại hiện trường.</div>
+        <div class="prod-features">
+          <span class="prod-feat">Mài mòn nhung thép 1000gf/3000 lần</span>
+          <span class="prod-feat">Chống vân tay, góc tiếp xúc &gt;110°</span>
+          <span class="prod-feat">Uốn trụ Φ40mm không nứt</span>
+        </div>
+      </div>
+    </div>
+    <div class="prod-card reveal">
+      <img class="prod-img"
+        src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&q=80"
+        alt="Vacuum plating">
+      <div class="prod-body">
+        <div class="prod-tag">Mạ chân không</div>
+        <div class="prod-name">Sơn Phủ Mạ Chân Không NCVM</div>
+        <div class="prod-desc">Tạo hiệu ứng kim loại hóa trên nhựa: vân xước (brushed), vân tia lửa, giả gốm. Kết hợp bóng-mờ tích hợp.</div>
+        <div class="prod-features">
+          <span class="prod-feat">Tỷ lệ đạt sản phẩm cao</span>
+          <span class="prod-feat">Kinh nghiệm sản xuất hàng loạt phong phú</span>
+          <span class="prod-feat">Hỗ trợ khắc laser CO₂, NCL, 3D</span>
+        </div>
+      </div>
+    </div>
+    <div class="prod-card reveal reveal-delay-1">
+      <img class="prod-img"
+        src="https://images.unsplash.com/photo-1587814969489-80c9c5be6c8d?w=600&q=80"
+        alt="Glass processing ink">
+      <div class="prod-body">
+        <div class="prod-tag">Mực in kính</div>
+        <div class="prod-name">Giải Pháp Mực In Gia Công Kính</div>
+        <div class="prod-desc">Toàn bộ giải pháp mực bảo vệ kính: từ mực bảo vệ nhiệt độ thấp/cao, chống HF, đến mực in offset hiệu ứng chuyển màu.</div>
+        <div class="prod-features">
+          <span class="prod-feat">Chịu nhiệt độ cao đến 900°C</span>
+          <span class="prod-feat">Chịu axit 30% trong 1 giờ</span>
+          <span class="prod-feat">Phủ tràn &amp; in lưới linh hoạt</span>
+        </div>
+      </div>
+    </div>
+    <div class="prod-card reveal reveal-delay-2">
+      <img class="prod-img"
+        src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"
+        alt="Smart home panel ink">
+      <div class="prod-body">
+        <div class="prod-tag">Mực in chống cháy</div>
+        <div class="prod-name">Mực In Chống Cháy Cho Tấm Vật Liệu</div>
+        <div class="prod-desc">Mực in thân thiện môi trường, không chứa halogen, đạt chuẩn UL94 V-0. Ứng dụng cho bảng điều khiển nhà thông minh.</div>
+        <div class="prod-features">
+          <span class="prod-feat">Chuẩn UL94 V-0 fire resistance</span>
+          <span class="prod-feat">Kim lửa (needle flame) 80–120 giây</span>
+          <span class="prod-feat">Không chứa halogen, thân thiện môi trường</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTS -->
+<section class="clients" id="clients">
+  <div class="reveal">
+    <span class="section-tag">Khách hàng hợp tác</span>
+    <h2 class="section-title">Được tin dùng bởi những tên tuổi hàng đầu</h2>
+    <div class="divider"></div>
+    <p class="section-desc">Kingda tự hào là đối tác chiến lược của các tập đoàn công nghệ và sản xuất hàng đầu thế giới trong hơn một thập kỷ.</p>
+  </div>
+  <div class="clients-marquee-wrap reveal">
+    <div class="clients-track">
+      <!-- first copy -->
+      <div class="client-logo">HUAWEI</div>
+      <div class="client-logo">VIVO</div>
+      <div class="client-logo">OPPO</div>
+      <div class="client-logo">XIAOMI</div>
+      <div class="client-logo">SAMSUNG</div>
+      <div class="client-logo">BYD</div>
+      <div class="client-logo">LENOVO</div>
+      <div class="client-logo">PANASONIC</div>
+      <div class="client-logo">BOE</div>
+      <div class="client-logo">NINTENDO</div>
+      <div class="client-logo">GREE</div>
+      <div class="client-logo">MIDEA</div>
+      <div class="client-logo">OFILM</div>
+      <div class="client-logo">LENS TECH</div>
+      <div class="client-logo">CHERY AUTO</div>
+      <!-- duplicate for infinite -->
+      <div class="client-logo">HUAWEI</div>
+      <div class="client-logo">VIVO</div>
+      <div class="client-logo">OPPO</div>
+      <div class="client-logo">XIAOMI</div>
+      <div class="client-logo">SAMSUNG</div>
+      <div class="client-logo">BYD</div>
+      <div class="client-logo">LENOVO</div>
+      <div class="client-logo">PANASONIC</div>
+      <div class="client-logo">BOE</div>
+      <div class="client-logo">NINTENDO</div>
+      <div class="client-logo">GREE</div>
+      <div class="client-logo">MIDEA</div>
+      <div class="client-logo">OFILM</div>
+      <div class="client-logo">LENS TECH</div>
+      <div class="client-logo">CHERY AUTO</div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="certs" id="certs">
+  <div class="reveal">
+    <span class="section-tag">Năng lực &amp; Chứng nhận</span>
+    <h2 class="section-title">Chứng chỉ quốc tế &amp; Bằng sáng chế</h2>
+    <div class="divider"></div>
+    <p class="section-desc">Kingda duy trì hệ thống quản lý chất lượng đẳng cấp quốc tế và sở hữu danh mục bằng sáng chế phong phú, khẳng định năng lực đổi mới sáng tạo.</p>
+    <div class="patents-row">
+      <div class="patent-box">
+        <div class="num">16</div>
+        <div class="lbl">Bằng sáng chế<br>phát minh</div>
+      </div>
+      <div class="patent-box">
+        <div class="num">7</div>
+        <div class="lbl">Bằng sáng chế<br>hữu ích</div>
+      </div>
+      <div class="patent-box">
+        <div class="num">8</div>
+        <div class="lbl">Bản quyền<br>phần mềm</div>
+      </div>
+    </div>
+  </div>
+  <div class="certs-grid reveal reveal-delay-2">
+    <div class="cert-card">
+      <div class="cert-icon">🏅</div>
+      <h4>ISO 9001:2015</h4>
+      <p>Hệ thống quản lý chất lượng</p>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🌿</div>
+      <h4>ISO 14001:2015</h4>
+      <p>Hệ thống quản lý môi trường</p>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🛡️</div>
+      <h4>ISO 45001:2018</h4>
+      <p>An toàn &amp; sức khỏe nghề nghiệp</p>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">⚡</div>
+      <h4>UL Certified</h4>
+      <p>Chứng nhận chất lượng quốc tế UL</p>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">📋</div>
+      <h4>QC80000</h4>
+      <p>Đang tiến hành chứng nhận EICC</p>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🔬</div>
+      <h4>R&D Lab</h4>
+      <p>Phòng thí nghiệm nghiên cứu tiên tiến</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="reveal">
+    <span class="section-tag">Liên hệ với chúng tôi</span>
+    <h2 class="section-title">Hãy cùng hợp tác phát triển</h2>
+    <div class="divider"></div>
+    <p class="section-desc">Đội ngũ kỹ thuật và kinh doanh của chúng tôi luôn sẵn sàng hỗ trợ 24/7. Hãy liên hệ để được tư vấn giải pháp phù hợp nhất cho doanh nghiệp bạn.</p>
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-item-icon">📍</div>
+        <div class="contact-item-text">
+          <h4>Địa chỉ văn phòng Việt Nam</h4>
+          <p>Tầng 1, số 27 Trần Quang Khải, Phường Võ Cường, Tỉnh Bắc Ninh, Việt Nam</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">✉️</div>
+        <div class="contact-item-text">
+          <h4>Email</h4>
+          <p>kingdahg@gmail.com</p>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">🏢</div>
+        <div class="contact-item-text">
+          <h4>Trụ sở chính (Trung Quốc)</h4>
+          <p>Songhu Zhigu R&D Center, Dongguan, Guangdong, P.R. China</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="contact-form reveal reveal-delay-2">
+    <h3 style="font-family:'Syne',sans-serif; font-size:20px; font-weight:700; color:white; margin-bottom:28px;">Gửi yêu cầu tư vấn</h3>
+    <div class="form-row">
+      <div class="form-field">
+        <label>Họ và tên</label>
+        <input type="text" placeholder="Nguyễn Văn A">
+      </div>
+      <div class="form-field">
+        <label>Công ty</label>
+        <input type="text" placeholder="Tên doanh nghiệp">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-field">
+        <label>Email</label>
+        <input type="email" placeholder="email@company.com">
+      </div>
+      <div class="form-field">
+        <label>Điện thoại</label>
+        <input type="tel" placeholder="+84 xxx xxx xxx">
+      </div>
+    </div>
+    <div class="form-field">
+      <label>Nội dung yêu cầu</label>
+      <textarea placeholder="Mô tả sản phẩm / vật liệu bạn cần tư vấn..."></textarea>
+    </div>
+    <button class="form-submit">Gửi yêu cầu ngay →</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div class="footer-logo-circle">KD</div>
+    <span class="footer-logo-text">KINGDA</span>
+  </div>
+  <p>© 2025 Công ty TNHH Thương Mại Công Nghệ Kingda. All rights reserved.</p>
+  <div class="footer-links">
+    <a href="#about">Giới thiệu</a>
+    <a href="#products">Sản phẩm</a>
+    <a href="#clients">Khách hàng</a>
+    <a href="#contact">Liên hệ</a>
+  </div>
+</footer>
 
 <script>
-(() => {
-  const canvas = document.getElementById('canvas');
-  const ctx = canvas.getContext('2d');
-  let W, H;
-
-  function resize() {
-    W = window.innerWidth;
-    H = window.innerHeight;
-    // set actual canvas resolution for sharpness
-    canvas.width = W * window.devicePixelRatio;
-    canvas.height = H * window.devicePixelRatio;
-    canvas.style.width = W + 'px';
-    canvas.style.height = H + 'px';
-    ctx.setTransform(1,0,0,1,0,0); // reset transform before scaling
-    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
-  }
-  window.addEventListener('resize', resize);
-  resize();
-
-  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-
-  // Utils
-  const random = (min, max) => Math.random() * (max - min) + min;
-
-  class Particle {
-    constructor(x, y, color, angle, speed, size=3, decay=0.02) {
-      this.x = x;
-      this.y = y;
-      this.color = color;
-      this.angle = angle;
-      this.speed = speed;
-      this.size = size;
-      this.decay = decay;
-      this.alpha = 1;
-      this.gravity = 0.03;
-      this.vx = Math.cos(angle) * speed;
-      this.vy = Math.sin(angle) * speed;
-      this.flicker = Math.random() * 0.1 + 0.9;
-    }
-    update() {
-      this.vx *= 0.96;
-      this.vy *= 0.96;
-      this.vy += this.gravity;
-      this.x += this.vx;
-      this.y += this.vy;
-      this.alpha -= this.decay;
-      if(this.alpha < 0) this.alpha = 0;
-      this.flicker = 0.85 + Math.random() * 0.15;
-    }
-    draw(ctx) {
-      if(this.alpha <= 0) return;
-      ctx.save();
-      ctx.globalAlpha = this.alpha * this.flicker;
-      const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size*5);
-      gradient.addColorStop(0, this.color);
-      gradient.addColorStop(0.2, this.color);
-      gradient.addColorStop(1, 'rgba(0,0,0,0)');
-      ctx.fillStyle = gradient;
-      ctx.shadowColor = this.color;
-      ctx.shadowBlur = this.size * 5;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size*2, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.restore();
-    }
-  }
-
-  class Firework {
-    constructor(x, y, targetY, color) {
-      this.x = x;
-      this.y = y;
-      this.targetY = targetY;
-      this.speed = random(7, 11);
-      this.color = color;
-      this.exploded = false;
-      this.particles = [];
-      this.size = 3;
-      this.vy = -this.speed;
-      this.vx = 0;
-      this.trail = [];
-    }
-    update() {
-      if(!this.exploded) {
-        this.trail.push({x: this.x, y: this.y});
-        if(this.trail.length > 8) this.trail.shift();
-
-        this.x += this.vx;
-        this.y += this.vy;
-        if(this.y <= this.targetY) {
-          this.explode();
-        }
-      } else {
-        this.particles.forEach(p => p.update());
-        this.particles = this.particles.filter(p => p.alpha > 0);
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
       }
-    }
-    explode() {
-      this.exploded = true;
-      const count = isMobile ? random(40, 60) : random(80, 110);
-      for(let i=0; i<count; i++) {
-        const angle = Math.random() * Math.PI * 2;
-        const speed = random(3, 8);
-        const size = random(1.5, 3.5);
-        this.particles.push(new Particle(this.x, this.y, this.color, angle, speed, size, 0.015 + Math.random() * 0.01));
-      }
-    }
-    draw(ctx) {
-      if(!this.exploded) {
-        ctx.save();
-        ctx.strokeStyle = this.color;
-        ctx.lineWidth = 2;
-        ctx.shadowColor = this.color;
-        ctx.shadowBlur = 10;
-        ctx.beginPath();
-        for(let i = 0; i < this.trail.length - 1; i++) {
-          const p1 = this.trail[i];
-          const p2 = this.trail[i + 1];
-          ctx.moveTo(p1.x, p1.y);
-          ctx.lineTo(p2.x, p2.y);
-        }
-        ctx.stroke();
-        ctx.restore();
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
 
-        ctx.save();
-        ctx.fillStyle = this.color;
-        ctx.shadowColor = this.color;
-        ctx.shadowBlur = 15;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size + 1, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-      } else {
-        this.particles.forEach(p => p.draw(ctx));
-      }
-    }
-    isDone() {
-      return this.exploded && this.particles.length === 0;
-    }
-  }
+  // Product tabs (simple toggle)
+  document.querySelectorAll('.ptab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
 
-  class TextFirework {
-    constructor(text, x, y, color) {
-      this.text = text;
-      this.x = x;
-      this.y = y;
-      this.color = color;
-      this.particles = [];
-      this.exploded = false;
-      this.duration = 400;
-      this.frame = 0;
-
-      this.createTextParticles();
-    }
-
-    createTextParticles() {
-      const offCanvas = document.createElement('canvas');
-      const offCtx = offCanvas.getContext('2d');
-      const fontSize = 100;
-      offCanvas.width = 800;
-      offCanvas.height = 250;
-      offCtx.font = `bold ${fontSize}px serif`;
-      offCtx.fillStyle = 'white';
-      offCtx.textAlign = 'center';
-      offCtx.textBaseline = 'middle';
-      offCtx.fillText(this.text, offCanvas.width/2, offCanvas.height/2);
-
-      const imageData = offCtx.getImageData(0,0, offCanvas.width, offCanvas.height);
-      const data = imageData.data;
-
-      for(let y=0; y < offCanvas.height; y+=5) {
-        for(let x=0; x < offCanvas.width; x+=5) {
-          const index = (y * offCanvas.width + x) * 4;
-          if(data[index+3] > 128) {
-            const px = this.x + (x - offCanvas.width/2);
-            const py = this.y + (y - offCanvas.height/2);
-            const startX = px + random(-70, 70);
-            const startY = H + random(20, 80);
-            this.particles.push(new TextParticle(startX, startY, px, py, this.color));
-          }
-        }
-      }
-    }
-
-    update() {
-      this.frame++;
-      if(this.frame < this.duration) {
-        this.particles.forEach(p => p.update());
-        this.particles = this.particles.filter(p => !p.done);
-      } else {
-        this.exploded = true;
-      }
-    }
-
-    draw(ctx) {
-      this.particles.forEach(p => p.draw(ctx));
-    }
-
-    isDone() {
-      return this.exploded;
-    }
-  }
-
-  class TextParticle {
-    constructor(x, y, targetX, targetY, color) {
-      this.x = x;
-      this.y = y;
-      this.targetX = targetX;
-      this.targetY = targetY;
-      this.color = color;
-      this.speed = random(3, 7);
-      this.done = false;
-      this.size = 3;
-      this.vx = 0;
-      this.vy = 0;
-      this.alpha = 1;
-      this.flicker = Math.random() * 0.3 + 0.7;
-    }
-
-    update() {
-      if(this.done) return;
-
-      const dx = this.targetX - this.x;
-      const dy = this.targetY - this.y;
-      const dist = Math.sqrt(dx*dx + dy*dy);
-
-      if(dist < 3) {
-        this.done = true;
-        return;
-      }
-
-      this.vx = dx * 0.15;
-      this.vy = dy * 0.15;
-
-      this.x += this.vx;
-      this.y += this.vy;
-
-      this.flicker = 0.75 + Math.random() * 0.25;
-    }
-
-    draw(ctx) {
-      ctx.save();
-      ctx.globalAlpha = this.flicker;
-      ctx.fillStyle = this.color;
-      ctx.shadowColor = this.color;
-      ctx.shadowBlur = 10;
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.restore();
-    }
-  }
-
-  class Rose {
-    constructor(x, y, scale=1) {
-      this.x = x;
-      this.y = y;
-      this.scale = scale;
-      this.alpha = 0;
-      this.growing = true;
-      this.rotation = 0;
-      this.rotationSpeed = 0.0025;
-      this.petalCount = 14;
-      this.sparkles = [];
-      this.sparkleCount = isMobile ? 30 : 50;
-      for(let i=0; i < this.sparkleCount; i++) {
-        this.sparkles.push({
-          angle: Math.random() * Math.PI * 2,
-          distance: random(30, 60),
-          size: random(0.5, 1.5),
-          alpha: Math.random(),
-          alphaDir: Math.random() < 0.5 ? 0.01 : -0.01
-        });
-      }
-    }
-
-    update() {
-      if(this.growing) {
-        this.alpha += 0.008;
-        this.scale += 0.015;
-        if(this.alpha >= 1) {
-          this.alpha = 1;
-          this.growing = false;
-        }
-      }
-      this.rotation += this.rotationSpeed;
-
-      this.sparkles.forEach(s => {
-        s.alpha += s.alphaDir;
-        if(s.alpha <= 0) {
-          s.alpha = 0;
-          s.alphaDir *= -1;
-        }
-        else if(s.alpha >= 1) {
-          s.alpha = 1;
-          s.alphaDir *= -1;
-        }
-      });
-    }
-
-    draw(ctx) {
-      ctx.save();
-      ctx.translate(this.x, this.y);
-      ctx.scale(this.scale, this.scale);
-      ctx.rotate(this.rotation);
-      ctx.globalAlpha = this.alpha;
-
-      for(let i=0; i < this.petalCount; i++) {
-        ctx.beginPath();
-        const gradient = ctx.createRadialGradient(0, 15, 5, 0, 15, 30);
-        gradient.addColorStop(0, 'rgba(30,144,255,0.9)');
-        gradient.addColorStop(1, 'rgba(0,0,80,0)');
-        ctx.fillStyle = gradient;
-        ctx.shadowColor = 'rgba(30,144,255,0.7)';
-        ctx.shadowBlur = 20;
-        ctx.rotate((Math.PI * 2) / this.petalCount);
-        ctx.ellipse(0, 15, 12, 40, Math.sin(i) * 0.3, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      ctx.beginPath();
-      const centerGradient = ctx.createRadialGradient(0, 0, 5, 0, 0, 25);
-      centerGradient.addColorStop(0, 'rgba(0,0,139,1)');
-      centerGradient.addColorStop(1, 'rgba(0,0,139,0)');
-      ctx.fillStyle = centerGradient;
-      ctx.shadowColor = 'rgba(0,0,139,0.9)';
-      ctx.shadowBlur = 35;
-      ctx.arc(0, 0, 15, 0, Math.PI * 2);
-      ctx.fill();
-
-      this.sparkles.forEach(s => {
-        ctx.beginPath();
-        const sx = Math.cos(s.angle) * s.distance;
-        const sy = Math.sin(s.angle) * s.distance;
-        ctx.globalAlpha = s.alpha * this.alpha;
-        ctx.fillStyle = 'rgba(135,206,250,0.8)';
-        ctx.shadowColor = 'rgba(135,206,250,1)';
-        ctx.shadowBlur = 12;
-        ctx.arc(sx, sy, s.size, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      ctx.restore();
-    }
-  }
-
-  // Main animation control
-  let fireworks = [];
-  let textFirework = null;
-  let rose = null;
-  let stage = 0;
-  const startTime = Date.now();
-
-  function randomColor() {
-    return `hsl(${Math.floor(random(0, 360))}, 90%, 65%)`;
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, W, H);
-
-    // Star background with fewer stars on mobile for perf
-    const starCount = isMobile ? 30 : 60;
-    for(let i=0; i < starCount; i++) {
-      const x = random(0, W);
-      const y = random(0, H);
-      const size = random(0.3, 1.1);
-      const alpha = Math.sin((Date.now()/500) + x + y) * 0.5 + 0.5;
-      ctx.fillStyle = `rgba(255,255,255,${alpha.toFixed(2)})`;
-      ctx.beginPath();
-      ctx.arc(x, y, size, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    if(stage === 0) {
-      // Fireworks phase: Launch some fireworks every frame randomly
-      if(fireworks.length < (isMobile ? 8 : 15) && Math.random() < 0.05) {
-        const x = random(W*0.1, W*0.9);
-        const targetY = random(H*0.2, H*0.5);
-        fireworks.push(new Firework(x, H, targetY, randomColor()));
-      }
-      fireworks.forEach(fw => {
-        fw.update();
-        fw.draw(ctx);
-      });
-      fireworks = fireworks.filter(fw => !fw.isDone());
-
-      if(Date.now() - startTime > 8000) {
-        stage = 1;
-        textFirework = new TextFirework("GOOD LUCK", W/2, H/2 - 50, 'cyan');
-      }
-    } else if(stage === 1) {
-      textFirework.update();
-      textFirework.draw(ctx);
-      if(textFirework.isDone()) {
-        stage = 2;
-        rose = new Rose(W/2, H/2 + 80, 0.1);
-      }
-    } else if(stage === 2) {
-      rose.update();
-      rose.draw(ctx);
-    }
-
-    requestAnimationFrame(animate);
-  }
-
-  animate();
-})();
+  // Smooth nav highlight on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    navLinks.forEach(link => {
+      link.style.color = link.getAttribute('href') === '#'+current
+        ? 'var(--cyan)' : 'rgba(255,255,255,0.75)';
+    });
+  });
 </script>
 </body>
 </html>
