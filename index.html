@@ -3,1012 +3,1566 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kingda – Giải Pháp Vật Liệu In Điện Tử</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
+<title>TÍN PHÁT GROUP – Tập Đoàn Đầu Tư Thương Mại</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; font-size: 16px; }
-body {
-  font-family: 'Poppins', sans-serif;
-  background: #ffffff;
-  color: #0d1f35;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-img { display: block; max-width: 100%; }
-a { text-decoration: none; color: inherit; }
-button { cursor: pointer; font-family: inherit; border: none; }
+/* ══════════════════════════════════════
+   DESIGN TOKENS
+══════════════════════════════════════ */
+:root{
+  /* palette */
+  --ivory:#faf6ef;
+  --parchment:#f3ede2;
+  --warm:#ede4d4;
+  --linen:#e4d9c6;
+  --night:#1c1836;
+  --ink:#2a2340;
+  --deep:#0e0c1d;
+  --gold:#c9933a;
+  --brass:#b07828;
+  --amber:#f0b93c;
+  --glow:rgba(201,147,58,.14);
+  --white:#fff;
+  --slate:#6a6280;
+  --muted:#a09898;
+  --line:#e2d9cc;
+  --linef:#d4c9b8;
 
-:root {
-  --navy:      #071828;
-  --navy-mid:  #0d2d50;
-  --blue:      #1565c0;
-  --blue-v:    #1e88e5;
-  --sky:       #29b6f6;
-  --cyan:      #00e5ff;
-  --white:     #ffffff;
-  --off:       #f5f7fa;
-  --slate:     #e2e8f0;
-  --muted:     #5a7291;
-  --text:      #0d1f35;
-  --sh-sm: 0 2px 12px rgba(13,31,53,0.08);
-  --sh-md: 0 8px 32px rgba(13,31,53,0.12);
-  --sh-lg: 0 24px 64px rgba(13,31,53,0.16);
-  --sh-xl: 0 40px 100px rgba(13,31,53,0.20);
+  /* effects */
+  --sh:0 2px 20px rgba(28,24,54,.05);
+  --sh2:0 10px 50px rgba(28,24,54,.1);
+  --sh3:0 24px 80px rgba(28,24,54,.16);
+  --grd-gold:linear-gradient(135deg,var(--gold),var(--amber));
 }
 
-/* ── NAV ── */
-.nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-  height: 68px; display: flex; align-items: center;
-  justify-content: space-between; padding: 0 52px;
-  background: rgba(7,24,40,0.94);
-  backdrop-filter: blur(18px);
-  border-bottom: 1px solid rgba(255,255,255,0.07);
-  transition: background 0.4s;
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Outfit',sans-serif;
+  background:var(--ivory);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
 }
-.nav-brand { display: flex; align-items: center; gap: 10px; }
-.nav-mark {
-  width: 36px; height: 36px; border-radius: 9px; flex-shrink: 0;
-  background: linear-gradient(135deg, var(--blue), var(--sky));
-  display: flex; align-items: center; justify-content: center;
-}
-.nav-mark svg { width: 16px; height: 16px; }
-.nav-name { font-size: 17px; font-weight: 800; color: #fff; letter-spacing: 1.2px; }
-.nav-name em { color: var(--sky); font-style: normal; }
-.nav-menu {
-  display: flex; align-items: center; gap: 4px; list-style: none;
-}
-.nav-menu a {
-  font-size: 13px; font-weight: 500;
-  color: rgba(255,255,255,0.62);
-  padding: 7px 13px; border-radius: 6px;
-  transition: color 0.22s, background 0.22s;
-  white-space: nowrap;
-}
-.nav-menu a:hover { color: #fff; background: rgba(255,255,255,0.07); }
-.nav-cta {
-  background: linear-gradient(135deg, var(--blue), var(--sky));
-  color: #fff; font-size: 13px; font-weight: 700;
-  padding: 9px 22px; border-radius: 40px;
-  letter-spacing: 0.2px; white-space: nowrap;
-  box-shadow: 0 4px 18px rgba(21,101,192,0.4);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 26px rgba(21,101,192,0.55); }
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;outline:none}
+img{display:block;width:100%;height:100%;object-fit:cover}
 
-/* ── HERO ── */
-.hero {
-  min-height: 100vh;
-  background: var(--navy);
-  position: relative; overflow: hidden;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  padding: 120px 52px 88px; text-align: center;
+/* ── grain overlay ── */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9999;opacity:.4;mix-blend-mode:multiply;
 }
-.hero-bg {
-  position: absolute; inset: 0; z-index: 0;
-  background:
-    radial-gradient(ellipse 85% 65% at 50% 42%, rgba(21,101,192,0.3) 0%, transparent 65%),
-    radial-gradient(ellipse 55% 45% at 82% 78%, rgba(0,229,255,0.12) 0%, transparent 55%),
-    radial-gradient(ellipse 45% 38% at 12% 22%, rgba(21,101,192,0.14) 0%, transparent 50%);
-}
-.hero-grid {
-  position: absolute; inset: 0; z-index: 0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
-  background-size: 68px 68px;
-}
-.geo { position: absolute; pointer-events: none; }
-.geo-t1 {
-  top: 7%; right: 7%;
-  width: 0; height: 0;
-  border-left: 110px solid transparent;
-  border-right: 110px solid transparent;
-  border-bottom: 190px solid rgba(0,229,255,0.048);
-  animation: gf 10s ease-in-out infinite;
-}
-.geo-t2 {
-  bottom: 12%; left: 5%;
-  width: 0; height: 0;
-  border-left: 70px solid transparent;
-  border-right: 70px solid transparent;
-  border-bottom: 121px solid rgba(21,101,192,0.07);
-  animation: gf 14s ease-in-out infinite reverse;
-}
-.geo-sq {
-  top: 38%; right: 2%;
-  width: 54px; height: 54px;
-  border: 1.5px solid rgba(0,229,255,0.1);
-  animation: gs 22s linear infinite;
-}
-@keyframes gf { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-22px)} }
-@keyframes gs { to{transform:rotate(360deg)} }
 
-.hero-inner {
-  position: relative; z-index: 2;
-  max-width: 820px;
-  animation: fuIn 1s cubic-bezier(.22,1,.36,1) both;
-}
-@keyframes fuIn {
-  from { opacity:0; transform:translateY(38px); }
-  to   { opacity:1; transform:translateY(0); }
-}
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 9px;
-  background: rgba(0,229,255,0.09);
-  border: 1px solid rgba(0,229,255,0.28);
-  color: var(--sky); font-size: 12px; font-weight: 600;
-  letter-spacing: 1.4px; text-transform: uppercase;
-  padding: 7px 18px; border-radius: 40px; margin-bottom: 32px;
-}
-.badge-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--sky); box-shadow: 0 0 6px var(--sky);
-  animation: bdp 2s ease-in-out infinite; flex-shrink: 0;
-}
-@keyframes bdp { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.45;transform:scale(.75)} }
+/* ── utilities ── */
+.cw{max-width:1300px;margin:auto;padding:0 40px}
 
-.hero-h1 {
-  font-family: 'Poppins', serif;
-  font-size: clamp(42px, 7.5vw, 90px);
-  font-weight: 700; line-height: 1.04;
-  color: #fff; letter-spacing: -0.025em; margin-bottom: 26px;
-}
-.hero-h1 .hl { color: var(--sky); font-style: italic; }
+/* ── reveal animations ── */
+.rv{opacity:0;transform:translateY(30px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}
+.rv.on{opacity:1;transform:none}
+.rv.slide-left{transform:translateX(-30px)}
+.rv.slide-left.on{transform:none}
+.rv.slide-right{transform:translateX(30px)}
+.rv.slide-right.on{transform:none}
+.rv.scale{transform:scale(.96) translateY(20px)}
+.rv.scale.on{transform:none;opacity:1}
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}
+.d4{transition-delay:.28s}.d5{transition-delay:.35s}.d6{transition-delay:.42s}
 
-.hero-p {
-  font-size: clamp(14px, 1.6vw, 16.5px);
-  color: rgba(255,255,255,0.56); line-height: 1.88;
-  max-width: 580px; margin: 0 auto 42px;
-}
-.hero-btns {
-  display: flex; align-items: center; justify-content: center;
-  gap: 12px; flex-wrap: wrap;
-}
-.hbtn-p {
-  background: linear-gradient(135deg, var(--blue), var(--sky));
-  color: #fff; font-size: 14px; font-weight: 700;
-  padding: 13px 32px; border-radius: 40px;
-  box-shadow: 0 8px 28px rgba(21,101,192,0.44);
-  transition: transform .22s, box-shadow .22s;
-}
-.hbtn-p:hover { transform:translateY(-2px); box-shadow:0 14px 38px rgba(21,101,192,0.6); }
-.hbtn-g {
-  color: rgba(255,255,255,0.72); font-size: 14px; font-weight: 600;
-  padding: 12px 28px; border-radius: 40px;
-  border: 1.5px solid rgba(255,255,255,0.18);
-  transition: border-color .22s, color .22s, background .22s;
-}
-.hbtn-g:hover { border-color:rgba(255,255,255,0.44); color:#fff; background:rgba(255,255,255,0.06); }
+@keyframes drift{0%,100%{transform:translateY(0) rotate(0deg)}33%{transform:translateY(-14px) rotate(.8deg)}66%{transform:translateY(-7px) rotate(-.4deg)}}
+@keyframes goldPulse{0%,100%{opacity:.6}50%{opacity:1}}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes lineGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes spinSlow{to{transform:rotate(360deg)}}
 
-.hero-kpis {
-  position: relative; z-index: 2; margin-top: 64px;
-  display: flex; justify-content: center; flex-wrap: wrap;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.09);
-  border-radius: 20px; padding: 26px 44px;
-  backdrop-filter: blur(10px); max-width: 660px; width: 100%;
-  animation: fuIn 1s cubic-bezier(.22,1,.36,1) 0.28s both;
+/* ══════════════════════════════════════
+   TOP BAR
+══════════════════════════════════════ */
+.topbar{
+  background:var(--night);
+  padding:10px 0;
+  border-bottom:1px solid rgba(201,147,58,.2);
 }
-.kpi { flex: 1 1 120px; text-align: center; padding: 0 24px; }
-.kpi + .kpi { border-left: 1px solid rgba(255,255,255,0.1); }
-.kpi-v {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 44px; font-weight: 700; color: #fff; line-height: 1;
+.tb-inner{
+  max-width:1300px;margin:auto;padding:0 40px;
+  display:flex;justify-content:space-between;align-items:center;
 }
-.kpi-v sup { font-size: 22px; color: var(--sky); font-family: 'Plus Jakarta Sans', sans-serif; }
-.kpi-l { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.42); margin-top: 8px; }
-
-/* ── SECTION LAYOUT ── */
-.sec { padding: 108px 52px; }
-.sec-w { max-width: 1200px; margin: 0 auto; }
-
-.pill {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: rgba(21,101,192,0.08);
-  color: var(--blue-v); font-size: 11px; font-weight: 700;
-  letter-spacing: 2.2px; text-transform: uppercase;
-  padding: 5px 13px; border-radius: 40px; margin-bottom: 18px;
+.tb-left{display:flex;gap:24px}
+.tb-left a{
+  font-size:12px;font-weight:400;
+  color:rgba(255,255,255,.4);
+  display:flex;align-items:center;gap:7px;
+  transition:color .25s;
 }
-.pill::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--blue-v); flex-shrink:0; }
-
-.st {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(30px, 4.2vw, 52px);
-  font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; color: var(--text);
+.tb-left a:hover{color:var(--amber)}
+.tb-left a::before{
+  content:'';width:4px;height:4px;border-radius:50%;
+  background:var(--gold);opacity:.6;flex-shrink:0;
 }
-.st-w { color: #fff; }
-.sbar { display:block; width:42px; height:3px; border-radius:2px; background:linear-gradient(90deg,var(--blue),var(--sky)); margin:18px 0 22px; }
-.sb { font-size:15px; line-height:1.85; color:var(--muted); max-width:530px; }
+.tb-right{display:flex;gap:20px;align-items:center}
+.tb-lang{font-size:11px;font-weight:500;letter-spacing:.5px;color:rgba(255,255,255,.3);cursor:pointer;transition:color .2s}
+.tb-lang:hover,.tb-lang.active{color:var(--amber)}
+.tb-sep{width:1px;height:11px;background:rgba(255,255,255,.1)}
 
-.sec-dark { background: var(--navy); }
-.sec-dark .pill { background:rgba(0,229,255,0.1); color:var(--sky); }
-.sec-dark .pill::before { background:var(--sky); }
-.sec-dark .sb { color:rgba(255,255,255,0.5); }
-.sec-dark .sbar { background:linear-gradient(90deg,var(--sky),rgba(255,255,255,0.4)); }
-
-/* ── ABOUT ── */
-.about-g { display:grid; grid-template-columns:1fr 1.08fr; gap:76px; align-items:center; }
-.about-vis { position:relative; }
-.about-img { border-radius:18px; overflow:hidden; aspect-ratio:4/3; box-shadow:var(--sh-xl); }
-.about-img img { width:100%; height:100%; object-fit:cover; transition:transform .55s; }
-.about-img:hover img { transform:scale(1.04); }
-.about-badge {
-  position:absolute; bottom:-26px; right:-26px;
-  background:var(--navy); border-radius:14px;
-  padding:20px 24px; box-shadow:var(--sh-lg); min-width:170px;
+/* ══════════════════════════════════════
+   NAVBAR
+══════════════════════════════════════ */
+.navbar{
+  background:rgba(250,246,239,.96);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:999;
+  transition:all .35s;
 }
-.about-badge .bn { font-family:'Cormorant Garamond',serif; font-size:44px; font-weight:700; color:var(--sky); line-height:1; }
-.about-badge .bl { font-size:12px; color:rgba(255,255,255,0.5); margin-top:5px; line-height:1.55; }
-
-.feat-g { display:grid; grid-template-columns:1fr 1fr; gap:13px; margin-top:34px; }
-.feat {
-  background:var(--off); border-radius:12px; padding:17px 19px;
-  border-left:3px solid var(--blue);
-  transition:transform .24s, box-shadow .24s;
+.navbar.scrolled{
+  box-shadow:0 4px 32px rgba(28,24,54,.08);
+  border-bottom-color:var(--linef);
 }
-.feat:hover { transform:translateY(-3px); box-shadow:var(--sh-md); }
-.feat h4 { font-size:13px; font-weight:700; color:var(--text); margin-bottom:4px; line-height:1.4; }
-.feat p  { font-size:12.5px; color:var(--muted); line-height:1.65; }
-
-.iso-r { display:flex; flex-wrap:wrap; gap:8px; margin-top:26px; }
-.iso-c { font-size:11.5px; font-weight:700; color:var(--blue); border:1.5px solid var(--blue); padding:5px 12px; border-radius:20px; }
-
-/* ── TIMELINE ── */
-.tl-wrap { margin-top:68px; position:relative; }
-.tl-line { position:absolute; top:19px; left:0; right:0; height:2px; background:rgba(255,255,255,0.1); }
-.tl-prog { height:100%; background:linear-gradient(90deg,var(--blue),var(--sky),var(--cyan)); }
-.tl-g { display:grid; grid-template-columns:repeat(7,1fr); position:relative; }
-.tln { padding:0 7px; text-align:center; }
-.tl-dot-row { display:flex; justify-content:center; margin-bottom:18px; }
-.tldot {
-  width:14px; height:14px; border-radius:50%;
-  background:linear-gradient(135deg,var(--blue),var(--sky));
-  box-shadow:0 0 0 4px rgba(0,229,255,0.14), 0 0 0 8px rgba(0,229,255,0.05);
-  transition:transform .3s;
+.nav-inner{
+  max-width:1300px;margin:auto;padding:0 40px;
+  height:74px;
+  display:flex;align-items:center;justify-content:space-between;gap:32px;
 }
-.tln:hover .tldot { transform:scale(1.55); }
-.tl-yr { font-family:'Cormorant Garamond',serif; font-size:21px; font-weight:700; color:var(--sky); line-height:1; margin-bottom:10px; }
-.tl-tx { font-size:12px; color:rgba(255,255,255,0.52); line-height:1.72; }
 
-/* ── CULTURE ── */
-.cult-g { display:grid; grid-template-columns:1.1fr 1fr; gap:76px; align-items:center; }
-.cult-vis { border-radius:18px; overflow:hidden; aspect-ratio:5/6; box-shadow:var(--sh-xl); }
-.cult-vis img { width:100%; height:100%; object-fit:cover; }
-.cult-cards { display:grid; grid-template-columns:1fr 1fr; gap:15px; margin-top:30px; }
-.cc {
-  background:var(--off); border-radius:12px; padding:21px;
-  position:relative; overflow:hidden;
-  transition:transform .24s, box-shadow .24s;
-}
-.cc::after { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--blue),var(--sky)); }
-.cc:hover { transform:translateY(-4px); box-shadow:var(--sh-md); }
-.cc-ico { font-size:22px; margin-bottom:11px; }
-.cc h3 { font-size:12.5px; font-weight:800; color:var(--text); text-transform:uppercase; letter-spacing:.8px; margin-bottom:7px; line-height:1.4; }
-.cc p  { font-size:13px; color:var(--muted); line-height:1.72; }
-
-/* ── ADVANTAGES ── */
-.adv-sec { background:var(--off); }
-.adv-hd { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:end; margin-bottom:54px; }
-.adv-note { font-size:13.5px; color:var(--muted); line-height:1.82; padding-left:24px; border-left:3px solid var(--blue); }
-.adv-g { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
-.advc {
-  background:#fff; border-radius:18px; padding:30px 24px;
-  box-shadow:var(--sh-sm); position:relative; overflow:hidden;
-  transition:transform .3s, box-shadow .3s;
-}
-.advc::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--blue),var(--sky)); transform:scaleX(0); transform-origin:left; transition:transform .4s; }
-.advc:hover { transform:translateY(-7px); box-shadow:var(--sh-lg); }
-.advc:hover::after { transform:scaleX(1); }
-.adv-n { font-family:'Cormorant Garamond',serif; font-size:50px; font-weight:700; color:rgba(21,101,192,0.09); line-height:1; margin-bottom:12px; letter-spacing:-2px; }
-.adv-ico { width:46px; height:46px; border-radius:11px; background:linear-gradient(135deg,rgba(21,101,192,0.08),rgba(41,182,246,0.11)); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px; }
-.advc h3 { font-size:14.5px; font-weight:800; color:var(--text); margin-bottom:9px; line-height:1.35; }
-.advc p  { font-size:13.5px; color:var(--muted); line-height:1.82; }
-
-/* ── PRODUCTS ── */
-.prod-hd { display:grid; grid-template-columns:1fr 1fr; gap:76px; align-items:end; margin-bottom:48px; }
-.p-tabs { display:flex; flex-wrap:wrap; gap:8px; }
-.ptab {
-  font-size:12.5px; font-weight:600; color:rgba(255,255,255,0.5);
-  background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.09);
-  padding:8px 18px; border-radius:30px; cursor:pointer;
-  transition:all .24s; white-space:nowrap;
-}
-.ptab.on, .ptab:hover { background:linear-gradient(135deg,var(--blue),var(--sky)); color:#fff; border-color:transparent; box-shadow:0 4px 14px rgba(21,101,192,0.38); }
-.p-g { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
-.pc {
-  border-radius:16px; overflow:hidden;
-  background:rgba(255,255,255,0.04);
-  border:1px solid rgba(255,255,255,0.07);
-  transition:transform .3s, border-color .3s, box-shadow .3s;
-}
-.pc:hover { transform:translateY(-6px); border-color:rgba(0,229,255,0.24); box-shadow:0 20px 60px rgba(0,0,0,0.3); }
-.pc-img { aspect-ratio:16/9; overflow:hidden; }
-.pc-img img { width:100%; height:100%; object-fit:cover; filter:brightness(.76) saturate(1.12); transition:transform .5s, filter .5s; }
-.pc:hover .pc-img img { transform:scale(1.06); filter:brightness(.86) saturate(1.22); }
-.pc-b { padding:20px 21px 23px; }
-.pc-tag { font-size:10.5px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--sky); margin-bottom:7px; }
-.pc-name { font-size:15.5px; font-weight:700; color:#fff; line-height:1.35; margin-bottom:9px; }
-.pc-desc { font-size:13px; color:rgba(255,255,255,0.5); line-height:1.76; margin-bottom:14px; }
-.pc-ul { list-style:none; display:flex; flex-direction:column; gap:5px; }
-.pc-ul li { font-size:12px; color:rgba(255,255,255,0.42); display:flex; align-items:flex-start; gap:8px; line-height:1.55; }
-.pc-ul li::before { content:'✓'; color:var(--sky); font-weight:800; font-size:11px; flex-shrink:0; margin-top:1px; }
-
-/* ── CLIENTS ── */
-.cli-hd { text-align:center; max-width:540px; margin:0 auto 56px; }
-.cli-hd .sbar { margin-inline:auto; }
-.mq-wrap {
+/* logo */
+.logo{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.logo-emblem{
+  width:44px;height:44px;
+  background:var(--night);
+  position:relative;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
   overflow:hidden;
-  mask-image:linear-gradient(90deg,transparent 0%,#000 9%,#000 91%,transparent 100%);
-  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 9%,#000 91%,transparent 100%);
 }
-.mq-t { display:flex; gap:14px; animation:mscroll 30s linear infinite; width:max-content; }
-@keyframes mscroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-.cli-chip {
-  flex-shrink:0; background:var(--off); border:1px solid var(--slate);
-  border-radius:10px; padding:14px 26px; height:62px;
-  display:flex; align-items:center;
-  font-size:13px; font-weight:800; color:var(--navy-mid); letter-spacing:.4px;
-  white-space:nowrap; transition:background .28s, color .28s, border-color .28s, transform .28s;
+.logo-emblem::after{
+  content:'';
+  position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:var(--grd-gold);
 }
-.cli-chip:hover { background:var(--navy); color:var(--sky); border-color:transparent; transform:translateY(-2px); }
-
-/* ── CERTS ── */
-.cert-sec { background:var(--off); }
-.cert-og { display:grid; grid-template-columns:1fr 1fr; gap:76px; align-items:center; }
-.cert-lbl { font-size:12px; font-weight:800; color:var(--muted); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:22px; }
-.cert-g { display:grid; grid-template-columns:repeat(3,1fr); gap:13px; }
-.cert-c { background:#fff; border-radius:12px; padding:19px 15px; text-align:center; box-shadow:var(--sh-sm); border-top:3px solid var(--blue); transition:transform .24s; }
-.cert-c:hover { transform:scale(1.04); }
-.cert-c .ci { font-size:26px; margin-bottom:9px; }
-.cert-c h4 { font-size:12.5px; font-weight:800; color:var(--text); line-height:1.35; }
-.cert-c p  { font-size:11.5px; color:var(--muted); margin-top:4px; line-height:1.55; }
-.pat-r { display:flex; gap:14px; margin-top:28px; }
-.pb { flex:1; background:#fff; border-radius:12px; padding:18px 14px; text-align:center; box-shadow:var(--sh-sm); transition:transform .24s, box-shadow .24s; }
-.pb:hover { transform:translateY(-4px); box-shadow:var(--sh-md); }
-.pb .pn { font-family:'Cormorant Garamond',serif; font-size:42px; font-weight:700; color:var(--blue); line-height:1; }
-.pb .pl { font-size:11.5px; color:var(--muted); margin-top:6px; line-height:1.6; }
-
-/* ── CONTACT ── */
-.con-g { display:grid; grid-template-columns:1fr 1.1fr; gap:76px; align-items:start; }
-.con-list { margin-top:38px; display:flex; flex-direction:column; gap:20px; }
-.con-row { display:flex; align-items:flex-start; gap:15px; }
-.con-ico { width:42px; height:42px; border-radius:10px; flex-shrink:0; background:rgba(0,229,255,0.1); border:1px solid rgba(0,229,255,0.2); display:flex; align-items:center; justify-content:center; font-size:17px; }
-.con-tx h4 { font-size:11px; font-weight:700; color:rgba(255,255,255,0.4); letter-spacing:1.2px; text-transform:uppercase; margin-bottom:4px; }
-.con-tx p  { font-size:14.5px; color:#fff; line-height:1.65; }
-.cf-wrap { background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-radius:22px; padding:38px; }
-.cf-title { font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:700; color:#fff; margin-bottom:26px; line-height:1.2; }
-.f-row2 { display:grid; grid-template-columns:1fr 1fr; gap:13px; margin-bottom:13px; }
-.ff { display:flex; flex-direction:column; gap:7px; margin-bottom:13px; }
-.ff label { font-size:12px; font-weight:600; color:rgba(255,255,255,0.48); }
-.ff input, .ff textarea, .ff select {
-  background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);
-  border-radius:9px; padding:12px 15px; color:#fff;
-  font-size:14px; font-family:'Plus Jakarta Sans',sans-serif;
-  outline:none; width:100%; transition:border-color .28s, background .28s;
+.logo-emblem-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:18px;font-weight:600;
+  color:var(--amber);
+  letter-spacing:1px;
+  position:relative;z-index:1;
 }
-.ff input::placeholder, .ff textarea::placeholder { color:rgba(255,255,255,0.24); }
-.ff input:focus, .ff textarea:focus, .ff select:focus { border-color:rgba(0,229,255,0.48); background:rgba(255,255,255,0.08); }
-.ff textarea { height:108px; resize:none; }
-.ff select option { background:#152535; }
-.fsub {
-  width:100%; background:linear-gradient(135deg,var(--blue),var(--sky));
-  color:#fff; font-size:14.5px; font-weight:700; padding:14px;
-  border-radius:10px; box-shadow:0 6px 22px rgba(21,101,192,0.42);
-  transition:opacity .28s, transform .2s;
+.logo-text-wrap{display:flex;flex-direction:column;line-height:1}
+.logo-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px;font-weight:700;
+  color:var(--night);
+  letter-spacing:.5px;
 }
-.fsub:hover { opacity:.88; transform:translateY(-1px); }
-
-/* ── FOOTER ── */
-footer {
-  background:#040c16; padding:34px 52px;
-  display:flex; align-items:center; justify-content:space-between;
-  flex-wrap:wrap; gap:18px;
-  border-top:1px solid rgba(255,255,255,0.06);
+.logo-tagline{
+  font-size:9px;font-weight:500;
+  letter-spacing:3px;text-transform:uppercase;
+  color:var(--muted);margin-top:3px;
 }
-.f-brand { display:flex; align-items:center; gap:10px; }
-.f-mark { width:34px; height:34px; border-radius:8px; background:linear-gradient(135deg,var(--blue),var(--sky)); display:flex; align-items:center; justify-content:center; }
-.f-mark svg { width:14px; height:14px; }
-.f-name { font-size:15px; font-weight:800; color:#fff; letter-spacing:1px; }
-footer p { font-size:12.5px; color:rgba(255,255,255,0.33); }
-.f-nav { display:flex; gap:22px; }
-.f-nav a { font-size:12.5px; color:rgba(255,255,255,0.38); transition:color .24s; }
-.f-nav a:hover { color:var(--sky); }
 
-/* ── REVEAL ── */
-.rv { opacity:0; transform:translateY(26px); transition:opacity .7s ease, transform .7s ease; }
-.rv.in { opacity:1; transform:translateY(0); }
-.d1 { transition-delay:.12s; }
-.d2 { transition-delay:.22s; }
-.d3 { transition-delay:.32s; }
-.d4 { transition-delay:.42s; }
+/* nav links */
+.nav-links{display:flex;gap:0}
+.nav-links a{
+  font-size:13px;font-weight:500;
+  color:var(--slate);
+  padding:8px 14px;
+  transition:color .22s;
+  position:relative;white-space:nowrap;
+}
+.nav-links a::after{
+  content:'';
+  position:absolute;bottom:-1px;left:14px;right:14px;
+  height:1.5px;background:var(--gold);
+  transform:scaleX(0);transform-origin:center;
+  transition:transform .3s cubic-bezier(.16,1,.3,1);
+}
+.nav-links a:hover,.nav-links a.on{color:var(--night)}
+.nav-links a:hover::after,.nav-links a.on::after{transform:scaleX(1)}
 
-/* ── RESPONSIVE ── */
+/* nav cta */
+.nav-ctas{display:flex;gap:10px;flex-shrink:0}
+.btn-nv-outline{
+  border:1px solid var(--linen);
+  color:var(--slate);padding:9px 18px;
+  font-size:13px;font-weight:500;
+  background:transparent;
+  border-radius:2px;
+  transition:all .22s;
+}
+.btn-nv-outline:hover{border-color:var(--night);color:var(--night)}
+.btn-nv-solid{
+  background:var(--night);
+  color:var(--ivory);
+  padding:10px 24px;
+  font-size:13px;font-weight:600;
+  border-radius:2px;
+  transition:all .25s;
+  position:relative;overflow:hidden;
+}
+.btn-nv-solid::before{
+  content:'';position:absolute;inset:0;
+  background:var(--grd-gold);
+  transform:translateY(100%);
+  transition:transform .32s cubic-bezier(.16,1,.3,1);
+}
+.btn-nv-solid:hover::before{transform:translateY(0)}
+.btn-nv-solid:hover{color:var(--night)}
+.btn-nv-solid span{position:relative;z-index:1}
+
+/* ══════════════════════════════════════
+   HERO — magazine luxury split
+══════════════════════════════════════ */
+.hero{
+  min-height:calc(100vh - 110px);
+  background:var(--ivory);
+  display:grid;
+  grid-template-columns:1fr 520px;
+  position:relative;
+  overflow:hidden;
+}
+
+/* left pane */
+.hero-left{
+  padding:90px 72px 80px 40px;
+  display:flex;flex-direction:column;
+  justify-content:center;
+  position:relative;z-index:2;
+  max-width:680px;
+  justify-self:end;
+  width:100%;
+}
+
+/* pre-headline */
+.h-pre{
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:28px;
+  animation:fadeUp .7s both;
+}
+.h-pre-line{
+  width:40px;height:1px;
+  background:var(--grd-gold);
+  flex-shrink:0;
+}
+.h-pre-text{
+  font-size:11px;font-weight:500;
+  letter-spacing:3.5px;text-transform:uppercase;
+  color:var(--gold);
+}
+
+/* giant headline */
+.hero-h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:90px;
+  font-weight:700;
+  line-height:.9;
+  letter-spacing:-2px;
+  color:var(--night);
+  margin-bottom:32px;
+  animation:fadeUp .7s .08s both;
+}
+.hero-h1 .line-italic{display:block;font-style:italic;color:var(--gold)}
+.hero-h1 .line-light{display:block;font-weight:300;color:var(--slate)}
+.hero-h1 .line-big{display:block;font-size:1.05em;letter-spacing:-3px}
+
+.hero-desc{
+  font-size:16px;line-height:1.85;
+  color:var(--slate);
+  max-width:430px;
+  margin-bottom:42px;
+  font-weight:400;
+  animation:fadeUp .7s .16s both;
+}
+
+/* ctas */
+.hero-ctas{
+  display:flex;align-items:center;gap:16px;
+  margin-bottom:60px;
+  animation:fadeUp .7s .22s both;
+}
+.btn-gold{
+  background:var(--night);
+  color:var(--ivory);
+  padding:16px 38px;
+  font-size:14px;font-weight:600;
+  border-radius:2px;
+  letter-spacing:.3px;
+  position:relative;overflow:hidden;
+  transition:all .3s;
+  display:flex;align-items:center;gap:10px;
+}
+.btn-gold::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:var(--grd-gold);
+  transform:translateX(-101%);
+  transition:transform .36s cubic-bezier(.16,1,.3,1);
+}
+.btn-gold:hover::after{transform:translateX(0)}
+.btn-gold:hover{color:var(--night)}
+.btn-gold-text,.btn-gold svg{position:relative;z-index:1;transition:transform .25s}
+.btn-gold:hover svg{transform:translateX(4px)}
+.btn-ghost{
+  display:flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:500;
+  color:var(--slate);
+  border-bottom:1px solid var(--linef);
+  padding-bottom:3px;
+  transition:all .25s;
+}
+.btn-ghost:hover{color:var(--gold);border-color:var(--gold);gap:12px}
+
+/* stat row */
+.hero-stats{
+  display:flex;
+  border-top:1px solid var(--line);
+  padding-top:36px;
+  animation:fadeUp .7s .28s both;
+}
+.hstat{flex:1;padding-right:32px;border-right:1px solid var(--line)}
+.hstat+.hstat{padding:0 0 0 32px;border-right:none}
+.hstat-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:50px;font-weight:700;
+  color:var(--night);line-height:1;
+  letter-spacing:-1.5px;
+}
+.hstat-n sup{font-size:24px;color:var(--gold);vertical-align:super}
+.hstat-l{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.5;font-weight:400}
+
+/* right pane — image */
+.hero-right{
+  position:relative;
+  overflow:hidden;
+  background:var(--parchment);
+}
+.hero-img{position:absolute;inset:0}
+.hero-img img{
+  filter:saturate(.85) brightness(.9);
+  transform-origin:center;
+  animation:slowZoom 18s ease-in-out infinite alternate;
+}
+@keyframes slowZoom{from{transform:scale(1.04)}to{transform:scale(1)}}
+/* warm overlay */
+.hero-img::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,var(--ivory) 0%,rgba(250,246,239,.3) 30%,transparent 60%),
+             linear-gradient(to top,rgba(28,24,54,.4) 0%,transparent 50%);
+}
+/* decorative elements on image */
+.hero-badge{
+  position:absolute;bottom:40px;left:36px;z-index:3;
+  background:rgba(250,246,239,.92);
+  backdrop-filter:blur(12px);
+  border:1px solid var(--linef);
+  padding:20px 26px;
+  box-shadow:var(--sh2);
+  animation:fadeUp .7s .35s both;
+}
+.hb-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:48px;font-weight:700;
+  color:var(--night);line-height:1;letter-spacing:-2px;
+}
+.hb-l{font-size:11px;color:var(--muted);margin-top:3px;font-weight:500;letter-spacing:.5px}
+/* gold pip */
+.hero-gold-pip{
+  position:absolute;top:40px;right:36px;z-index:3;
+  width:80px;height:80px;
+  border-radius:50%;
+  border:1px solid var(--gold);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:rgba(201,147,58,.1);
+  backdrop-filter:blur(8px);
+  animation:drift 8s ease-in-out infinite;
+}
+.hgp-n{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--gold);line-height:1}
+.hgp-l{font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:.7;margin-top:2px}
+
+/* ══════════════════════════════════════
+   MARQUEE / PARTNERS STRIP
+══════════════════════════════════════ */
+.marquee-strip{
+  background:var(--night);
+  padding:16px 0;
+  overflow:hidden;
+  border-top:1px solid rgba(201,147,58,.15);
+  border-bottom:1px solid rgba(201,147,58,.15);
+  position:relative;
+}
+.marquee-strip::before,.marquee-strip::after{
+  content:'';position:absolute;top:0;bottom:0;width:100px;z-index:2;pointer-events:none;
+}
+.marquee-strip::before{left:0;background:linear-gradient(90deg,var(--night),transparent)}
+.marquee-strip::after{right:0;background:linear-gradient(-90deg,var(--night),transparent)}
+.marquee-track{
+  display:flex;
+  animation:marquee 24s linear infinite;
+  will-change:transform;
+}
+.marquee-track:hover{animation-play-state:paused}
+.mi{
+  display:flex;align-items:center;gap:36px;
+  flex-shrink:0;padding-right:36px;
+}
+.mi-brand{
+  font-family:'Cormorant Garamond',serif;
+  font-size:16px;font-weight:600;
+  letter-spacing:2px;
+  color:rgba(255,255,255,.25);
+  white-space:nowrap;
+  transition:color .25s;cursor:default;
+}
+.mi-brand:hover{color:var(--amber)}
+.mi-ornament{
+  width:18px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  flex-shrink:0;
+}
+
+/* ══════════════════════════════════════
+   SHARED SECTION STYLES
+══════════════════════════════════════ */
+.sec{padding:112px 0}
+.tag-line{
+  display:flex;align-items:center;gap:11px;
+  font-size:10.5px;font-weight:600;
+  letter-spacing:3px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:14px;
+}
+.tag-line::before{
+  content:'';width:24px;height:1px;
+  background:var(--gold);flex-shrink:0;
+}
+.tag-line.center{justify-content:center}
+.tag-line.center::before{display:none}
+h2.sec-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:56px;font-weight:700;
+  line-height:.95;letter-spacing:-1.5px;
+  color:var(--night);
+  margin-bottom:18px;
+}
+h2.sec-title em{font-style:italic;color:var(--gold)}
+h2.sec-title.center{text-align:center}
+.sec-lead{
+  font-size:16px;color:var(--slate);
+  line-height:1.85;max-width:500px;font-weight:400;
+}
+.sec-lead.center{text-align:center;margin:0 auto}
+.row-head{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:56px;gap:20px;
+}
+.link-see{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;
+  color:var(--slate);
+  border-bottom:1px solid var(--linef);
+  padding-bottom:2px;
+  transition:all .25s;white-space:nowrap;flex-shrink:0;
+}
+.link-see:hover{color:var(--gold);border-color:var(--gold);gap:12px}
+
+/* gold divider */
+.gold-divider{
+  width:48px;height:1px;
+  background:var(--grd-gold);
+  margin:18px 0 28px;
+  display:block;
+}
+.gold-divider.center{margin:18px auto 28px}
+
+/* ══════════════════════════════════════
+   ABOUT — offset asymmetric luxury
+══════════════════════════════════════ */
+.about{background:var(--white)}
+.ab-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;min-height:680px}
+
+/* image col */
+.ab-img-col{position:relative;overflow:hidden;background:var(--parchment)}
+.ab-img-col img{
+  position:absolute;inset:0;
+  filter:brightness(.88) saturate(.9);
+  transition:transform 1.2s cubic-bezier(.16,1,.3,1);
+}
+.ab-img-col:hover img{transform:scale(1.04)}
+.ab-img-col::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to right,transparent 50%,var(--white) 100%),
+             linear-gradient(to top,rgba(28,24,54,.5) 0%,transparent 60%);
+}
+/* floating quote */
+.ab-pull{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:36px 40px;z-index:2;
+  background:linear-gradient(to top,rgba(28,24,54,.85) 0%,transparent 100%);
+}
+.ab-pull-q{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-style:italic;font-weight:600;
+  color:rgba(255,255,255,.85);line-height:1.55;
+  border-left:2px solid var(--amber);
+  padding-left:18px;
+}
+
+/* text col */
+.ab-text-col{
+  padding:88px 64px 88px 72px;
+  display:flex;flex-direction:column;
+  justify-content:center;
+}
+.ab-body{
+  font-size:15.5px;color:var(--slate);
+  line-height:1.88;margin-bottom:18px;font-weight:400;
+}
+.ab-body strong{color:var(--night);font-weight:600}
+
+/* value pills */
+.ab-values{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 36px}
+.av{
+  display:flex;align-items:center;gap:8px;
+  background:var(--parchment);
+  border:1px solid var(--linen);
+  padding:9px 18px;
+  font-size:13px;font-weight:500;
+  color:var(--ink);
+  transition:all .25s;cursor:default;
+  border-radius:2px;
+}
+.av-ico{font-size:15px}
+.av:hover{background:var(--night);border-color:var(--night);color:var(--ivory)}
+
+/* cta row */
+.ab-cta{display:flex;gap:14px;align-items:center}
+.btn-primary{
+  background:var(--night);color:var(--ivory);
+  padding:14px 30px;
+  font-size:14px;font-weight:600;
+  border-radius:2px;
+  display:flex;align-items:center;gap:9px;
+  transition:all .28s;
+  position:relative;overflow:hidden;
+}
+.btn-primary::after{
+  content:'';position:absolute;inset:0;
+  background:var(--grd-gold);
+  transform:translateX(-101%);
+  transition:transform .34s cubic-bezier(.16,1,.3,1);
+}
+.btn-primary:hover::after{transform:translateX(0)}
+.btn-primary:hover{color:var(--night)}
+.btn-primary .pt,.btn-primary svg{position:relative;z-index:1;transition:transform .25s}
+.btn-primary:hover svg{transform:translateX(4px)}
+.btn-secondary{
+  font-size:14px;font-weight:500;
+  color:var(--slate);
+  display:flex;align-items:center;gap:7px;
+  transition:all .22s;
+}
+.btn-secondary:hover{color:var(--gold);gap:11px}
+
+/* ══════════════════════════════════════
+   NUMBERS — rich dark panel
+══════════════════════════════════════ */
+.numbers{background:var(--night);position:relative;overflow:hidden}
+/* subtle pattern */
+.numbers::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(201,147,58,.08) 1px,transparent 1px);
+  background-size:48px 48px;
+}
+/* gold line top */
+.numbers::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--grd-gold)}
+/* warm glow */
+.num-glow{
+  position:absolute;width:600px;height:600px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(201,147,58,.12) 0%,transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.num-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  position:relative;z-index:1;
+}
+.nm{
+  padding:76px 52px;
+  border-right:1px solid rgba(255,255,255,.05);
+  position:relative;cursor:default;transition:background .3s;
+}
+.nm:last-child{border-right:none}
+.nm:hover{background:rgba(255,255,255,.03)}
+.nm::after{
+  content:'';
+  position:absolute;bottom:0;left:52px;
+  width:0;height:2px;
+  background:var(--grd-gold);
+  transition:width .5s cubic-bezier(.16,1,.3,1);
+}
+.nm:hover::after{width:48px}
+.nm-idx{
+  font-size:10px;font-weight:500;letter-spacing:2.5px;
+  text-transform:uppercase;color:rgba(255,255,255,.18);
+  margin-bottom:22px;
+}
+.nm-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:80px;font-weight:700;
+  color:var(--white);
+  line-height:.9;letter-spacing:-3px;
+  margin-bottom:14px;
+}
+.nm-n sup{
+  font-size:36px;color:var(--amber);
+  vertical-align:super;
+}
+.nm-l{font-size:14px;color:rgba(255,255,255,.38);line-height:1.55;font-weight:400}
+
+/* ══════════════════════════════════════
+   BUSINESS AREAS — editorial bento
+══════════════════════════════════════ */
+.areas{background:var(--ivory)}
+.areas-head{text-align:center;margin-bottom:64px}
+
+/* bento grid */
+.bento{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto;gap:16px}
+.bc{
+  background:var(--white);
+  border:1px solid var(--line);
+  padding:40px 36px;
+  position:relative;overflow:hidden;
+  cursor:default;
+  transition:all .38s cubic-bezier(.16,1,.3,1);
+}
+/* tall first card */
+.bc:first-child{grid-row:1/3;display:flex;flex-direction:column;justify-content:flex-end;padding:0;overflow:hidden}
+.bc-hero-img{position:absolute;inset:0;background:var(--night)}
+.bc-hero-img img{opacity:.45;transition:all 1.2s cubic-bezier(.16,1,.3,1)}
+.bc:first-child:hover .bc-hero-img img{transform:scale(1.06);opacity:.6}
+.bc-hero-body{
+  position:relative;z-index:2;
+  padding:36px 36px 40px;
+  background:linear-gradient(to top,rgba(28,24,54,.95) 0%,rgba(28,24,54,.6) 60%,transparent 100%);
+  height:100%;
+  display:flex;flex-direction:column;justify-content:flex-end;
+}
+.bc-hero-body .bc-ico{background:rgba(201,147,58,.2);border-color:rgba(201,147,58,.3)}
+.bc-hero-body h3{color:var(--white)}
+.bc-hero-body p{color:rgba(255,255,255,.52)}
+.bc-hero-body .bc-link{color:var(--amber)}
+
+/* ghost number */
+.bc-num{
+  position:absolute;top:-8px;right:16px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:100px;font-weight:700;
+  color:rgba(28,24,54,.04);
+  line-height:1;pointer-events:none;
+  transition:color .3s;
+}
+.bc:hover .bc-num{color:rgba(28,24,54,.07)}
+.bc:hover{
+  transform:translateY(-7px);
+  box-shadow:var(--sh2);
+  border-color:var(--linef);
+}
+.bc:first-child:hover{transform:none;box-shadow:none}
+
+/* bottom color line */
+.bc::before{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--grd-gold);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .4s cubic-bezier(.16,1,.3,1);
+}
+.bc:hover::before{transform:scaleX(1)}
+
+.bc-ico{
+  width:52px;height:52px;
+  border:1px solid var(--linen);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;margin-bottom:22px;
+  background:var(--parchment);
+  transition:all .28s;
+  position:relative;z-index:1;
+  border-radius:2px;
+}
+.bc:hover .bc-ico{background:var(--night);border-color:var(--night)}
+.bc h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;font-weight:700;
+  color:var(--night);margin-bottom:11px;
+  line-height:1.3;
+  transition:color .25s;position:relative;z-index:1;
+}
+.bc:hover h3{color:var(--night)}
+.bc p{
+  font-size:13.5px;color:var(--slate);
+  line-height:1.72;
+  transition:color .25s;position:relative;z-index:1;
+}
+.bc-link{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12.5px;font-weight:600;
+  color:var(--gold);margin-top:20px;
+  transition:all .22s;position:relative;z-index:1;
+}
+.bc:hover .bc-link{gap:10px;color:var(--brass)}
+
+/* ══════════════════════════════════════
+   NEWS — editorial magazine layout
+══════════════════════════════════════ */
+.news{background:var(--parchment);border-top:1px solid var(--line)}
+.news-layout{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows:auto auto;
+  gap:20px;
+}
+/* featured — spans both rows left */
+.nc-featured{grid-row:1/3;background:var(--white);border:1px solid var(--line);overflow:hidden;cursor:pointer;transition:all .35s}
+.nc-featured:hover{box-shadow:var(--sh3)}
+.nc-f-img{height:320px;overflow:hidden;position:relative}
+.nc-f-img img{transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.nc-featured:hover .nc-f-img img{transform:scale(1.05)}
+.nc-f-cat{
+  position:absolute;top:18px;left:18px;
+  background:var(--night);color:var(--ivory);
+  font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  padding:5px 13px;
+}
+.nc-f-body{padding:32px 34px 34px}
+.nc-f-body h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:28px;font-weight:700;
+  color:var(--night);line-height:1.32;margin-bottom:14px;
+  transition:color .25s;
+}
+.nc-featured:hover .nc-f-body h3{color:var(--gold)}
+.nc-f-body p{font-size:14.5px;color:var(--slate);line-height:1.75}
+.nc-f-meta{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:24px;padding-top:18px;border-top:1px solid var(--line);
+}
+.nc-f-meta-date{font-size:12px;color:var(--muted);font-weight:500}
+.nc-f-arr{
+  width:38px;height:38px;
+  border:1px solid var(--linen);
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;color:var(--muted);
+  transition:all .25s;
+}
+.nc-featured:hover .nc-f-arr{background:var(--night);border-color:var(--night);color:var(--ivory)}
+
+/* small cards */
+.nc-small{
+  background:var(--white);border:1px solid var(--line);
+  overflow:hidden;cursor:pointer;
+  display:flex;
+  transition:all .3s;
+}
+.nc-small:hover{box-shadow:var(--sh2)}
+.nc-s-img{
+  width:130px;flex-shrink:0;overflow:hidden;
+}
+.nc-s-img img{
+  width:100%;height:100%;
+  transition:transform .7s cubic-bezier(.16,1,.3,1);
+  filter:saturate(.85);
+}
+.nc-small:hover .nc-s-img img{transform:scale(1.08)}
+.nc-s-body{
+  padding:20px 22px;
+  display:flex;flex-direction:column;
+  justify-content:center;flex:1;
+}
+.nc-s-cat{
+  font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:8px;
+}
+.nc-s-body h4{
+  font-family:'Cormorant Garamond',serif;
+  font-size:17px;font-weight:700;
+  color:var(--night);line-height:1.4;margin-bottom:7px;
+  transition:color .22s;
+}
+.nc-small:hover .nc-s-body h4{color:var(--gold)}
+.nc-s-body p{font-size:12.5px;color:var(--slate);line-height:1.6}
+.nc-s-date{font-size:11px;color:var(--muted);margin-top:10px}
+
+/* ══════════════════════════════════════
+   APP SECTION — warm feature band
+══════════════════════════════════════ */
+.app-sec{
+  background:var(--white);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:96px 0;
+  position:relative;overflow:hidden;
+}
+/* corner decoration */
+.app-sec::before{
+  content:'';
+  position:absolute;right:-120px;top:-120px;
+  width:480px;height:480px;
+  border-radius:50%;
+  border:1px solid var(--linen);
+  pointer-events:none;
+}
+.app-sec::after{
+  content:'';
+  position:absolute;right:-60px;top:-60px;
+  width:280px;height:280px;
+  border-radius:50%;
+  border:1px solid var(--linen);
+  pointer-events:none;
+}
+.app-inner{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:center;position:relative;z-index:1}
+.app-l .tag-line{margin-bottom:14px}
+.app-l h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:52px;font-weight:700;
+  color:var(--night);line-height:.95;
+  letter-spacing:-1.5px;margin-bottom:16px;
+}
+.app-l h2 em{font-style:italic;color:var(--gold)}
+.app-l p{font-size:15.5px;color:var(--slate);line-height:1.82;margin-bottom:40px;max-width:400px}
+.app-list{display:flex;flex-direction:column;gap:12px}
+.al{
+  display:flex;align-items:center;gap:18px;
+  background:var(--parchment);
+  border:1px solid var(--linen);
+  padding:20px 24px;
+  transition:all .3s cubic-bezier(.16,1,.3,1);
+  border-radius:2px;cursor:pointer;
+}
+.al:hover{background:var(--night);border-color:var(--night);transform:translateX(10px);box-shadow:var(--sh2)}
+.al:hover .al-ico{background:rgba(201,147,58,.2);border-color:var(--gold)}
+.al:hover .al-name{color:var(--ivory)}
+.al:hover .al-sub{color:rgba(255,255,255,.4)}
+.al:hover .al-arrow{color:var(--amber)}
+.al-ico{
+  width:46px;height:46px;
+  background:var(--warm);border:1px solid var(--linen);
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;
+  transition:all .25s;border-radius:2px;
+}
+.al-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:17px;font-weight:700;
+  color:var(--night);line-height:1.2;
+  transition:color .25s;
+}
+.al-sub{font-size:12px;color:var(--muted);margin-top:2px;transition:color .25s}
+.al-arrow{margin-left:auto;font-size:17px;color:var(--muted);transition:all .25s}
+.al:hover .al-arrow{transform:translateX(5px)}
+
+/* right feature blocks */
+.app-r{display:flex;flex-direction:column;gap:20px}
+.af-block{
+  background:var(--parchment);
+  border:1px solid var(--linen);
+  padding:28px 30px;
+  transition:all .28s;cursor:default;
+  border-radius:2px;
+}
+.af-block:hover{background:var(--white);box-shadow:var(--sh);transform:translateY(-3px)}
+.af-top{display:flex;align-items:center;gap:14px;margin-bottom:11px}
+.af-n{
+  font-family:'Cormorant Garamond',serif;
+  font-size:36px;font-weight:700;
+  color:var(--linen);line-height:1;
+}
+.af-label{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold)}
+.af-block p{font-size:13.5px;color:var(--slate);line-height:1.68}
+
+/* ══════════════════════════════════════
+   RECRUITMENT
+══════════════════════════════════════ */
+.recruit{background:var(--ivory)}
+.rec-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.rc{
+  background:var(--white);
+  border:1px solid var(--line);
+  padding:32px 28px;
+  position:relative;overflow:hidden;
+  cursor:pointer;
+  transition:all .35s cubic-bezier(.16,1,.3,1);
+  border-radius:2px;
+}
+.rc::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--grd-gold);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .4s cubic-bezier(.16,1,.3,1);
+}
+.rc:hover{transform:translateY(-8px);box-shadow:var(--sh2);border-color:var(--linef)}
+.rc:hover::before{transform:scaleX(1)}
+.rc-type{
+  display:inline-block;
+  background:var(--night);color:var(--ivory);
+  font-size:9.5px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+  padding:4px 12px;margin-bottom:16px;
+  border-radius:2px;
+}
+.rc h4{
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px;font-weight:700;
+  color:var(--night);line-height:1.35;
+  margin-bottom:11px;
+}
+.rc p{font-size:13px;color:var(--slate);line-height:1.65;margin-bottom:18px}
+.rc-loc{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:5px;font-weight:500}
+.rc-arrow{
+  position:absolute;bottom:24px;right:24px;
+  width:36px;height:36px;
+  border:1px solid var(--linen);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;color:var(--muted);
+  transition:all .25s;border-radius:2px;
+}
+.rc:hover .rc-arrow{background:var(--night);border-color:var(--night);color:var(--ivory)}
+
+/* ══════════════════════════════════════
+   PARTNERS
+══════════════════════════════════════ */
+.partners{background:var(--white);border-top:1px solid var(--line);padding:84px 0}
+.part-grid{
+  display:grid;grid-template-columns:repeat(6,1fr);
+  border:1px solid var(--line);
+  gap:0;margin-top:52px;
+}
+.pc{
+  height:96px;
+  display:flex;align-items:center;justify-content:center;
+  border-right:1px solid var(--line);
+  cursor:default;transition:all .3s;
+  position:relative;overflow:hidden;
+}
+.pc:last-child{border-right:none}
+.pc::before{
+  content:'';position:absolute;inset:0;
+  background:var(--parchment);
+  transform:translateY(100%);
+  transition:transform .35s cubic-bezier(.16,1,.3,1);
+}
+.pc:hover::before{transform:translateY(0)}
+.pc-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:17px;font-weight:700;
+  color:var(--linen);letter-spacing:.5px;
+  transition:color .3s;
+  position:relative;z-index:1;
+}
+.pc:hover .pc-name{color:var(--night)}
+
+/* ══════════════════════════════════════
+   CTA BANNER
+══════════════════════════════════════ */
+.cta-banner{
+  background:var(--night);
+  padding:96px 0;
+  position:relative;overflow:hidden;
+  text-align:center;
+}
+.cta-banner::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(201,147,58,.07) 1px,transparent 1px);
+  background-size:48px 48px;
+}
+.cta-banner::after{
+  content:'';
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:700px;height:700px;border-radius:50%;
+  background:radial-gradient(circle,rgba(201,147,58,.08) 0%,transparent 65%);
+  pointer-events:none;
+}
+.cta-inner{position:relative;z-index:1}
+.cta-banner h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:58px;font-weight:700;font-style:italic;
+  color:var(--white);letter-spacing:-1.5px;
+  line-height:1.05;margin-bottom:18px;
+}
+.cta-banner h2 em{font-style:normal;color:var(--amber)}
+.cta-banner p{font-size:16px;color:rgba(255,255,255,.45);line-height:1.7;margin-bottom:40px}
+.cta-btns{display:flex;justify-content:center;gap:14px}
+.btn-cta-main{
+  background:var(--grd-gold);
+  color:var(--night);
+  padding:16px 40px;
+  font-size:15px;font-weight:700;
+  border-radius:2px;
+  transition:all .25s;
+  display:flex;align-items:center;gap:9px;
+}
+.btn-cta-main:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(201,147,58,.35)}
+.btn-cta-ghost{
+  border:1px solid rgba(255,255,255,.2);
+  color:rgba(255,255,255,.65);
+  padding:16px 32px;
+  font-size:15px;font-weight:500;
+  background:transparent;border-radius:2px;
+  transition:all .25s;
+}
+.btn-cta-ghost:hover{border-color:rgba(255,255,255,.55);color:#fff}
+
+/* ══════════════════════════════════════
+   FOOTER — premium dark
+══════════════════════════════════════ */
+footer{
+  background:var(--deep);
+  border-top:1px solid rgba(201,147,58,.25);
+}
+.ft-main{
+  max-width:1300px;margin:auto;
+  padding:76px 40px 56px;
+  display:grid;
+  grid-template-columns:2.2fr 1fr 1fr 1.2fr;
+  gap:56px;
+  border-bottom:1px solid rgba(255,255,255,.05);
+  margin-bottom:0;
+}
+.ft-brand{
+  font-family:'Cormorant Garamond',serif;
+  font-size:26px;font-weight:700;
+  color:var(--white);margin-bottom:4px;
+}
+.ft-brand em{font-style:italic;color:var(--amber)}
+.ft-est{
+  font-size:10px;font-weight:500;letter-spacing:3px;
+  text-transform:uppercase;color:rgba(255,255,255,.2);
+  display:block;margin-bottom:20px;
+}
+.ft-about{
+  font-size:13.5px;color:rgba(255,255,255,.3);
+  line-height:1.85;margin-bottom:28px;font-weight:400;
+}
+.ft-contact{display:flex;flex-direction:column;gap:9px;margin-bottom:28px}
+.ftc{
+  display:flex;align-items:flex-start;gap:8px;
+  font-size:13px;color:rgba(255,255,255,.3);
+}
+.ftc a{color:rgba(255,255,255,.3);transition:color .22s}
+.ftc a:hover{color:var(--amber)}
+.ft-soc{display:flex;gap:8px}
+.fso{
+  width:36px;height:36px;
+  border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.3);font-size:12px;
+  transition:all .22s;border-radius:2px;
+}
+.fso:hover{background:var(--gold);border-color:var(--gold);color:var(--night)}
+.ft-col h5{
+  font-family:'Cormorant Garamond',serif;
+  font-size:16px;font-weight:700;
+  color:rgba(255,255,255,.6);
+  margin-bottom:18px;letter-spacing:.3px;
+}
+.ft-col a{
+  display:block;font-size:13px;
+  color:rgba(255,255,255,.3);
+  transition:all .22s;margin-bottom:9px;font-weight:400;
+}
+.ft-col a:hover{color:var(--amber);padding-left:5px}
+.ft-bot{
+  max-width:1300px;margin:auto;
+  padding:22px 40px;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:12px;
+}
+.ft-copy{font-size:12px;color:rgba(255,255,255,.15);font-weight:400}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
 @media(max-width:1100px){
-  .nav { padding:0 26px; }
-  .nav-menu { display:none; }
-  .sec { padding:76px 26px; }
-  .about-g,.cult-g,.cert-og,.con-g { grid-template-columns:1fr; gap:44px; }
-  .adv-g { grid-template-columns:1fr 1fr; }
-  .p-g { grid-template-columns:1fr 1fr; }
-  .tl-g { grid-template-columns:repeat(4,1fr); }
-  .tln:nth-child(n+5) { display:none; }
-  .hero { padding:110px 26px 76px; }
-  .hero-kpis { padding:22px 26px; }
-  .about-badge { position:static; display:inline-block; margin-top:18px; }
-  .adv-hd,.prod-hd { grid-template-columns:1fr; gap:22px; }
-  footer { flex-direction:column; text-align:center; }
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-right{height:500px}
+  .hero-left{padding:80px 40px;max-width:100%;justify-self:start}
+  .hero-h1{font-size:62px}
+  .ab-grid{grid-template-columns:1fr}
+  .ab-img-col{height:420px;order:-1}
+  .ab-img-col::after{display:none}
+  .ab-text-col{padding:64px 40px}
+  .num-grid{grid-template-columns:1fr 1fr}
+  .nm{border-right:none;border-bottom:1px solid rgba(255,255,255,.06);padding:52px 40px}
+  .bento{grid-template-columns:1fr 1fr}
+  .bc:first-child{grid-row:auto;min-height:360px}
+  .news-layout{grid-template-columns:1fr}
+  .nc-featured{grid-row:auto}
+  .app-inner{grid-template-columns:1fr;gap:48px}
+  .rec-grid{grid-template-columns:1fr 1fr}
+  .part-grid{grid-template-columns:repeat(3,1fr)}
+  .ft-main{grid-template-columns:1fr 1fr;gap:32px}
+  h2.sec-title{font-size:44px}
 }
-@media(max-width:600px){
-  .hero-kpis { flex-direction:column; }
-  .kpi+.kpi { border-left:none; border-top:1px solid rgba(255,255,255,0.1); padding-top:18px; }
-  .p-g,.adv-g { grid-template-columns:1fr; }
-  .cult-cards,.feat-g { grid-template-columns:1fr; }
-  .cert-g { grid-template-columns:1fr 1fr; }
-  .f-row2 { grid-template-columns:1fr; }
+@media(max-width:680px){
+  .hero-h1{font-size:46px}
+  .bento,.rec-grid,.part-grid{grid-template-columns:1fr}
+  h2.sec-title{font-size:36px}
+  .nm-n{font-size:60px}
+  .cta-banner h2{font-size:38px}
+  .hero-stats{flex-direction:column;gap:24px}
+  .hstat{border-right:none;padding:0 0 24px;border-bottom:1px solid var(--line)}
+  .hstat:last-child{border-bottom:none}
+  .cta-btns{flex-direction:column;align-items:center}
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav" id="topnav">
-  <div class="nav-brand">
-    <div class="nav-mark">
-      <svg viewBox="0 0 16 16" fill="none">
-        <path d="M8 1.5L14 13H2L8 1.5Z" fill="white" opacity=".9"/>
-        <path d="M8 6.5L11.5 13H4.5L8 6.5Z" fill="rgba(0,229,255,.6)"/>
-      </svg>
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="tb-inner">
+    <div class="tb-left">
+      <a href="mailto:contact@tinphat.com">contact@tinphat.com</a>
+      <a href="tel:0949299494">0949 29 94 94</a>
     </div>
-    <span class="nav-name">KING<em>DA</em></span>
+    <div class="tb-right">
+      <span class="tb-lang active">🇻🇳 Tiếng Việt</span>
+      <div class="tb-sep"></div>
+      <span class="tb-lang">🇬🇧 English</span>
+    </div>
   </div>
-  <ul class="nav-menu">
-    <li><a href="#about">Giới thiệu</a></li>
-    <li><a href="#timeline">Lịch sử</a></li>
-    <li><a href="#products">Sản phẩm</a></li>
-    <li><a href="#advantages">Ưu thế</a></li>
-    <li><a href="#clients">Khách hàng</a></li>
-    <li><a href="#contact">Liên hệ</a></li>
-  </ul>
-  <button class="nav-cta">Liên hệ ngay</button>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-emblem"><span class="logo-emblem-text">TP</span></div>
+      <div class="logo-text-wrap">
+        <div class="logo-name">Tín Phát Group</div>
+        <div class="logo-tagline">Est. 2002 · Bạc Liêu, Việt Nam</div>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#" class="on">Trang chủ</a>
+      <a href="#">Giới thiệu</a>
+      <a href="#">Tin tức</a>
+      <a href="#">Tuyển dụng</a>
+      <a href="#">Hợp tác</a>
+      <a href="#">Ứng dụng</a>
+      <a href="#">Liên hệ</a>
+    </div>
+    <div class="nav-ctas">
+      <button class="btn-nv-outline">🛒 TipaShop</button>
+      <button class="btn-nv-solid"><span>Đăng ký hợp tác →</span></button>
+    </div>
+  </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero" id="home">
-  <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-  <div class="geo geo-t1"></div>
-  <div class="geo geo-t2"></div>
-  <div class="geo geo-sq"></div>
-
-  <div class="hero-inner">
-    <div class="hero-badge">
-      <span class="badge-dot"></span>
-      Công ty TNHH Thương Mại Công Nghệ Kingda
+<!-- ① HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="h-pre">
+      <div class="h-pre-line"></div>
+      <span class="h-pre-text">Tập đoàn đầu tư thương mại · Est. 2002</span>
     </div>
     <h1 class="hero-h1">
-      Giải Pháp Vật Liệu<br>
-      <span class="hl">In Điện Tử</span><br>
-      Đẳng Cấp Thế Giới
+      <span class="line-light">Tập Đoàn</span>
+      <span class="line-italic">Tín Phát</span>
+      <span class="line-big">Group</span>
     </h1>
-    <p class="hero-p">
-      Hơn 15 năm nghiên cứu và sản xuất mực in, sơn phủ chất lượng cao cho điện tử tiêu dùng, linh kiện ô tô và hệ thống nhà thông minh. Đối tác chiến lược của Huawei, Samsung, BYD và hàng chục tập đoàn toàn cầu.
-    </p>
-    <div class="hero-btns">
-      <a href="#products" class="hbtn-p">Khám phá sản phẩm →</a>
-      <a href="#about" class="hbtn-g">Tìm hiểu thêm</a>
+    <p class="hero-desc">Nâng cao chất lượng cuộc sống cộng đồng — mang đến những sản phẩm chất lượng và công nghệ đỉnh cao. Vươn tới tầm cao, trở thành Tập đoàn Thương mại toàn cầu.</p>
+    <div class="hero-ctas">
+      <a href="#" class="btn-gold">
+        <span class="btn-gold-text">Khám phá ngay</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+      <a href="#" class="btn-ghost">Đăng ký hợp tác <span>→</span></a>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat">
+        <div class="hstat-n" data-to="22">0<sup>+</sup></div>
+        <div class="hstat-l">Năm hoạt động<br>& phát triển</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-n">8<sup>+</sup></div>
+        <div class="hstat-l">Đối tác thương<br>hiệu quốc tế</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-n">3</div>
+        <div class="hstat-l">Ứng dụng<br>di động</div>
+      </div>
     </div>
   </div>
-
-  <div class="hero-kpis">
-    <div class="kpi">
-      <div class="kpi-v">15<sup>+</sup></div>
-      <div class="kpi-l">Năm kinh nghiệm</div>
+  <div class="hero-right">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1000&q=85" alt="Tín Phát Group">
     </div>
-    <div class="kpi">
-      <div class="kpi-v">31<sup>+</sup></div>
-      <div class="kpi-l">Bằng sáng chế</div>
+    <div class="hero-badge">
+      <div class="hb-n">22+</div>
+      <div class="hb-l">Năm kinh nghiệm</div>
     </div>
-    <div class="kpi">
-      <div class="kpi-v">20<sup>+</sup></div>
-      <div class="kpi-l">Đối tác toàn cầu</div>
-    </div>
-    <div class="kpi">
-      <div class="kpi-v">3<sup>x</sup></div>
-      <div class="kpi-l">Chứng nhận ISO</div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section class="sec" id="about" style="background:#fff;">
-<div class="sec-w">
-  <div class="about-g">
-    <div class="about-vis rv">
-      <div class="about-img">
-        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80" alt="Kingda R&D">
-      </div>
-      <div class="about-badge">
-        <div class="bn">2009</div>
-        <div class="bl">Năm thành lập<br>tại Thâm Quyến</div>
-      </div>
-    </div>
-    <div class="rv d2">
-      <span class="pill">Giới thiệu công ty</span>
-      <h2 class="st">Nền tảng vững chắc,<br>đổi mới không ngừng</h2>
-      <span class="sbar"></span>
-      <p class="sb">
-        Kingda là doanh nghiệp tư nhân chuyên nghiên cứu, sản xuất và cung cấp mực in, sơn phủ cho điện tử với vốn đăng ký 10 triệu NDT. Sau hơn 10 năm tích lũy, sản phẩm đã ứng dụng rộng rãi trong điện tử 3C và thiết lập quan hệ hợp tác bền vững với Huawei, Xiaomi, BOE, Lens Technology, OFILM và BYD.
-      </p>
-      <div class="feat-g">
-        <div class="feat">
-          <h4>🔬 Trung tâm R&D hiện đại</h4>
-          <p>Gần 1.000 m² tại Songhu Zhigu với đội ngũ kỹ sư và thiết bị tiên tiến</p>
-        </div>
-        <div class="feat">
-          <h4>🏭 Sản xuất chuẩn quốc tế</h4>
-          <p>Dây chuyền hiện đại, kiểm soát chất lượng toàn bộ quy trình sản xuất</p>
-        </div>
-        <div class="feat">
-          <h4>🎓 Hợp tác học thuật</h4>
-          <p>Liên kết Đại học Trịnh Châu, Đại học Hồ Nam trong nghiên cứu ứng dụng</p>
-        </div>
-        <div class="feat">
-          <h4>🌏 Mạng lưới toàn cầu</h4>
-          <p>Văn phòng tại Thâm Quyến, Đông Quan (TQ) và Bắc Ninh (Việt Nam)</p>
-        </div>
-      </div>
-      <div class="iso-r">
-        <span class="iso-c">ISO 9001:2015</span>
-        <span class="iso-c">ISO 14001:2015</span>
-        <span class="iso-c">ISO 45001:2018</span>
-        <span class="iso-c">UL Certified</span>
-      </div>
+    <div class="hero-gold-pip">
+      <div class="hgp-n">2002</div>
+      <div class="hgp-l">Thành lập</div>
     </div>
   </div>
 </div>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <div class="mi"><span class="mi-brand">Shell</span><div class="mi-ornament"></div><span class="mi-brand">Castrol</span><div class="mi-ornament"></div><span class="mi-brand">Motul</span><div class="mi-ornament"></div><span class="mi-brand">Unilever</span><div class="mi-ornament"></div><span class="mi-brand">GS Battery</span><div class="mi-ornament"></div><span class="mi-brand">Kenda</span><div class="mi-ornament"></div><span class="mi-brand">Mekong Penda</span><div class="mi-ornament"></div><span class="mi-brand">TAHASA</span><div class="mi-ornament"></div><span class="mi-brand">Best Express</span><div class="mi-ornament"></div></div>
+    <div class="mi"><span class="mi-brand">Shell</span><div class="mi-ornament"></div><span class="mi-brand">Castrol</span><div class="mi-ornament"></div><span class="mi-brand">Motul</span><div class="mi-ornament"></div><span class="mi-brand">Unilever</span><div class="mi-ornament"></div><span class="mi-brand">GS Battery</span><div class="mi-ornament"></div><span class="mi-brand">Kenda</span><div class="mi-ornament"></div><span class="mi-brand">Mekong Penda</span><div class="mi-ornament"></div><span class="mi-brand">TAHASA</span><div class="mi-ornament"></div><span class="mi-brand">Best Express</span><div class="mi-ornament"></div></div>
+  </div>
+</div>
+
+<!-- ② ABOUT -->
+<section class="about">
+  <div class="ab-grid">
+    <div class="ab-img-col rv slide-left">
+      <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=85" alt="Tín Phát">
+      <div class="ab-pull">
+        <p class="ab-pull-q">"Chuyên nghiệp – Tận tình – Chất lượng" — triết lý kinh doanh không thỏa hiệp của Tín Phát Group."</p>
+      </div>
+    </div>
+    <div class="ab-text-col">
+      <div class="tag-line rv">Về chúng tôi</div>
+      <h2 class="sec-title rv d1">Từ Bạc Liêu<br><em>Ra Thế Giới</em></h2>
+      <span class="gold-divider rv d1"></span>
+      <p class="ab-body rv d2">Được thành lập năm <strong>2002</strong> tại Bạc Liêu, Tín Phát Group là Tập đoàn Đầu tư Thương mại đa lĩnh vực. Hơn <strong>22 năm</strong> phát triển, chúng tôi là đối tác tin cậy của <strong>Shell, Castrol, Motul, Unilever, GS Battery, Kenda</strong> — những thương hiệu hàng đầu thế giới.</p>
+      <p class="ab-body rv d3">Tầm nhìn: <strong>Trở thành Tập đoàn Đầu tư Thương mại có quy mô toàn cầu</strong>, tiên phong ứng dụng công nghệ số và mô hình doanh nghiệp 5.0 vào mọi hoạt động.</p>
+      <div class="ab-values rv d3">
+        <div class="av"><span class="av-ico">🎯</span>Sứ mệnh rõ ràng</div>
+        <div class="av"><span class="av-ico">🔒</span>Chính trực</div>
+        <div class="av"><span class="av-ico">📋</span>Tuân thủ</div>
+        <div class="av"><span class="av-ico">🛡️</span>An toàn</div>
+        <div class="av"><span class="av-ico">💪</span>Trách nhiệm</div>
+        <div class="av"><span class="av-ico">🤝</span>Đoàn kết</div>
+      </div>
+      <div class="ab-cta rv d4">
+        <a href="#" class="btn-primary">
+          <span class="pt">Tìm hiểu thêm</span>
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+        <a href="#" class="btn-secondary">Ban lãnh đạo <span>→</span></a>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- TIMELINE -->
-<section class="sec sec-dark" id="timeline">
-<div class="sec-w">
-  <div style="text-align:center;max-width:600px;margin:0 auto;" class="rv">
-    <span class="pill">Lịch sử hình thành</span>
-    <h2 class="st st-w">Hành trình 15 năm phát triển</h2>
-    <span class="sbar" style="margin-inline:auto;"></span>
-  </div>
-  <div class="tl-wrap rv d1">
-    <div class="tl-line"><div class="tl-prog"></div></div>
-    <div class="tl-g">
-      <div class="tln">
-        <div class="tl-yr">2009</div>
-        <div class="tl-dot-row"><div class="tldot"></div></div>
-        <div class="tl-tx">Đăng ký tại Thâm Quyến, chuyên cung cấp giải pháp vật liệu in ấn điện tử</div>
-      </div>
-      <div class="tln">
-        <div class="tl-yr">2015</div>
-        <div class="tl-dot-row"><div class="tldot"></div></div>
-        <div class="tl-tx">Đạt chứng nhận hệ thống ISO 9001, ISO 14001 và ISO 18001</div>
-      </div>
-      <div class="tln">
-        <div class="tl-yr">2016</div>
-        <div class="tl-dot-row"><div class="tldot"></div></div>
-        <div class="tl-tx">Trở thành nhà cung cấp đạt chuẩn của Lens &amp; OFILM (phục vụ Huawei)</div>
-      </div>
-      <div class="tln">
-        <div class="tl-yr">2017</div>
-        <div class="tl-dot-row"><div class="tldot"></div></div>
-        <div class="tl-tx">Thành lập Công ty Vật liệu Mới Kingda tại Đông Quan, Quảng Đông</div>
-      </div>
-      <div class="tln">
-        <div class="tl-yr">2018</div>
-        <div class="tl-dot-row"><div class="tldot"></div></div>
-        <div class="tl-tx">Mua văn phòng gần 1.000 m² tại Songhu Zhigu làm trung tâm R&D</div>
-      </div>
-      <div class="tln">
-        <div class="tl-yr">2019</div>
-        <div class="tl-dot-row"><div class="tldot"></div></div>
-        <div class="tl-tx">Toàn bộ văn phòng &amp; R&D chuyển đến Songhu Zhigu, bước vào chương mới</div>
-      </div>
-      <div class="tln">
-        <div class="tl-yr">2022</div>
-        <div class="tl-dot-row"><div class="tldot"></div></div>
-        <div class="tl-tx">Vào kho tài nguyên OPPO &amp; VIVO, bắt đầu sản xuất đại trà quy mô lớn</div>
-      </div>
+<!-- ③ NUMBERS -->
+<div class="numbers">
+  <div class="num-glow"></div>
+  <div class="num-grid">
+    <div class="nm rv d1">
+      <div class="nm-idx">// 01</div>
+      <div class="nm-n" data-cnt="22">0<sup>+</sup></div>
+      <div class="nm-l">Năm hoạt động & phát triển bền vững</div>
+    </div>
+    <div class="nm rv d2">
+      <div class="nm-idx">// 02</div>
+      <div class="nm-n">8<sup>+</sup></div>
+      <div class="nm-l">Thương hiệu đối tác quốc tế uy tín</div>
+    </div>
+    <div class="nm rv d3">
+      <div class="nm-idx">// 03</div>
+      <div class="nm-n">3</div>
+      <div class="nm-l">Ứng dụng di động phục vụ khách hàng</div>
+    </div>
+    <div class="nm rv d4">
+      <div class="nm-idx">// 04</div>
+      <div class="nm-n">5<sup>+</sup></div>
+      <div class="nm-l">Tỉnh thành có chi nhánh & đại lý</div>
     </div>
   </div>
 </div>
+
+<!-- ④ BUSINESS AREAS -->
+<section class="areas sec">
+  <div class="cw">
+    <div class="areas-head rv">
+      <div class="tag-line center">Lĩnh vực hoạt động</div>
+      <h2 class="sec-title center">Đa Lĩnh Vực, <em>Một Tập Đoàn</em></h2>
+      <span class="gold-divider center"></span>
+      <p class="sec-lead center">Tín Phát Group hoạt động đa lĩnh vực — từ phân phối hàng tiêu dùng, dầu nhớt đến thương mại điện tử và logistics hiện đại.</p>
+    </div>
+    <div class="bento rv d1">
+      <div class="bc">
+        <div class="bc-hero-img"><img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=700&q=80" alt=""></div>
+        <div class="bc-hero-body">
+          <div class="bc-ico">🛢️</div>
+          <h3>Phân phối Dầu nhớt & Ắc quy</h3>
+          <p>Đại lý chính thức Shell, Castrol, Motul, GS Battery và Mekong Penda tại Đồng bằng sông Cửu Long.</p>
+          <div class="bc-link">Xem chi tiết →</div>
+        </div>
+      </div>
+      <div class="bc"><div class="bc-num">02</div><div class="bc-ico">🛒</div><h3>Thương mại điện tử TipaShop</h3><p>Nền tảng mua sắm online đa danh mục, giao hàng nhanh, giá cạnh tranh toàn quốc.</p><div class="bc-link">Xem chi tiết →</div></div>
+      <div class="bc"><div class="bc-num">03</div><div class="bc-ico">🚚</div><h3>Logistics TipaExpress</h3><p>Giao hàng nhanh kết nối BEST Express — phủ sóng rộng khắp Đồng bằng sông Cửu Long.</p><div class="bc-link">Xem chi tiết →</div></div>
+      <div class="bc"><div class="bc-num">04</div><div class="bc-ico">🧴</div><h3>Phân phối Unilever</h3><p>Nhà phân phối chính thức Unilever tại Bạc Liêu và các tỉnh lân cận.</p><div class="bc-link">Xem chi tiết →</div></div>
+      <div class="bc"><div class="bc-num">05</div><div class="bc-ico">🏍️</div><h3>Lốp xe Kenda</h3><p>Đại lý lốp xe Kenda chất lượng Đài Loan — phù hợp mọi loại xe máy và ô tô.</p><div class="bc-link">Xem chi tiết →</div></div>
+    </div>
+  </div>
 </section>
 
-<!-- CULTURE -->
-<section class="sec" id="culture" style="background:#fff;">
-<div class="sec-w">
-  <div class="cult-g">
-    <div class="cult-vis rv">
-      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80" alt="Kingda team">
+<!-- ⑤ NEWS -->
+<section class="news sec">
+  <div class="cw">
+    <div class="row-head rv">
+      <div>
+        <div class="tag-line">Cập nhật mới nhất</div>
+        <h2 class="sec-title">Tin Tức &<br><em>Sự Kiện</em></h2>
+      </div>
+      <a href="#" class="link-see">Xem tất cả tin tức →</a>
     </div>
-    <div class="rv d2">
-      <span class="pill">Văn hóa doanh nghiệp</span>
-      <h2 class="st">Trung thực · Tận tâm<br>Thiết thực · Sáng tạo</h2>
-      <span class="sbar"></span>
-      <p class="sb">
-        Chúng tôi kiên định với triết lý: "Chất lượng hàng đầu, dịch vụ xuất sắc, đổi mới sáng tạo, cùng nhau phát triển đôi bên cùng có lợi" – lấy nhu cầu thị trường làm trung tâm và đội ngũ kỹ thuật làm lợi thế cạnh tranh cốt lõi.
-      </p>
-      <div class="cult-cards">
-        <div class="cc">
-          <div class="cc-ico">🎯</div>
-          <h3>Định vị</h3>
-          <p>Trở thành nhà cung cấp giải pháp ứng dụng vật liệu in điện tử hàng đầu</p>
+    <div class="news-layout rv d1">
+      <div class="nc-featured">
+        <div class="nc-f-img">
+          <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=900&q=85" alt="">
+          <div class="nc-f-cat">Tin Công Ty</div>
         </div>
-        <div class="cc">
-          <div class="cc-ico">🌟</div>
-          <h3>Sứ mệnh</h3>
-          <p>Tạo giá trị cho khách hàng, xây dựng thương hiệu và tạo dựng thành tựu cho nhân viên</p>
-        </div>
-        <div class="cc">
-          <div class="cc-ico">🏆</div>
-          <h3>Mục tiêu</h3>
-          <p>Xây dựng thương hiệu chuyên nghiệp, dẫn đầu ngành về quy mô và thị phần</p>
-        </div>
-        <div class="cc">
-          <div class="cc-ico">🔑</div>
-          <h3>Phương châm</h3>
-          <p>Làm vững chắc → Củng cố phát triển → Mở rộng dẫn đầu toàn ngành</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- ADVANTAGES -->
-<section class="sec adv-sec" id="advantages">
-<div class="sec-w">
-  <div class="adv-hd rv">
-    <div>
-      <span class="pill">Ưu thế cạnh tranh</span>
-      <h2 class="st">Vì sao lựa chọn Kingda?</h2>
-      <span class="sbar"></span>
-    </div>
-    <p class="adv-note">
-      Bốn trụ cột cốt lõi tạo nên sức mạnh bền vững: đội ngũ chuyên nghiệp, năng lực R&D vượt trội, chất lượng ổn định và dịch vụ phản hồi nhanh 24/7 – tất cả hướng đến một mục tiêu duy nhất là sự thành công của khách hàng.
-    </p>
-  </div>
-  <div class="adv-g">
-    <div class="advc rv">
-      <div class="adv-n">01</div>
-      <div class="adv-ico">👥</div>
-      <h3>Đội ngũ doanh nghiệp</h3>
-      <p>Cơ cấu kiến thức hợp lý, phân công rõ ràng và năng lực sáng tạo mạnh mẽ trong cả nghiên cứu lẫn dịch vụ khách hàng.</p>
-    </div>
-    <div class="advc rv d1">
-      <div class="adv-n">02</div>
-      <div class="adv-ico">🔬</div>
-      <h3>Năng lực R&D mạnh</h3>
-      <p>Cung cấp giải pháp hệ thống toàn diện, đáp ứng hoàn toàn nhu cầu tùy chỉnh và yêu cầu đặc thù của từng khách hàng.</p>
-    </div>
-    <div class="advc rv d2">
-      <div class="adv-n">03</div>
-      <div class="adv-ico">✅</div>
-      <h3>Chất lượng ổn định</h3>
-      <p>Kiểm tra toàn bộ quy trình từ nguyên liệu đến thành phẩm. Đã thông qua chứng nhận ISO9001, ISO14001 và UL đầy đủ.</p>
-    </div>
-    <div class="advc rv d3">
-      <div class="adv-n">04</div>
-      <div class="adv-ico">⚡</div>
-      <h3>Phản hồi nhanh 24/7</h3>
-      <p>Đội ngũ kỹ thuật xử lý sự cố tại hiện trường khách hàng mọi lúc. Dịch vụ chuỗi cung ứng hoàn thiện, lấy khách hàng làm trọng tâm.</p>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- PRODUCTS -->
-<section class="sec sec-dark" id="products">
-<div class="sec-w">
-  <div class="prod-hd rv">
-    <div>
-      <span class="pill">Danh mục sản phẩm</span>
-      <h2 class="st st-w">Giải pháp toàn diện<br>cho mọi ứng dụng</h2>
-      <span class="sbar"></span>
-      <p class="sb">Từ sơn gốc nước, in nổi 3D, AG chống chói đến sơn phủ mạ chân không – Kingda cung cấp đầy đủ cho điện tử, ô tô và nhà thông minh.</p>
-    </div>
-    <div class="p-tabs">
-      <span class="ptab on">Tất cả</span>
-      <span class="ptab">Điện tử tiêu dùng</span>
-      <span class="ptab">Kính &amp; Màn hình</span>
-      <span class="ptab">Ô tô</span>
-      <span class="ptab">Nhà thông minh</span>
-    </div>
-  </div>
-
-  <div class="p-g">
-    <div class="pc rv">
-      <div class="pc-img"><img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=700&q=80" alt="Water-based"></div>
-      <div class="pc-b">
-        <div class="pc-tag">Sơn gốc nước</div>
-        <div class="pc-name">WS-30C Polyurethane Dispersions</div>
-        <div class="pc-desc">Sơn cao su gốc nước với cảm giác bề mặt tốt, bám dính trực tiếp trên nền vật liệu và kháng hóa chất vượt trội.</div>
-        <ul class="pc-ul">
-          <li>Độ mài mòn RCA 175gf / 250 lần (thị trường &lt;100 lần)</li>
-          <li>Kháng hóa chất trên 30 loại, kết quả tốt</li>
-          <li>Khả năng phân hủy QUV đạt 300 giờ</li>
-        </ul>
-      </div>
-    </div>
-    <div class="pc rv d1">
-      <div class="pc-img"><img src="https://images.unsplash.com/photo-1512054502232-10a0a035d672?w=700&q=80" alt="3D emboss"></div>
-      <div class="pc-b">
-        <div class="pc-tag">In nổi 3D áp lực cao</div>
-        <div class="pc-name">Dung Dịch In Nổi Hoa Văn 3D</div>
-        <div class="pc-desc">Tạo hoa văn cao cấp: vân cát ánh kim, vân tuyết, vân giả đá, vân ánh quang, vân CD cho mặt lưng điện thoại.</div>
-        <ul class="pc-ul">
-          <li>Chịu tạo hình 3D áp lực cao, không nứt</li>
-          <li>Mài mòn nhung thép 1000gf / 1000 lần</li>
-          <li>Chống vân tay, góc tiếp xúc giọt nước &gt;105°</li>
-        </ul>
-      </div>
-    </div>
-    <div class="pc rv d2">
-      <div class="pc-img"><img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=700&q=80" alt="AG anti-glare"></div>
-      <div class="pc-b">
-        <div class="pc-tag">AG Chống chói</div>
-        <div class="pc-name">Dung Dịch AG Chịu Mài Mòn Cao</div>
-        <div class="pc-desc">Hiệu ứng bề mặt đẹp, mịn và trong suốt. Cảm giác trơn mượt. Điều chỉnh độ bóng linh hoạt tại hiện trường.</div>
-        <ul class="pc-ul">
-          <li>Mài mòn nhung thép 1000gf / 3000 lần</li>
-          <li>Chống vân tay, góc tiếp xúc &gt;110°</li>
-          <li>Uốn trụ Φ40mm không nứt</li>
-        </ul>
-      </div>
-    </div>
-    <div class="pc rv">
-      <div class="pc-img"><img src="https://images.unsplash.com/photo-1567361808960-dec9cb578182?w=700&q=80" alt="Vacuum plating"></div>
-      <div class="pc-b">
-        <div class="pc-tag">Mạ chân không NCVM</div>
-        <div class="pc-name">Sơn Phủ Mạ Chân Không Cao Cấp</div>
-        <div class="pc-desc">Tạo hiệu ứng kim loại hóa trên nhựa: vân xước (brushed), vân tia lửa, hiệu ứng giả gốm. Bóng–mờ tích hợp.</div>
-        <ul class="pc-ul">
-          <li>Tỷ lệ đạt sản phẩm cao, kinh nghiệm hàng loạt phong phú</li>
-          <li>Hỗ trợ khắc laser CO₂, NCL và 3D</li>
-          <li>Vật liệu nền: PC+ABS, PC, ABS, PC+GF</li>
-        </ul>
-      </div>
-    </div>
-    <div class="pc rv d1">
-      <div class="pc-img"><img src="https://images.unsplash.com/photo-1601410890222-9fc4f9b5e135?w=700&q=80" alt="Glass ink"></div>
-      <div class="pc-b">
-        <div class="pc-tag">Mực in gia công kính</div>
-        <div class="pc-name">Giải Pháp Mực In Cho Kính</div>
-        <div class="pc-desc">Toàn bộ giải pháp mực bảo vệ kính: nhiệt độ thấp/cao, chống HF, mực offset hiệu ứng chuyển màu.</div>
-        <ul class="pc-ul">
-          <li>Kính 3D chịu nhiệt đến 900°C, bề mặt sạch không hạt</li>
-          <li>Chịu axit 30% trong 1 giờ, dễ tẩy mực</li>
-          <li>Linh hoạt phun hoặc in lưới</li>
-        </ul>
-      </div>
-    </div>
-    <div class="pc rv d2">
-      <div class="pc-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="Fire-resistant"></div>
-      <div class="pc-b">
-        <div class="pc-tag">Mực in chống cháy</div>
-        <div class="pc-name">Mực Chống Cháy Chuẩn UL94 V-0</div>
-        <div class="pc-desc">Mực in thân thiện môi trường, không chứa halogen, đạt chuẩn UL94 V-0. Dùng cho bảng điều khiển nhà thông minh.</div>
-        <ul class="pc-ul">
-          <li>Chuẩn UL94 V-0, kim lửa 80–120 giây</li>
-          <li>Không chứa halogen, thân thiện môi trường</li>
-          <li>Phù hợp nhiều loại tấm nhựa PMMA, PC/PMMA</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- CLIENTS -->
-<section class="sec" id="clients" style="background:#fff;">
-<div class="sec-w">
-  <div class="cli-hd rv">
-    <span class="pill">Khách hàng hợp tác</span>
-    <h2 class="st">Được tin dùng bởi những<br>tên tuổi hàng đầu thế giới</h2>
-    <span class="sbar"></span>
-    <p class="sb" style="margin-inline:auto;text-align:center;">
-      Kingda tự hào là đối tác chiến lược của các tập đoàn công nghệ và sản xuất toàn cầu trong hơn một thập kỷ liên tục.
-    </p>
-  </div>
-  <div class="mq-wrap rv">
-    <div class="mq-t">
-      <div class="cli-chip">HUAWEI</div><div class="cli-chip">VIVO</div>
-      <div class="cli-chip">OPPO</div><div class="cli-chip">XIAOMI</div>
-      <div class="cli-chip">SAMSUNG</div><div class="cli-chip">BYD</div>
-      <div class="cli-chip">LENOVO</div><div class="cli-chip">PANASONIC</div>
-      <div class="cli-chip">BOE</div><div class="cli-chip">NINTENDO</div>
-      <div class="cli-chip">GREE</div><div class="cli-chip">MIDEA</div>
-      <div class="cli-chip">OFILM</div><div class="cli-chip">LENS TECHNOLOGY</div>
-      <div class="cli-chip">CHERY AUTO</div>
-      <!-- duplicate -->
-      <div class="cli-chip">HUAWEI</div><div class="cli-chip">VIVO</div>
-      <div class="cli-chip">OPPO</div><div class="cli-chip">XIAOMI</div>
-      <div class="cli-chip">SAMSUNG</div><div class="cli-chip">BYD</div>
-      <div class="cli-chip">LENOVO</div><div class="cli-chip">PANASONIC</div>
-      <div class="cli-chip">BOE</div><div class="cli-chip">NINTENDO</div>
-      <div class="cli-chip">GREE</div><div class="cli-chip">MIDEA</div>
-      <div class="cli-chip">OFILM</div><div class="cli-chip">LENS TECHNOLOGY</div>
-      <div class="cli-chip">CHERY AUTO</div>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- CERTS -->
-<section class="sec cert-sec" id="certs">
-<div class="sec-w">
-  <div class="cert-og">
-    <div class="rv">
-      <span class="pill">Chứng nhận năng lực</span>
-      <h2 class="st">Chứng chỉ quốc tế<br>&amp; Bằng sáng chế</h2>
-      <span class="sbar"></span>
-      <p class="sb">
-        Kingda duy trì hệ thống quản lý chất lượng đẳng cấp quốc tế và sở hữu danh mục bằng sáng chế phong phú, khẳng định năng lực đổi mới sáng tạo không ngừng.
-      </p>
-      <div class="pat-r" style="margin-top:32px;">
-        <div class="pb">
-          <div class="pn">16</div>
-          <div class="pl">Bằng sáng chế<br>phát minh</div>
-        </div>
-        <div class="pb">
-          <div class="pn">7</div>
-          <div class="pl">Bằng sáng chế<br>hữu ích</div>
-        </div>
-        <div class="pb">
-          <div class="pn">8</div>
-          <div class="pl">Bản quyền<br>phần mềm</div>
-        </div>
-      </div>
-    </div>
-    <div class="rv d2">
-      <p class="cert-lbl">Hệ thống chứng nhận</p>
-      <div class="cert-g">
-        <div class="cert-c"><div class="ci">🏅</div><h4>ISO 9001:2015</h4><p>Quản lý chất lượng</p></div>
-        <div class="cert-c"><div class="ci">🌿</div><h4>ISO 14001:2015</h4><p>Quản lý môi trường</p></div>
-        <div class="cert-c"><div class="ci">🛡️</div><h4>ISO 45001:2018</h4><p>An toàn nghề nghiệp</p></div>
-        <div class="cert-c"><div class="ci">⚡</div><h4>UL Certified</h4><p>Chứng nhận UL quốc tế</p></div>
-        <div class="cert-c"><div class="ci">📋</div><h4>QC80000</h4><p>Đang triển khai EICC</p></div>
-        <div class="cert-c"><div class="ci">🔬</div><h4>R&amp;D Lab</h4><p>Phòng TN chuẩn quốc tế</p></div>
-      </div>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- CONTACT -->
-<section class="sec sec-dark" id="contact">
-<div class="sec-w">
-  <div class="con-g">
-    <div class="rv">
-      <span class="pill">Liên hệ với chúng tôi</span>
-      <h2 class="st st-w">Hãy cùng hợp tác<br>và phát triển</h2>
-      <span class="sbar"></span>
-      <p class="sb">
-        Đội ngũ kỹ thuật và kinh doanh của Kingda luôn sẵn sàng hỗ trợ 24/7. Liên hệ để được tư vấn giải pháp vật liệu phù hợp nhất cho doanh nghiệp bạn.
-      </p>
-      <div class="con-list">
-        <div class="con-row">
-          <div class="con-ico">📍</div>
-          <div class="con-tx">
-            <h4>Văn phòng Việt Nam</h4>
-            <p>Tầng 1, số 27 Trần Quang Khải,<br>Phường Võ Cường, Tỉnh Bắc Ninh</p>
+        <div class="nc-f-body">
+          <h3>Công ty TNHH SX & TM Tín Phát Việt khai trương đầu năm 2026</h3>
+          <p>Khởi đầu mới – Khí thế mới – Thành công mới. Tín Phát Group chính thức khai trương với quyết tâm bứt phá mạnh mẽ trong năm 2026. Toàn thể đội ngũ sẵn sàng hành động và phục vụ hết mình.</p>
+          <div class="nc-f-meta">
+            <span class="nc-f-meta-date">24 tháng 02, 2026</span>
+            <div class="nc-f-arr">→</div>
           </div>
         </div>
-        <div class="con-row">
-          <div class="con-ico">✉️</div>
-          <div class="con-tx">
-            <h4>Email</h4>
-            <p>kingdahg@gmail.com</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="nc-small">
+          <div class="nc-s-img"><img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400&q=80" alt=""></div>
+          <div class="nc-s-body">
+            <div class="nc-s-cat">Khen thưởng</div>
+            <h4>Tín Phát Group khen thưởng tháng 12</h4>
+            <p>Nhân viên được ghi nhận xứng đáng với những đóng góp xuất sắc.</p>
+            <div class="nc-s-date">16/01/2026</div>
           </div>
         </div>
-        <div class="con-row">
-          <div class="con-ico">🏢</div>
-          <div class="con-tx">
-            <h4>Trụ sở chính (Trung Quốc)</h4>
-            <p>Songhu Zhigu R&D Center,<br>Dongguan, Guangdong, P.R. China</p>
+        <div class="nc-small">
+          <div class="nc-s-img"><img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&q=80" alt=""></div>
+          <div class="nc-s-body">
+            <div class="nc-s-cat">Khuyến Mãi</div>
+            <h4>SALE OFF Dầu Cầu Mekong Penda EP 85W90</h4>
+            <p>Ưu đãi giá sốc – số lượng có hạn, dành cho đại lý.</p>
+            <div class="nc-s-date">28/02/2026</div>
+          </div>
+        </div>
+        <div class="nc-small">
+          <div class="nc-s-img"><img src="https://images.unsplash.com/photo-1573164574511-73c773193279?w=400&q=80" alt=""></div>
+          <div class="nc-s-body">
+            <div class="nc-s-cat">Hoạt Động</div>
+            <h4>Họp kinh doanh định kỳ tháng 10/2025</h4>
+            <p>Buổi họp khối kinh doanh với sự tham gia đầy đủ của toàn đội.</p>
+            <div class="nc-s-date">14/11/2025</div>
           </div>
         </div>
       </div>
     </div>
-    <div class="cf-wrap rv d2">
-      <p class="cf-title">Gửi yêu cầu tư vấn</p>
-      <div class="f-row2">
-        <div class="ff"><label>Họ và tên</label><input type="text" placeholder="Nguyễn Văn A"></div>
-        <div class="ff"><label>Tên công ty</label><input type="text" placeholder="Tên doanh nghiệp"></div>
+  </div>
+</section>
+
+<!-- ⑥ APP -->
+<section class="app-sec">
+  <div class="cw">
+    <div class="app-inner">
+      <div class="app-l rv">
+        <div class="tag-line">Ứng dụng di động</div>
+        <h2>Tải Ứng Dụng<br><em>Tín Phát</em></h2>
+        <span class="gold-divider"></span>
+        <p>TipaShop, TipaExpress và Tín Phát CRM — Mua sắm, giao hàng và quản trị doanh nghiệp thông minh ngay trên điện thoại của bạn.</p>
+        <div class="app-list">
+          <a href="#" class="al">
+            <div class="al-ico">🛒</div>
+            <div><div class="al-name">TipaShop</div><div class="al-sub">Mua sắm trực tuyến đa danh mục</div></div>
+            <div class="al-arrow">→</div>
+          </a>
+          <a href="#" class="al">
+            <div class="al-ico">🚚</div>
+            <div><div class="al-name">TipaExpress</div><div class="al-sub">Giao hàng nhanh toàn ĐBSCL</div></div>
+            <div class="al-arrow">→</div>
+          </a>
+          <a href="#" class="al">
+            <div class="al-ico">📊</div>
+            <div><div class="al-name">Tín Phát CRM</div><div class="al-sub">Quản trị doanh nghiệp 5.0</div></div>
+            <div class="al-arrow">→</div>
+          </a>
+        </div>
       </div>
-      <div class="f-row2">
-        <div class="ff"><label>Email liên hệ</label><input type="email" placeholder="email@company.com"></div>
-        <div class="ff"><label>Số điện thoại</label><input type="tel" placeholder="+84 xxx xxx xxx"></div>
+      <div class="app-r rv d2">
+        <div class="af-block">
+          <div class="af-top"><div class="af-n">01</div><div class="af-label">TipaShop</div></div>
+          <p>Mua sắm đa danh mục, hàng chất lượng, giao nhanh toàn quốc. Đặt hàng dễ dàng, thanh toán linh hoạt.</p>
+        </div>
+        <div class="af-block">
+          <div class="af-top"><div class="af-n">02</div><div class="af-label">TipaExpress</div></div>
+          <p>Kết nối BEST Express, phủ sóng toàn Đồng bằng sông Cửu Long. Theo dõi đơn hàng thời gian thực.</p>
+        </div>
+        <div class="af-block">
+          <div class="af-top"><div class="af-n">03</div><div class="af-label">Tín Phát CRM</div></div>
+          <p>Quản lý KPI, OKR và hiệu suất đội ngũ. Chuyển đổi số toàn diện theo mô hình 5.0 hiện đại.</p>
+        </div>
       </div>
-      <div class="ff">
-        <label>Sản phẩm quan tâm</label>
-        <select>
-          <option value="">-- Chọn dòng sản phẩm --</option>
-          <option>Sơn gốc nước (WS-30C)</option>
-          <option>In nổi 3D áp lực cao</option>
-          <option>AG Chống chói</option>
-          <option>Sơn phủ mạ chân không</option>
-          <option>Mực in gia công kính</option>
-          <option>Mực in chống cháy UL94 V-0</option>
-        </select>
+    </div>
+  </div>
+</section>
+
+<!-- ⑦ RECRUITMENT -->
+<section class="recruit sec">
+  <div class="cw">
+    <div class="row-head rv">
+      <div>
+        <div class="tag-line">Cơ hội nghề nghiệp</div>
+        <h2 class="sec-title">Gia Nhập<br><em>Tín Phát</em></h2>
       </div>
-      <div class="ff">
-        <label>Nội dung yêu cầu</label>
-        <textarea placeholder="Mô tả chi tiết nhu cầu hoặc vật liệu cần tư vấn..."></textarea>
+      <a href="#" class="link-see">Xem tất cả vị trí →</a>
+    </div>
+    <div class="rec-grid rv d1">
+      <div class="rc">
+        <span class="rc-type">Sales</span>
+        <h4>Nhân viên bán hàng Unilever</h4>
+        <p>Nam/nữ tốt nghiệp 12/12, giao tiếp tốt, có xe máy. Thu nhập hấp dẫn, cơ hội thăng tiến cao.</p>
+        <div class="rc-loc">📍 Bạc Liêu</div>
+        <div class="rc-arrow">→</div>
       </div>
-      <button class="fsub">Gửi yêu cầu ngay →</button>
+      <div class="rc">
+        <span class="rc-type">Logistics</span>
+        <h4>Shipper BEST Express</h4>
+        <p>Giao hàng nhanh khu vực Hòa Bình, Bạc Liêu, Vĩnh Lợi. Lương hấp dẫn cộng thưởng hàng tuần.</p>
+        <div class="rc-loc">📍 Hòa Bình, Bạc Liêu</div>
+        <div class="rc-arrow">→</div>
+      </div>
+      <div class="rc">
+        <span class="rc-type">Management</span>
+        <h4>Giám sát bán hàng khu vực</h4>
+        <p>Triển khai và giám sát hoạt động bán hàng toàn khu vực Đồng bằng sông Cửu Long.</p>
+        <div class="rc-loc">📍 Cà Mau, Bạc Liêu, Sóc Trăng</div>
+        <div class="rc-arrow">→</div>
+      </div>
+      <div class="rc">
+        <span class="rc-type">IT</span>
+        <h4>Quản trị Website TMĐT</h4>
+        <p>WordPress, HTML/CSS/JS. Quản lý và phát triển nền tảng thương mại điện tử của Tín Phát.</p>
+        <div class="rc-loc">📍 Bạc Liêu</div>
+        <div class="rc-arrow">→</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑧ PARTNERS -->
+<section class="partners">
+  <div class="cw">
+    <div class="row-head rv">
+      <div>
+        <div class="tag-line">Tin tưởng bởi</div>
+        <h2 class="sec-title">Đối Tác<br><em>Chiến Lược</em></h2>
+      </div>
+    </div>
+    <div class="part-grid rv d1">
+      <div class="pc"><div class="pc-name">Shell</div></div>
+      <div class="pc"><div class="pc-name">Castrol</div></div>
+      <div class="pc"><div class="pc-name">Motul</div></div>
+      <div class="pc"><div class="pc-name">Unilever</div></div>
+      <div class="pc"><div class="pc-name">GS Battery</div></div>
+      <div class="pc"><div class="pc-name">Kenda</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <div class="cw cta-inner rv">
+    <h2>Sẵn sàng<br><em>hợp tác</em> cùng chúng tôi?</h2>
+    <p>Đăng ký làm nhà phân phối, đại lý hoặc tham gia hệ sinh thái TipaShop — mở ra cơ hội kinh doanh không giới hạn.</p>
+    <div class="cta-btns">
+      <a href="#" class="btn-cta-main">Đăng ký ngay →</a>
+      <a href="#" class="btn-cta-ghost">Liên hệ tư vấn</a>
     </div>
   </div>
 </div>
-</section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="f-brand">
-    <div class="f-mark">
-      <svg viewBox="0 0 14 14" fill="none">
-        <path d="M7 1L13 12H1L7 1Z" fill="white" opacity=".9"/>
-        <path d="M7 5.5L10.5 12H3.5L7 5.5Z" fill="rgba(0,229,255,.55)"/>
-      </svg>
+  <div class="ft-main">
+    <div>
+      <div class="ft-brand">Tín Phát <em>Group</em></div>
+      <span class="ft-est">Est. 2002 · Bạc Liêu, Việt Nam</span>
+      <p class="ft-about">"Chuyên nghiệp – Tận tình – Chất lượng." Cam kết mang lại dịch vụ tốt nhất, hướng tới Tập đoàn Thương mại quy mô toàn cầu.</p>
+      <div class="ft-contact">
+        <span class="ftc">📍 315 Nguyễn Thị Minh Khai, Phường 5, TP Bạc Liêu</span>
+        <span class="ftc"><a href="tel:0949299494">📞 0949 29 94 94 · 02913-99-2299</a></span>
+        <span class="ftc"><a href="mailto:contact@tinphat.com">✉ contact@tinphat.com</a></span>
+      </div>
+      <div class="ft-soc">
+        <a href="#" class="fso">f</a>
+        <a href="#" class="fso">t</a>
+        <a href="#" class="fso">z</a>
+        <a href="#" class="fso">▶</a>
+      </div>
     </div>
-    <span class="f-name">KINGDA</span>
+    <div class="ft-col">
+      <h5>Về chúng tôi</h5>
+      <a href="#">Giới thiệu</a>
+      <a href="#">Các lĩnh vực</a>
+      <a href="#">Ban lãnh đạo</a>
+      <a href="#">Tin tức</a>
+    </div>
+    <div class="ft-col">
+      <h5>Dịch vụ</h5>
+      <a href="#">Dầu nhớt & Ắc quy</a>
+      <a href="#">TipaShop</a>
+      <a href="#">TipaExpress</a>
+      <a href="#">Tín Phát CRM</a>
+    </div>
+    <div class="ft-col">
+      <h5>Hợp tác</h5>
+      <a href="#">Đăng ký đại lý</a>
+      <a href="#">Tham gia TipaShop</a>
+      <a href="#">Cung ứng sản phẩm</a>
+      <a href="#">Tuyển dụng</a>
+    </div>
   </div>
-  <p>© 2025 Công ty TNHH Thương Mại Công Nghệ Kingda · All rights reserved</p>
-  <nav class="f-nav">
-    <a href="#about">Giới thiệu</a>
-    <a href="#products">Sản phẩm</a>
-    <a href="#clients">Khách hàng</a>
-    <a href="#contact">Liên hệ</a>
-  </nav>
+  <div class="ft-bot">
+    <p class="ft-copy">© 2026 Tín Phát Group Bạc Liêu · tinphat.com · All rights reserved.</p>
+  </div>
 </footer>
 
 <script>
-// Scroll reveal
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-}, { threshold: 0.1 });
-document.querySelectorAll('.rv').forEach(el => io.observe(el));
+/* navbar */
+const nav=document.getElementById('nav')
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>50),{passive:true})
 
-// Tab switch
-document.querySelectorAll('.ptab').forEach(t => {
-  t.addEventListener('click', () => {
-    document.querySelectorAll('.ptab').forEach(x => x.classList.remove('on'));
-    t.classList.add('on');
-  });
-});
+/* reveal on scroll */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on')}})
+},{threshold:.07,rootMargin:'0px 0px -40px 0px'})
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el))
 
-// Nav highlight on scroll
-const sections = document.querySelectorAll('section[id]');
-const links = document.querySelectorAll('.nav-menu a');
-let ticking = false;
-window.addEventListener('scroll', () => {
-  if (!ticking) {
-    requestAnimationFrame(() => {
-      let cur = '';
-      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 90) cur = s.id; });
-      links.forEach(a => {
-        const active = a.getAttribute('href') === '#' + cur;
-        a.style.color = active ? '#fff' : '';
-        a.style.background = active ? 'rgba(255,255,255,0.08)' : '';
-      });
-      // Nav opacity on scroll
-      document.getElementById('topnav').style.background =
-        window.scrollY > 40 ? 'rgba(7,24,40,0.98)' : 'rgba(7,24,40,0.94)';
-      ticking = false;
-    });
-    ticking = true;
-  }
-}, { passive: true });
+/* counter animation */
+function countUp(el,to){
+  const inner=el.querySelector('sup'),suf=inner?inner.outerHTML:''
+  let c=0;const step=to/90;
+  const t=setInterval(()=>{
+    c=Math.min(c+step,to)
+    el.innerHTML=Math.floor(c)+suf
+    if(c>=to)clearInterval(t)
+  },16)
+}
+const cObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      document.querySelectorAll('[data-to],[data-cnt]').forEach(el=>{
+        const v=+(el.dataset.to||el.dataset.cnt)
+        if(v)countUp(el,v)
+      })
+      cObs.disconnect()
+    }
+  })
+},{threshold:.3})
+const numEl=document.querySelector('.num-grid')
+if(numEl)cObs.observe(numEl)
 </script>
 </body>
 </html>
