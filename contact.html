@@ -1,1 +1,1003 @@
 
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liên Hệ — TÍN PHÁT GROUP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ivory:  #FAF7F2;
+  --paper:  #F3EDE3;
+  --warm:   #E8DFD0;
+  --sand:   #D6CBBA;
+  --white:  #FEFEFE;
+  --navy:   #0E1B2C;
+  --navy2:  #1A2E4A;
+  --navy3:  #243E62;
+  --gold:   #C4881C;
+  --gold2:  #D9A030;
+  --amber:  #EDBA48;
+  --body:   #3C3630;
+  --slate:  #68605A;
+  --muted:  #9E9288;
+  --line:   #E4DACC;
+  --lineD:  #CFC3B2;
+  --sh1: 0 2px 16px rgba(14,27,44,.06);
+  --sh2: 0 8px 48px rgba(14,27,44,.10);
+  --sh3: 0 20px 80px rgba(14,27,44,.15);
+  --shG: 0 12px 40px rgba(196,136,28,.25);
+  --ease: cubic-bezier(.16,1,.3,1);
+  --gold-grad: linear-gradient(135deg,var(--gold),var(--amber));
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Exo 2',sans-serif;background:var(--ivory);color:var(--navy);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{text-decoration:none;color:inherit}
+button{font-family:'Exo 2',sans-serif;cursor:pointer;border:none;outline:none;background:none}
+
+body::before{content:'';position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.45;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.028'/%3E%3C/svg%3E")}
+
+.cw{width:85%;max-width:1400px;margin:0 auto}
+@media(max-width:600px){.cw{width:92%}}
+
+.rv{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+.rv.on{opacity:1;transform:none}
+.rv.rl{transform:translateX(-28px)}.rv.rl.on{transform:none;opacity:1}
+.rv.rr{transform:translateX(28px)}.rv.rr.on{transform:none;opacity:1}
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}
+.d4{transition-delay:.28s}.d5{transition-delay:.35s}
+
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.6}50%{transform:scale(1.4);opacity:.2}}
+
+#prog{position:fixed;top:0;left:0;z-index:8999;height:2px;width:0%;background:var(--gold-grad)}
+
+/* ── TOPBAR ── */
+.topbar{display:none}
+@media(min-width:768px){
+  .topbar{display:block;background:var(--navy);border-bottom:1px solid rgba(196,136,28,.15)}
+  .tb-inner{width:85%;max-width:1400px;margin:0 auto;height:38px;display:flex;align-items:center;justify-content:space-between}
+  @media(max-width:600px){.tb-inner{width:92%}}
+  .tb-links{display:flex}
+  .tb-link{display:flex;align-items:center;gap:6px;height:38px;padding:0 14px;font-size:11.5px;font-weight:400;color:rgba(255,255,255,.3);border-right:1px solid rgba(255,255,255,.06);transition:color .2s}
+  .tb-link:first-child{padding-left:0}
+  .tb-link:hover{color:var(--amber)}
+  .tb-dot{width:3px;height:3px;border-radius:50%;background:var(--gold);opacity:.5}
+  .tb-langs{display:flex}
+  .tb-lang{height:38px;padding:0 12px;font-size:10.5px;font-weight:700;letter-spacing:.5px;color:rgba(255,255,255,.25);display:flex;align-items:center;border-left:1px solid rgba(255,255,255,.06);cursor:pointer;transition:color .2s}
+  .tb-lang:hover,.tb-lang.on{color:var(--amber)}
+}
+
+/* ── NAVBAR ── */
+.navbar{position:sticky;top:0;z-index:990;background:rgba(250,247,242,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--line);transition:box-shadow .3s,border-color .3s}
+.navbar.on{box-shadow:0 4px 32px rgba(14,27,44,.07);border-bottom-color:var(--lineD)}
+.nav-inner{width:85%;max-width:1400px;margin:0 auto;height:62px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+@media(max-width:600px){.nav-inner{width:92%}}
+@media(min-width:1024px){.nav-inner{height:70px}}
+
+.logo{display:flex;align-items:center;gap:11px;flex-shrink:0}
+.logo-mark{width:38px;height:38px;flex-shrink:0;background:var(--navy);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)}
+.logo-mark::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--gold-grad)}
+.logo-mark span{font-size:12px;font-weight:900;color:var(--amber);letter-spacing:.5px}
+.logo-info{display:flex;flex-direction:column}
+.logo-name{font-size:15px;font-weight:900;color:var(--navy);letter-spacing:.2px;line-height:1}
+.logo-sub{font-size:8px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-top:3px}
+@media(min-width:1024px){.logo-mark{width:42px;height:42px}.logo-name{font-size:17px}.logo-sub{font-size:8.5px}}
+
+.nav-links{display:none}
+@media(min-width:1024px){
+  .nav-links{display:flex;gap:0}
+  .nav-links a{font-size:13px;font-weight:500;color:var(--slate);padding:0 12px;height:70px;display:flex;align-items:center;white-space:nowrap;position:relative;transition:color .2s}
+  .nav-links a::after{content:'';position:absolute;bottom:0;left:12px;right:12px;height:2px;background:var(--gold-grad);transform:scaleX(0);transform-origin:center;transition:transform .3s var(--ease)}
+  .nav-links a:hover,.nav-links a.on{color:var(--navy)}
+  .nav-links a:hover::after,.nav-links a.on::after{transform:scaleX(1)}
+}
+.nav-cta{display:none}
+@media(min-width:1024px){
+  .nav-cta{display:flex;gap:9px;flex-shrink:0}
+  .btn-nv-outline{padding:9px 16px;font-size:12.5px;font-weight:600;color:var(--slate);border:1.5px solid var(--line);transition:all .22s;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px))}
+  .btn-nv-outline:hover{border-color:var(--navy);color:var(--navy)}
+  .btn-nv-fill{padding:10px 22px;font-size:12.5px;font-weight:800;color:#fff;background:var(--navy);position:relative;overflow:hidden;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));transition:color .28s}
+  .btn-nv-fill::before{content:'';position:absolute;inset:0;background:var(--gold-grad);transform:translateY(105%);transition:transform .36s var(--ease)}
+  .btn-nv-fill:hover::before{transform:translateY(0)}
+  .btn-nv-fill:hover{color:var(--navy)}
+  .btn-nv-fill span{position:relative;z-index:1}
+}
+.hamburger{display:flex;flex-direction:column;gap:5px;width:40px;height:40px;align-items:center;justify-content:center;flex-shrink:0}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--navy);border-radius:2px;transition:all .3s var(--ease)}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+@media(min-width:1024px){.hamburger{display:none}}
+
+.mobile-menu{position:fixed;inset:0;z-index:980;background:var(--navy);display:flex;flex-direction:column;padding:100px 32px 48px;transform:translateX(100%);transition:transform .45s var(--ease)}
+.mobile-menu.open{transform:translateX(0)}
+.mobile-menu a{display:block;font-size:28px;font-weight:800;color:rgba(255,255,255,.85);padding:14px 0;border-bottom:1px solid rgba(255,255,255,.07);transition:color .2s,padding-left .25s var(--ease)}
+.mobile-menu a:hover{color:var(--amber);padding-left:8px}
+.mob-bottom{margin-top:40px;display:flex;flex-direction:column;gap:12px}
+.btn-mob{padding:16px 24px;font-size:15px;font-weight:800;color:var(--navy);background:var(--gold-grad);text-align:center;display:block;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px))}
+.btn-mob2{padding:15px 24px;font-size:15px;font-weight:600;color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.18);text-align:center;display:block}
+@media(min-width:1024px){.mobile-menu{display:none}}
+
+/* ── BREADCRUMB ── */
+.breadcrumb{background:var(--white);border-bottom:1px solid var(--line);padding:14px 0}
+.bc-inner{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:500;color:var(--muted)}
+.bc-inner a{color:var(--muted);transition:color .2s}
+.bc-inner a:hover{color:var(--gold)}
+.bc-sep{color:var(--lineD);font-size:10px}
+.bc-cur{color:var(--navy);font-weight:600}
+
+/* ── PAGE HERO ── */
+.page-hero{background:var(--navy);position:relative;overflow:hidden;padding:72px 0 80px}
+@media(min-width:768px){.page-hero{padding:88px 0 96px}}
+@media(min-width:1024px){.page-hero{padding:104px 0 112px}}
+.page-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(196,136,28,.07) 1px,transparent 1px);background-size:40px 40px}
+.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--amber) 70%,transparent)}
+.ph-glow{position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(196,136,28,.1) 0%,transparent 70%);pointer-events:none}
+.ph-inner{position:relative;z-index:1}
+.ph-label{display:flex;align-items:center;gap:10px;margin-bottom:18px;animation:up .6s both}
+.ph-bar{height:1.5px;width:28px;background:var(--gold-grad);flex-shrink:0}
+.ph-txt{font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(196,136,28,.9)}
+.ph-dot{width:5px;height:5px;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);background:var(--gold);animation:blink 2.5s infinite}
+.ph-title{font-size:clamp(44px,9vw,96px);font-weight:900;color:#fff;line-height:.9;letter-spacing:-3px;margin-bottom:20px;animation:up .6s .08s both}
+.ph-title em{font-style:italic;color:var(--amber);display:block;font-size:.72em;letter-spacing:-2px}
+.ph-desc{font-size:clamp(14px,2vw,17px);font-weight:300;color:rgba(255,255,255,.45);line-height:1.8;max-width:520px;animation:up .6s .15s both}
+
+/* ── SHARED ── */
+.sec{padding:72px 0}
+@media(min-width:768px){.sec{padding:88px 0}}
+@media(min-width:1024px){.sec{padding:108px 0}}
+.eyebrow{display:flex;align-items:center;gap:10px;font-size:10px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.eyebrow::before{content:'';width:20px;height:1.5px;background:var(--gold-grad);flex-shrink:0}
+.eyebrow.ct{justify-content:center}.eyebrow.ct::before{display:none}
+.s-title{font-size:clamp(32px,6vw,58px);font-weight:900;line-height:.92;letter-spacing:-2px;color:var(--navy);margin-bottom:16px}
+.s-title em{font-style:italic;color:var(--gold)}
+.g-bar{display:block;width:36px;height:2px;background:var(--gold-grad);margin:14px 0 24px}
+.g-bar.ct{margin:14px auto 24px}
+.body-t{font-size:clamp(14.5px,1.8vw,15.5px);font-weight:300;line-height:1.9;color:var(--slate)}
+.body-t strong{color:var(--navy);font-weight:600}
+
+/* ════════════════════════════════
+   MAIN CONTACT LAYOUT
+════════════════════════════════ */
+.contact-main{background:var(--white)}
+.contact-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:0;
+}
+@media(min-width:900px){
+  .contact-grid{grid-template-columns:1fr 1fr;min-height:680px}
+}
+
+/* ── LEFT — Info panel ── */
+.contact-info{
+  background:var(--navy);
+  padding:56px 32px;
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;gap:0;
+}
+@media(min-width:600px){.contact-info{padding:64px 44px}}
+@media(min-width:1024px){.contact-info{padding:80px 56px}}
+/* dot grid */
+.contact-info::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(196,136,28,.06) 1px,transparent 1px);background-size:38px 38px}
+/* gold glow */
+.contact-info::after{content:'';position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(196,136,28,.1) 0%,transparent 70%);pointer-events:none}
+
+.ci-head{position:relative;z-index:1;margin-bottom:40px}
+.ci-eyebrow{display:flex;align-items:center;gap:10px;font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(196,136,28,.8);margin-bottom:14px}
+.ci-eyebrow::before{content:'';width:18px;height:1.5px;background:var(--gold-grad);flex-shrink:0}
+.ci-title{font-size:clamp(30px,4.5vw,44px);font-weight:900;color:#fff;line-height:.95;letter-spacing:-1.5px;margin-bottom:14px}
+.ci-title em{font-style:italic;color:var(--amber)}
+.ci-desc{font-size:14.5px;font-weight:300;color:rgba(255,255,255,.42);line-height:1.8;max-width:380px}
+
+/* Contact items */
+.ci-items{display:flex;flex-direction:column;gap:0;position:relative;z-index:1;flex:1}
+.ci-item{
+  display:flex;align-items:flex-start;gap:16px;
+  padding:20px 0;border-bottom:1px solid rgba(255,255,255,.07);
+  transition:all .25s;
+}
+.ci-item:last-child{border-bottom:none}
+.ci-item:hover .ci-ico{background:rgba(196,136,28,.25);border-color:rgba(196,136,28,.5)}
+.ci-ico{
+  width:44px;height:44px;flex-shrink:0;
+  border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.05);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;transition:all .25s;
+  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+}
+.ci-label{font-size:9.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.ci-value{font-size:clamp(13.5px,1.8vw,15px);font-weight:500;color:rgba(255,255,255,.85);line-height:1.5}
+.ci-value a{color:rgba(255,255,255,.85);transition:color .2s}
+.ci-value a:hover{color:var(--amber)}
+.ci-sub{font-size:12px;font-weight:300;color:rgba(255,255,255,.38);margin-top:3px}
+
+/* Socials */
+.ci-socials{display:flex;gap:9px;margin-top:32px;position:relative;z-index:1}
+.cs{
+  width:40px;height:40px;
+  border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;color:rgba(255,255,255,.35);
+  clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px));
+  transition:all .25s;
+}
+.cs:hover{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+
+/* Working hours */
+.ci-hours{
+  margin-top:32px;padding:20px 22px;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.07);
+  position:relative;z-index:1;
+}
+.ci-hours-title{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:7px}
+.ci-hours-title::before{content:'';width:3px;height:3px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
+.ci-hour-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:13px}
+.ci-hour-row:last-child{border-bottom:none}
+.ci-hour-day{font-weight:500;color:rgba(255,255,255,.55)}
+.ci-hour-time{font-weight:600;color:rgba(255,255,255,.8)}
+.ci-hour-time.open{color:var(--amber)}
+
+/* ── RIGHT — Form panel ── */
+.contact-form-wrap{
+  background:var(--white);
+  padding:56px 32px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+@media(min-width:600px){.contact-form-wrap{padding:64px 44px}}
+@media(min-width:1024px){.contact-form-wrap{padding:80px 56px}}
+
+.cf-head{margin-bottom:36px}
+.cf-title{font-size:clamp(26px,4vw,38px);font-weight:900;line-height:.95;letter-spacing:-1.5px;color:var(--navy);margin-bottom:10px}
+.cf-title em{font-style:italic;color:var(--gold)}
+.cf-desc{font-size:14px;font-weight:300;color:var(--slate);line-height:1.75}
+
+/* Form */
+.cf-form{display:flex;flex-direction:column;gap:16px}
+.cf-row{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:600px){.cf-row{grid-template-columns:1fr 1fr}}
+
+.cf-field{display:flex;flex-direction:column;gap:6px}
+.cf-label{font-size:11.5px;font-weight:700;letter-spacing:.5px;color:var(--slate)}
+.cf-label span{color:var(--gold);margin-left:2px}
+
+.cf-input,
+.cf-select,
+.cf-textarea{
+  width:100%;
+  background:var(--ivory);
+  border:1.5px solid var(--line);
+  padding:13px 16px;
+  font-family:'Exo 2',sans-serif;
+  font-size:14px;font-weight:400;
+  color:var(--navy);
+  outline:none;
+  transition:all .25s var(--ease);
+  appearance:none;-webkit-appearance:none;
+}
+.cf-input:focus,
+.cf-select:focus,
+.cf-textarea:focus{
+  border-color:var(--gold);
+  background:var(--white);
+  box-shadow:0 0 0 3px rgba(196,136,28,.1);
+}
+.cf-input::placeholder,
+.cf-textarea::placeholder{color:var(--muted);font-weight:300}
+.cf-textarea{resize:vertical;min-height:130px;line-height:1.6}
+
+/* Select custom arrow */
+.cf-select-wrap{position:relative}
+.cf-select-wrap::after{
+  content:'›';
+  position:absolute;right:14px;top:50%;transform:translateY(-50%) rotate(90deg);
+  font-size:16px;color:var(--muted);pointer-events:none;
+}
+
+/* Department radio pills */
+.cf-pills{display:flex;flex-wrap:wrap;gap:8px}
+.cf-pill input{position:absolute;opacity:0;pointer-events:none}
+.cf-pill label{
+  display:flex;align-items:center;gap:6px;
+  padding:8px 14px;
+  font-size:12.5px;font-weight:600;
+  color:var(--slate);
+  background:var(--ivory);
+  border:1.5px solid var(--line);
+  cursor:pointer;transition:all .22s;
+  clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px));
+}
+.cf-pill input:checked + label{
+  background:var(--navy);border-color:var(--navy);color:#fff;
+}
+.cf-pill label:hover{border-color:var(--navy);color:var(--navy)}
+
+/* Submit */
+.cf-submit{
+  display:flex;align-items:center;gap:10px;justify-content:space-between;
+  margin-top:8px;flex-wrap:wrap;gap:12px;
+}
+.btn-submit{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--navy);color:#fff;
+  padding:15px 36px;font-size:14px;font-weight:800;
+  clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,9px 100%,0 calc(100% - 9px));
+  position:relative;overflow:hidden;
+  transition:gap .3s,color .3s;
+  border:none;cursor:pointer;font-family:'Exo 2',sans-serif;
+}
+.btn-submit::before{content:'';position:absolute;inset:0;background:var(--gold-grad);transform:translateX(-105%);transition:transform .4s var(--ease)}
+.btn-submit:hover::before{transform:translateX(0)}
+.btn-submit:hover{color:var(--navy);gap:14px}
+.btn-submit span,.btn-submit svg{position:relative;z-index:1}
+.cf-note{font-size:12px;font-weight:300;color:var(--muted);line-height:1.55}
+
+/* Success state */
+.cf-success{
+  display:none;
+  flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:48px 24px;gap:16px;
+}
+.cf-success.show{display:flex}
+.cf-success-ico{font-size:56px}
+.cf-success h3{font-size:22px;font-weight:800;color:var(--navy)}
+.cf-success p{font-size:14px;font-weight:300;color:var(--slate);line-height:1.7;max-width:320px}
+
+/* ════════════════════════════════
+   MAP SECTION
+════════════════════════════════ */
+.map-sec{background:var(--ivory);border-top:1px solid var(--line)}
+.map-sec .sec-head{text-align:center;margin-bottom:40px}
+.map-wrap{
+  position:relative;
+  height:clamp(300px,50vw,520px);
+  border:1px solid var(--line);
+  overflow:hidden;
+  background:var(--paper);
+}
+.map-wrap iframe{
+  width:100%;height:100%;border:none;
+  filter:grayscale(.2) contrast(1.05);
+}
+/* pin overlay */
+.map-pin{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  z-index:2;pointer-events:none;
+  display:flex;flex-direction:column;align-items:center;gap:0;
+}
+.map-pin-dot{
+  width:18px;height:18px;border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 0 0 4px rgba(196,136,28,.25),0 0 0 8px rgba(196,136,28,.1);
+  animation:pulse 2.5s infinite;
+}
+.map-pin-line{width:2px;height:20px;background:linear-gradient(to bottom,var(--gold),transparent)}
+
+/* ════════════════════════════════
+   BRANCHES
+════════════════════════════════ */
+.branches{background:var(--paper);border-top:1px solid var(--line)}
+.branches-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+}
+@media(min-width:560px){.branches-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1024px){.branches-grid{grid-template-columns:repeat(3,1fr)}}
+
+.branch-card{
+  background:var(--white);border:1px solid var(--line);
+  padding:28px 26px;
+  position:relative;overflow:hidden;
+  transition:all .38s var(--ease);
+}
+.branch-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold-grad);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+.branch-card:hover{transform:translateY(-6px);box-shadow:var(--sh2);border-color:transparent}
+.branch-card:hover::before{transform:scaleX(1)}
+.bc-icon{font-size:28px;margin-bottom:16px}
+.bc-name{font-size:clamp(16px,2.5vw,19px);font-weight:800;color:var(--navy);margin-bottom:5px}
+.bc-type{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:block}
+.bc-detail{display:flex;flex-direction:column;gap:7px}
+.bd{font-size:13px;font-weight:300;color:var(--slate);display:flex;align-items:flex-start;gap:7px;line-height:1.5}
+.bd-ico{flex-shrink:0;font-size:14px;margin-top:1px}
+.bc-badge{
+  position:absolute;top:16px;right:16px;
+  background:var(--navy);color:#fff;
+  font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  padding:4px 10px;
+  clip-path:polygon(0 0,calc(100% - 4px) 0,100% 4px,100% 100%,4px 100%,0 calc(100% - 4px));
+}
+.bc-badge.main{background:var(--gold);color:var(--navy)}
+
+/* ════════════════════════════════
+   FAQ
+════════════════════════════════ */
+.faq-sec{background:var(--white);border-top:1px solid var(--line)}
+.faq-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:0;
+  border:1px solid var(--line);
+}
+@media(min-width:900px){
+  .faq-grid{grid-template-columns:1fr 1fr;gap:0}
+}
+.faq-item{
+  border-bottom:1px solid var(--line);
+  cursor:pointer;
+  transition:background .25s;
+}
+.faq-item:nth-child(odd){border-right:1px solid var(--line)}
+@media(max-width:899px){.faq-item:nth-child(odd){border-right:none}}
+.faq-item:nth-last-child(-n+2){border-bottom:none}
+@media(max-width:899px){.faq-item:last-child{border-bottom:none}.faq-item:nth-last-child(2){border-bottom:1px solid var(--line)}}
+.faq-q{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:22px 24px;gap:16px;
+  font-size:14.5px;font-weight:700;color:var(--navy);line-height:1.4;
+}
+.faq-ico{
+  width:32px;height:32px;flex-shrink:0;
+  border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;color:var(--muted);
+  transition:all .25s;
+  clip-path:polygon(0 0,calc(100% - 4px) 0,100% 4px,100% 100%,4px 100%,0 calc(100% - 4px));
+}
+.faq-item.open .faq-ico{background:var(--navy);border-color:var(--navy);color:#fff;transform:rotate(45deg)}
+.faq-a{
+  max-height:0;overflow:hidden;
+  transition:max-height .4s var(--ease);
+}
+.faq-item.open .faq-a{max-height:200px}
+.faq-a-inner{padding:0 24px 22px;font-size:13.5px;font-weight:300;color:var(--slate);line-height:1.75}
+.faq-item:hover{background:var(--ivory)}
+.faq-item.open{background:var(--ivory)}
+
+/* ════════════════════════════════
+   CTA
+════════════════════════════════ */
+.cta-band{background:var(--navy);padding:80px 0;position:relative;overflow:hidden}
+@media(min-width:768px){.cta-band{padding:100px 0}}
+.cta-band::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(196,136,28,.06) 1px,transparent 1px);background-size:40px 40px}
+.cta-band::after{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:clamp(400px,80vw,800px);height:300px;border-radius:50%;background:radial-gradient(ellipse,rgba(196,136,28,.08) 0%,transparent 70%);pointer-events:none}
+.cta-top{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--amber) 70%,transparent)}
+.cta-in{position:relative;z-index:1;text-align:center}
+.cta-in h2{font-size:clamp(34px,7vw,68px);font-weight:900;font-style:italic;color:#fff;line-height:.95;letter-spacing:-2px;margin-bottom:16px}
+.cta-in h2 em{font-style:normal;color:var(--amber)}
+.cta-in p{font-size:clamp(14px,2vw,16px);font-weight:300;color:rgba(255,255,255,.4);line-height:1.75;margin-bottom:40px}
+.cta-btns{display:flex;flex-direction:column;align-items:center;gap:10px}
+@media(min-width:480px){.cta-btns{flex-direction:row;justify-content:center}}
+.btn-cta-fill{display:inline-flex;align-items:center;gap:8px;background:var(--gold-grad);color:var(--navy);padding:16px 38px;font-size:14px;font-weight:800;clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,9px 100%,0 calc(100% - 9px));transition:all .28s}
+.btn-cta-fill:hover{transform:translateY(-3px);box-shadow:var(--shG)}
+.btn-cta-ghost{display:inline-flex;align-items:center;justify-content:center;padding:15px 30px;font-size:14px;font-weight:500;color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.18);clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));transition:all .25s}
+.btn-cta-ghost:hover{border-color:rgba(255,255,255,.5);color:#fff}
+
+/* ── FOOTER ── */
+footer{background:#090e17;border-top:1px solid rgba(196,136,28,.18)}
+.ft-main{width:85%;max-width:1400px;margin:0 auto;padding:60px 0 48px;display:grid;grid-template-columns:1fr;gap:40px;border-bottom:1px solid rgba(255,255,255,.04)}
+@media(max-width:600px){.ft-main{width:92%}}
+@media(min-width:600px){.ft-main{grid-template-columns:1fr 1fr;gap:36px}}
+@media(min-width:1024px){.ft-main{grid-template-columns:2fr 1fr 1fr 1.2fr;gap:48px}}
+.ft-brand{font-size:clamp(19px,3vw,22px);font-weight:900;color:#fff;margin-bottom:4px}
+.ft-brand em{font-style:italic;color:var(--amber)}
+.ft-est{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.18);display:block;margin-bottom:16px}
+.ft-about{font-size:13px;font-weight:300;color:rgba(255,255,255,.28);line-height:1.85;margin-bottom:22px}
+.ft-contacts{display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
+.ftc{font-size:12.5px;font-weight:300;color:rgba(255,255,255,.26);display:flex;align-items:flex-start;gap:7px}
+.ftc a{color:rgba(255,255,255,.26);transition:color .2s}
+.ftc a:hover{color:var(--amber)}
+.ft-soc{display:flex;gap:7px}
+.fso{width:36px;height:36px;border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:12px;color:rgba(255,255,255,.22);clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px));transition:all .22s}
+.fso:hover{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.ft-col h5{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.5px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.05)}
+.ft-col a{display:block;font-size:13px;font-weight:300;color:rgba(255,255,255,.26);margin-bottom:9px;transition:all .22s}
+.ft-col a:hover{color:var(--amber);padding-left:5px}
+.ft-bot{width:85%;max-width:1400px;margin:0 auto;padding:18px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+@media(max-width:600px){.ft-bot{width:92%;justify-content:center}}
+.ft-copy{font-size:11px;font-weight:300;color:rgba(255,255,255,.14)}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="tb-inner">
+    <div class="tb-links">
+      <a href="mailto:contact@tinphat.com" class="tb-link"><span class="tb-dot"></span>contact@tinphat.com</a>
+      <a href="tel:0949299494" class="tb-link"><span class="tb-dot"></span>0949 29 94 94</a>
+    </div>
+    <div class="tb-langs">
+      <span class="tb-lang on">🇻🇳 VI</span>
+      <span class="tb-lang">🇬🇧 EN</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark"><span>TP</span></div>
+      <div class="logo-info">
+        <div class="logo-name">TÍN PHÁT GROUP</div>
+        <div class="logo-sub">Est. 2002 · Bạc Liêu</div>
+      </div>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Trang chủ</a>
+      <a href="gioi-thieu.html">Giới thiệu</a>
+      <a href="#">Tin tức</a>
+      <a href="#">Tuyển dụng</a>
+      <a href="#">Hợp tác</a>
+      <a href="#">Ứng dụng</a>
+      <a href="#" class="on">Liên hệ</a>
+    </nav>
+    <div class="nav-cta">
+      <button class="btn-nv-outline">🛒 TipaShop</button>
+      <button class="btn-nv-fill"><span>Hợp tác ngay →</span></button>
+    </div>
+    <button class="hamburger" id="ham" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-menu" id="mob">
+  <a href="index.html">Trang chủ</a>
+  <a href="gioi-thieu.html">Giới thiệu</a>
+  <a href="#">Tin tức</a>
+  <a href="#">Tuyển dụng</a>
+  <a href="#">Hợp tác</a>
+  <a href="#">Ứng dụng</a>
+  <a href="#">Liên hệ</a>
+  <div class="mob-bottom">
+    <a href="#" class="btn-mob">Hợp tác ngay →</a>
+    <a href="#" class="btn-mob2">🛒 TipaShop</a>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <div class="cw">
+    <div class="bc-inner">
+      <a href="index.html">Trang chủ</a>
+      <span class="bc-sep">›</span>
+      <span class="bc-cur">Liên hệ</span>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="ph-glow"></div>
+  <div class="cw">
+    <div class="ph-inner">
+      <div class="ph-label">
+        <div class="ph-bar"></div>
+        <span class="ph-txt">Kết nối với chúng tôi</span>
+        <span class="ph-dot"></span>
+      </div>
+      <div class="ph-title">LIÊN<br><em>HỆ</em></div>
+      <p class="ph-desc">Chúng tôi luôn sẵn sàng lắng nghe — dù bạn là đối tác tiềm năng, khách hàng hay ứng viên. Hãy liên hệ ngay hôm nay.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTACT -->
+<section class="contact-main">
+  <div class="cw">
+    <div class="contact-grid">
+
+      <!-- LEFT — Info -->
+      <div class="contact-info rv rl">
+        <div class="ci-head">
+          <div class="ci-eyebrow">Thông tin liên hệ</div>
+          <h2 class="ci-title">Luôn Sẵn Sàng<br><em>Phục Vụ</em></h2>
+          <p class="ci-desc">Đội ngũ Tín Phát Group luôn sẵn sàng hỗ trợ bạn trong giờ làm việc. Đừng ngần ngại liên hệ!</p>
+        </div>
+
+        <div class="ci-items">
+          <div class="ci-item">
+            <div class="ci-ico">📍</div>
+            <div>
+              <div class="ci-label">Trụ sở chính</div>
+              <div class="ci-value">315 Nguyễn Thị Minh Khai</div>
+              <div class="ci-sub">Phường 5, TP Bạc Liêu, Tỉnh Bạc Liêu</div>
+            </div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-ico">📞</div>
+            <div>
+              <div class="ci-label">Điện thoại</div>
+              <div class="ci-value">
+                <a href="tel:0949299494">0949 29 94 94</a>
+              </div>
+              <div class="ci-sub"><a href="tel:02913992299">02913 99 2299</a> (Văn phòng)</div>
+            </div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-ico">✉️</div>
+            <div>
+              <div class="ci-label">Email</div>
+              <div class="ci-value"><a href="mailto:contact@tinphat.com">contact@tinphat.com</a></div>
+              <div class="ci-sub">Phản hồi trong 24 giờ làm việc</div>
+            </div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-ico">🌐</div>
+            <div>
+              <div class="ci-label">Website</div>
+              <div class="ci-value"><a href="https://tinphat.com" target="_blank">tinphat.com</a></div>
+              <div class="ci-sub">TipaShop · TipaExpress · CRM</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ci-hours">
+          <div class="ci-hours-title">Giờ làm việc</div>
+          <div class="ci-hour-row">
+            <span class="ci-hour-day">Thứ 2 — Thứ 6</span>
+            <span class="ci-hour-time open">07:30 — 17:30</span>
+          </div>
+          <div class="ci-hour-row">
+            <span class="ci-hour-day">Thứ 7</span>
+            <span class="ci-hour-time open">07:30 — 11:30</span>
+          </div>
+          <div class="ci-hour-row">
+            <span class="ci-hour-day">Chủ nhật</span>
+            <span class="ci-hour-time">Nghỉ</span>
+          </div>
+        </div>
+
+        <div class="ci-socials">
+          <a href="#" class="cs">f</a>
+          <a href="#" class="cs">t</a>
+          <a href="#" class="cs">z</a>
+          <a href="#" class="cs">▶</a>
+        </div>
+      </div>
+
+      <!-- RIGHT — Form -->
+      <div class="contact-form-wrap rv rr">
+        <div class="cf-head">
+          <div class="eyebrow" style="margin-bottom:12px">Gửi tin nhắn</div>
+          <h2 class="cf-title">Bắt Đầu<br><em>Hợp Tác</em></h2>
+          <p class="cf-desc">Điền thông tin bên dưới — chúng tôi sẽ liên hệ lại trong vòng 24 giờ làm việc.</p>
+        </div>
+
+        <form class="cf-form" id="contactForm" novalidate>
+          <!-- Name & Phone -->
+          <div class="cf-row">
+            <div class="cf-field">
+              <label class="cf-label">Họ và tên <span>*</span></label>
+              <input type="text" class="cf-input" placeholder="Nguyễn Văn A" required>
+            </div>
+            <div class="cf-field">
+              <label class="cf-label">Số điện thoại <span>*</span></label>
+              <input type="tel" class="cf-input" placeholder="0909 xxx xxx" required>
+            </div>
+          </div>
+
+          <!-- Email & Company -->
+          <div class="cf-row">
+            <div class="cf-field">
+              <label class="cf-label">Email <span>*</span></label>
+              <input type="email" class="cf-input" placeholder="email@company.com" required>
+            </div>
+            <div class="cf-field">
+              <label class="cf-label">Công ty / Doanh nghiệp</label>
+              <input type="text" class="cf-input" placeholder="Tên công ty (nếu có)">
+            </div>
+          </div>
+
+          <!-- Department pills -->
+          <div class="cf-field">
+            <label class="cf-label">Bạn muốn liên hệ về <span>*</span></label>
+            <div class="cf-pills">
+              <div class="cf-pill">
+                <input type="radio" name="dept" id="d1" value="hop-tac" checked>
+                <label for="d1">🤝 Hợp tác / Đại lý</label>
+              </div>
+              <div class="cf-pill">
+                <input type="radio" name="dept" id="d2" value="tipashop">
+                <label for="d2">🛒 TipaShop</label>
+              </div>
+              <div class="cf-pill">
+                <input type="radio" name="dept" id="d3" value="tipaxpress">
+                <label for="d3">🚚 TipaExpress</label>
+              </div>
+              <div class="cf-pill">
+                <input type="radio" name="dept" id="d4" value="tuyen-dung">
+                <label for="d4">💼 Tuyển dụng</label>
+              </div>
+              <div class="cf-pill">
+                <input type="radio" name="dept" id="d5" value="khac">
+                <label for="d5">💬 Khác</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Province -->
+          <div class="cf-field">
+            <label class="cf-label">Tỉnh / Thành phố</label>
+            <div class="cf-select-wrap">
+              <select class="cf-select cf-input">
+                <option value="">— Chọn tỉnh thành —</option>
+                <option>Bạc Liêu</option>
+                <option>Cà Mau</option>
+                <option>Sóc Trăng</option>
+                <option>Kiên Giang</option>
+                <option>Hậu Giang</option>
+                <option>Cần Thơ</option>
+                <option>An Giang</option>
+                <option>TP. Hồ Chí Minh</option>
+                <option>Khác</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Message -->
+          <div class="cf-field">
+            <label class="cf-label">Nội dung <span>*</span></label>
+            <textarea class="cf-textarea" placeholder="Cho chúng tôi biết bạn cần gì — chúng tôi sẽ tư vấn ngay..." required></textarea>
+          </div>
+
+          <!-- Submit -->
+          <div class="cf-submit">
+            <button type="submit" class="btn-submit">
+              <span>Gửi tin nhắn</span>
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </button>
+            <p class="cf-note">🔒 Thông tin của bạn được bảo mật<br>và không chia sẻ cho bên thứ ba.</p>
+          </div>
+        </form>
+
+        <!-- Success message (hidden) -->
+        <div class="cf-success" id="cfSuccess">
+          <div class="cf-success-ico">✅</div>
+          <h3>Gửi thành công!</h3>
+          <p>Cảm ơn bạn đã liên hệ. Đội ngũ Tín Phát Group sẽ phản hồi trong vòng <strong>24 giờ</strong> làm việc.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="map-sec sec">
+  <div class="cw">
+    <div class="sec-head rv" style="text-align:center;margin-bottom:40px">
+      <div class="eyebrow ct">Vị trí</div>
+      <h2 class="s-title" style="text-align:center">Tìm <em>Chúng Tôi</em></h2>
+      <span class="g-bar ct"></span>
+    </div>
+    <div class="map-wrap rv d1">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.267!2d105.7274!3d9.2840!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31a0878cd1b1b1b1%3A0x1!2s315%20Nguy%E1%BB%85n%20Th%E1%BB%8B%20Minh%20Khai%2C%20Ph%C6%B0%E1%BB%9Dng%205%2C%20B%E1%BA%A1c%20Li%C3%AAu!5e0!3m2!1svi!2svn!4v1234567890"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Bản đồ Tín Phát Group">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- BRANCHES -->
+<section class="branches sec">
+  <div class="cw">
+    <div class="rv" style="text-align:center;margin-bottom:48px">
+      <div class="eyebrow ct">Hệ thống chi nhánh</div>
+      <h2 class="s-title" style="text-align:center">Điểm <em>Giao Dịch</em></h2>
+      <span class="g-bar ct"></span>
+    </div>
+    <div class="branches-grid rv d1">
+      <div class="branch-card">
+        <span class="bc-badge main">Trụ sở chính</span>
+        <div class="bc-icon">🏢</div>
+        <div class="bc-name">Bạc Liêu</div>
+        <span class="bc-type">Trụ sở & Văn phòng điều hành</span>
+        <div class="bc-detail">
+          <div class="bd"><span class="bd-ico">📍</span><span>315 Nguyễn Thị Minh Khai, P.5, TP Bạc Liêu</span></div>
+          <div class="bd"><span class="bd-ico">📞</span><span><a href="tel:0949299494" style="color:var(--slate)">0949 29 94 94</a></span></div>
+          <div class="bd"><span class="bd-ico">🕐</span><span>T2–T6: 07:30–17:30 · T7: 07:30–11:30</span></div>
+        </div>
+      </div>
+
+      <div class="branch-card">
+        <span class="bc-badge">Chi nhánh</span>
+        <div class="bc-icon">🏪</div>
+        <div class="bc-name">Cà Mau</div>
+        <span class="bc-type">Đại lý phân phối khu vực</span>
+        <div class="bc-detail">
+          <div class="bd"><span class="bd-ico">📍</span><span>Khu vực TP. Cà Mau, Tỉnh Cà Mau</span></div>
+          <div class="bd"><span class="bd-ico">📞</span><span>Liên hệ văn phòng chính: 0949 29 94 94</span></div>
+          <div class="bd"><span class="bd-ico">🛢️</span><span>Shell · Castrol · GS Battery · Kenda</span></div>
+        </div>
+      </div>
+
+      <div class="branch-card">
+        <span class="bc-badge">Chi nhánh</span>
+        <div class="bc-icon">🏪</div>
+        <div class="bc-name">Sóc Trăng</div>
+        <span class="bc-type">Đại lý phân phối khu vực</span>
+        <div class="bc-detail">
+          <div class="bd"><span class="bd-ico">📍</span><span>Khu vực TP. Sóc Trăng, Tỉnh Sóc Trăng</span></div>
+          <div class="bd"><span class="bd-ico">📞</span><span>Liên hệ văn phòng chính: 0949 29 94 94</span></div>
+          <div class="bd"><span class="bd-ico">🧴</span><span>Unilever · Motul · Mekong Penda</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-sec sec">
+  <div class="cw">
+    <div class="rv" style="text-align:center;margin-bottom:48px">
+      <div class="eyebrow ct">Câu hỏi thường gặp</div>
+      <h2 class="s-title" style="text-align:center">Giải Đáp <em>Thắc Mắc</em></h2>
+      <span class="g-bar ct"></span>
+    </div>
+    <div class="faq-grid rv d1">
+      <div class="faq-item">
+        <div class="faq-q">Làm thế nào để trở thành đại lý của Tín Phát?<span class="faq-ico">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Bạn có thể điền form liên hệ trên trang này hoặc gọi trực tiếp đến số 0949 29 94 94. Đội ngũ kinh doanh sẽ tư vấn và hướng dẫn các thủ tục đăng ký trở thành đại lý chính thức.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Tín Phát Group phân phối những sản phẩm gì?<span class="faq-ico">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Chúng tôi là đại lý chính thức của Shell, Castrol, Motul (dầu nhớt), GS Battery (ắc quy), Kenda (lốp xe), Unilever (hàng tiêu dùng) và Mekong Penda (dầu cầu). Ngoài ra còn có TipaShop và TipaExpress.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">TipaExpress giao hàng đến những tỉnh thành nào?<span class="faq-ico">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">TipaExpress kết nối BEST Express, phủ sóng toàn khu vực Đồng bằng sông Cửu Long và toàn quốc. Thời gian giao hàng từ 1–3 ngày tùy khu vực.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Làm sao để đăng ký bán hàng trên TipaShop?<span class="faq-ico">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Tải ứng dụng TipaShop từ App Store hoặc Google Play, sau đó chọn "Đăng ký người bán". Hoặc liên hệ trực tiếp qua email contact@tinphat.com để được hỗ trợ tạo gian hàng.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Tín Phát CRM dành cho đối tượng nào?<span class="faq-ico">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Tín Phát CRM được thiết kế cho đội ngũ nội bộ và các đối tác kinh doanh của Tín Phát Group nhằm quản lý KPI, OKR và hiệu suất theo mô hình doanh nghiệp 5.0.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Thời gian phản hồi email và điện thoại là bao lâu?<span class="faq-ico">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Chúng tôi cam kết phản hồi email trong vòng 24 giờ làm việc. Đối với điện thoại, hãy gọi trong giờ làm việc: Thứ 2–6 từ 07:30–17:30 và Thứ 7 từ 07:30–11:30.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-band">
+  <div class="cta-top"></div>
+  <div class="cw cta-in rv">
+    <h2>Sẵn sàng <em>hợp tác</em><br>cùng chúng tôi?</h2>
+    <p>Đăng ký làm nhà phân phối, đại lý hoặc tham gia hệ sinh thái TipaShop — mở ra cơ hội kinh doanh không giới hạn.</p>
+    <div class="cta-btns">
+      <a href="tel:0949299494" class="btn-cta-fill">📞 Gọi ngay</a>
+      <a href="mailto:contact@tinphat.com" class="btn-cta-ghost">✉ Gửi email</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-main">
+    <div>
+      <div class="ft-brand">Tín Phát <em>Group</em></div>
+      <span class="ft-est">Est. 2002 · Bạc Liêu, Việt Nam</span>
+      <p class="ft-about">"Chuyên nghiệp – Tận tình – Chất lượng." Cam kết mang lại dịch vụ tốt nhất, hướng tới Tập đoàn Thương mại quy mô toàn cầu.</p>
+      <div class="ft-contacts">
+        <span class="ftc">📍 315 Nguyễn Thị Minh Khai, P.5, TP Bạc Liêu</span>
+        <span class="ftc"><a href="tel:0949299494">📞 0949 29 94 94 · 02913-99-2299</a></span>
+        <span class="ftc"><a href="mailto:contact@tinphat.com">✉ contact@tinphat.com</a></span>
+      </div>
+      <div class="ft-soc">
+        <a href="#" class="fso">f</a><a href="#" class="fso">t</a>
+        <a href="#" class="fso">z</a><a href="#" class="fso">▶</a>
+      </div>
+    </div>
+    <div class="ft-col">
+      <h5>Về chúng tôi</h5>
+      <a href="gioi-thieu.html">Giới thiệu</a><a href="#">Các lĩnh vực</a>
+      <a href="#">Ban lãnh đạo</a><a href="#">Tin tức</a>
+    </div>
+    <div class="ft-col">
+      <h5>Dịch vụ</h5>
+      <a href="#">Dầu nhớt & Ắc quy</a><a href="#">TipaShop</a>
+      <a href="#">TipaExpress</a><a href="#">Tín Phát CRM</a>
+    </div>
+    <div class="ft-col">
+      <h5>Hợp tác</h5>
+      <a href="#">Đăng ký đại lý</a><a href="#">Tham gia TipaShop</a>
+      <a href="#">Cung ứng sản phẩm</a><a href="#">Tuyển dụng</a>
+    </div>
+  </div>
+  <div class="ft-bot">
+    <p class="ft-copy">© 2026 Tín Phát Group · Bạc Liêu, Việt Nam · tinphat.com</p>
+  </div>
+</footer>
+
+<script>
+/* progress */
+const prog = document.getElementById('prog');
+window.addEventListener('scroll', () => {
+  const s = document.documentElement.scrollTop;
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  prog.style.width = (h > 0 ? s/h*100 : 0) + '%';
+}, {passive:true});
+
+/* navbar */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('on', scrollY > 50), {passive:true});
+
+/* hamburger */
+const ham = document.getElementById('ham'), mob = document.getElementById('mob');
+let open = false;
+ham.addEventListener('click', () => {
+  open = !open;
+  ham.classList.toggle('open', open);
+  mob.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  open = false; ham.classList.remove('open'); mob.classList.remove('open');
+  document.body.style.overflow = '';
+}));
+
+/* reveal */
+const obs = new IntersectionObserver(e => {
+  e.forEach(el => { if(el.isIntersecting) el.target.classList.add('on'); });
+}, {threshold:.06, rootMargin:'0px 0px -28px 0px'});
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+/* FAQ accordion */
+document.querySelectorAll('.faq-item').forEach(item => {
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+/* Form submit */
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const form = this;
+  const btn = form.querySelector('.btn-submit');
+  const originalText = btn.innerHTML;
+
+  /* Loading state */
+  btn.innerHTML = '<span>Đang gửi...</span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="8" r="6" stroke-dasharray="20" stroke-dashoffset="20"><animate attributeName="stroke-dashoffset" values="20;0" dur=".8s" repeatCount="indefinite"/></circle></svg>';
+  btn.disabled = true;
+
+  /* Simulate send */
+  setTimeout(() => {
+    form.style.display = 'none';
+    document.getElementById('cfSuccess').classList.add('show');
+  }, 1400);
+});
+
+/* Input focus effects */
+document.querySelectorAll('.cf-input, .cf-select, .cf-textarea').forEach(el => {
+  el.addEventListener('focus', () => el.parentElement.classList.add('focused'));
+  el.addEventListener('blur',  () => el.parentElement.classList.remove('focused'));
+});
+</script>
+</body>
+</html>
