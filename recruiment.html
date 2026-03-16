@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tuyển Dụng — TÍN PHÁT GROUP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════ TOKENS ═══════════════════════ */
+:root{
+  --ink:    #0A1320;
+  --ink2:   #111D2E;
+  --ink3:   #1A2D44;
+  --ivory:  #FAF8F3;
+  --paper:  #F4EFE5;
+  --warm:   #EAE0CE;
+  --sand:   #D8CCBA;
+  --white:  #FEFEFE;
+  --gold:   #C4881C;
+  --amber:  #EDBA48;
+  --slate:  #66605A;
+  --muted:  #A09488;
+  --line:   #E6DDD0;
+  --lineD:  #D0C5B4;
+  --sh1: 0 2px 20px rgba(10,19,32,.06);
+  --sh2: 0 10px 60px rgba(10,19,32,.12);
+  --sh3: 0 24px 100px rgba(10,19,32,.18);
+  --shG: 0 14px 48px rgba(196,136,28,.28);
+  --ease: cubic-bezier(.16,1,.3,1);
+  --gg: linear-gradient(135deg,var(--gold),var(--amber));
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Exo 2',sans-serif;background:var(--ivory);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{text-decoration:none;color:inherit}
+button{font-family:'Exo 2',sans-serif;cursor:pointer;border:none;outline:none;background:none}
+
+/* grain */
+body::before{content:'';position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.38;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.03'/%3E%3C/svg%3E")}
+
+.cw{width:85%;max-width:1400px;margin:0 auto}
+@media(max-width:600px){.cw{width:92%}}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.on{opacity:1;transform:none}
+.rv.rl{transform:translateX(-30px)}.rv.rl.on{transform:none;opacity:1}
+.rv.rr{transform:translateX(30px)}.rv.rr.on{transform:none;opacity:1}
+.rv.sc{transform:scale(.95);opacity:0}.rv.sc.on{transform:scale(1);opacity:1}
+.d1{transition-delay:.06s}.d2{transition-delay:.12s}.d3{transition-delay:.18s}
+.d4{transition-delay:.24s}.d5{transition-delay:.30s}.d6{transition-delay:.36s}
+
+@keyframes up   {from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes ken  {from{transform:scale(1.07)}to{transform:scale(1)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes spin {to{transform:rotate(360deg)}}
+@keyframes marquee{to{transform:translateX(-50%)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(196,136,28,.5)}70%{box-shadow:0 0 0 10px rgba(196,136,28,0)}}
+
+#prog{position:fixed;top:0;left:0;z-index:8999;height:2.5px;width:0%;background:var(--gg)}
+
+/* ──── TOPBAR ──── */
+.topbar{display:none}
+@media(min-width:768px){
+  .topbar{display:block;background:var(--ink);border-bottom:1px solid rgba(196,136,28,.15)}
+  .tb-w{width:85%;max-width:1400px;margin:0 auto;height:38px;display:flex;align-items:center;justify-content:space-between}
+  .tb-l{display:flex}
+  .tbl{display:flex;align-items:center;gap:6px;height:38px;padding:0 14px;font-size:11.5px;font-weight:400;color:rgba(255,255,255,.3);border-right:1px solid rgba(255,255,255,.06);transition:color .2s}
+  .tbl:first-child{padding-left:0}
+  .tbl:hover{color:var(--amber)}
+  .tb-dot{width:3px;height:3px;border-radius:50%;background:var(--gold);opacity:.5}
+  .tb-r{display:flex}
+  .tb-lang{height:38px;padding:0 12px;font-size:10.5px;font-weight:700;letter-spacing:.5px;color:rgba(255,255,255,.25);display:flex;align-items:center;border-left:1px solid rgba(255,255,255,.06);cursor:pointer;transition:color .2s}
+  .tb-lang:hover,.tb-lang.on{color:var(--amber)}
+}
+
+/* ──── NAVBAR ──── */
+.navbar{position:sticky;top:0;z-index:990;background:rgba(250,248,243,.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--line);transition:box-shadow .3s}
+.navbar.stuck{box-shadow:0 4px 40px rgba(10,19,32,.08);border-bottom-color:var(--lineD)}
+.nav-w{width:85%;max-width:1400px;margin:0 auto;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+@media(max-width:600px){.nav-w{width:92%}}
+@media(min-width:1024px){.nav-w{height:72px}}
+
+.logo{display:flex;align-items:center;gap:11px;flex-shrink:0}
+.logo-gem{width:40px;height:40px;flex-shrink:0;background:var(--ink);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)}
+.logo-gem::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--gg)}
+.logo-gem span{font-size:12px;font-weight:900;color:var(--amber);letter-spacing:.5px}
+.logo-words{display:flex;flex-direction:column}
+.logo-name{font-size:15px;font-weight:900;color:var(--ink);letter-spacing:.2px;line-height:1}
+.logo-sub{font-size:8px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-top:3px}
+@media(min-width:1024px){.logo-gem{width:44px;height:44px}.logo-name{font-size:17px}}
+
+.nav-links{display:none}
+@media(min-width:1024px){
+  .nav-links{display:flex;gap:0}
+  .nav-links a{font-size:13px;font-weight:500;color:var(--slate);padding:0 12px;height:72px;display:flex;align-items:center;white-space:nowrap;position:relative;transition:color .2s}
+  .nav-links a::after{content:'';position:absolute;bottom:0;left:12px;right:12px;height:2px;background:var(--gg);transform:scaleX(0);transform-origin:center;transition:transform .3s var(--ease)}
+  .nav-links a:hover,.nav-links a.on{color:var(--ink)}
+  .nav-links a:hover::after,.nav-links a.on::after{transform:scaleX(1)}
+}
+.nav-cta{display:none}
+@media(min-width:1024px){
+  .nav-cta{display:flex;gap:9px;flex-shrink:0}
+  .btn-no{padding:9px 17px;font-size:12.5px;font-weight:600;color:var(--slate);border:1.5px solid var(--line);transition:all .22s;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px))}
+  .btn-no:hover{border-color:var(--ink);color:var(--ink)}
+  .btn-nf{padding:10px 22px;font-size:12.5px;font-weight:800;color:#fff;background:var(--ink);position:relative;overflow:hidden;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));transition:color .28s}
+  .btn-nf::before{content:'';position:absolute;inset:0;background:var(--gg);transform:translateY(105%);transition:transform .36s var(--ease)}
+  .btn-nf:hover::before{transform:translateY(0)}.btn-nf:hover{color:var(--ink)}
+  .btn-nf span{position:relative;z-index:1}
+}
+.ham{display:flex;flex-direction:column;gap:5px;width:40px;height:40px;align-items:center;justify-content:center;flex-shrink:0}
+.ham span{display:block;width:22px;height:1.5px;background:var(--ink);border-radius:2px;transition:all .3s var(--ease)}
+.ham.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.ham.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.ham.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+@media(min-width:1024px){.ham{display:none}}
+
+.mob-menu{position:fixed;inset:0;z-index:980;background:var(--ink);display:flex;flex-direction:column;padding:100px 32px 48px;transform:translateX(100%);transition:transform .45s var(--ease)}
+.mob-menu.open{transform:translateX(0)}
+.mob-menu a{display:block;font-size:28px;font-weight:800;color:rgba(255,255,255,.85);padding:14px 0;border-bottom:1px solid rgba(255,255,255,.07);transition:color .2s,padding-left .25s var(--ease)}
+.mob-menu a:hover{color:var(--amber);padding-left:8px}
+.mob-bot{margin-top:40px;display:flex;flex-direction:column;gap:12px}
+.btn-mob{padding:16px 24px;font-size:15px;font-weight:800;color:var(--ink);background:var(--gg);text-align:center;display:block;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px))}
+.btn-mob2{padding:15px 24px;font-size:15px;font-weight:600;color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.18);text-align:center;display:block}
+@media(min-width:1024px){.mob-menu{display:none}}
+
+/* ──── BREADCRUMB ──── */
+.breadcrumb{background:var(--white);border-bottom:1px solid var(--line);padding:13px 0}
+.bc-w{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:500;color:var(--muted)}
+.bc-w a{color:var(--muted);transition:color .2s}.bc-w a:hover{color:var(--gold)}
+.bc-sep{color:var(--lineD);font-size:10px}.bc-cur{color:var(--ink);font-weight:600}
+
+/* ═══════════════════════════════════════════
+   HERO — full-bleed split cinematic
+═══════════════════════════════════════════ */
+.hero{
+  background:var(--ink);
+  position:relative;overflow:hidden;
+  min-height:clamp(520px,70svh,780px);
+  display:grid;grid-template-columns:1fr;
+}
+@media(min-width:900px){
+  .hero{grid-template-columns:1fr 42%}
+}
+/* dot pattern */
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(196,136,28,.06) 1px,transparent 1px);background-size:36px 36px;z-index:0}
+
+/* LEFT TEXT */
+.h-left{
+  padding:72px 40px 64px;
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;z-index:2;
+  max-width:700px;
+}
+@media(min-width:900px){.h-left{padding:96px 80px 80px 40px;max-width:none}}
+@media(min-width:1200px){.h-left{padding:100px 88px 88px 40px}}
+
+.h-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:24px;animation:up .7s both}
+.h-ew-line{height:1.5px;width:30px;background:var(--gg);flex-shrink:0}
+.h-ew-txt{font-size:10.5px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(196,136,28,.85)}
+.h-ew-dot{width:5px;height:5px;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);background:var(--gold);animation:blink 2.5s infinite}
+
+/* Giant headline */
+.h-headline{margin-bottom:28px;animation:up .7s .09s both}
+.h-sub{display:block;font-size:clamp(13px,2.5vw,20px);font-weight:200;letter-spacing:6px;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:6px}
+.h-main{display:block;font-size:clamp(62px,10vw,110px);font-weight:900;line-height:.87;letter-spacing:-3px;color:#fff}
+.h-italic{display:block;font-size:clamp(54px,8.5vw,96px);font-weight:800;font-style:italic;line-height:.87;letter-spacing:-2.5px;color:var(--amber)}
+.h-group{display:block;font-size:clamp(16px,2.8vw,28px);font-weight:200;letter-spacing:clamp(8px,1.5vw,20px);color:rgba(255,255,255,.25);margin-top:10px;text-transform:uppercase}
+
+.h-desc{font-size:clamp(14px,1.8vw,16.5px);font-weight:300;color:rgba(255,255,255,.45);line-height:1.85;max-width:460px;margin-bottom:38px;animation:up .7s .17s both}
+
+.h-btns{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:56px;animation:up .7s .24s both}
+.btn-hero-gold{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--gg);color:var(--ink);
+  padding:15px 34px;font-size:14px;font-weight:800;
+  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
+  transition:all .28s;white-space:nowrap;
+}
+.btn-hero-gold:hover{transform:translateY(-3px);box-shadow:var(--shG)}
+.btn-hero-ghost{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,.55);font-size:14px;font-weight:600;padding-bottom:3px;border-bottom:1.5px solid rgba(255,255,255,.2);transition:all .25s;white-space:nowrap}
+.btn-hero-ghost:hover{color:var(--amber);border-color:var(--amber);gap:12px}
+
+/* Stats row */
+.h-stats{display:flex;gap:0;border-top:1px solid rgba(255,255,255,.08);padding-top:32px;animation:up .7s .31s both}
+.h-stat{flex:1;padding-right:24px;border-right:1px solid rgba(255,255,255,.08)}
+.h-stat+.h-stat{padding-left:24px;border-right:none;padding-right:0}
+.h-stat-n{font-size:clamp(32px,5vw,48px);font-weight:900;font-style:italic;color:#fff;line-height:1;letter-spacing:-2px}
+.h-stat-n sup{font-size:.42em;color:var(--amber);font-style:normal;vertical-align:super}
+.h-stat-l{font-size:11.5px;font-weight:300;color:rgba(255,255,255,.38);margin-top:5px;line-height:1.4}
+
+/* RIGHT — photo mosaic */
+.h-right{position:relative;overflow:hidden;display:none}
+@media(min-width:900px){.h-right{display:block}}
+.h-photo{position:absolute;inset:0;background:var(--ink2)}
+.h-photo img{position:absolute;inset:0;filter:brightness(.48) saturate(.7);animation:ken 20s ease-in-out infinite alternate}
+.h-photo::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,var(--ink) 0%,rgba(10,19,32,.2) 40%,transparent 70%)}
+.h-photo::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;z-index:3;background:var(--gg)}
+
+/* Floating info card */
+.h-badge{
+  position:absolute;bottom:32px;left:28px;z-index:4;
+  background:rgba(250,248,243,.94);backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.85);
+  padding:18px 24px;box-shadow:var(--sh2);
+  clip-path:polygon(0 0,calc(100% - 7px) 0,100% 7px,100% 100%,7px 100%,0 calc(100% - 7px));
+  animation:up .7s .5s both;
+}
+.hb-n{font-size:clamp(34px,5vw,46px);font-weight:900;font-style:italic;color:var(--ink);line-height:1;letter-spacing:-2px}
+.hb-l{font-size:11px;font-weight:500;color:var(--muted);margin-top:3px}
+.h-live{
+  position:absolute;top:28px;right:28px;z-index:4;
+  display:flex;align-items:center;gap:8px;
+  background:rgba(10,19,32,.75);backdrop-filter:blur(10px);
+  border:1px solid rgba(255,255,255,.12);
+  padding:10px 16px;
+  font-size:12px;font-weight:700;color:#fff;
+  clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px));
+}
+.h-live-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
+/* gold right accent */
+.h-right::before{content:'';position:absolute;top:0;right:0;bottom:0;width:4px;background:var(--gg);z-index:5}
+
+/* ═══════════════════════════════════════════
+   DEPT TABS — horizontal pill nav
+═══════════════════════════════════════════ */
+.dept-bar{background:var(--ink2);border-bottom:1px solid rgba(255,255,255,.06);position:sticky;top:64px;z-index:88}
+@media(min-width:1024px){.dept-bar{top:72px}}
+.dept-inner{display:flex;overflow-x:auto;gap:0;-ms-overflow-style:none;scrollbar-width:none}
+.dept-inner::-webkit-scrollbar{display:none}
+.dept-btn{
+  display:flex;align-items:center;gap:8px;
+  padding:14px 22px;
+  font-size:12.5px;font-weight:700;letter-spacing:.3px;
+  color:rgba(255,255,255,.35);
+  white-space:nowrap;
+  border-bottom:2.5px solid transparent;
+  transition:all .25s;
+  flex-shrink:0;
+}
+.dept-btn:hover{color:rgba(255,255,255,.7)}
+.dept-btn.on{color:var(--amber);border-bottom-color:var(--amber)}
+.dept-count{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;background:rgba(255,255,255,.08);border-radius:50%;font-size:10px;font-weight:800}
+.dept-btn.on .dept-count{background:rgba(196,136,28,.25);color:var(--amber)}
+
+/* ═══════════════════════════════════════════
+   MAIN — 2 col layout
+═══════════════════════════════════════════ */
+.jobs-section{background:var(--ivory);padding:64px 0 96px}
+
+.jobs-wrap{display:grid;grid-template-columns:1fr;gap:40px}
+@media(min-width:1024px){.jobs-wrap{grid-template-columns:1fr 320px;gap:56px}}
+
+/* ── Search + Filter Bar ── */
+.filter-bar{
+  display:flex;flex-wrap:wrap;gap:12px;align-items:center;
+  margin-bottom:32px;
+}
+.search-wrap{position:relative;flex:1;min-width:220px}
+.search-wrap input{
+  width:100%;background:var(--white);border:1.5px solid var(--line);
+  padding:13px 44px 13px 16px;
+  font-family:'Exo 2',sans-serif;font-size:14px;color:var(--ink);
+  outline:none;transition:all .25s;
+}
+.search-wrap input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(196,136,28,.1)}
+.search-wrap input::placeholder{color:var(--muted);font-weight:300}
+.search-wrap svg{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--muted)}
+
+.filter-select{
+  background:var(--white);border:1.5px solid var(--line);
+  padding:13px 40px 13px 16px;
+  font-family:'Exo 2',sans-serif;font-size:13.5px;color:var(--ink);
+  outline:none;appearance:none;
+  min-width:160px;transition:all .25s;
+  position:relative;cursor:pointer;
+}
+.filter-select:focus{border-color:var(--gold)}
+.select-wrap{position:relative;flex-shrink:0}
+.select-wrap::after{content:'›';position:absolute;right:14px;top:50%;transform:translateY(-50%) rotate(90deg);font-size:16px;color:var(--muted);pointer-events:none}
+
+/* Results meta */
+.results-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:8px}
+.rm-txt{font-size:13.5px;font-weight:600;color:var(--slate)}.rm-txt strong{color:var(--ink)}
+.rm-sort select{background:var(--white);border:1px solid var(--line);padding:7px 12px;font-family:'Exo 2',sans-serif;font-size:12.5px;color:var(--ink);outline:none}
+
+/* ── JOB CARDS ── */
+.jobs-list{display:flex;flex-direction:column;gap:0}
+
+.jc{
+  background:var(--white);
+  border-left:1px solid var(--line);
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:0;overflow:hidden;
+  cursor:pointer;
+  transition:all .35s var(--ease);
+  position:relative;
+}
+.jc:first-child{border-top:1px solid var(--line)}
+/* left color accent by dept */
+.jc::after{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--gg);
+  transform:scaleY(0);transform-origin:bottom;
+  transition:transform .35s var(--ease);
+}
+.jc:hover{background:var(--ivory);z-index:2;box-shadow:var(--sh2);border-color:transparent;transform:translateX(4px)}
+.jc:hover::after{transform:scaleY(1)}
+
+.jc-inner{padding:22px 26px;display:flex;flex-direction:column;gap:12px}
+@media(min-width:640px){.jc-inner{flex-direction:row;align-items:center;gap:20px}}
+
+.jc-left{flex:1;min-width:0}
+.jc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:9px}
+.tag{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;clip-path:polygon(0 0,calc(100% - 4px) 0,100% 4px,100% 100%,4px 100%,0 calc(100% - 4px))}
+.tag.dept-sales{background:#1a4a6e;color:#fff}
+.tag.dept-logistics{background:#4a1a1a;color:#fff}
+.tag.dept-it{background:#1a3a1a;color:#fff}
+.tag.dept-hr{background:#3a1a4a;color:#fff}
+.tag.dept-marketing{background:#4a3a1a;color:#fff}
+.tag.dept-ops{background:#1a3a4a;color:#fff}
+.tag.tag-new{background:var(--gold);color:#fff}
+.tag.tag-hot{background:#c0392b;color:#fff}
+.tag.tag-type{background:var(--paper);color:var(--slate);border:1px solid var(--line)}
+.jc-title{font-size:clamp(15px,2.2vw,18px);font-weight:800;color:var(--ink);line-height:1.3;letter-spacing:-.2px;transition:color .22s}
+.jc:hover .jc-title{color:var(--gold)}
+.jc-meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:7px}
+.jc-m{font-size:12px;font-weight:400;color:var(--muted);display:flex;align-items:center;gap:5px}
+
+.jc-right{display:flex;flex-direction:row;align-items:center;gap:16px;flex-shrink:0}
+@media(min-width:640px){.jc-right{flex-direction:column;align-items:flex-end;gap:12px}}
+.jc-salary{font-size:clamp(14px,1.8vw,16px);font-weight:900;color:var(--ink);letter-spacing:-.3px;white-space:nowrap}
+.jc-salary span{color:var(--gold)}
+.btn-apply{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--ink);color:#fff;
+  padding:10px 20px;font-size:12.5px;font-weight:700;
+  white-space:nowrap;
+  clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px));
+  position:relative;overflow:hidden;transition:gap .25s,color .25s;
+}
+.btn-apply::before{content:'';position:absolute;inset:0;background:var(--gg);transform:translateX(-105%);transition:transform .36s var(--ease)}
+.btn-apply:hover::before{transform:translateX(0)}
+.btn-apply:hover{color:var(--ink);gap:10px}
+.btn-apply span,.btn-apply svg{position:relative;z-index:1}
+
+.no-jobs{text-align:center;padding:64px 20px;display:none}
+.no-jobs.show{display:block}
+.nj-ico{font-size:48px;margin-bottom:14px}
+.nj-p{font-size:15px;font-weight:300;color:var(--muted)}
+
+/* pagination */
+.pg{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:40px;flex-wrap:wrap}
+.pg-b{width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:13.5px;font-weight:700;color:var(--slate);border:1.5px solid var(--line);background:var(--white);cursor:pointer;transition:all .22s;clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px))}
+.pg-b:hover,.pg-b.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.pg-b:disabled{opacity:.3;cursor:not-allowed}
+.pg-b:disabled:hover{background:var(--white);border-color:var(--line);color:var(--slate)}
+
+/* ── SIDEBAR ── */
+.sidebar{display:flex;flex-direction:column;gap:20px}
+
+.sw{background:var(--white);border:1px solid var(--line);overflow:hidden}
+.sw-h{
+  padding:14px 20px;border-bottom:1px solid var(--line);
+  font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--ink);
+  display:flex;align-items:center;gap:10px;
+}
+.sw-h::before{content:'';width:16px;height:2px;background:var(--gg);flex-shrink:0}
+.sw-body{padding:16px 18px}
+
+/* perks in sidebar */
+.perk-row{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.perk-row:last-child{border-bottom:none}
+.perk-ico{width:38px;height:38px;background:var(--paper);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)}
+.perk-txt h5{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.perk-txt p{font-size:12px;font-weight:300;color:var(--muted);line-height:1.5}
+
+/* quick stats */
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sg-item{background:var(--paper);padding:14px;text-align:center}
+.sg-n{font-size:28px;font-weight:900;font-style:italic;color:var(--ink);line-height:1;letter-spacing:-1.5px}
+.sg-n sup{font-size:.45em;color:var(--gold);font-style:normal;vertical-align:super}
+.sg-l{font-size:10.5px;font-weight:400;color:var(--muted);margin-top:3px}
+
+/* contact HR */
+.hr-card{background:var(--ink);padding:22px 20px}
+.hr-eyebrow{font-size:9.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--amber);margin-bottom:12px;display:flex;align-items:center;gap:7px}
+.hr-eyebrow::before{content:'';width:12px;height:1.5px;background:var(--amber)}
+.hr-title{font-size:18px;font-weight:800;color:#fff;line-height:1.25;margin-bottom:8px}
+.hr-desc{font-size:12.5px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.65;margin-bottom:18px}
+.hr-contacts{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+.hr-c{font-size:12.5px;font-weight:400;color:rgba(255,255,255,.55);display:flex;align-items:center;gap:8px}
+.hr-c a{color:var(--amber);transition:color .2s}.hr-c a:hover{color:#fff}
+.btn-hr{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:12px;
+  background:var(--gg);color:var(--ink);
+  font-family:'Exo 2',sans-serif;font-size:13px;font-weight:800;
+  border:none;cursor:pointer;
+  clip-path:polygon(0 0,calc(100% - 7px) 0,100% 7px,100% 100%,7px 100%,0 calc(100% - 7px));
+  transition:all .25s;
+}
+.btn-hr:hover{transform:translateY(-2px);box-shadow:var(--shG)}
+
+/* ═══════════════════════════════════════════
+   WHY JOIN — dark band
+═══════════════════════════════════════════ */
+.why-sec{background:var(--ink2);position:relative;overflow:hidden}
+.why-sec::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(196,136,28,.055) 1px,transparent 1px);background-size:38px 38px}
+.why-sec::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--amber) 70%,transparent)}
+.why-glow{position:absolute;left:-100px;top:50%;transform:translateY(-50%);width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(196,136,28,.08) 0%,transparent 70%);pointer-events:none}
+.why-grid{
+  display:grid;grid-template-columns:1fr;
+  gap:0;position:relative;z-index:1;
+  border:1px solid rgba(255,255,255,.05);
+}
+@media(min-width:560px){.why-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1024px){.why-grid{grid-template-columns:repeat(4,1fr)}}
+
+.wc{
+  padding:40px 32px;
+  border-right:1px solid rgba(255,255,255,.05);
+  border-bottom:1px solid rgba(255,255,255,.05);
+  transition:background .3s;
+  position:relative;overflow:hidden;
+}
+@media(min-width:560px){.wc:nth-child(2n){border-right:none}}
+@media(min-width:1024px){
+  .wc{border-bottom:none}
+  .wc:nth-child(2n){border-right:1px solid rgba(255,255,255,.05)}
+  .wc:last-child{border-right:none}
+  .wc:nth-child(4){border-right:none}
+}
+.wc:hover{background:rgba(255,255,255,.03)}
+.wc::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gg);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+.wc:hover::before{transform:scaleX(1)}
+.wc-ico{font-size:34px;margin-bottom:18px}
+.wc-n{position:absolute;top:-8px;right:10px;font-size:80px;font-weight:900;font-style:italic;color:rgba(255,255,255,.025);line-height:1;pointer-events:none}
+.wc h3{font-size:clamp(17px,2.2vw,20px);font-weight:800;color:#fff;margin-bottom:10px;line-height:1.2}
+.wc p{font-size:13.5px;font-weight:300;color:rgba(255,255,255,.42);line-height:1.75}
+
+/* ═══════════════════════════════════════════
+   PROCESS — horizontal steps
+═══════════════════════════════════════════ */
+.process-sec{background:var(--paper);border-top:1px solid var(--line)}
+.steps{
+  display:grid;grid-template-columns:1fr;
+  gap:0;
+  border:1px solid var(--line);
+  background:var(--line);
+}
+@media(min-width:560px){.steps{grid-template-columns:1fr 1fr}}
+@media(min-width:1024px){.steps{grid-template-columns:repeat(4,1fr)}}
+
+.step{
+  background:var(--white);
+  padding:36px 30px;
+  position:relative;overflow:hidden;
+  transition:background .3s;
+  display:flex;flex-direction:column;
+}
+.step:hover{background:var(--ivory)}
+.step-n{
+  width:52px;height:52px;border-radius:50%;
+  border:2.5px solid var(--line);
+  display:flex;align-items:center;justify-content:center;
+  font-size:19px;font-weight:900;font-style:italic;
+  color:var(--gold);margin-bottom:18px;
+  position:relative;z-index:1;
+  transition:all .3s;
+  flex-shrink:0;
+}
+.step:hover .step-n{background:var(--ink);border-color:var(--ink);color:var(--amber)}
+.step h4{font-size:clamp(15px,2vw,17px);font-weight:800;color:var(--ink);margin-bottom:9px;line-height:1.2}
+.step p{font-size:13px;font-weight:300;color:var(--slate);line-height:1.65;flex:1}
+/* connector arrow desktop */
+.step-arr{display:none}
+@media(min-width:1024px){
+  .step-arr{display:block;position:absolute;top:50px;right:-12px;font-size:20px;color:var(--gold);z-index:3;pointer-events:none}
+  .step:last-child .step-arr{display:none}
+}
+/* deco number */
+.step-bg{position:absolute;bottom:-12px;right:8px;font-size:100px;font-weight:900;font-style:italic;color:rgba(10,19,32,.04);line-height:1;pointer-events:none}
+
+/* ═══════════════════════════════════════════
+   TESTIMONIALS
+═══════════════════════════════════════════ */
+.testimonials-sec{background:var(--white);border-top:1px solid var(--line)}
+.testi-grid{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:600px){.testi-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1024px){.testi-grid{grid-template-columns:repeat(3,1fr)}}
+
+.tc{background:var(--ivory);border:1px solid var(--line);padding:30px 26px;position:relative;overflow:hidden;transition:all .38s var(--ease)}
+.tc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gg);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+.tc:hover{transform:translateY(-6px);box-shadow:var(--sh2);border-color:transparent;background:var(--white)}
+.tc:hover::before{transform:scaleX(1)}
+.tc-stars{color:var(--amber);font-size:13px;letter-spacing:1px;margin-bottom:12px}
+.tc-q{font-size:52px;font-weight:900;color:var(--line);line-height:.7;margin-bottom:10px;font-style:italic}
+.tc-text{font-size:14px;font-weight:300;font-style:italic;color:var(--slate);line-height:1.8;margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.tc-author{display:flex;align-items:center;gap:12px}
+.tc-av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--ink2),var(--ink3));display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.tc-name{font-size:14px;font-weight:700;color:var(--ink);line-height:1.2}
+.tc-role{font-size:11.5px;font-weight:300;color:var(--muted);margin-top:2px}
+
+/* ═══════════════════════════════════════════
+   APPLY DRAWER — with real email form
+═══════════════════════════════════════════ */
+.overlay{position:fixed;inset:0;z-index:1000;background:rgba(10,19,32,.6);backdrop-filter:blur(5px);opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+.overlay.open{opacity:1;visibility:visible}
+
+.drawer{
+  position:fixed;top:0;right:0;bottom:0;z-index:1001;
+  width:min(660px,100vw);
+  background:var(--white);
+  display:flex;flex-direction:column;
+  transform:translateX(100%);
+  transition:transform .48s var(--ease);
+  overflow:hidden;
+}
+.overlay.open .drawer{transform:translateX(0)}
+
+/* drawer top image */
+.dr-img{height:clamp(180px,30vw,260px);overflow:hidden;position:relative;flex-shrink:0}
+.dr-img-bg{position:absolute;inset:0;background:var(--ink)}
+.dr-img-bg img{opacity:.5;filter:saturate(.6);animation:ken 12s ease-in-out infinite alternate}
+.dr-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(10,19,32,.9) 0%,transparent 60%)}
+.dr-img-body{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:20px 28px}
+.dr-dept{display:inline-block;font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;margin-bottom:9px;clip-path:polygon(0 0,calc(100% - 4px) 0,100% 4px,100% 100%,4px 100%,0 calc(100% - 4px))}
+.dr-title{font-size:clamp(18px,3vw,24px);font-weight:900;color:#fff;line-height:1.15;letter-spacing:-.5px}
+.dr-close{position:absolute;top:14px;right:14px;width:38px;height:38px;background:rgba(10,19,32,.6);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:17px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .22s;z-index:3;clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px))}
+.dr-close:hover{background:rgba(196,136,28,.8)}
+
+/* tabs */
+.dr-tabs{display:flex;border-bottom:1px solid var(--line);flex-shrink:0}
+.dr-tab{flex:1;padding:14px;font-size:13px;font-weight:700;color:var(--muted);text-align:center;cursor:pointer;border-bottom:2.5px solid transparent;transition:all .25s}
+.dr-tab.on{color:var(--ink);border-bottom-color:var(--gold)}
+
+/* drawer body */
+.dr-body{overflow-y:auto;flex:1}
+.dr-panel{display:none;padding:24px 28px 40px}
+.dr-panel.on{display:block}
+
+/* JD detail */
+.jd-meta-g{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:22px}
+.jdm{background:var(--ivory);border:1px solid var(--line);padding:10px 14px}
+.jdm-label{font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.jdm-val{font-size:13.5px;font-weight:700;color:var(--ink)}
+.jd-sec{margin-bottom:20px}
+.jd-sec h4{font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:11px;display:flex;align-items:center;gap:8px}
+.jd-sec h4::before{content:'';width:12px;height:1.5px;background:var(--gg);flex-shrink:0}
+.jd-list{display:flex;flex-direction:column;gap:7px}
+.jd-li{font-size:13.5px;font-weight:300;color:var(--slate);line-height:1.55;padding-left:14px;position:relative}
+.jd-li::before{content:'›';position:absolute;left:0;color:var(--gold);font-weight:700}
+
+/* Apply form */
+.af-title{font-size:clamp(20px,3vw,26px);font-weight:900;color:var(--ink);letter-spacing:-.5px;margin-bottom:6px}
+.af-title em{font-style:italic;color:var(--gold)}
+.af-sub{font-size:13px;font-weight:300;color:var(--muted);margin-bottom:22px;line-height:1.6}
+.af-note{
+  display:flex;align-items:flex-start;gap:10px;
+  background:rgba(196,136,28,.07);border:1px solid rgba(196,136,28,.2);
+  padding:12px 15px;margin-bottom:22px;
+}
+.af-note-ico{font-size:18px;flex-shrink:0}
+.af-note p{font-size:12.5px;font-weight:400;color:var(--slate);line-height:1.55}
+.af-note strong{color:var(--ink)}
+
+.aform{display:flex;flex-direction:column;gap:14px}
+.af-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:500px){.af-row{grid-template-columns:1fr}}
+.af-f{display:flex;flex-direction:column;gap:5px}
+.af-l{font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--slate)}.af-l span{color:var(--gold)}
+.af-i,.af-s,.af-ta{
+  width:100%;background:var(--ivory);border:1.5px solid var(--line);
+  padding:12px 15px;font-family:'Exo 2',sans-serif;
+  font-size:14px;color:var(--ink);outline:none;
+  transition:all .25s;appearance:none;
+}
+.af-i:focus,.af-s:focus,.af-ta:focus{border-color:var(--gold);background:var(--white);box-shadow:0 0 0 3px rgba(196,136,28,.1)}
+.af-i::placeholder,.af-ta::placeholder{color:var(--muted);font-weight:300}
+.af-ta{resize:vertical;min-height:100px;line-height:1.6}
+.sel-w{position:relative}
+.sel-w::after{content:'›';position:absolute;right:13px;top:50%;transform:translateY(-50%) rotate(90deg);font-size:15px;color:var(--muted);pointer-events:none}
+
+/* File upload */
+.file-zone{
+  border:1.5px dashed var(--line);padding:20px;text-align:center;
+  cursor:pointer;transition:all .25s;position:relative;overflow:hidden;
+  background:var(--ivory);
+}
+.file-zone:hover{border-color:var(--gold);background:rgba(196,136,28,.03)}
+.file-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;font-size:0}
+.fz-ico{font-size:26px;margin-bottom:6px}
+.fz-txt{font-size:13px;font-weight:600;color:var(--slate)}
+.fz-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.fz-name{font-size:13px;font-weight:700;color:var(--gold);margin-top:7px;display:none}
+
+/* Drawer footer */
+.dr-foot{padding:18px 28px;border-top:1px solid var(--line);display:flex;align-items:center;gap:14px;flex-wrap:wrap;flex-shrink:0}
+.btn-submit-dr{
+  flex:1;display:flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--ink);color:#fff;padding:14px 24px;
+  font-family:'Exo 2',sans-serif;font-size:14px;font-weight:800;
+  border:none;cursor:pointer;
+  clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
+  position:relative;overflow:hidden;transition:gap .3s,color .3s;
+}
+.btn-submit-dr::before{content:'';position:absolute;inset:0;background:var(--gg);transform:translateX(-105%);transition:transform .4s var(--ease)}
+.btn-submit-dr:hover::before{transform:translateX(0)}
+.btn-submit-dr:hover{color:var(--ink);gap:12px}
+.btn-submit-dr span,.btn-submit-dr svg{position:relative;z-index:1}
+.dr-note{font-size:11.5px;color:var(--muted);line-height:1.5}
+
+/* success */
+.dr-success{display:none;text-align:center;padding:48px 20px}
+.dr-success.show{display:block}
+.drs-ico{font-size:56px;margin-bottom:16px}
+.drs-title{font-size:22px;font-weight:900;color:var(--ink);margin-bottom:9px}
+.drs-desc{font-size:14px;font-weight:300;color:var(--slate);line-height:1.75}
+
+/* ─── FOOTER ─── */
+footer{background:#090e17;border-top:1px solid rgba(196,136,28,.18)}
+.ft-main{width:85%;max-width:1400px;margin:0 auto;padding:60px 0 48px;display:grid;grid-template-columns:1fr;gap:40px;border-bottom:1px solid rgba(255,255,255,.04)}
+@media(max-width:600px){.ft-main{width:92%}}
+@media(min-width:600px){.ft-main{grid-template-columns:1fr 1fr;gap:36px}}
+@media(min-width:1024px){.ft-main{grid-template-columns:2fr 1fr 1fr 1.2fr;gap:48px}}
+.ft-brand{font-size:clamp(19px,3vw,22px);font-weight:900;color:#fff;margin-bottom:4px}
+.ft-brand em{font-style:italic;color:var(--amber)}
+.ft-est{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.18);display:block;margin-bottom:16px}
+.ft-about{font-size:13px;font-weight:300;color:rgba(255,255,255,.28);line-height:1.85;margin-bottom:22px}
+.ft-contacts{display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
+.ftc{font-size:12.5px;font-weight:300;color:rgba(255,255,255,.26);display:flex;align-items:flex-start;gap:7px}
+.ftc a{color:rgba(255,255,255,.26);transition:color .2s}.ftc a:hover{color:var(--amber)}
+.ft-soc{display:flex;gap:7px}
+.fso{width:36px;height:36px;border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:12px;color:rgba(255,255,255,.22);clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px));transition:all .22s}
+.fso:hover{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.ft-col h5{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.5px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.05)}
+.ft-col a{display:block;font-size:13px;font-weight:300;color:rgba(255,255,255,.26);margin-bottom:9px;transition:all .22s}
+.ft-col a:hover{color:var(--amber);padding-left:5px}
+.ft-bot{width:85%;max-width:1400px;margin:0 auto;padding:18px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+@media(max-width:600px){.ft-bot{width:92%;justify-content:center}}
+.ft-copy{font-size:11px;font-weight:300;color:rgba(255,255,255,.14)}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="tb-w">
+    <div class="tb-l">
+      <a href="mailto:contact@tinphat.com" class="tbl"><span class="tb-dot"></span>contact@tinphat.com</a>
+      <a href="tel:0949299494" class="tbl"><span class="tb-dot"></span>0949 29 94 94</a>
+    </div>
+    <div class="tb-r">
+      <span class="tb-lang on">🇻🇳 VI</span>
+      <span class="tb-lang">🇬🇧 EN</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="nav">
+  <div class="nav-w">
+    <a href="index.html" class="logo">
+      <div class="logo-gem"><span>TP</span></div>
+      <div class="logo-words">
+        <div class="logo-name">TÍN PHÁT GROUP</div>
+        <div class="logo-sub">Est. 2002 · Bạc Liêu</div>
+      </div>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Trang chủ</a>
+      <a href="gioi-thieu.html">Giới thiệu</a>
+      <a href="tin-tuc.html">Tin tức</a>
+      <a href="#" class="on">Tuyển dụng</a>
+      <a href="hop-tac.html">Hợp tác</a>
+      <a href="#">Ứng dụng</a>
+      <a href="lien-he.html">Liên hệ</a>
+    </nav>
+    <div class="nav-cta">
+      <button class="btn-no">🛒 TipaShop</button>
+      <button class="btn-nf" onclick="document.getElementById('jobs-section').scrollIntoView({behavior:'smooth'})"><span>Xem vị trí →</span></button>
+    </div>
+    <button class="ham" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mob">
+  <a href="index.html">Trang chủ</a>
+  <a href="gioi-thieu.html">Giới thiệu</a>
+  <a href="tin-tuc.html">Tin tức</a>
+  <a href="#">Tuyển dụng</a>
+  <a href="hop-tac.html">Hợp tác</a>
+  <a href="#">Ứng dụng</a>
+  <a href="lien-he.html">Liên hệ</a>
+  <div class="mob-bot">
+    <a href="#jobs-section" class="btn-mob">Xem vị trí tuyển dụng →</a>
+    <a href="#" class="btn-mob2">🛒 TipaShop</a>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <div class="cw">
+    <div class="bc-w">
+      <a href="index.html">Trang chủ</a>
+      <span class="bc-sep">›</span>
+      <span class="bc-cur">Tuyển dụng</span>
+    </div>
+  </div>
+</div>
+
+<!-- ① HERO -->
+<section class="hero">
+  <div class="h-left">
+    <div class="h-eyebrow">
+      <div class="h-ew-line"></div>
+      <span class="h-ew-txt">Gia nhập đội ngũ Tín Phát</span>
+      <span class="h-ew-dot"></span>
+    </div>
+    <div class="h-headline">
+      <span class="h-sub">Cơ hội nghề nghiệp</span>
+      <span class="h-main">TUYỂN</span>
+      <span class="h-italic">DỤNG</span>
+      <span class="h-group">2 · 0 · 2 · 6</span>
+    </div>
+    <p class="h-desc">Tín Phát Group tìm kiếm những con người tài năng, nhiệt huyết và sẵn sàng cùng nhau kiến tạo tương lai. Không ngừng học hỏi — không ngừng phát triển.</p>
+    <div class="h-btns">
+      <a href="#jobs-section" class="btn-hero-gold">
+        Xem vị trí đang tuyển
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+      <a href="lien-he.html" class="btn-hero-ghost">Liên hệ HR →</a>
+    </div>
+    <div class="h-stats">
+      <div class="h-stat">
+        <div class="h-stat-n" data-to="50">0<sup>+</sup></div>
+        <div class="h-stat-l">Nhân viên<br>toàn hệ thống</div>
+      </div>
+      <div class="h-stat">
+        <div class="h-stat-n">14</div>
+        <div class="h-stat-l">Vị trí đang<br>tuyển dụng</div>
+      </div>
+      <div class="h-stat">
+        <div class="h-stat-n">22<sup>+</sup></div>
+        <div class="h-stat-l">Năm văn hóa<br>doanh nghiệp</div>
+      </div>
+    </div>
+  </div>
+  <div class="h-right">
+    <div class="h-photo">
+      <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=85" alt="">
+    </div>
+    <div class="h-live">
+      <div class="h-live-dot"></div>
+      <span>14 vị trí đang mở</span>
+    </div>
+    <div class="h-badge">
+      <div class="hb-n">14</div>
+      <div class="hb-l">Vị trí tuyển dụng</div>
+    </div>
+  </div>
+</section>
+
+<!-- ② DEPT TABS -->
+<div class="dept-bar" id="dept-bar">
+  <div class="cw">
+    <div class="dept-inner">
+      <button class="dept-btn on" data-dept="all">🗂 Tất cả<span class="dept-count">14</span></button>
+      <button class="dept-btn" data-dept="sales">📊 Kinh doanh<span class="dept-count">4</span></button>
+      <button class="dept-btn" data-dept="logistics">🚚 Logistics<span class="dept-count">3</span></button>
+      <button class="dept-btn" data-dept="it">💻 Công nghệ<span class="dept-count">2</span></button>
+      <button class="dept-btn" data-dept="marketing">📣 Marketing<span class="dept-count">2</span></button>
+      <button class="dept-btn" data-dept="hr">👥 Hành chính<span class="dept-count">2</span></button>
+      <button class="dept-btn" data-dept="ops">⚙️ Vận hành<span class="dept-count">1</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- ③ JOBS + SIDEBAR -->
+<section class="jobs-section sec" id="jobs-section">
+  <div class="cw">
+    <div class="jobs-wrap">
+
+      <!-- LEFT: List -->
+      <div>
+        <!-- Filter bar -->
+        <div class="filter-bar rv">
+          <div class="search-wrap">
+            <input type="text" id="jobSearch" placeholder="Tìm kiếm vị trí...">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </div>
+          <div class="select-wrap">
+            <select class="filter-select" id="locFilter">
+              <option value="all">📍 Tất cả địa điểm</option>
+              <option value="baclieu">Bạc Liêu</option>
+              <option value="camau">Cà Mau</option>
+              <option value="soctrang">Sóc Trăng</option>
+              <option value="hcm">TP. Hồ Chí Minh</option>
+            </select>
+          </div>
+          <div class="select-wrap">
+            <select class="filter-select" id="typeFilter">
+              <option value="all">⏰ Hình thức</option>
+              <option value="fulltime">Toàn thời gian</option>
+              <option value="parttime">Bán thời gian</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="results-meta rv d1">
+          <div class="rm-txt">Tìm thấy <strong id="jobCount">14</strong> vị trí</div>
+        </div>
+
+        <div class="jobs-list rv d2" id="jobsList"></div>
+        <div class="no-jobs" id="noJobs">
+          <div class="nj-ico">🔍</div>
+          <p class="nj-p">Không có vị trí phù hợp. Thử từ khóa hoặc bộ lọc khác.</p>
+        </div>
+        <div class="pg rv d3" id="pgEl"></div>
+      </div>
+
+      <!-- RIGHT: Sidebar -->
+      <div class="sidebar">
+
+        <!-- Quick stats -->
+        <div class="sw rv d1">
+          <div class="sw-h">Tổng quan</div>
+          <div class="sw-body">
+            <div class="stat-grid">
+              <div class="sg-item"><div class="sg-n">50<sup>+</sup></div><div class="sg-l">Nhân viên</div></div>
+              <div class="sg-item"><div class="sg-n">14</div><div class="sg-l">Vị trí mở</div></div>
+              <div class="sg-item"><div class="sg-n">6</div><div class="sg-l">Phòng ban</div></div>
+              <div class="sg-item"><div class="sg-n">22<sup>+</sup></div><div class="sg-l">Năm kinh nghiệm</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Perks -->
+        <div class="sw rv d2">
+          <div class="sw-h">Phúc lợi nổi bật</div>
+          <div class="sw-body">
+            <div class="perk-row"><div class="perk-ico">💰</div><div class="perk-txt"><h5>Thu nhập cạnh tranh</h5><p>Lương + thưởng KPI, xét tăng lương 6 tháng/lần</p></div></div>
+            <div class="perk-row"><div class="perk-ico">🏥</div><div class="perk-txt"><h5>Bảo hiểm đầy đủ</h5><p>BHXH, BHYT, BHTN theo quy định pháp luật</p></div></div>
+            <div class="perk-row"><div class="perk-ico">✈️</div><div class="perk-txt"><h5>Du lịch hằng năm</h5><p>Team building và du lịch 100% chi phí công ty</p></div></div>
+            <div class="perk-row"><div class="perk-ico">📈</div><div class="perk-txt"><h5>Lộ trình thăng tiến</h5><p>Sơ đồ nghề nghiệp rõ ràng, đánh giá 2 lần/năm</p></div></div>
+          </div>
+        </div>
+
+        <!-- Contact HR -->
+        <div class="hr-card rv d3">
+          <div class="hr-eyebrow">Liên hệ trực tiếp</div>
+          <h3 class="hr-title">Cần tư vấn?<br>HR luôn sẵn sàng</h3>
+          <p class="hr-desc">Đội ngũ HR sẽ phản hồi trong 24 giờ làm việc và tư vấn vị trí phù hợp nhất với bạn.</p>
+          <div class="hr-contacts">
+            <div class="hr-c">📞 <a href="tel:0949299494">0949 29 94 94</a></div>
+            <div class="hr-c">✉ <a href="mailto:hr@tinphat.com">hr@tinphat.com</a></div>
+          </div>
+          <button class="btn-hr" onclick="window.location='mailto:hr@tinphat.com?subject=Liên hệ tuyển dụng'">
+            ✉ Gửi email cho HR →
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ④ VÌ SAO GIA NHẬP -->
+<section class="why-sec sec">
+  <div class="why-glow"></div>
+  <div class="cw">
+    <div class="rv" style="text-align:center;margin-bottom:52px">
+      <div style="display:flex;align-items:center;justify-content:center;gap:10px;font-size:10px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:rgba(196,136,28,.8);margin-bottom:12px">Văn hóa doanh nghiệp</div>
+      <h2 style="font-size:clamp(32px,6vw,56px);font-weight:900;color:#fff;line-height:.92;letter-spacing:-2px;margin-bottom:0">Vì Sao Gia Nhập <em style="font-style:italic;color:var(--amber)">Tín Phát?</em></h2>
+    </div>
+    <div class="why-grid rv d1">
+      <div class="wc"><div class="wc-n">01</div><div class="wc-ico">💰</div><h3>Thu nhập cạnh tranh</h3><p>Lương thưởng hấp dẫn, đánh giá KPI minh bạch, thưởng cuối năm theo kết quả kinh doanh toàn tập đoàn.</p></div>
+      <div class="wc"><div class="wc-n">02</div><div class="wc-ico">📈</div><h3>Thăng tiến nhanh</h3><p>Lộ trình nghề nghiệp rõ ràng, đánh giá 2 lần/năm, cơ hội thăng chức cho người xuất sắc không phụ thuộc thâm niên.</p></div>
+      <div class="wc"><div class="wc-n">03</div><div class="wc-ico">🎓</div><h3>Học hỏi liên tục</h3><p>Đào tạo nội bộ hàng tháng, hỗ trợ học phí khóa học bên ngoài, mentoring từ lãnh đạo cấp cao dày dạn kinh nghiệm.</p></div>
+      <div class="wc"><div class="wc-n">04</div><div class="wc-ico">🤝</div><h3>Đội ngũ gắn kết</h3><p>Văn hóa đoàn kết, tôn trọng lẫn nhau, team building định kỳ và du lịch hằng năm do công ty đài thọ 100%.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑤ QUY TRÌNH -->
+<section class="process-sec sec">
+  <div class="cw">
+    <div class="rv" style="text-align:center;margin-bottom:48px">
+      <div style="display:flex;align-items:center;justify-content:center;gap:10px;font-size:10px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px">Quy trình ứng tuyển</div>
+      <h2 style="font-size:clamp(32px,6vw,56px);font-weight:900;color:var(--ink);line-height:.92;letter-spacing:-2px">4 Bước Để <em style="font-style:italic;color:var(--gold)">Gia Nhập</em></h2>
+    </div>
+    <div class="steps rv d1">
+      <div class="step">
+        <div class="step-n">1</div>
+        <h4>Nộp hồ sơ</h4>
+        <p>Click "Ứng tuyển" và điền form trực tuyến, hoặc gửi CV trực tiếp đến hr@tinphat.com. Phản hồi trong 3 ngày làm việc.</p>
+        <div class="step-arr">→</div>
+        <div class="step-bg">1</div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <h4>Phỏng vấn sơ bộ</h4>
+        <p>Phỏng vấn online hoặc trực tiếp 30 phút với HR để tìm hiểu mục tiêu nghề nghiệp và độ phù hợp văn hóa.</p>
+        <div class="step-arr">→</div>
+        <div class="step-bg">2</div>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <h4>Phỏng vấn chuyên môn</h4>
+        <p>Gặp trưởng bộ phận, đánh giá kỹ năng chuyên môn thực tế. Một số vị trí có bài test hoặc bài tập tình huống.</p>
+        <div class="step-arr">→</div>
+        <div class="step-bg">3</div>
+      </div>
+      <div class="step">
+        <div class="step-n">4</div>
+        <h4>Nhận offer & Onboard</h4>
+        <p>Nhận thư đề nghị làm việc, ký hợp đồng và tham gia 1 tuần onboarding cùng đội ngũ thân thiện của Tín Phát.</p>
+        <div class="step-bg">4</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑥ TESTIMONIALS -->
+<section class="testimonials-sec sec">
+  <div class="cw">
+    <div class="rv" style="text-align:center;margin-bottom:48px">
+      <div style="display:flex;align-items:center;justify-content:center;gap:10px;font-size:10px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px">Đồng nghiệp nói gì</div>
+      <h2 style="font-size:clamp(32px,6vw,56px);font-weight:900;color:var(--ink);line-height:.92;letter-spacing:-2px">Tiếng Nói Từ <em style="font-style:italic;color:var(--gold)">Bên Trong</em></h2>
+    </div>
+    <div class="testi-grid rv d1">
+      <div class="tc"><div class="tc-stars">★★★★★</div><div class="tc-q">"</div><p class="tc-text">Tín Phát là nơi tôi thực sự trưởng thành. Sau 2 năm, tôi từ nhân viên lên trưởng nhóm. Môi trường cởi mở, cấp trên lắng nghe và luôn tạo điều kiện để phát triển.</p><div class="tc-author"><div class="tc-av">👩‍💼</div><div><div class="tc-name">Chị Nguyễn Thị Hoa</div><div class="tc-role">Trưởng nhóm Kinh doanh · 3 năm</div></div></div></div>
+      <div class="tc"><div class="tc-stars">★★★★★</div><div class="tc-q">"</div><p class="tc-text">Môi trường trẻ trung, năng động. Đồng nghiệp hỗ trợ nhau rất nhiệt tình. Lương thưởng minh bạch, KPI rõ ràng — không có chuyện "mơ hồ" như nhiều nơi khác tôi từng làm.</p><div class="tc-author"><div class="tc-av">👨‍💻</div><div><div class="tc-name">Anh Trần Minh Khoa</div><div class="tc-role">Web Developer · 1.5 năm</div></div></div></div>
+      <div class="tc"><div class="tc-stars">★★★★★</div><div class="tc-q">"</div><p class="tc-text">Được đào tạo bài bản từ ngày đầu tiên, không bị thả lơ. Du lịch team building hằng năm thực sự tuyệt — năm ngoái Đà Nẵng, năm nay nghe nói đi Phú Quốc!</p><div class="tc-author"><div class="tc-av">🧑‍🏭</div><div><div class="tc-name">Anh Lê Quốc Bảo</div><div class="tc-role">Giám sát kho · 2 năm</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-main">
+    <div>
+      <div class="ft-brand">Tín Phát <em>Group</em></div>
+      <span class="ft-est">Est. 2002 · Bạc Liêu, Việt Nam</span>
+      <p class="ft-about">"Chuyên nghiệp – Tận tình – Chất lượng." Cam kết mang lại dịch vụ tốt nhất, hướng tới Tập đoàn Thương mại quy mô toàn cầu.</p>
+      <div class="ft-contacts">
+        <span class="ftc">📍 315 Nguyễn Thị Minh Khai, P.5, TP Bạc Liêu</span>
+        <span class="ftc"><a href="tel:0949299494">📞 0949 29 94 94</a></span>
+        <span class="ftc"><a href="mailto:contact@tinphat.com">✉ contact@tinphat.com</a></span>
+      </div>
+      <div class="ft-soc"><a href="#" class="fso">f</a><a href="#" class="fso">t</a><a href="#" class="fso">z</a><a href="#" class="fso">▶</a></div>
+    </div>
+    <div class="ft-col"><h5>Về chúng tôi</h5><a href="gioi-thieu.html">Giới thiệu</a><a href="#">Các lĩnh vực</a><a href="#">Ban lãnh đạo</a><a href="tin-tuc.html">Tin tức</a></div>
+    <div class="ft-col"><h5>Dịch vụ</h5><a href="#">Dầu nhớt & Ắc quy</a><a href="#">TipaShop</a><a href="#">TipaExpress</a><a href="#">Tín Phát CRM</a></div>
+    <div class="ft-col"><h5>Hợp tác</h5><a href="hop-tac.html">Đăng ký đại lý</a><a href="#">Tham gia TipaShop</a><a href="#">Cung ứng sản phẩm</a><a href="#">Tuyển dụng</a></div>
+  </div>
+  <div class="ft-bot">
+    <p class="ft-copy">© 2026 Tín Phát Group · Bạc Liêu, Việt Nam · tinphat.com</p>
+  </div>
+</footer>
+
+<!-- APPLY DRAWER -->
+<div class="overlay" id="overlay">
+  <div class="drawer" id="drawer">
+    <div id="drImg"></div>
+    <div class="dr-tabs" id="drTabs">
+      <div class="dr-tab on" data-tab="detail">📋 Mô tả công việc</div>
+      <div class="dr-tab" data-tab="apply">📩 Ứng tuyển ngay</div>
+    </div>
+    <div class="dr-body">
+      <div class="dr-panel on" id="panel-detail"></div>
+      <div class="dr-panel" id="panel-apply"></div>
+    </div>
+    <div class="dr-foot" id="drFoot">
+      <button class="btn-submit-dr" id="drSubmitBtn">
+        <span>Gửi hồ sơ</span>
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </button>
+      <p class="dr-note">🔒 Bảo mật thông tin<br>Phản hồi trong 3 ngày làm việc</p>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══════════ JOB DATA ═══════════ */
+const JOBS = [
+  /* SALES */
+  {id:1,dept:'sales',deptLabel:'Kinh doanh',deptTag:'dept-sales',img:'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80',
+   title:'Nhân viên bán hàng Unilever',type:'fulltime',typeLabel:'Toàn thời gian',loc:'baclieu',locLabel:'Bạc Liêu',
+   salary:'8–12 triệu',badge:['new'],
+   desc:'Triển khai hoạt động bán hàng sản phẩm Unilever tại khu vực Bạc Liêu, phát triển và duy trì mối quan hệ với hệ thống đại lý và siêu thị.',
+   req:['Tốt nghiệp THPT trở lên, ưu tiên có kinh nghiệm sales','Có xe máy và GPLX hạng A','Kỹ năng giao tiếp và thuyết phục tốt','Nhiệt tình, chăm chỉ, có tinh thần trách nhiệm cao'],
+   wel:['Lương cứng + hoa hồng doanh số hấp dẫn','BHXH, BHYT đầy đủ theo luật','Phụ cấp xăng xe và điện thoại hàng tháng','Thưởng doanh số theo tháng và quý']},
+  {id:2,dept:'sales',deptLabel:'Kinh doanh',deptTag:'dept-sales',img:'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80',
+   title:'Nhân viên kinh doanh dầu nhớt Shell / Castrol',type:'fulltime',typeLabel:'Toàn thời gian',loc:'camau',locLabel:'Cà Mau',
+   salary:'10–16 triệu',badge:['hot'],
+   desc:'Phụ trách phát triển kênh phân phối dầu nhớt Shell và Castrol tại khu vực Cà Mau và các huyện lân cận. Xây dựng mạng lưới đại lý mới.',
+   req:['Kinh nghiệm 1+ năm trong lĩnh vực kinh doanh B2B','Có kiến thức về ngành dầu nhớt, phụ tùng xe là lợi thế','Kỹ năng đàm phán và chốt hợp đồng hiệu quả','Sẵn sàng đi lại thường xuyên trong khu vực phụ trách'],
+   wel:['Lương + thưởng doanh số không giới hạn','Phụ cấp đi lại và ăn uống đầy đủ','Xe công ty hỗ trợ khi ngoại tỉnh','Đào tạo sản phẩm chuyên sâu định kỳ']},
+  {id:3,dept:'sales',deptLabel:'Kinh doanh',deptTag:'dept-sales',img:'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80',
+   title:'Giám sát bán hàng khu vực ĐBSCL',type:'fulltime',typeLabel:'Toàn thời gian',loc:'soctrang',locLabel:'Sóc Trăng',
+   salary:'16–24 triệu',badge:['hot'],
+   desc:'Quản lý và giám sát đội ngũ sales khu vực, triển khai kế hoạch kinh doanh theo tháng/quý, phát triển kênh phân phối và báo cáo kết quả.',
+   req:['Tốt nghiệp ĐH/CĐ chuyên ngành kinh doanh, quản trị','Kinh nghiệm 2+ năm trong vai trò giám sát sales FMCG','Kỹ năng lãnh đạo, huấn luyện và phát triển đội nhóm','Thành thạo Excel, PowerPoint, phần mềm CRM'],
+   wel:['Lương cố định cao + thưởng KPI không giới hạn','Xe ô tô công ty phục vụ công tác','Laptop và điện thoại công ty cấp','Cơ hội thăng tiến lên Trưởng phòng Kinh doanh']},
+  {id:4,dept:'sales',deptLabel:'Kinh doanh',deptTag:'dept-sales',img:'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80',
+   title:'Nhân viên phát triển đại lý TipaShop',type:'fulltime',typeLabel:'Toàn thời gian',loc:'baclieu',locLabel:'Bạc Liêu',
+   salary:'9–13 triệu',badge:['new'],
+   desc:'Tìm kiếm, tiếp cận và phát triển mạng lưới người bán trên nền tảng TipaShop. Hỗ trợ onboarding và tăng trưởng doanh số cho hệ thống đối tác.',
+   req:['Am hiểu về thương mại điện tử và mạng xã hội','Kỹ năng giao tiếp và thuyết phục tốt','Ưu tiên có kinh nghiệm phát triển đối tác/đại lý','Sử dụng thành thạo Facebook, Zalo, điện thoại thông minh'],
+   wel:['Lương + hoa hồng theo số đại lý phát triển','Làm việc năng động, môi trường công nghệ','Được dùng TipaShop và CRM hàng ngày','Cơ hội thành chuyên gia TMĐT']},
+  /* LOGISTICS */
+  {id:5,dept:'logistics',deptLabel:'Logistics',deptTag:'dept-logistics',img:'https://images.unsplash.com/photo-1580674684081-7617fbf3d745?w=800&q=80',
+   title:'Shipper TipaExpress — Hòa Bình & Vĩnh Lợi',type:'fulltime',typeLabel:'Toàn thời gian',loc:'baclieu',locLabel:'Hòa Bình, Bạc Liêu',
+   salary:'8–14 triệu',badge:['new'],
+   desc:'Nhận và giao hàng tại khu vực Hòa Bình, Vĩnh Lợi, Bạc Liêu qua app TipaExpress. Đảm bảo giao hàng đúng hẹn và chất lượng dịch vụ.',
+   req:['Nam/nữ từ 18 tuổi, có xe máy và GPLX hạng A','Smartphone cài app TipaExpress (hỗ trợ cài)','Thành thạo đường đi khu vực đăng ký','Trung thực, cẩn thận khi xử lý hàng hóa'],
+   wel:['Lương cơ bản + hoa hồng theo đơn giao','Thưởng hoàn thành 100% đơn trong ngày','Bảo hiểm tai nạn lao động đầy đủ','Ca làm việc linh hoạt sáng/chiều/tối']},
+  {id:6,dept:'logistics',deptLabel:'Logistics',deptTag:'dept-logistics',img:'https://images.unsplash.com/photo-1553413077-190dd305871c?w=800&q=80',
+   title:'Điều phối viên kho hàng',type:'fulltime',typeLabel:'Toàn thời gian',loc:'baclieu',locLabel:'Bạc Liêu',
+   salary:'9–13 triệu',badge:[],
+   desc:'Quản lý nhập xuất kho, kiểm soát tồn kho và điều phối đơn hàng giữa các bộ phận. Sử dụng phần mềm quản lý kho Tín Phát CRM.',
+   req:['Tốt nghiệp THPT trở lên, ưu tiên ngành logistics','Có kinh nghiệm quản lý kho là lợi thế lớn','Cẩn thận, tỉ mỉ và có kỹ năng tổ chức tốt','Thành thạo máy tính: Excel, Word cơ bản'],
+   wel:['Lương ổn định + thưởng hiệu suất hàng quý','BHXH, BHYT đầy đủ theo luật','Đào tạo sử dụng phần mềm kho CRM','Ca làm việc cố định, ổn định lâu dài']},
+  {id:7,dept:'logistics',deptLabel:'Logistics',deptTag:'dept-logistics',img:'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&q=80',
+   title:'Trưởng nhóm giao hàng TipaExpress',type:'fulltime',typeLabel:'Toàn thời gian',loc:'baclieu',locLabel:'Bạc Liêu',
+   salary:'13–18 triệu',badge:['hot'],
+   desc:'Quản lý đội shipper 10–15 người, phân công tuyến đường, giải quyết sự cố giao hàng, theo dõi KPI đội nhóm và báo cáo kết quả hàng ngày.',
+   req:['Kinh nghiệm 1+ năm trong ngành giao hàng/logistics','Kỹ năng quản lý nhóm và xử lý áp lực tốt','Thành thạo app TipaExpress và phần mềm tracking','Có ô tô là lợi thế lớn'],
+   wel:['Lương quản lý + thưởng KPI đội nhóm','Phụ cấp xăng xe và điện thoại','Cơ hội thăng tiến lên Giám đốc Vận hành','Được đào tạo kỹ năng lãnh đạo']},
+  /* IT */
+  {id:8,dept:'it',deptLabel:'Công nghệ',deptTag:'dept-it',img:'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=80',
+   title:'Lập trình viên Web Full-stack',type:'fulltime',typeLabel:'Toàn thời gian',loc:'baclieu',locLabel:'Bạc Liêu',
+   salary:'18–32 triệu',badge:['hot'],
+   desc:'Phát triển và bảo trì TipaShop, Tín Phát CRM và các ứng dụng nội bộ. Tích hợp API, tối ưu hiệu năng và bảo mật hệ thống toàn tập đoàn.',
+   req:['Kinh nghiệm 2+ năm với PHP/Laravel hoặc Node.js + React/Vue','Thành thạo MySQL, RESTful API, Git, Docker','Kinh nghiệm WordPress/WooCommerce là lợi thế lớn','Tự chủ công việc, đảm bảo deadline nghiêm túc'],
+   wel:['Lương cao, đàm phán theo năng lực thực tế','Thiết bị làm việc MacBook/PC hiện đại','Hybrid 3 ngày office / 2 ngày remote','Cơ hội phát triển thành Tech Lead']},
+  {id:9,dept:'it',deptLabel:'Công nghệ',deptTag:'dept-it',img:'https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?w=800&q=80',
+   title:'Quản trị hệ thống & DevOps',type:'fulltime',typeLabel:'Toàn thời gian',loc:'baclieu',locLabel:'Bạc Liêu',
+   salary:'16–26 triệu',badge:[],
+   desc:'Quản lý hạ tầng máy chủ, triển khai và vận hành hệ thống CI/CD, đảm bảo uptime và bảo mật cho toàn bộ nền tảng số của Tín Phát Group.',
+   req:['Kinh nghiệm với Linux, Nginx, MySQL, Redis','Thành thạo Docker, CI/CD pipelines','Kiến thức bảo mật hệ thống và backup','Có khả năng troubleshoot sự cố ngoài giờ khi cần'],
+   wel:['Lương + phụ cấp on-call','Server allowance và cloud credits','Học chứng chỉ AWS/Google Cloud được hỗ trợ','Môi trường kỹ thuật hiện đại']},
+  /* MARKETING */
+  {id:10,dept:'marketing',deptLabel:'Marketing',deptTag:'dept-marketing',img:'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=800&q=80',
+   title:'Chuyên viên Digital Marketing',type:'fulltime',typeLabel:'Toàn thời gian',loc:'baclieu',locLabel:'Bạc Liêu',
+   salary:'12–18 triệu',badge:['new'],
+   desc:'Xây dựng và triển khai chiến lược nội dung cho TipaShop, fanpage Tín Phát. Quản lý quảng cáo Facebook/TikTok, tạo content và theo dõi KPI.',
+   req:['Kinh nghiệm 1+ năm digital marketing thực chiến','Thành thạo Facebook Ads Manager, TikTok Ads','Kỹ năng thiết kế cơ bản: Canva, Photoshop, CapCut','Viết content tiếng Việt tốt, sáng tạo và có góc nhìn người dùng'],
+   wel:['Ngân sách quảng cáo thực chiến hàng tháng','Môi trường sáng tạo, trẻ trung, năng động','Phụ cấp dữ liệu và công cụ digital','Cơ hội thành Marketing Manager trong 2 năm']},
+  {id:11,dept:'marketing',deptLabel:'Marketing',deptTag:'dept-marketing',img:'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&q=80',
+   title:'Content Creator & Video Editor',type:'fulltime',typeLabel:'Toàn thời gian',loc:'baclieu',locLabel:'Bạc Liêu',
+   salary:'10–15 triệu',badge:['new'],
+   desc:'Sản xuất nội dung video/reels cho kênh TikTok và Facebook của Tín Phát Group. Xây dựng câu chuyện thương hiệu và nội dung bán hàng hấp dẫn.',
+   req:['Thành thạo CapCut, Premiere Pro hoặc DaVinci Resolve','Có kênh mạng xã hội cá nhân hoặc portfolio là lợi thế','Hiểu xu hướng TikTok, Reels và nội dung viral','Sáng tạo, chủ động đề xuất ý tưởng mới']},
+  /* HR */
+  {id:12,dept:'hr',deptLabel:'Hành chính',deptTag:'dept-hr',img:'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&q=80',
+   title:'Chuyên viên Hành chính - Nhân sự',type:'fulltime',typeLabel:'Toàn thời gian',loc:'baclieu',locLabel:'Bạc Liêu',
+   salary:'10–14 triệu',badge:[],
+   desc:'Phụ trách tuyển dụng, quản lý hồ sơ nhân sự, chấm công, tính lương và các thủ tục hành chính. Xây dựng và triển khai chính sách nhân sự.',
+   req:['Tốt nghiệp ĐH/CĐ chuyên ngành Quản trị nhân lực hoặc Luật','Kinh nghiệm 1+ năm trong lĩnh vực HR/hành chính','Thành thạo Excel, Word và phần mềm nhân sự','Am hiểu Luật lao động, BHXH Việt Nam hiện hành'],
+   wel:['Môi trường văn phòng chuyên nghiệp, ổn định','BHXH, BHYT đầy đủ theo luật','Thưởng KPI hàng quý minh bạch','Cơ hội phát triển lên Trưởng phòng HR']},
+  {id:13,dept:'hr',deptLabel:'Hành chính',deptTag:'dept-hr',img:'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&q=80',
+   title:'Kế toán tổng hợp',type:'fulltime',typeLabel:'Toàn thời gian',loc:'baclieu',locLabel:'Bạc Liêu',
+   salary:'12–16 triệu',badge:[],
+   desc:'Phụ trách toàn bộ công tác kế toán: thu chi, công nợ, báo cáo tài chính định kỳ và quyết toán thuế hàng năm cho toàn bộ pháp nhân trong tập đoàn.',
+   req:['Tốt nghiệp ĐH chuyên ngành Kế toán, Tài chính','Kinh nghiệm 2+ năm kế toán tổng hợp','Thành thạo phần mềm kế toán MISA, Excel nâng cao','Am hiểu thuế GTGT, TNDN, quy trình khai báo thuế'],
+   wel:['Mức lương thương lượng theo năng lực','Môi trường ổn định, lâu dài','Được đào tạo nghiệp vụ nâng cao hàng năm','Ưu tiên ứng viên tại Bạc Liêu, Cà Mau']},
+  /* OPS */
+  {id:14,dept:'ops',deptLabel:'Vận hành',deptTag:'dept-ops',img:'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&q=80',
+   title:'Giám sát vận hành TipaShop & CRM',type:'fulltime',typeLabel:'Toàn thời gian',loc:'baclieu',locLabel:'Bạc Liêu',
+   salary:'14–20 triệu',badge:['new'],
+   desc:'Giám sát hoạt động vận hành hàng ngày của TipaShop và hệ thống CRM, đảm bảo uptime, xử lý sự cố và phối hợp cải tiến quy trình với team IT.',
+   req:['Kinh nghiệm 2+ năm vận hành sàn TMĐT hoặc hệ thống CRM','Kỹ năng phân tích dữ liệu và tư duy quy trình','Có khả năng làm việc với đội kỹ thuật và nghiệp vụ cùng lúc','Chịu được áp lực cao, xử lý vấn đề nhanh'],
+   wel:['Lương quản lý + thưởng KPI hệ thống','Cơ hội học hỏi toàn bộ hệ sinh thái số Tín Phát','Phát triển thành Head of Operations','Môi trường công nghệ và kinh doanh kết hợp']}
+];
+
+/* ═══════════════════════════════
+   RENDER & FILTER
+═══════════════════════════════ */
+let activeDept='all', activeLoc='all', activeType='all', searchQ='', page=1;
+const PER_PAGE=8;
+
+const DEPT_COLORS={
+  sales:'#1e4a7e',logistics:'#7e1e1e',it:'#1e6b1e',
+  marketing:'#7e6b1e',hr:'#5e1e7e',ops:'#1e5e7e'
+};
+
+function getFiltered(){
+  return JOBS.filter(j=>{
+    const d=activeDept==='all'||j.dept===activeDept;
+    const l=activeLoc==='all'||j.loc===activeLoc;
+    const t=activeType==='all'||j.type===activeType;
+    const s=!searchQ||j.title.toLowerCase().includes(searchQ)||j.deptLabel.toLowerCase().includes(searchQ);
+    return d&&l&&t&&s;
+  });
+}
+
+function renderJobs(){
+  const list=getFiltered();
+  const total=list.length;
+  const tp=Math.ceil(total/PER_PAGE)||1;
+  page=Math.min(page,tp);
+  const slice=list.slice((page-1)*PER_PAGE,page*PER_PAGE);
+  document.getElementById('jobCount').textContent=total;
+  const c=document.getElementById('jobsList');
+  const nj=document.getElementById('noJobs');
+  if(!slice.length){c.innerHTML='';nj.classList.add('show');renderPg(0,0);return;}
+  nj.classList.remove('show');
+  c.innerHTML=slice.map(j=>`
+    <div class="jc" data-id="${j.id}">
+      <div class="jc-inner">
+        <div class="jc-left">
+          <div class="jc-tags">
+            <span class="tag ${j.deptTag}">${j.deptLabel}</span>
+            <span class="tag tag-type">${j.typeLabel}</span>
+            ${j.badge.includes('new')?'<span class="tag tag-new">✨ Mới</span>':''}
+            ${j.badge.includes('hot')?'<span class="tag tag-hot">🔥 Hot</span>':''}
+          </div>
+          <div class="jc-title">${j.title}</div>
+          <div class="jc-meta">
+            <span class="jc-m">📍 ${j.locLabel}</span>
+            <span class="jc-m">⏰ ${j.typeLabel}</span>
+            <span class="jc-m">💼 ${j.deptLabel}</span>
+          </div>
+        </div>
+        <div class="jc-right">
+          <div class="jc-salary"><span>${j.salary}</span>/tháng</div>
+          <button class="btn-apply" onclick="openDrawer(${j.id})">
+            <span>Ứng tuyển</span>
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  renderPg(page,tp);
+}
+
+function renderPg(cur,tot){
+  const el=document.getElementById('pgEl');
+  if(tot<=1){el.innerHTML='';return;}
+  let h=`<button class="pg-b" onclick="goPage(${cur-1})" ${cur<=1?'disabled':''}>‹</button>`;
+  for(let i=1;i<=tot;i++) h+=`<button class="pg-b ${i===cur?'on':''}" onclick="goPage(${i})">${i}</button>`;
+  h+=`<button class="pg-b" onclick="goPage(${cur+1})" ${cur>=tot?'disabled':''}>›</button>`;
+  el.innerHTML=h;
+}
+function goPage(p){page=p;renderJobs();document.getElementById('jobs-section').scrollIntoView({behavior:'smooth'})}
+
+renderJobs();
+
+/* dept tab filter */
+document.querySelectorAll('.dept-btn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.dept-btn').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    activeDept=b.dataset.dept; page=1; renderJobs();
+  });
+});
+document.getElementById('locFilter').addEventListener('change',e=>{activeLoc=e.target.value;page=1;renderJobs()});
+document.getElementById('typeFilter').addEventListener('change',e=>{activeType=e.target.value;page=1;renderJobs()});
+document.getElementById('jobSearch').addEventListener('input',e=>{searchQ=e.target.value.toLowerCase().trim();page=1;renderJobs()});
+
+/* ═══════════════════════════════
+   DRAWER
+═══════════════════════════════ */
+let currentJob=null;
+
+function openDrawer(id){
+  const j=JOBS.find(x=>x.id===id);
+  if(!j)return;
+  currentJob=j;
+  const color=DEPT_COLORS[j.dept]||'var(--ink)';
+
+  /* image header */
+  document.getElementById('drImg').innerHTML=`
+    <div class="dr-img">
+      <div class="dr-img-bg"><img src="${j.img}" alt=""></div>
+      <div class="dr-img-body">
+        <div class="dr-dept" style="background:${color};color:#fff">${j.deptLabel}</div>
+        <div class="dr-title">${j.title}</div>
+      </div>
+      <div class="dr-close" id="drClose">✕</div>
+    </div>`;
+  document.getElementById('drClose').addEventListener('click',closeDrawer);
+
+  /* detail panel */
+  document.getElementById('panel-detail').innerHTML=`
+    <div class="jd-meta-g">
+      <div class="jdm"><div class="jdm-label">Địa điểm</div><div class="jdm-val">📍 ${j.locLabel}</div></div>
+      <div class="jdm"><div class="jdm-label">Lương</div><div class="jdm-val" style="color:var(--gold)">${j.salary}/tháng</div></div>
+      <div class="jdm"><div class="jdm-label">Hình thức</div><div class="jdm-val">${j.typeLabel}</div></div>
+      <div class="jdm"><div class="jdm-label">Phòng ban</div><div class="jdm-val">${j.deptLabel}</div></div>
+    </div>
+    <div class="jd-sec"><p style="font-size:14px;font-weight:300;color:var(--slate);line-height:1.82">${j.desc}</p></div>
+    <div class="jd-sec"><h4>Yêu cầu</h4><div class="jd-list">${(j.req||[]).map(r=>`<div class="jd-li">${r}</div>`).join('')}</div></div>
+    <div class="jd-sec"><h4>Quyền lợi</h4><div class="jd-list">${(j.wel||[]).map(w=>`<div class="jd-li">${w}</div>`).join('')}</div></div>
+    <div style="margin-top:24px;padding:16px;background:rgba(196,136,28,.07);border:1px solid rgba(196,136,28,.2)">
+      <p style="font-size:12.5px;font-weight:500;color:var(--slate)">📩 Muốn ứng tuyển ngay? Chọn tab <strong>"Ứng tuyển ngay"</strong> ở trên hoặc gửi CV về <a href="mailto:hr@tinphat.com" style="color:var(--gold);font-weight:700">hr@tinphat.com</a></p>
+    </div>`;
+
+  /* apply panel — real mailto form */
+  document.getElementById('panel-apply').innerHTML=`
+    <h2 class="af-title">Ứng Tuyển <em>Ngay</em></h2>
+    <p class="af-sub">Điền thông tin bên dưới. Hồ sơ sẽ được gửi trực tiếp đến email tuyển dụng của Tín Phát Group.</p>
+    <div class="af-note">
+      <div class="af-note-ico">💡</div>
+      <p>Sau khi nhấn <strong>"Gửi hồ sơ"</strong>, ứng dụng email của bạn sẽ mở ra với thông tin đã điền sẵn. Hãy <strong>đính kèm file CV</strong> và nhấn Gửi để hoàn tất ứng tuyển.</p>
+    </div>
+    <form class="aform" id="applyForm">
+      <div class="af-row">
+        <div class="af-f"><label class="af-l">Họ và tên <span>*</span></label><input class="af-i" id="af_name" type="text" placeholder="Nguyễn Văn A" required></div>
+        <div class="af-f"><label class="af-l">Số điện thoại <span>*</span></label><input class="af-i" id="af_phone" type="tel" placeholder="0909 xxx xxx" required></div>
+      </div>
+      <div class="af-f"><label class="af-l">Email <span>*</span></label><input class="af-i" id="af_email" type="email" placeholder="email@gmail.com" required></div>
+      <div class="af-row">
+        <div class="af-f"><label class="af-l">Kinh nghiệm</label>
+          <div class="sel-w"><select class="af-s" id="af_exp"><option>Chưa có kinh nghiệm</option><option>Dưới 1 năm</option><option>1–2 năm</option><option>3–5 năm</option><option>Trên 5 năm</option></select></div>
+        </div>
+        <div class="af-f"><label class="af-l">Mức lương mong muốn</label><input class="af-i" id="af_salary" type="text" placeholder="VD: 12 triệu"></div>
+      </div>
+      <div class="af-f"><label class="af-l">Giới thiệu bản thân <span>*</span></label>
+        <textarea class="af-ta" id="af_intro" placeholder="Điểm mạnh, kinh nghiệm nổi bật và lý do bạn phù hợp với vị trí này..." required></textarea>
+      </div>
+      <div class="af-f">
+        <label class="af-l">Đính kèm CV (nhắc nhở)</label>
+        <div class="file-zone">
+          <div class="fz-ico">📎</div>
+          <div class="fz-txt">Nhớ đính kèm CV khi email mở ra</div>
+          <div class="fz-sub">PDF, DOC, DOCX · Tối đa 5MB</div>
+        </div>
+      </div>
+    </form>
+    <div class="dr-success" id="drSuccess">
+      <div class="drs-ico">📬</div>
+      <div class="drs-title">Đang mở email...</div>
+      <p class="drs-desc">Ứng dụng email của bạn đã mở với thông tin sẵn.<br>Hãy <strong>đính kèm CV</strong> và nhấn <strong>Gửi</strong> để hoàn tất.<br><br>HR sẽ liên hệ bạn trong <strong>3 ngày làm việc</strong>.</p>
+    </div>`;
+
+  /* tabs */
+  document.querySelectorAll('.dr-tab').forEach(t=>{
+    t.addEventListener('click',()=>{
+      document.querySelectorAll('.dr-tab').forEach(x=>x.classList.remove('on'));
+      document.querySelectorAll('.dr-panel').forEach(x=>x.classList.remove('on'));
+      t.classList.add('on');
+      document.getElementById('panel-'+t.dataset.tab).classList.add('on');
+      document.getElementById('drFoot').style.display=t.dataset.tab==='apply'?'flex':'none';
+    });
+  });
+  document.getElementById('drFoot').style.display='none';
+
+  /* submit — builds mailto */
+  document.getElementById('drSubmitBtn').onclick=()=>{
+    const f=document.getElementById('applyForm');
+    if(!f) return;
+    const name=document.getElementById('af_name')?.value.trim();
+    const phone=document.getElementById('af_phone')?.value.trim();
+    const email=document.getElementById('af_email')?.value.trim();
+    const exp=document.getElementById('af_exp')?.value;
+    const sal=document.getElementById('af_salary')?.value.trim();
+    const intro=document.getElementById('af_intro')?.value.trim();
+    if(!name||!phone||!email||!intro){alert('Vui lòng điền đầy đủ các trường bắt buộc (*)');return;}
+    const subj=encodeURIComponent(`[Ứng tuyển] ${j.title} — ${name}`);
+    const body=encodeURIComponent(
+      `Vị trí ứng tuyển: ${j.title}\nPhòng ban: ${j.deptLabel}\n\n`+
+      `Họ và tên: ${name}\nSố điện thoại: ${phone}\nEmail: ${email}\n`+
+      `Kinh nghiệm: ${exp||'—'}\nLương mong muốn: ${sal||'—'}\n\n`+
+      `Giới thiệu bản thân:\n${intro}\n\n`+
+      `---\nGửi qua website tuyển dụng tinphat.com\n`
+    );
+    window.location.href=`mailto:hr@tinphat.com?subject=${subj}&body=${body}`;
+    f.style.display='none';
+    document.getElementById('drSuccess').classList.add('show');
+    document.getElementById('drFoot').style.display='none';
+  };
+
+  /* show overlay */
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+  document.getElementById('drawer').scrollTop=0;
+}
+
+function closeDrawer(){
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow='';
+  /* reset tabs */
+  document.querySelectorAll('.dr-tab').forEach((t,i)=>{t.classList.toggle('on',i===0)});
+  document.querySelectorAll('.dr-panel').forEach((p,i)=>{p.classList.toggle('on',i===0)});
+  document.getElementById('drFoot').style.display='none';
+}
+document.getElementById('overlay').addEventListener('click',e=>{if(e.target===document.getElementById('overlay'))closeDrawer()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer()});
+
+/* ═══════════════════════════════
+   BASE JS
+═══════════════════════════════ */
+const prog=document.getElementById('prog');
+window.addEventListener('scroll',()=>{
+  const s=document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight;
+  prog.style.width=(h>0?s/h*100:0)+'%';
+},{passive:true});
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('stuck',scrollY>50),{passive:true});
+
+const ham=document.getElementById('ham'),mob=document.getElementById('mob');
+let mOpen=false;
+ham.addEventListener('click',()=>{mOpen=!mOpen;ham.classList.toggle('open',mOpen);mob.classList.toggle('open',mOpen);document.body.style.overflow=mOpen?'hidden':''});
+mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{mOpen=false;ham.classList.remove('open');mob.classList.remove('open');document.body.style.overflow=''}));
+
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('on')})},{threshold:.06,rootMargin:'0px 0px -28px 0px'});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+/* counter */
+function countUp(el,to){
+  const sup=el.querySelector('sup'),suf=sup?sup.outerHTML:'';
+  let n=0;const step=to/70;
+  const t=setInterval(()=>{n=Math.min(n+step,to);el.innerHTML=Math.floor(n)+suf;if(n>=to)clearInterval(t)},18);
+}
+const cObs=new IntersectionObserver(e=>{if(e[0].isIntersecting){document.querySelectorAll('[data-to]').forEach(el=>{const v=+el.dataset.to;if(v)countUp(el,v)});cObs.disconnect()}},{threshold:.3});
+const hst=document.querySelector('.h-stats');
+if(hst)cObs.observe(hst);
+
+/* smooth scroll anchors */
+document.querySelectorAll('a[href="#jobs-section"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();document.getElementById('jobs-section').scrollIntoView({behavior:'smooth'})}));
+</script>
+</body>
+</html>
