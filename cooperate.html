@@ -1,1 +1,1332 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hợp Tác — TÍN PHÁT GROUP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ivory:  #FAF7F2;
+  --paper:  #F3EDE3;
+  --warm:   #E8DFD0;
+  --sand:   #D6CBBA;
+  --white:  #FEFEFE;
+  --navy:   #0E1B2C;
+  --navy2:  #1A2E4A;
+  --navy3:  #243E62;
+  --gold:   #C4881C;
+  --gold2:  #D9A030;
+  --amber:  #EDBA48;
+  --body:   #3C3630;
+  --slate:  #68605A;
+  --muted:  #9E9288;
+  --line:   #E4DACC;
+  --lineD:  #CFC3B2;
+  --sh1: 0 2px 16px rgba(14,27,44,.06);
+  --sh2: 0 8px 48px rgba(14,27,44,.10);
+  --sh3: 0 20px 80px rgba(14,27,44,.15);
+  --shG: 0 12px 40px rgba(196,136,28,.25);
+  --ease: cubic-bezier(.16,1,.3,1);
+  --gold-grad: linear-gradient(135deg,var(--gold),var(--amber));
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Exo 2',sans-serif;background:var(--ivory);color:var(--navy);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{text-decoration:none;color:inherit}
+button{font-family:'Exo 2',sans-serif;cursor:pointer;border:none;outline:none;background:none}
 
+body::before{content:'';position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.45;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.028'/%3E%3C/svg%3E")}
+
+.cw{width:85%;max-width:1400px;margin:0 auto}
+@media(max-width:600px){.cw{width:92%}}
+
+.rv{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+.rv.on{opacity:1;transform:none}
+.rv.rl{transform:translateX(-28px)}.rv.rl.on{transform:none;opacity:1}
+.rv.rr{transform:translateX(28px)}.rv.rr.on{transform:none;opacity:1}
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}
+.d4{transition-delay:.28s}.d5{transition-delay:.35s}
+
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes ken{from{transform:scale(1.07)}to{transform:scale(1)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes ticker{to{transform:translateX(-50%)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(196,136,28,.4)}70%{box-shadow:0 0 0 10px rgba(196,136,28,0)}}
+@keyframes countUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+#prog{position:fixed;top:0;left:0;z-index:8999;height:2px;width:0%;background:var(--gold-grad)}
+
+/* ── TOPBAR ── */
+.topbar{display:none}
+@media(min-width:768px){
+  .topbar{display:block;background:var(--navy);border-bottom:1px solid rgba(196,136,28,.15)}
+  .tb-inner{width:85%;max-width:1400px;margin:0 auto;height:38px;display:flex;align-items:center;justify-content:space-between}
+  .tb-links{display:flex}
+  .tb-link{display:flex;align-items:center;gap:6px;height:38px;padding:0 14px;font-size:11.5px;font-weight:400;color:rgba(255,255,255,.3);border-right:1px solid rgba(255,255,255,.06);transition:color .2s}
+  .tb-link:first-child{padding-left:0}
+  .tb-link:hover{color:var(--amber)}
+  .tb-dot{width:3px;height:3px;border-radius:50%;background:var(--gold);opacity:.5}
+  .tb-langs{display:flex}
+  .tb-lang{height:38px;padding:0 12px;font-size:10.5px;font-weight:700;letter-spacing:.5px;color:rgba(255,255,255,.25);display:flex;align-items:center;border-left:1px solid rgba(255,255,255,.06);cursor:pointer;transition:color .2s}
+  .tb-lang:hover,.tb-lang.on{color:var(--amber)}
+}
+
+/* ── NAVBAR ── */
+.navbar{position:sticky;top:0;z-index:990;background:rgba(250,247,242,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--line);transition:box-shadow .3s,border-color .3s}
+.navbar.on{box-shadow:0 4px 32px rgba(14,27,44,.07);border-bottom-color:var(--lineD)}
+.nav-inner{width:85%;max-width:1400px;margin:0 auto;height:62px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+@media(max-width:600px){.nav-inner{width:92%}}
+@media(min-width:1024px){.nav-inner{height:70px}}
+
+.logo{display:flex;align-items:center;gap:11px;flex-shrink:0}
+.logo-mark{width:38px;height:38px;flex-shrink:0;background:var(--navy);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)}
+.logo-mark::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--gold-grad)}
+.logo-mark span{font-size:12px;font-weight:900;color:var(--amber);letter-spacing:.5px}
+.logo-info{display:flex;flex-direction:column}
+.logo-name{font-size:15px;font-weight:900;color:var(--navy);letter-spacing:.2px;line-height:1}
+.logo-sub{font-size:8px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-top:3px}
+@media(min-width:1024px){.logo-mark{width:42px;height:42px}.logo-name{font-size:17px}.logo-sub{font-size:8.5px}}
+
+.nav-links{display:none}
+@media(min-width:1024px){
+  .nav-links{display:flex;gap:0}
+  .nav-links a{font-size:13px;font-weight:500;color:var(--slate);padding:0 12px;height:70px;display:flex;align-items:center;white-space:nowrap;position:relative;transition:color .2s}
+  .nav-links a::after{content:'';position:absolute;bottom:0;left:12px;right:12px;height:2px;background:var(--gold-grad);transform:scaleX(0);transform-origin:center;transition:transform .3s var(--ease)}
+  .nav-links a:hover,.nav-links a.on{color:var(--navy)}
+  .nav-links a:hover::after,.nav-links a.on::after{transform:scaleX(1)}
+}
+.nav-cta{display:none}
+@media(min-width:1024px){
+  .nav-cta{display:flex;gap:9px;flex-shrink:0}
+  .btn-nv-outline{padding:9px 16px;font-size:12.5px;font-weight:600;color:var(--slate);border:1.5px solid var(--line);transition:all .22s;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px))}
+  .btn-nv-outline:hover{border-color:var(--navy);color:var(--navy)}
+  .btn-nv-fill{padding:10px 22px;font-size:12.5px;font-weight:800;color:#fff;background:var(--navy);position:relative;overflow:hidden;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));transition:color .28s}
+  .btn-nv-fill::before{content:'';position:absolute;inset:0;background:var(--gold-grad);transform:translateY(105%);transition:transform .36s var(--ease)}
+  .btn-nv-fill:hover::before{transform:translateY(0)}
+  .btn-nv-fill:hover{color:var(--navy)}
+  .btn-nv-fill span{position:relative;z-index:1}
+}
+.hamburger{display:flex;flex-direction:column;gap:5px;width:40px;height:40px;align-items:center;justify-content:center;flex-shrink:0}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--navy);border-radius:2px;transition:all .3s var(--ease)}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+@media(min-width:1024px){.hamburger{display:none}}
+
+.mobile-menu{position:fixed;inset:0;z-index:980;background:var(--navy);display:flex;flex-direction:column;padding:100px 32px 48px;transform:translateX(100%);transition:transform .45s var(--ease)}
+.mobile-menu.open{transform:translateX(0)}
+.mobile-menu a{display:block;font-size:28px;font-weight:800;color:rgba(255,255,255,.85);padding:14px 0;border-bottom:1px solid rgba(255,255,255,.07);transition:color .2s,padding-left .25s var(--ease)}
+.mobile-menu a:hover{color:var(--amber);padding-left:8px}
+.mob-bottom{margin-top:40px;display:flex;flex-direction:column;gap:12px}
+.btn-mob{padding:16px 24px;font-size:15px;font-weight:800;color:var(--navy);background:var(--gold-grad);text-align:center;display:block;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px))}
+.btn-mob2{padding:15px 24px;font-size:15px;font-weight:600;color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.18);text-align:center;display:block}
+@media(min-width:1024px){.mobile-menu{display:none}}
+
+/* ── BREADCRUMB ── */
+.breadcrumb{background:var(--white);border-bottom:1px solid var(--line);padding:14px 0}
+.bc-inner{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:500;color:var(--muted)}
+.bc-inner a{color:var(--muted);transition:color .2s}
+.bc-inner a:hover{color:var(--gold)}
+.bc-sep{color:var(--lineD);font-size:10px}
+.bc-cur{color:var(--navy);font-weight:600}
+
+/* ════════════════════════════════
+   PAGE HERO — cinematic split
+════════════════════════════════ */
+.page-hero{
+  background:var(--navy);
+  position:relative;overflow:hidden;
+  min-height:clamp(480px,60vw,640px);
+  display:flex;align-items:center;
+}
+.page-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(196,136,28,.07) 1px,transparent 1px);background-size:40px 40px}
+.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--amber) 70%,transparent)}
+
+/* BG image */
+.ph-bg{position:absolute;inset:0}
+.ph-bg img{position:absolute;inset:0;filter:brightness(.22) saturate(.6);animation:ken 20s ease-in-out infinite alternate}
+.ph-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(14,27,44,.95) 0%,rgba(14,27,44,.7) 55%,rgba(14,27,44,.4) 100%)}
+
+/* gold accent right */
+.ph-accent{position:absolute;top:0;right:0;bottom:0;width:4px;background:var(--gold-grad)}
+
+.ph-inner{position:relative;z-index:2;display:flex;flex-direction:column;gap:0;padding:72px 0}
+@media(min-width:900px){
+  .ph-inner{display:grid;grid-template-columns:1fr 400px;align-items:center;gap:60px;padding:88px 0}
+}
+
+.ph-left{}
+.ph-label{display:flex;align-items:center;gap:10px;margin-bottom:20px;animation:up .65s both}
+.ph-bar{height:1.5px;width:28px;background:var(--gold-grad);flex-shrink:0}
+.ph-txt{font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(196,136,28,.85)}
+.ph-dot{width:5px;height:5px;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);background:var(--gold);animation:blink 2.5s infinite}
+
+.ph-title{font-size:clamp(46px,9vw,100px);font-weight:900;color:#fff;line-height:.88;letter-spacing:-3px;margin-bottom:22px;animation:up .65s .08s both}
+.ph-title em{display:block;font-style:italic;color:var(--amber);font-size:.72em;letter-spacing:-2px}
+.ph-desc{font-size:clamp(14px,1.8vw,16.5px);font-weight:300;color:rgba(255,255,255,.48);line-height:1.82;max-width:480px;margin-bottom:36px;animation:up .65s .15s both}
+.ph-btns{display:flex;flex-wrap:wrap;gap:12px;animation:up .65s .22s both}
+
+.btn-ph-main{display:inline-flex;align-items:center;gap:10px;background:var(--gold-grad);color:var(--navy);padding:15px 34px;font-size:14px;font-weight:800;clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,9px 100%,0 calc(100% - 9px));transition:all .28s;white-space:nowrap}
+.btn-ph-main:hover{transform:translateY(-3px);box-shadow:var(--shG)}
+.btn-ph-ghost{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,.6);font-size:14px;font-weight:600;padding-bottom:3px;border-bottom:1.5px solid rgba(255,255,255,.25);transition:all .25s;white-space:nowrap}
+.btn-ph-ghost:hover{color:var(--amber);border-color:var(--amber);gap:12px}
+
+/* Right — quick stats */
+.ph-stats{display:none}
+@media(min-width:900px){
+  .ph-stats{
+    display:flex;flex-direction:column;gap:10px;
+    animation:up .65s .3s both;
+  }
+}
+.ph-stat{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  padding:20px 24px;
+  display:flex;align-items:center;gap:16px;
+  transition:all .25s;
+}
+.ph-stat:hover{background:rgba(196,136,28,.12);border-color:rgba(196,136,28,.3)}
+.ph-stat-ico{font-size:28px;flex-shrink:0}
+.ph-stat-n{font-size:clamp(26px,3vw,34px);font-weight:900;font-style:italic;color:#fff;line-height:1;letter-spacing:-1.5px}
+.ph-stat-n sup{font-size:.45em;color:var(--amber);font-style:normal;vertical-align:super}
+.ph-stat-l{font-size:12px;font-weight:300;color:rgba(255,255,255,.42);margin-top:3px}
+
+/* ════════════════════════════════
+   SHARED
+════════════════════════════════ */
+.sec{padding:72px 0}
+@media(min-width:768px){.sec{padding:88px 0}}
+@media(min-width:1024px){.sec{padding:108px 0}}
+.eyebrow{display:flex;align-items:center;gap:10px;font-size:10px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.eyebrow::before{content:'';width:20px;height:1.5px;background:var(--gold-grad);flex-shrink:0}
+.eyebrow.ct{justify-content:center}.eyebrow.ct::before{display:none}
+.eyebrow.lt{color:rgba(255,255,255,.4)}.eyebrow.lt::before{background:rgba(255,255,255,.25)}
+.s-title{font-size:clamp(32px,6vw,58px);font-weight:900;line-height:.92;letter-spacing:-2px;color:var(--navy);margin-bottom:16px}
+.s-title em{font-style:italic;color:var(--gold)}
+.s-title.wh{color:#fff}
+.s-title.ct{text-align:center}
+.g-bar{display:block;width:36px;height:2px;background:var(--gold-grad);margin:14px 0 24px}
+.g-bar.ct{margin:14px auto 24px}
+.body-t{font-size:clamp(14.5px,1.8vw,15.5px);font-weight:300;line-height:1.9;color:var(--slate)}
+.body-t strong{color:var(--navy);font-weight:600}
+
+.btn-primary{display:inline-flex;align-items:center;gap:9px;background:var(--navy);color:#fff;padding:14px 28px;font-size:14px;font-weight:700;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));position:relative;overflow:hidden;transition:gap .3s,color .3s}
+.btn-primary::before{content:'';position:absolute;inset:0;background:var(--gold-grad);transform:translateX(-105%);transition:transform .38s var(--ease)}
+.btn-primary:hover::before{transform:translateX(0)}
+.btn-primary:hover{color:var(--navy);gap:13px}
+.btn-primary span,.btn-primary svg{position:relative;z-index:1}
+
+/* ════════════════════════════════
+   WHY PARTNER — 3 col
+════════════════════════════════ */
+.why-sec{background:var(--white)}
+.why-grid{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:600px){.why-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1024px){.why-grid{grid-template-columns:repeat(3,1fr)}}
+
+.why-card{
+  background:var(--ivory);border:1px solid var(--line);
+  padding:36px 30px;
+  position:relative;overflow:hidden;
+  transition:all .4s var(--ease);
+}
+.why-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold-grad);transform:scaleX(0);transform-origin:left;transition:transform .42s var(--ease)}
+.why-card:hover{transform:translateY(-7px);box-shadow:var(--sh2);border-color:transparent;background:var(--white)}
+.why-card:hover::before{transform:scaleX(1)}
+.why-card:hover .wc-ico{background:var(--navy);border-color:var(--navy)}
+.wc-num{position:absolute;top:-10px;right:12px;font-size:88px;font-weight:900;font-style:italic;color:rgba(14,27,44,.04);line-height:1;pointer-events:none}
+.wc-ico{width:52px;height:52px;border:1.5px solid var(--line);background:var(--warm);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:20px;transition:all .3s;flex-shrink:0}
+.why-card h3{font-size:clamp(17px,2.2vw,20px);font-weight:800;color:var(--navy);margin-bottom:10px;line-height:1.25}
+.why-card p{font-size:13.5px;font-weight:300;color:var(--slate);line-height:1.75}
+
+/* ════════════════════════════════
+   PARTNER TYPES — tabbed cards
+════════════════════════════════ */
+.types-sec{background:var(--paper);border-top:1px solid var(--line)}
+.types-hd{text-align:center;margin-bottom:52px}
+
+/* Tab nav */
+.type-tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:40px}
+.tab-btn{
+  padding:10px 20px;font-size:13px;font-weight:700;
+  color:var(--slate);background:var(--white);
+  border:1.5px solid var(--line);
+  clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px));
+  transition:all .25s;cursor:pointer;
+}
+.tab-btn:hover{border-color:var(--navy);color:var(--navy)}
+.tab-btn.on{background:var(--navy);border-color:var(--navy);color:#fff}
+
+/* Tab content panels */
+.tab-panel{display:none}
+.tab-panel.on{display:block}
+
+.tp-grid{display:grid;grid-template-columns:1fr;gap:0;background:var(--line)}
+@media(min-width:900px){.tp-grid{grid-template-columns:1fr 1fr}}
+
+/* Image side */
+.tp-img{position:relative;overflow:hidden;background:var(--navy2);height:56vw;max-height:460px}
+@media(min-width:900px){.tp-img{height:auto;max-height:none}}
+.tp-img img{position:absolute;inset:0;filter:brightness(.65) saturate(.8);animation:ken 16s ease-in-out infinite alternate}
+.tp-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(14,27,44,.85) 0%,transparent 55%)}
+@media(min-width:900px){
+  .tp-img::after{background:linear-gradient(to right,transparent 55%,var(--paper) 100%),linear-gradient(to top,rgba(14,27,44,.7) 0%,transparent 55%)}
+}
+/* badge on image */
+.tp-badge{position:absolute;bottom:20px;left:20px;z-index:3;background:rgba(250,247,242,.94);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.8);padding:14px 18px;box-shadow:var(--sh2);clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px))}
+@media(min-width:600px){.tp-badge{bottom:28px;left:28px;padding:18px 24px}}
+.tp-badge-ico{font-size:28px;margin-bottom:4px}
+.tp-badge-n{font-size:clamp(13px,2vw,15px);font-weight:800;color:var(--navy);line-height:1.2}
+
+/* Text side */
+.tp-text{background:var(--white);padding:44px 28px}
+@media(min-width:600px){.tp-text{padding:52px 40px}}
+@media(min-width:1024px){.tp-text{padding:72px 56px}}
+
+.tp-tag{display:inline-block;background:var(--navy);color:#fff;font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;margin-bottom:16px;clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px))}
+.tp-title{font-size:clamp(24px,4vw,36px);font-weight:900;letter-spacing:-1.5px;color:var(--navy);line-height:.95;margin-bottom:14px}
+.tp-title em{font-style:italic;color:var(--gold)}
+.tp-desc{font-size:14.5px;font-weight:300;color:var(--slate);line-height:1.82;margin-bottom:28px}
+
+/* Benefits list */
+.tp-benefits{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.tb-row{display:flex;align-items:flex-start;gap:12px;padding:13px 15px;background:var(--ivory);border:1px solid var(--line);transition:all .28s}
+.tb-row:hover{background:var(--white);border-color:var(--lineD);transform:translateX(4px);box-shadow:var(--sh1)}
+.tb-check{width:22px;height:22px;border-radius:50%;background:var(--gold-grad);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.tb-check svg{width:10px;height:10px;stroke:#fff;stroke-width:2.5;fill:none}
+.tb-row p{font-size:13.5px;font-weight:400;color:var(--body);line-height:1.55}
+.tb-row p strong{color:var(--navy);font-weight:700}
+
+/* Requirements */
+.tp-reqs{background:var(--paper);border:1px solid var(--line);padding:18px 20px;margin-bottom:28px}
+.tp-reqs-title{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.tp-reqs-title::before{content:'';width:14px;height:1.5px;background:var(--gold-grad);flex-shrink:0}
+.tp-reqs ul{display:flex;flex-direction:column;gap:6px}
+.tp-reqs li{font-size:13px;font-weight:300;color:var(--slate);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.tp-reqs li::before{content:'›';color:var(--gold);font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* ════════════════════════════════
+   PROCESS — steps
+════════════════════════════════ */
+.process-sec{background:var(--white);border-top:1px solid var(--line)}
+.process-hd{text-align:center;margin-bottom:56px}
+
+.steps{display:grid;grid-template-columns:1fr;gap:0;position:relative}
+@media(min-width:768px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.steps{grid-template-columns:repeat(4,1fr)}}
+/* connecting line desktop */
+@media(min-width:1024px){
+  .steps::before{content:'';position:absolute;top:42px;left:calc(12.5% + 20px);right:calc(12.5% + 20px);height:1.5px;background:linear-gradient(90deg,var(--gold),var(--amber));z-index:0}
+}
+
+.step{
+  padding:36px 28px;
+  display:flex;flex-direction:column;align-items:flex-start;
+  position:relative;z-index:1;
+  transition:all .35s var(--ease);
+}
+@media(min-width:768px){.step:nth-child(odd){border-right:1px solid var(--line)}}
+@media(min-width:1024px){.step{align-items:center;text-align:center;border-right:1px solid var(--line)}}
+@media(min-width:1024px){.step:last-child{border-right:none}}
+.step:hover{background:var(--ivory)}
+
+.step-n{
+  width:56px;height:56px;
+  background:var(--white);
+  border:2px solid var(--line);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;font-weight:900;font-style:italic;
+  color:var(--navy);
+  margin-bottom:20px;
+  flex-shrink:0;
+  transition:all .3s;
+  position:relative;z-index:2;
+}
+.step:hover .step-n{background:var(--navy);border-color:var(--navy);color:var(--amber)}
+.step h4{font-size:clamp(15px,2vw,17px);font-weight:800;color:var(--navy);margin-bottom:9px;line-height:1.25}
+.step p{font-size:13px;font-weight:300;color:var(--slate);line-height:1.65}
+.step-arrow{
+  display:none;
+}
+@media(min-width:1024px){
+  .step-arrow{display:block;position:absolute;top:37px;right:-10px;font-size:18px;color:var(--gold);z-index:3}
+  .step:last-child .step-arrow{display:none}
+}
+
+/* ════════════════════════════════
+   PARTNER BRANDS
+════════════════════════════════ */
+.brands-sec{background:var(--ivory);border-top:1px solid var(--line)}
+.brands-hd{text-align:center;margin-bottom:48px}
+
+.brands-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  border:1px solid var(--line);
+  background:var(--line);
+  gap:1px;
+}
+@media(min-width:560px){.brands-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1024px){.brands-grid{grid-template-columns:repeat(4,1fr)}}
+
+.brand-card{
+  background:var(--white);
+  padding:28px 24px;
+  display:flex;flex-direction:column;align-items:flex-start;gap:0;
+  position:relative;overflow:hidden;
+  transition:all .35s var(--ease);
+  cursor:default;
+}
+.brand-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold-grad);transform:scaleY(0);transform-origin:bottom;transition:transform .35s var(--ease)}
+.brand-card:hover{background:var(--ivory);transform:translateY(-4px);box-shadow:var(--sh2)}
+.brand-card:hover::before{transform:scaleY(1)}
+.bc-logo{font-size:clamp(18px,3vw,22px);font-weight:900;letter-spacing:1px;color:var(--sand);margin-bottom:12px;transition:color .25s;text-transform:uppercase}
+.brand-card:hover .bc-logo{color:var(--navy)}
+.bc-cat{font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.bc-desc{font-size:12.5px;font-weight:300;color:var(--slate);line-height:1.6}
+.bc-country{position:absolute;top:14px;right:14px;font-size:10px;font-weight:600;color:var(--muted);letter-spacing:.5px}
+
+/* ════════════════════════════════
+   SUCCESS STORIES
+════════════════════════════════ */
+.stories-sec{background:var(--paper);border-top:1px solid var(--line)}
+.stories-hd{text-align:center;margin-bottom:48px}
+
+.stories-grid{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:600px){.stories-grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1024px){.stories-grid{grid-template-columns:repeat(3,1fr)}}
+
+.story-card{
+  background:var(--white);border:1px solid var(--line);
+  padding:32px 28px;
+  position:relative;overflow:hidden;
+  transition:all .38s var(--ease);
+}
+.story-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold-grad);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+.story-card:hover{transform:translateY(-6px);box-shadow:var(--sh2);border-color:transparent}
+.story-card:hover::before{transform:scaleX(1)}
+.sc-quote{font-size:56px;font-weight:900;color:var(--line);line-height:.7;margin-bottom:14px;font-style:italic}
+.sc-text{font-size:14px;font-weight:300;font-style:italic;color:var(--slate);line-height:1.8;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--line)}
+.sc-author{display:flex;align-items:center;gap:12px}
+.sc-avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--navy2),var(--navy3));display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.sc-name{font-size:14px;font-weight:700;color:var(--navy);line-height:1.2}
+.sc-role{font-size:11.5px;font-weight:300;color:var(--muted);margin-top:2px}
+.sc-stars{color:var(--amber);font-size:13px;margin-bottom:10px;letter-spacing:1px}
+
+/* ════════════════════════════════
+   REGISTER FORM
+════════════════════════════════ */
+.reg-sec{background:var(--navy);position:relative;overflow:hidden}
+.reg-sec::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(196,136,28,.06) 1px,transparent 1px);background-size:40px 40px}
+.reg-glow{position:absolute;right:-100px;top:50%;transform:translateY(-50%);width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(196,136,28,.09) 0%,transparent 70%);pointer-events:none}
+.reg-top{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--amber) 70%,transparent)}
+
+.reg-inner{display:grid;grid-template-columns:1fr;gap:52px;position:relative;z-index:1}
+@media(min-width:900px){.reg-inner{grid-template-columns:1fr 1fr;gap:80px;align-items:center}}
+
+/* Left text */
+.reg-l{}
+.reg-l .body-t{color:rgba(255,255,255,.42);margin-bottom:32px;max-width:440px}
+.reg-perks{display:flex;flex-direction:column;gap:12px}
+.rp{display:flex;align-items:center;gap:14px;padding:14px 18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);transition:all .25s}
+.rp:hover{background:rgba(196,136,28,.12);border-color:rgba(196,136,28,.25)}
+.rp-ico{width:40px;height:40px;background:rgba(196,136,28,.15);border:1px solid rgba(196,136,28,.25);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)}
+.rp p{font-size:13.5px;font-weight:400;color:rgba(255,255,255,.65);line-height:1.5}
+.rp p strong{color:#fff;font-weight:700}
+
+/* Right form */
+.reg-form-wrap{background:var(--white);padding:36px 28px}
+@media(min-width:600px){.reg-form-wrap{padding:44px 40px}}
+
+.rf-title{font-size:clamp(22px,3vw,30px);font-weight:900;letter-spacing:-1.5px;color:var(--navy);margin-bottom:6px}
+.rf-title em{font-style:italic;color:var(--gold)}
+.rf-sub{font-size:13.5px;font-weight:300;color:var(--slate);margin-bottom:28px;line-height:1.6}
+
+.rf-form{display:flex;flex-direction:column;gap:14px}
+.rf-row{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:600px){.rf-row{grid-template-columns:1fr 1fr}}
+.rf-field{display:flex;flex-direction:column;gap:5px}
+.rf-label{font-size:11px;font-weight:700;letter-spacing:.5px;color:var(--slate)}
+.rf-label span{color:var(--gold)}
+.rf-input,.rf-select,.rf-textarea{width:100%;background:var(--ivory);border:1.5px solid var(--line);padding:12px 15px;font-family:'Exo 2',sans-serif;font-size:14px;font-weight:400;color:var(--navy);outline:none;transition:all .25s var(--ease);appearance:none}
+.rf-input:focus,.rf-select:focus,.rf-textarea:focus{border-color:var(--gold);background:var(--white);box-shadow:0 0 0 3px rgba(196,136,28,.1)}
+.rf-input::placeholder,.rf-textarea::placeholder{color:var(--muted);font-weight:300}
+.rf-textarea{resize:vertical;min-height:100px;line-height:1.6}
+.rf-select-w{position:relative}
+.rf-select-w::after{content:'›';position:absolute;right:13px;top:50%;transform:translateY(-50%) rotate(90deg);font-size:15px;color:var(--muted);pointer-events:none}
+.btn-reg{display:flex;align-items:center;justify-content:center;gap:9px;background:var(--navy);color:#fff;padding:15px 32px;font-size:14px;font-weight:800;border:none;cursor:pointer;font-family:'Exo 2',sans-serif;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));position:relative;overflow:hidden;transition:gap .3s,color .3s;width:100%;margin-top:4px}
+.btn-reg::before{content:'';position:absolute;inset:0;background:var(--gold-grad);transform:translateX(-105%);transition:transform .4s var(--ease)}
+.btn-reg:hover::before{transform:translateX(0)}
+.btn-reg:hover{color:var(--navy);gap:13px}
+.btn-reg span,.btn-reg svg{position:relative;z-index:1}
+
+/* success */
+.rf-success{display:none;text-align:center;padding:40px 20px}
+.rf-success.show{display:block}
+.rf-success-ico{font-size:52px;margin-bottom:14px}
+.rf-success h3{font-size:20px;font-weight:800;color:var(--navy);margin-bottom:8px}
+.rf-success p{font-size:14px;font-weight:300;color:var(--slate);line-height:1.7}
+
+/* ════════════════════════════════
+   FAQ
+════════════════════════════════ */
+.faq-sec{background:var(--white);border-top:1px solid var(--line)}
+.faq-grid{display:grid;grid-template-columns:1fr;gap:0;border:1px solid var(--line)}
+@media(min-width:900px){.faq-grid{grid-template-columns:1fr 1fr}}
+.faq-item{border-bottom:1px solid var(--line);cursor:pointer;transition:background .25s}
+.faq-item:nth-child(odd){border-right:1px solid var(--line)}
+@media(max-width:899px){.faq-item:nth-child(odd){border-right:none}}
+.faq-item:nth-last-child(-n+2){border-bottom:none}
+@media(max-width:899px){.faq-item:last-child{border-bottom:none}.faq-item:nth-last-child(2){border-bottom:1px solid var(--line)}}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:20px 22px;gap:14px;font-size:14px;font-weight:700;color:var(--navy);line-height:1.4}
+.faq-ico{width:30px;height:30px;flex-shrink:0;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:17px;color:var(--muted);transition:all .25s;clip-path:polygon(0 0,calc(100% - 4px) 0,100% 4px,100% 100%,4px 100%,0 calc(100% - 4px))}
+.faq-item.open .faq-ico{background:var(--navy);border-color:var(--navy);color:#fff;transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s var(--ease)}
+.faq-item.open .faq-a{max-height:200px}
+.faq-a-inner{padding:0 22px 20px;font-size:13.5px;font-weight:300;color:var(--slate);line-height:1.75}
+.faq-item:hover{background:var(--ivory)}
+.faq-item.open{background:var(--ivory)}
+
+/* ── FOOTER ── */
+footer{background:#090e17;border-top:1px solid rgba(196,136,28,.18)}
+.ft-main{width:85%;max-width:1400px;margin:0 auto;padding:60px 0 48px;display:grid;grid-template-columns:1fr;gap:40px;border-bottom:1px solid rgba(255,255,255,.04)}
+@media(max-width:600px){.ft-main{width:92%}}
+@media(min-width:600px){.ft-main{grid-template-columns:1fr 1fr;gap:36px}}
+@media(min-width:1024px){.ft-main{grid-template-columns:2fr 1fr 1fr 1.2fr;gap:48px}}
+.ft-brand{font-size:clamp(19px,3vw,22px);font-weight:900;color:#fff;margin-bottom:4px}
+.ft-brand em{font-style:italic;color:var(--amber)}
+.ft-est{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.18);display:block;margin-bottom:16px}
+.ft-about{font-size:13px;font-weight:300;color:rgba(255,255,255,.28);line-height:1.85;margin-bottom:22px}
+.ft-contacts{display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
+.ftc{font-size:12.5px;font-weight:300;color:rgba(255,255,255,.26);display:flex;align-items:flex-start;gap:7px}
+.ftc a{color:rgba(255,255,255,.26);transition:color .2s}
+.ftc a:hover{color:var(--amber)}
+.ft-soc{display:flex;gap:7px}
+.fso{width:36px;height:36px;border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:12px;color:rgba(255,255,255,.22);clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px));transition:all .22s}
+.fso:hover{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.ft-col h5{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.5px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.05)}
+.ft-col a{display:block;font-size:13px;font-weight:300;color:rgba(255,255,255,.26);margin-bottom:9px;transition:all .22s}
+.ft-col a:hover{color:var(--amber);padding-left:5px}
+.ft-bot{width:85%;max-width:1400px;margin:0 auto;padding:18px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+@media(max-width:600px){.ft-bot{width:92%;justify-content:center}}
+.ft-copy{font-size:11px;font-weight:300;color:rgba(255,255,255,.14)}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="tb-inner">
+    <div class="tb-links">
+      <a href="mailto:contact@tinphat.com" class="tb-link"><span class="tb-dot"></span>contact@tinphat.com</a>
+      <a href="tel:0949299494" class="tb-link"><span class="tb-dot"></span>0949 29 94 94</a>
+    </div>
+    <div class="tb-langs">
+      <span class="tb-lang on">🇻🇳 VI</span>
+      <span class="tb-lang">🇬🇧 EN</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark"><span>TP</span></div>
+      <div class="logo-info">
+        <div class="logo-name">TÍN PHÁT GROUP</div>
+        <div class="logo-sub">Est. 2002 · Bạc Liêu</div>
+      </div>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Trang chủ</a>
+      <a href="gioi-thieu.html">Giới thiệu</a>
+      <a href="#">Tin tức</a>
+      <a href="#">Tuyển dụng</a>
+      <a href="#" class="on">Hợp tác</a>
+      <a href="#">Ứng dụng</a>
+      <a href="lien-he.html">Liên hệ</a>
+    </nav>
+    <div class="nav-cta">
+      <button class="btn-nv-outline">🛒 TipaShop</button>
+      <button class="btn-nv-fill" onclick="document.getElementById('reg').scrollIntoView({behavior:'smooth'})"><span>Đăng ký ngay →</span></button>
+    </div>
+    <button class="hamburger" id="ham" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-menu" id="mob">
+  <a href="index.html">Trang chủ</a>
+  <a href="gioi-thieu.html">Giới thiệu</a>
+  <a href="#">Tin tức</a>
+  <a href="#">Tuyển dụng</a>
+  <a href="#">Hợp tác</a>
+  <a href="#">Ứng dụng</a>
+  <a href="lien-he.html">Liên hệ</a>
+  <div class="mob-bottom">
+    <a href="#reg" class="btn-mob">Đăng ký hợp tác →</a>
+    <a href="#" class="btn-mob2">🛒 TipaShop</a>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <div class="cw">
+    <div class="bc-inner">
+      <a href="index.html">Trang chủ</a>
+      <span class="bc-sep">›</span>
+      <span class="bc-cur">Hợp tác</span>
+    </div>
+  </div>
+</div>
+
+<!-- ① PAGE HERO -->
+<section class="page-hero">
+  <div class="ph-bg">
+    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1600&q=85" alt="">
+  </div>
+  <div class="ph-accent"></div>
+  <div class="cw" style="width:85%;position:relative;z-index:2">
+    <div class="ph-inner">
+      <div class="ph-left">
+        <div class="ph-label">
+          <div class="ph-bar"></div>
+          <span class="ph-txt">Cùng nhau phát triển</span>
+          <span class="ph-dot"></span>
+        </div>
+        <div class="ph-title">HỢP<br><em>TÁC</em></div>
+        <p class="ph-desc">Tín Phát Group tìm kiếm những đối tác cùng chung khát vọng — nhà phân phối, đại lý, nhà cung cấp và đối tác chiến lược để cùng xây dựng hệ sinh thái thương mại vững mạnh tại Việt Nam.</p>
+        <div class="ph-btns">
+          <a href="#reg" class="btn-ph-main">
+            Đăng ký hợp tác
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+          <a href="lien-he.html" class="btn-ph-ghost">Liên hệ tư vấn →</a>
+        </div>
+      </div>
+      <div class="ph-stats">
+        <div class="ph-stat">
+          <div class="ph-stat-ico">🤝</div>
+          <div>
+            <div class="ph-stat-n">8<sup>+</sup></div>
+            <div class="ph-stat-l">Thương hiệu đối tác quốc tế</div>
+          </div>
+        </div>
+        <div class="ph-stat">
+          <div class="ph-stat-ico">🏪</div>
+          <div>
+            <div class="ph-stat-n">200<sup>+</sup></div>
+            <div class="ph-stat-l">Đại lý & điểm phân phối</div>
+          </div>
+        </div>
+        <div class="ph-stat">
+          <div class="ph-stat-ico">🌏</div>
+          <div>
+            <div class="ph-stat-n">5<sup>+</sup></div>
+            <div class="ph-stat-l">Tỉnh thành phủ sóng</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ② VÌ SAO HỢP TÁC -->
+<section class="why-sec sec">
+  <div class="cw">
+    <div class="rv" style="text-align:center;margin-bottom:48px">
+      <div class="eyebrow ct">Lý do hợp tác</div>
+      <h2 class="s-title ct">Vì Sao Chọn<br><em>Tín Phát?</em></h2>
+      <span class="g-bar ct"></span>
+      <p class="body-t" style="text-align:center;max-width:520px;margin:0 auto">Hơn 22 năm xây dựng hệ sinh thái phân phối — Tín Phát Group mang đến cho đối tác những giá trị cạnh tranh không ai sánh bằng.</p>
+    </div>
+    <div class="why-grid rv d1">
+      <div class="why-card">
+        <div class="wc-num">01</div>
+        <div class="wc-ico">🏆</div>
+        <h3>Thương hiệu Quốc tế Chính hãng</h3>
+        <p>Là đại lý chính thức Shell, Castrol, Motul, Unilever, GS Battery, Kenda — đảm bảo hàng chính hãng, giá cạnh tranh và chính sách chiết khấu hấp dẫn cho toàn hệ thống đại lý.</p>
+      </div>
+      <div class="why-card">
+        <div class="wc-num">02</div>
+        <div class="wc-ico">🚚</div>
+        <h3>Hậu Cần & Giao Hàng Nhanh</h3>
+        <p>TipaExpress kết nối BEST Express phủ sóng toàn ĐBSCL. Đơn hàng xử lý trong ngày, giao hàng 1–3 ngày, theo dõi trạng thái thời gian thực trên ứng dụng.</p>
+      </div>
+      <div class="why-card">
+        <div class="wc-num">03</div>
+        <div class="wc-ico">📲</div>
+        <h3>Hệ Sinh Thái Số Hiện Đại</h3>
+        <p>TipaShop, TipaExpress và CRM 5.0 giúp đối tác quản lý đơn hàng, theo dõi doanh số và kết nối trực tiếp với kho hàng — mọi lúc, mọi nơi trên điện thoại.</p>
+      </div>
+      <div class="why-card">
+        <div class="wc-num">04</div>
+        <div class="wc-ico">💰</div>
+        <h3>Chính Sách Giá Ưu Đãi</h3>
+        <p>Chiết khấu theo doanh số, thưởng doanh thu cuối quý, hỗ trợ vật phẩm trưng bày, POSM và đào tạo nhân viên bán hàng miễn phí theo từng tháng.</p>
+      </div>
+      <div class="why-card">
+        <div class="wc-num">05</div>
+        <div class="wc-ico">🎓</div>
+        <h3>Đào Tạo & Hỗ Trợ Liên Tục</h3>
+        <p>Đội ngũ Sales hỗ trợ tại điểm bán, đào tạo sản phẩm định kỳ, tài liệu marketing và hỗ trợ kỹ thuật 24/7 qua hotline riêng dành cho đại lý.</p>
+      </div>
+      <div class="why-card">
+        <div class="wc-num">06</div>
+        <div class="wc-ico">🌱</div>
+        <h3>Cùng Nhau Phát Triển Bền Vững</h3>
+        <p>Chiến lược tăng trưởng dài hạn, bảo vệ vùng kinh doanh độc quyền, ưu tiên gia hạn hợp đồng và cùng xây dựng thị phần theo từng khu vực địa lý.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ③ LOẠI HÌNH HỢP TÁC -->
+<section class="types-sec sec">
+  <div class="cw">
+    <div class="types-hd rv">
+      <div class="eyebrow ct">Hình thức hợp tác</div>
+      <h2 class="s-title ct">Chọn Mô Hình<br><em>Phù Hợp Với Bạn</em></h2>
+      <span class="g-bar ct"></span>
+    </div>
+    <div class="type-tabs rv d1">
+      <button class="tab-btn on" data-tab="daily">🏪 Đại lý phân phối</button>
+      <button class="tab-btn" data-tab="tipashop">🛒 Bán hàng TipaShop</button>
+      <button class="tab-btn" data-tab="tipaxpress">🚚 Đối tác TipaExpress</button>
+      <button class="tab-btn" data-tab="supply">📦 Cung ứng sản phẩm</button>
+    </div>
+
+    <!-- Tab 1: Đại lý -->
+    <div class="tab-panel on" id="tab-daily">
+      <div class="tp-grid rv">
+        <div class="tp-img">
+          <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=85" alt="Đại lý phân phối">
+          <div class="tp-badge">
+            <div class="tp-badge-ico">🛢️</div>
+            <div class="tp-badge-n">Đại lý chính thức<br>Shell, Castrol, Motul...</div>
+          </div>
+        </div>
+        <div class="tp-text">
+          <div class="tp-tag">Mô hình phổ biến nhất</div>
+          <h3 class="tp-title">Đại Lý<br><em>Phân Phối</em></h3>
+          <p class="tp-desc">Trở thành đại lý phân phối chính thức của Tín Phát Group — tiếp cận hàng chục thương hiệu quốc tế, hưởng chiết khấu hấp dẫn và được bảo vệ vùng kinh doanh.</p>
+          <div class="tp-benefits">
+            <div class="tb-row">
+              <div class="tb-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div>
+              <p><strong>Chiết khấu 5–18%</strong> tùy doanh số và sản phẩm</p>
+            </div>
+            <div class="tb-row">
+              <div class="tb-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div>
+              <p><strong>Bảo vệ vùng kinh doanh</strong> độc quyền theo hợp đồng</p>
+            </div>
+            <div class="tb-row">
+              <div class="tb-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div>
+              <p><strong>Hỗ trợ POSM</strong>, biển bảng, vật phẩm trưng bày miễn phí</p>
+            </div>
+            <div class="tb-row">
+              <div class="tb-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div>
+              <p><strong>Đào tạo sản phẩm</strong> và kỹ năng bán hàng định kỳ</p>
+            </div>
+            <div class="tb-row">
+              <div class="tb-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div>
+              <p><strong>Thưởng doanh số</strong> cuối quý và cuối năm</p>
+            </div>
+          </div>
+          <div class="tp-reqs">
+            <div class="tp-reqs-title">Yêu cầu cơ bản</div>
+            <ul>
+              <li>Có địa điểm kinh doanh cố định, mặt tiền rõ ràng</li>
+              <li>Vốn ban đầu từ 20–100 triệu (tùy ngành hàng)</li>
+              <li>Cam kết doanh số tối thiểu theo hợp đồng</li>
+              <li>Có khả năng tiếp cận thị trường khu vực</li>
+            </ul>
+          </div>
+          <a href="#reg" class="btn-primary">
+            <span>Đăng ký làm đại lý</span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 2: TipaShop -->
+    <div class="tab-panel" id="tab-tipashop">
+      <div class="tp-grid rv">
+        <div class="tp-img">
+          <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=85" alt="TipaShop">
+          <div class="tp-badge">
+            <div class="tp-badge-ico">🛒</div>
+            <div class="tp-badge-n">Bán hàng trực tuyến<br>toàn quốc qua TipaShop</div>
+          </div>
+        </div>
+        <div class="tp-text">
+          <div class="tp-tag">Thương mại điện tử</div>
+          <h3 class="tp-title">Bán Hàng<br><em>TipaShop</em></h3>
+          <p class="tp-desc">Mở gian hàng trên TipaShop — nền tảng thương mại điện tử của Tín Phát, tiếp cận hàng nghìn khách hàng toàn quốc mà không cần cửa hàng vật lý.</p>
+          <div class="tp-benefits">
+            <div class="tb-row">
+              <div class="tb-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div>
+              <p><strong>Miễn phí mở gian hàng</strong>, không phí hàng tháng</p>
+            </div>
+            <div class="tb-row">
+              <div class="tb-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div>
+              <p><strong>Hỗ trợ chụp ảnh sản phẩm</strong> và viết mô tả chuyên nghiệp</p>
+            </div>
+            <div class="tb-row">
+              <div class="tb-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div>
+              <p><strong>Kết nối TipaExpress</strong> giao hàng tự động toàn quốc</p>
+            </div>
+            <div class="tb-row">
+              <div class="tb-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div>
+              <p><strong>Quản lý đơn hàng</strong> dễ dàng qua app di động</p>
+            </div>
+            <div class="tb-row">
+              <div class="tb-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div>
+              <p><strong>Thanh toán an toàn</strong>, quyết toán nhanh 7 ngày/lần</p>
+            </div>
+          </div>
+          <div class="tp-reqs">
+            <div class="tp-reqs-title">Điều kiện đăng ký</div>
+            <ul>
+              <li>Có sản phẩm hợp pháp, có nguồn gốc rõ ràng</li>
+              <li>CMND/CCCD hoặc giấy phép kinh doanh</li>
+              <li>Có khả năng đóng gói và giao hàng trong 24h</li>
+              <li>Cam kết chất lượng và dịch vụ sau bán hàng</li>
+            </ul>
+          </div>
+          <a href="#reg" class="btn-primary">
+            <span>Mở gian hàng ngay</span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 3: TipaExpress -->
+    <div class="tab-panel" id="tab-tipaxpress">
+      <div class="tp-grid rv">
+        <div class="tp-img">
+          <img src="https://images.unsplash.com/photo-1580674684081-7617fbf3d745?w=800&q=85" alt="TipaExpress">
+          <div class="tp-badge">
+            <div class="tp-badge-ico">🚚</div>
+            <div class="tp-badge-n">Đối tác vận chuyển<br>kết nối BEST Express</div>
+          </div>
+        </div>
+        <div class="tp-text">
+          <div class="tp-tag">Logistics & Vận chuyển</div>
+          <h3 class="tp-title">Đối Tác<br><em>TipaExpress</em></h3>
+          <p class="tp-desc">Trở thành đối tác giao hàng của TipaExpress — kết nối hệ thống BEST Express, mở rộng thu nhập và hưởng hoa hồng hấp dẫn theo từng đơn hàng hoàn thành.</p>
+          <div class="tp-benefits">
+            <div class="tb-row">
+              <div class="tb-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div>
+              <p><strong>Thu nhập ổn định</strong> từ 8–15 triệu/tháng tùy khu vực</p>
+            </div>
+            <div class="tb-row">
+              <div class="tb-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div>
+              <p><strong>Hỗ trợ trang thiết bị</strong> và đồng phục ban đầu</p>
+            </div>
+            <div class="tb-row">
+              <div class="tb-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div>
+              <p><strong>App quản lý đơn</strong> thông minh, cập nhật tức thời</p>
+            </div>
+            <div class="tb-row">
+              <div class="tb-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div>
+              <p><strong>Thanh toán tuần</strong>, không trừ chiều dài tuyến đường</p>
+            </div>
+            <div class="tb-row">
+              <div class="tb-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div>
+              <p><strong>Bảo hiểm hàng hóa</strong> và hỗ trợ sự cố trong ca làm việc</p>
+            </div>
+          </div>
+          <div class="tp-reqs">
+            <div class="tp-reqs-title">Yêu cầu</div>
+            <ul>
+              <li>Có xe máy hoặc ô tô, bằng lái hợp lệ</li>
+              <li>Thành thạo khu vực giao hàng đăng ký</li>
+              <li>Điện thoại Android/iOS cài app TipaExpress</li>
+              <li>Cam kết thời gian làm việc theo ca đăng ký</li>
+            </ul>
+          </div>
+          <a href="#reg" class="btn-primary">
+            <span>Đăng ký tài xế</span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab 4: Cung ứng -->
+    <div class="tab-panel" id="tab-supply">
+      <div class="tp-grid rv">
+        <div class="tp-img">
+          <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?w=800&q=85" alt="Cung ứng sản phẩm">
+          <div class="tp-badge">
+            <div class="tp-badge-ico">📦</div>
+            <div class="tp-badge-n">Nhà cung ứng<br>được chứng nhận</div>
+          </div>
+        </div>
+        <div class="tp-text">
+          <div class="tp-tag">Nhà cung cấp</div>
+          <h3 class="tp-title">Cung Ứng<br><em>Sản Phẩm</em></h3>
+          <p class="tp-desc">Đưa sản phẩm của bạn vào hệ thống phân phối Tín Phát Group — tiếp cận hàng trăm điểm bán lẻ trên toàn ĐBSCL và kênh thương mại điện tử TipaShop.</p>
+          <div class="tp-benefits">
+            <div class="tb-row">
+              <div class="tb-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div>
+              <p><strong>Kênh phân phối rộng</strong> — 200+ điểm bán, 5+ tỉnh thành</p>
+            </div>
+            <div class="tb-row">
+              <div class="tb-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div>
+              <p><strong>Đồng hành marketing</strong> cùng đội ngũ Sales dày dạn kinh nghiệm</p>
+            </div>
+            <div class="tb-row">
+              <div class="tb-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div>
+              <p><strong>Thanh toán nhanh</strong>, đúng hạn, minh bạch theo hợp đồng</p>
+            </div>
+            <div class="tb-row">
+              <div class="tb-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div>
+              <p><strong>Hỗ trợ vận chuyển</strong> qua TipaExpress từ kho đến điểm bán</p>
+            </div>
+            <div class="tb-row">
+              <div class="tb-check"><svg viewBox="0 0 12 12"><path d="M2 6l3 3 5-5"/></svg></div>
+              <p><strong>Feedback thị trường</strong> thực tế, định kỳ từ đội ngũ kinh doanh</p>
+            </div>
+          </div>
+          <div class="tp-reqs">
+            <div class="tp-reqs-title">Tiêu chí sản phẩm</div>
+            <ul>
+              <li>Có giấy phép kinh doanh và chứng nhận chất lượng</li>
+              <li>Sản phẩm phù hợp thị trường tiêu dùng ĐBSCL</li>
+              <li>Có khả năng cung ứng số lượng lớn, ổn định</li>
+              <li>Chính sách giá và chiết khấu hợp lý cho kênh GT/MT</li>
+            </ul>
+          </div>
+          <a href="#reg" class="btn-primary">
+            <span>Gửi hồ sơ cung ứng</span>
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ④ QUY TRÌNH -->
+<section class="process-sec sec">
+  <div class="cw">
+    <div class="process-hd rv">
+      <div class="eyebrow ct">Quy trình hợp tác</div>
+      <h2 class="s-title ct">4 Bước Để<br><em>Bắt Đầu</em></h2>
+      <span class="g-bar ct"></span>
+    </div>
+    <div class="steps rv d1">
+      <div class="step">
+        <div class="step-n">1</div>
+        <h4>Đăng ký & Tư vấn</h4>
+        <p>Điền form đăng ký hoặc gọi hotline. Đội ngũ kinh doanh sẽ tư vấn mô hình phù hợp trong 24 giờ.</p>
+        <div class="step-arrow">→</div>
+      </div>
+      <div class="step">
+        <div class="step-n">2</div>
+        <h4>Thẩm định & Phê duyệt</h4>
+        <p>Tín Phát tiến hành thẩm định hồ sơ, khảo sát địa điểm kinh doanh và xác nhận vùng phân phối.</p>
+        <div class="step-arrow">→</div>
+      </div>
+      <div class="step">
+        <div class="step-n">3</div>
+        <h4>Ký hợp đồng & Onboard</h4>
+        <p>Ký kết hợp đồng hợp tác chính thức, đào tạo sản phẩm, cấp tài khoản hệ thống CRM và TipaShop.</p>
+        <div class="step-arrow">→</div>
+      </div>
+      <div class="step">
+        <div class="step-n">4</div>
+        <h4>Vận hành & Phát triển</h4>
+        <p>Bắt đầu kinh doanh với sự hỗ trợ đầy đủ từ Tín Phát. Cùng nhau theo dõi doanh số và tăng trưởng.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑤ THƯƠNG HIỆU ĐỐI TÁC -->
+<section class="brands-sec sec">
+  <div class="cw">
+    <div class="brands-hd rv">
+      <div class="eyebrow ct">Danh mục sản phẩm</div>
+      <h2 class="s-title ct">Thương Hiệu<br><em>Bạn Được Phân Phối</em></h2>
+      <span class="g-bar ct"></span>
+      <p class="body-t" style="text-align:center;max-width:480px;margin:0 auto">Là đại lý của Tín Phát, bạn được tiếp cận danh mục sản phẩm từ 8+ thương hiệu hàng đầu thế giới.</p>
+    </div>
+    <div class="brands-grid rv d1">
+      <div class="brand-card">
+        <span class="bc-country">🇬🇧 Anh</span>
+        <div class="bc-logo">Shell</div>
+        <div class="bc-cat">Dầu nhớt cao cấp</div>
+        <p class="bc-desc">Thương hiệu dầu nhớt số 1 thế giới, phù hợp xe máy và ô tô. Chiết khấu tốt, nhu cầu ổn định.</p>
+      </div>
+      <div class="brand-card">
+        <span class="bc-country">🇬🇧 Anh</span>
+        <div class="bc-logo">Castrol</div>
+        <div class="bc-cat">Dầu nhớt kỹ thuật</div>
+        <p class="bc-desc">Thương hiệu dầu nhớt kỹ thuật cao, đặc biệt phổ biến cho xe tay ga và ô tô hạng sang.</p>
+      </div>
+      <div class="brand-card">
+        <span class="bc-country">🇫🇷 Pháp</span>
+        <div class="bc-logo">Motul</div>
+        <div class="bc-cat">Dầu nhớt performance</div>
+        <p class="bc-desc">Chuyên dầu nhớt hiệu năng cao, phổ biến trong phân khúc xe thể thao và biker chuyên nghiệp.</p>
+      </div>
+      <div class="brand-card">
+        <span class="bc-country">🇬🇧 Anh</span>
+        <div class="bc-logo">Unilever</div>
+        <div class="bc-cat">Hàng tiêu dùng</div>
+        <p class="bc-desc">Tập đoàn hàng tiêu dùng hàng đầu — OMO, Dove, Sunsilk, Lipton, Knorr và hàng trăm SKU khác.</p>
+      </div>
+      <div class="brand-card">
+        <span class="bc-country">🇰🇷 Hàn Quốc</span>
+        <div class="bc-logo">GS Battery</div>
+        <div class="bc-cat">Ắc quy xe máy & ô tô</div>
+        <p class="bc-desc">Thương hiệu ắc quy hàng đầu Hàn Quốc, bền bỉ trong điều kiện khí hậu nhiệt đới Việt Nam.</p>
+      </div>
+      <div class="brand-card">
+        <span class="bc-country">🇹🇼 Đài Loan</span>
+        <div class="bc-logo">Kenda</div>
+        <div class="bc-cat">Lốp xe máy & ô tô</div>
+        <p class="bc-desc">Thương hiệu lốp xe toàn cầu từ Đài Loan — chất lượng ổn định, giá thành cạnh tranh, nhiều mẫu mã.</p>
+      </div>
+      <div class="brand-card">
+        <span class="bc-country">🇻🇳 Việt Nam</span>
+        <div class="bc-logo">Mekong Penda</div>
+        <div class="bc-cat">Dầu cầu & nhớt công nghiệp</div>
+        <p class="bc-desc">Thương hiệu dầu cầu nội địa chất lượng cao, được tin dùng bởi hàng nghìn cơ sở sửa xe tại ĐBSCL.</p>
+      </div>
+      <div class="brand-card">
+        <span class="bc-country">🇻🇳 Việt Nam</span>
+        <div class="bc-logo">TAHASA</div>
+        <div class="bc-cat">Phụ gia & nhớt đặc biệt</div>
+        <p class="bc-desc">Phụ gia động cơ và nhớt đặc biệt nội địa, phù hợp điều kiện vận hành xe máy tại Đồng bằng sông Cửu Long.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑥ TESTIMONIALS -->
+<section class="stories-sec sec">
+  <div class="cw">
+    <div class="stories-hd rv">
+      <div class="eyebrow ct">Đối tác nói gì</div>
+      <h2 class="s-title ct">Câu Chuyện<br><em>Thành Công</em></h2>
+      <span class="g-bar ct"></span>
+    </div>
+    <div class="stories-grid rv d1">
+      <div class="story-card">
+        <div class="sc-stars">★★★★★</div>
+        <div class="sc-quote">"</div>
+        <p class="sc-text">Từ khi trở thành đại lý Shell của Tín Phát, doanh thu cửa hàng tôi tăng gần 40%. Chính sách chiết khấu tốt, nhân viên hỗ trợ nhiệt tình và giao hàng đúng hẹn.</p>
+        <div class="sc-author">
+          <div class="sc-avatar">👨‍🔧</div>
+          <div>
+            <div class="sc-name">Anh Nguyễn Minh Tuấn</div>
+            <div class="sc-role">Cửa hàng phụ tùng xe máy · Cà Mau</div>
+          </div>
+        </div>
+      </div>
+      <div class="story-card">
+        <div class="sc-stars">★★★★★</div>
+        <div class="sc-quote">"</div>
+        <p class="sc-text">TipaShop giúp tôi mở rộng kênh bán hàng online mà không cần đầu tư thêm mặt bằng. Chỉ 2 tháng sau khi mở gian hàng, tôi đã có thêm 50–80 đơn mỗi ngày.</p>
+        <div class="sc-author">
+          <div class="sc-avatar">👩‍💼</div>
+          <div>
+            <div class="sc-name">Chị Trần Thị Lan</div>
+            <div class="sc-role">Nhà bán lẻ hàng tiêu dùng · Sóc Trăng</div>
+          </div>
+        </div>
+      </div>
+      <div class="story-card">
+        <div class="sc-stars">★★★★★</div>
+        <div class="sc-quote">"</div>
+        <p class="sc-text">Làm TipaExpress được 8 tháng, thu nhập ổn định và chủ động thời gian hơn công việc cũ. App dễ dùng, thanh toán đúng hẹn và có hỗ trợ khi gặp sự cố giao hàng.</p>
+        <div class="sc-author">
+          <div class="sc-avatar">🚴</div>
+          <div>
+            <div class="sc-name">Anh Lê Văn Hùng</div>
+            <div class="sc-role">Tài xế TipaExpress · Bạc Liêu</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑦ ĐĂNG KÝ FORM -->
+<section class="reg-sec sec" id="reg">
+  <div class="reg-glow"></div>
+  <div class="reg-top"></div>
+  <div class="cw">
+    <div class="reg-inner">
+      <!-- Left text -->
+      <div class="rv rl">
+        <div class="eyebrow lt">Bắt đầu ngay hôm nay</div>
+        <h2 class="s-title wh">Đăng Ký<br><em>Hợp Tác</em></h2>
+        <span class="g-bar" style="background:linear-gradient(90deg,var(--gold),var(--amber))"></span>
+        <p class="body-t" style="color:rgba(255,255,255,.42);max-width:420px;margin-bottom:32px">Điền form bên cạnh — đội ngũ kinh doanh sẽ liên hệ trong vòng 24 giờ làm việc để tư vấn và hỗ trợ bạn.</p>
+        <div class="reg-perks">
+          <div class="rp">
+            <div class="rp-ico">⚡</div>
+            <p><strong>Phản hồi trong 24h</strong> làm việc sau khi nhận form</p>
+          </div>
+          <div class="rp">
+            <div class="rp-ico">🆓</div>
+            <p><strong>Tư vấn miễn phí</strong>, không ràng buộc bất kỳ điều kiện nào</p>
+          </div>
+          <div class="rp">
+            <div class="rp-ico">🔒</div>
+            <p><strong>Thông tin bảo mật</strong>, không chia sẻ bên thứ ba</p>
+          </div>
+          <div class="rp">
+            <div class="rp-ico">📞</div>
+            <p>Hoặc gọi thẳng: <strong style="color:#fff"><a href="tel:0949299494" style="color:var(--amber)">0949 29 94 94</a></strong></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right form -->
+      <div class="rv rr d1">
+        <div class="reg-form-wrap">
+          <h3 class="rf-title">Đăng Ký <em>Ngay</em></h3>
+          <p class="rf-sub">Chúng tôi sẽ liên hệ tư vấn miễn phí trong 24 giờ làm việc.</p>
+
+          <form class="rf-form" id="regForm" novalidate>
+            <div class="rf-row">
+              <div class="rf-field">
+                <label class="rf-label">Họ và tên <span>*</span></label>
+                <input type="text" class="rf-input" placeholder="Nguyễn Văn A" required>
+              </div>
+              <div class="rf-field">
+                <label class="rf-label">Số điện thoại <span>*</span></label>
+                <input type="tel" class="rf-input" placeholder="0909 xxx xxx" required>
+              </div>
+            </div>
+            <div class="rf-field">
+              <label class="rf-label">Email</label>
+              <input type="email" class="rf-input" placeholder="email@company.com">
+            </div>
+            <div class="rf-row">
+              <div class="rf-field">
+                <label class="rf-label">Mô hình hợp tác <span>*</span></label>
+                <div class="rf-select-w">
+                  <select class="rf-select rf-input" required>
+                    <option value="">— Chọn loại hình —</option>
+                    <option>Đại lý phân phối</option>
+                    <option>Bán hàng TipaShop</option>
+                    <option>Đối tác TipaExpress</option>
+                    <option>Cung ứng sản phẩm</option>
+                    <option>Khác</option>
+                  </select>
+                </div>
+              </div>
+              <div class="rf-field">
+                <label class="rf-label">Tỉnh / Thành phố <span>*</span></label>
+                <div class="rf-select-w">
+                  <select class="rf-select rf-input" required>
+                    <option value="">— Chọn tỉnh thành —</option>
+                    <option>Bạc Liêu</option>
+                    <option>Cà Mau</option>
+                    <option>Sóc Trăng</option>
+                    <option>Kiên Giang</option>
+                    <option>Hậu Giang</option>
+                    <option>Cần Thơ</option>
+                    <option>An Giang</option>
+                    <option>TP. Hồ Chí Minh</option>
+                    <option>Khác</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="rf-field">
+              <label class="rf-label">Mô tả ngắn về bạn / doanh nghiệp</label>
+              <textarea class="rf-textarea" placeholder="Kinh nghiệm, ngành hàng hiện tại, quy mô..."></textarea>
+            </div>
+            <button type="submit" class="btn-reg">
+              <span>Gửi đăng ký hợp tác</span>
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </button>
+          </form>
+
+          <div class="rf-success" id="regSuccess">
+            <div class="rf-success-ico">🎉</div>
+            <h3>Đăng ký thành công!</h3>
+            <p>Cảm ơn bạn đã tin tưởng Tín Phát Group. Đội ngũ kinh doanh sẽ liên hệ bạn trong <strong>24 giờ</strong> làm việc tới.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑧ FAQ -->
+<section class="faq-sec sec">
+  <div class="cw">
+    <div class="rv" style="text-align:center;margin-bottom:48px">
+      <div class="eyebrow ct">Câu hỏi thường gặp</div>
+      <h2 class="s-title ct">Giải Đáp <em>Thắc Mắc</em></h2>
+      <span class="g-bar ct"></span>
+    </div>
+    <div class="faq-grid rv d1">
+      <div class="faq-item">
+        <div class="faq-q">Tôi cần bao nhiêu vốn để trở thành đại lý?<span class="faq-ico">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Vốn ban đầu phụ thuộc vào ngành hàng và quy mô đại lý. Thông thường từ 20 triệu (đại lý nhỏ dầu nhớt) đến 100+ triệu (đại lý Unilever). Đội ngũ tư vấn sẽ hỗ trợ bạn chọn mô hình phù hợp khả năng tài chính.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Có cần kinh nghiệm trong ngành không?<span class="faq-ico">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Không bắt buộc! Tín Phát sẽ đào tạo kiến thức sản phẩm, kỹ năng bán hàng và hỗ trợ triển khai đầy đủ. Điều quan trọng là bạn có thị trường tiềm năng và tinh thần kinh doanh.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Vùng kinh doanh có được bảo vệ không?<span class="faq-ico">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Có. Tín Phát cam kết bảo vệ vùng kinh doanh được ghi rõ trong hợp đồng. Chúng tôi không phát triển thêm đại lý trong cùng khu vực địa lý của bạn trong suốt thời hạn hợp đồng.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Chính sách đổi trả hàng tồn kho như thế nào?<span class="faq-ico">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Tín Phát hỗ trợ đổi trả hàng lỗi/hết date theo quy định của từng nhà sản xuất. Với hàng tồn kho chậm, đội kinh doanh sẽ hỗ trợ kế hoạch bán hàng và chương trình khuyến mãi để xử lý tồn kho.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Thời gian từ khi đăng ký đến khi ký hợp đồng là bao lâu?<span class="faq-ico">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">Thông thường quy trình mất 5–10 ngày làm việc: tư vấn (1–2 ngày) → thẩm định hồ sơ (2–3 ngày) → khảo sát thực địa (1–2 ngày) → ký hợp đồng (1 ngày). Trường hợp đặc biệt có thể nhanh hơn.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">TipaShop hỗ trợ những danh mục sản phẩm nào?<span class="faq-ico">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">TipaShop tiếp nhận hầu hết danh mục: hàng tiêu dùng, thực phẩm, phụ kiện xe, hàng gia dụng, thời trang và nhiều hơn nữa. Yêu cầu sản phẩm có nguồn gốc rõ ràng và không thuộc danh mục cấm kinh doanh.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-main">
+    <div>
+      <div class="ft-brand">Tín Phát <em>Group</em></div>
+      <span class="ft-est">Est. 2002 · Bạc Liêu, Việt Nam</span>
+      <p class="ft-about">"Chuyên nghiệp – Tận tình – Chất lượng." Cam kết mang lại dịch vụ tốt nhất, hướng tới Tập đoàn Thương mại quy mô toàn cầu.</p>
+      <div class="ft-contacts">
+        <span class="ftc">📍 315 Nguyễn Thị Minh Khai, P.5, TP Bạc Liêu</span>
+        <span class="ftc"><a href="tel:0949299494">📞 0949 29 94 94 · 02913-99-2299</a></span>
+        <span class="ftc"><a href="mailto:contact@tinphat.com">✉ contact@tinphat.com</a></span>
+      </div>
+      <div class="ft-soc">
+        <a href="#" class="fso">f</a><a href="#" class="fso">t</a>
+        <a href="#" class="fso">z</a><a href="#" class="fso">▶</a>
+      </div>
+    </div>
+    <div class="ft-col">
+      <h5>Về chúng tôi</h5>
+      <a href="gioi-thieu.html">Giới thiệu</a><a href="#">Các lĩnh vực</a>
+      <a href="#">Ban lãnh đạo</a><a href="#">Tin tức</a>
+    </div>
+    <div class="ft-col">
+      <h5>Dịch vụ</h5>
+      <a href="#">Dầu nhớt & Ắc quy</a><a href="#">TipaShop</a>
+      <a href="#">TipaExpress</a><a href="#">Tín Phát CRM</a>
+    </div>
+    <div class="ft-col">
+      <h5>Hợp tác</h5>
+      <a href="#">Đăng ký đại lý</a><a href="#">Tham gia TipaShop</a>
+      <a href="#">Cung ứng sản phẩm</a><a href="#">Tuyển dụng</a>
+    </div>
+  </div>
+  <div class="ft-bot">
+    <p class="ft-copy">© 2026 Tín Phát Group · Bạc Liêu, Việt Nam · tinphat.com</p>
+  </div>
+</footer>
+
+<script>
+/* scroll progress */
+const prog = document.getElementById('prog');
+window.addEventListener('scroll',()=>{
+  const s=document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight;
+  prog.style.width=(h>0?s/h*100:0)+'%';
+},{passive:true});
+
+/* navbar */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('on',scrollY>50),{passive:true});
+
+/* hamburger */
+const ham=document.getElementById('ham'),mob=document.getElementById('mob');
+let open=false;
+ham.addEventListener('click',()=>{
+  open=!open;
+  ham.classList.toggle('open',open);
+  mob.classList.toggle('open',open);
+  document.body.style.overflow=open?'hidden':'';
+});
+mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+  open=false;ham.classList.remove('open');mob.classList.remove('open');
+  document.body.style.overflow='';
+}));
+
+/* reveal */
+const obs=new IntersectionObserver(e=>{
+  e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('on');});
+},{threshold:.06,rootMargin:'0px 0px -28px 0px'});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+/* tabs */
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const t=btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('on'));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('on'));
+    btn.classList.add('on');
+    document.getElementById('tab-'+t).classList.add('on');
+    // re-trigger reveal on newly visible panel
+    document.querySelectorAll('#tab-'+t+' .rv').forEach(el=>{
+      el.classList.remove('on');
+      setTimeout(()=>el.classList.add('on'),50);
+    });
+  });
+});
+
+/* FAQ accordion */
+document.querySelectorAll('.faq-item').forEach(item=>{
+  item.querySelector('.faq-q').addEventListener('click',()=>{
+    const isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!isOpen)item.classList.add('open');
+  });
+});
+
+/* Register form */
+document.getElementById('regForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  const btn=this.querySelector('.btn-reg');
+  btn.innerHTML='<span>Đang gửi...</span>';
+  btn.disabled=true;
+  setTimeout(()=>{
+    this.style.display='none';
+    document.getElementById('regSuccess').classList.add('show');
+  },1400);
+});
+
+/* smooth scroll for # links */
+document.querySelectorAll('a[href="#reg"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    document.getElementById('reg').scrollIntoView({behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>
