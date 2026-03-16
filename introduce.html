@@ -1,1 +1,1056 @@
 
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Giới Thiệu — TÍN PHÁT GROUP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════
+   TOKENS
+════════════════════════════════════ */
+:root {
+  --ivory:  #FAF7F2;
+  --paper:  #F3EDE3;
+  --warm:   #E8DFD0;
+  --sand:   #D6CBBA;
+  --white:  #FEFEFE;
+
+  --navy:   #0E1B2C;
+  --navy2:  #1A2E4A;
+  --navy3:  #243E62;
+
+  --gold:   #C4881C;
+  --gold2:  #D9A030;
+  --amber:  #EDBA48;
+
+  --body:   #3C3630;
+  --slate:  #68605A;
+  --muted:  #9E9288;
+  --line:   #E4DACC;
+  --lineD:  #CFC3B2;
+
+  --sh1: 0 2px 16px rgba(14,27,44,.06);
+  --sh2: 0 8px 48px rgba(14,27,44,.10);
+  --sh3: 0 20px 80px rgba(14,27,44,.15);
+  --shG: 0 12px 40px rgba(196,136,28,.25);
+  --ease: cubic-bezier(.16,1,.3,1);
+  --gold-grad: linear-gradient(135deg,var(--gold),var(--amber));
+}
+
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+body {
+  font-family:'Exo 2',sans-serif;
+  background:var(--ivory);
+  color:var(--navy);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img { display:block; width:100%; height:100%; object-fit:cover; }
+a { text-decoration:none; color:inherit; }
+button { font-family:'Exo 2',sans-serif; cursor:pointer; border:none; outline:none; background:none; }
+
+/* grain */
+body::before {
+  content:''; position:fixed; inset:0; z-index:9000; pointer-events:none; opacity:.45; mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.028'/%3E%3C/svg%3E");
+}
+
+/* ════════════════════════════════════
+   LAYOUT
+════════════════════════════════════ */
+.cw { width:85%; max-width:1400px; margin:0 auto; }
+@media(max-width:600px) { .cw { width:92%; } }
+
+/* ════════════════════════════════════
+   REVEAL
+════════════════════════════════════ */
+.rv { opacity:0; transform:translateY(28px); transition:opacity .75s var(--ease),transform .75s var(--ease); }
+.rv.on { opacity:1; transform:none; }
+.rv.rl { transform:translateX(-28px); } .rv.rl.on { transform:none; opacity:1; }
+.rv.rr { transform:translateX(28px); } .rv.rr.on { transform:none; opacity:1; }
+.d1{transition-delay:.07s} .d2{transition-delay:.14s} .d3{transition-delay:.21s}
+.d4{transition-delay:.28s} .d5{transition-delay:.35s}
+
+@keyframes up    { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:none} }
+@keyframes ken   { from{transform:scale(1.06)} to{transform:scale(1)} }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:.2} }
+@keyframes drift { 0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)} }
+@keyframes barIn { from{transform:scaleX(0)} to{transform:scaleX(1)} }
+@keyframes ticker{ to{transform:translateX(-50%)} }
+@keyframes lineW { from{width:0} to{width:100%} }
+
+/* progress bar */
+#prog { position:fixed; top:0; left:0; z-index:8999; height:2px; width:0%; background:var(--gold-grad); }
+
+/* ════════════════════════════════════
+   TOPBAR
+════════════════════════════════════ */
+.topbar { display:none; }
+@media(min-width:768px) {
+  .topbar { display:block; background:var(--navy); border-bottom:1px solid rgba(196,136,28,.15); }
+  .tb-inner { width:85%; max-width:1400px; margin:0 auto; height:38px; display:flex; align-items:center; justify-content:space-between; }
+  .tb-links { display:flex; }
+  .tb-link { display:flex; align-items:center; gap:6px; height:38px; padding:0 14px; font-size:11.5px; font-weight:400; color:rgba(255,255,255,.3); border-right:1px solid rgba(255,255,255,.06); transition:color .2s; }
+  .tb-link:first-child { padding-left:0; }
+  .tb-link:hover { color:var(--amber); }
+  .tb-dot { width:3px; height:3px; border-radius:50%; background:var(--gold); opacity:.5; }
+  .tb-langs { display:flex; }
+  .tb-lang { height:38px; padding:0 12px; font-size:10.5px; font-weight:700; letter-spacing:.5px; color:rgba(255,255,255,.25); display:flex; align-items:center; border-left:1px solid rgba(255,255,255,.06); cursor:pointer; transition:color .2s; }
+  .tb-lang:hover,.tb-lang.on { color:var(--amber); }
+}
+
+/* ════════════════════════════════════
+   NAVBAR
+════════════════════════════════════ */
+.navbar { position:sticky; top:0; z-index:990; background:rgba(250,247,242,.97); backdrop-filter:blur(20px); border-bottom:1px solid var(--line); transition:box-shadow .3s,border-color .3s; }
+.navbar.on { box-shadow:0 4px 32px rgba(14,27,44,.07); border-bottom-color:var(--lineD); }
+.nav-inner { width:85%; max-width:1400px; margin:0 auto; height:62px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+@media(max-width:600px) { .nav-inner { width:92%; } }
+@media(min-width:1024px) { .nav-inner { height:70px; } }
+
+.logo { display:flex; align-items:center; gap:11px; flex-shrink:0; }
+.logo-mark { width:38px; height:38px; flex-shrink:0; background:var(--navy); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%); }
+.logo-mark::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:var(--gold-grad); }
+.logo-mark span { font-size:12px; font-weight:900; color:var(--amber); letter-spacing:.5px; }
+.logo-info { display:flex; flex-direction:column; }
+.logo-name { font-size:15px; font-weight:900; color:var(--navy); letter-spacing:.2px; line-height:1; }
+.logo-sub  { font-size:8px; font-weight:600; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-top:3px; }
+@media(min-width:1024px) { .logo-mark{width:42px;height:42px} .logo-name{font-size:17px} .logo-sub{font-size:8.5px} }
+
+.nav-links { display:none; }
+@media(min-width:1024px) {
+  .nav-links { display:flex; gap:0; }
+  .nav-links a { font-size:13px; font-weight:500; color:var(--slate); padding:0 12px; height:70px; display:flex; align-items:center; white-space:nowrap; position:relative; transition:color .2s; }
+  .nav-links a::after { content:''; position:absolute; bottom:0; left:12px; right:12px; height:2px; background:var(--gold-grad); transform:scaleX(0); transform-origin:center; transition:transform .3s var(--ease); }
+  .nav-links a:hover,.nav-links a.on { color:var(--navy); }
+  .nav-links a:hover::after,.nav-links a.on::after { transform:scaleX(1); }
+}
+.nav-cta { display:none; }
+@media(min-width:1024px) {
+  .nav-cta { display:flex; gap:9px; flex-shrink:0; }
+  .btn-nv-outline { padding:9px 16px; font-size:12.5px; font-weight:600; color:var(--slate); border:1.5px solid var(--line); transition:all .22s; clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px)); }
+  .btn-nv-outline:hover { border-color:var(--navy); color:var(--navy); }
+  .btn-nv-fill { padding:10px 22px; font-size:12.5px; font-weight:800; color:#fff; background:var(--navy); position:relative; overflow:hidden; clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px)); transition:color .28s; }
+  .btn-nv-fill::before { content:''; position:absolute; inset:0; background:var(--gold-grad); transform:translateY(105%); transition:transform .36s var(--ease); }
+  .btn-nv-fill:hover::before { transform:translateY(0); }
+  .btn-nv-fill:hover { color:var(--navy); }
+  .btn-nv-fill span { position:relative; z-index:1; }
+}
+.hamburger { display:flex; flex-direction:column; gap:5px; width:40px; height:40px; align-items:center; justify-content:center; flex-shrink:0; }
+.hamburger span { display:block; width:22px; height:1.5px; background:var(--navy); border-radius:2px; transition:all .3s var(--ease); }
+.hamburger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+.hamburger.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+@media(min-width:1024px) { .hamburger { display:none; } }
+
+.mobile-menu { position:fixed; inset:0; z-index:980; background:var(--navy); display:flex; flex-direction:column; padding:100px 32px 48px; transform:translateX(100%); transition:transform .45s var(--ease); }
+.mobile-menu.open { transform:translateX(0); }
+.mobile-menu a { display:block; font-size:28px; font-weight:800; color:rgba(255,255,255,.85); padding:14px 0; border-bottom:1px solid rgba(255,255,255,.07); transition:color .2s,padding-left .25s var(--ease); }
+.mobile-menu a:hover { color:var(--amber); padding-left:8px; }
+.mob-bottom { margin-top:40px; display:flex; flex-direction:column; gap:12px; }
+.btn-mob { padding:16px 24px; font-size:15px; font-weight:800; color:var(--navy); background:var(--gold-grad); text-align:center; display:block; clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px)); }
+.btn-mob2 { padding:15px 24px; font-size:15px; font-weight:600; color:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.18); text-align:center; display:block; }
+@media(min-width:1024px) { .mobile-menu { display:none; } }
+
+/* ════════════════════════════════════
+   BREADCRUMB
+════════════════════════════════════ */
+.breadcrumb { background:var(--white); border-bottom:1px solid var(--line); padding:14px 0; }
+.bc-inner { display:flex; align-items:center; gap:8px; font-size:12.5px; font-weight:500; color:var(--muted); }
+.bc-inner a { color:var(--muted); transition:color .2s; }
+.bc-inner a:hover { color:var(--gold); }
+.bc-sep { color:var(--lineD); font-size:10px; }
+.bc-cur { color:var(--navy); font-weight:600; }
+
+/* ════════════════════════════════════
+   PAGE HERO BANNER
+════════════════════════════════════ */
+.page-hero {
+  background:var(--navy);
+  position:relative; overflow:hidden;
+  padding:72px 0 80px;
+}
+@media(min-width:768px)  { .page-hero { padding:88px 0 96px; } }
+@media(min-width:1024px) { .page-hero { padding:104px 0 112px; } }
+/* dot grid */
+.page-hero::before { content:''; position:absolute; inset:0; background-image:radial-gradient(circle,rgba(196,136,28,.07) 1px,transparent 1px); background-size:40px 40px; }
+/* gold top line */
+.page-hero::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--amber) 70%,transparent); }
+/* warm glow */
+.ph-glow { position:absolute; left:-100px; top:50%; transform:translateY(-50%); width:500px; height:500px; border-radius:50%; background:radial-gradient(circle,rgba(196,136,28,.1) 0%,transparent 70%); pointer-events:none; }
+.ph-inner { position:relative; z-index:1; }
+.ph-label { display:flex; align-items:center; gap:10px; margin-bottom:18px; animation:up .6s both; }
+.ph-bar { height:1.5px; width:28px; background:var(--gold-grad); flex-shrink:0; }
+.ph-txt { font-size:10px; font-weight:700; letter-spacing:4px; text-transform:uppercase; color:rgba(196,136,28,.9); }
+.ph-dot { width:5px; height:5px; clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%); background:var(--gold); animation:blink 2.5s infinite; }
+.ph-title { font-size:clamp(44px,9vw,96px); font-weight:900; color:#fff; line-height:.9; letter-spacing:-3px; margin-bottom:20px; animation:up .6s .08s both; }
+.ph-title em { font-style:italic; color:var(--amber); display:block; font-size:.72em; letter-spacing:-2px; }
+.ph-desc { font-size:clamp(14px,2vw,17px); font-weight:300; color:rgba(255,255,255,.45); line-height:1.8; max-width:500px; animation:up .6s .15s both; }
+/* right image */
+.ph-img-wrap { display:none; }
+@media(min-width:900px) {
+  .ph-inner { display:grid; grid-template-columns:1fr 38%; align-items:center; gap:60px; }
+  .ph-left { display:flex; flex-direction:column; }
+  .ph-img-wrap { display:block; position:relative; height:360px; overflow:hidden; }
+  .ph-img-wrap img { position:absolute; inset:0; filter:brightness(.6) saturate(.8); border-radius:2px; }
+  .ph-img-wrap::before { content:''; position:absolute; inset:0; border:1px solid rgba(255,255,255,.08); z-index:1; }
+  /* gold corner */
+  .ph-img-wrap::after { content:''; position:absolute; bottom:0; left:0; right:0; height:3px; background:var(--gold-grad); z-index:2; }
+  /* year stamp */
+  .ph-stamp { position:absolute; top:20px; left:20px; z-index:3; background:var(--navy); padding:14px 18px; clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px)); }
+  .ph-stamp-n { font-size:32px; font-weight:900; font-style:italic; color:var(--amber); line-height:1; letter-spacing:-1.5px; }
+  .ph-stamp-l { font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.35); margin-top:3px; }
+}
+
+/* ════════════════════════════════════
+   SHARED SECTION
+════════════════════════════════════ */
+.sec { padding:72px 0; }
+@media(min-width:768px)  { .sec { padding:88px 0; } }
+@media(min-width:1024px) { .sec { padding:108px 0; } }
+
+.eyebrow { display:flex; align-items:center; gap:10px; font-size:10px; font-weight:700; letter-spacing:3.5px; text-transform:uppercase; color:var(--gold); margin-bottom:12px; }
+.eyebrow::before { content:''; width:20px; height:1.5px; background:var(--gold-grad); flex-shrink:0; }
+.eyebrow.ct { justify-content:center; } .eyebrow.ct::before { display:none; }
+.eyebrow.lt { color:rgba(255,255,255,.4); } .eyebrow.lt::before { background:rgba(255,255,255,.25); }
+
+.s-title { font-size:clamp(32px,6vw,58px); font-weight:900; line-height:.92; letter-spacing:-2px; color:var(--navy); margin-bottom:16px; }
+.s-title em { font-style:italic; color:var(--gold); }
+.s-title.wh { color:#fff; }
+.s-title.ct { text-align:center; }
+
+.g-bar { display:block; width:36px; height:2px; background:var(--gold-grad); margin:14px 0 24px; }
+.g-bar.ct { margin:14px auto 24px; }
+
+.body-t { font-size:clamp(14.5px,1.8vw,15.5px); font-weight:300; line-height:1.9; color:var(--slate); }
+.body-t strong { color:var(--navy); font-weight:600; }
+
+.btn-primary { display:inline-flex; align-items:center; gap:9px; background:var(--navy); color:#fff; padding:14px 28px; font-size:14px; font-weight:700; clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px)); position:relative; overflow:hidden; transition:gap .3s,color .3s; }
+.btn-primary::before { content:''; position:absolute; inset:0; background:var(--gold-grad); transform:translateX(-105%); transition:transform .38s var(--ease); }
+.btn-primary:hover::before { transform:translateX(0); }
+.btn-primary:hover { color:var(--navy); gap:13px; }
+.btn-primary span,.btn-primary svg { position:relative; z-index:1; }
+
+/* ════════════════════════════════════
+   STORY — zigzag split
+════════════════════════════════════ */
+.story { background:var(--white); }
+.story-block { display:flex; flex-direction:column; gap:0; }
+@media(min-width:900px) { .story-block { display:grid; grid-template-columns:1fr 1fr; min-height:520px; } }
+
+.sb-img { position:relative; overflow:hidden; background:var(--paper); height:60vw; max-height:420px; }
+@media(min-width:900px) { .sb-img { height:auto; max-height:none; } }
+.sb-img img { position:absolute; inset:0; filter:brightness(.82) saturate(.86); transition:transform 1.4s var(--ease); }
+.sb-img:hover img { transform:scale(1.04); }
+/* gradient right side */
+.sb-img::after { content:''; position:absolute; inset:0; background:linear-gradient(to top,rgba(14,27,44,.7) 0%,transparent 50%); }
+@media(min-width:900px) {
+  .sb-img::after { background:linear-gradient(to right,transparent 55%,var(--white) 100%), linear-gradient(to top,rgba(14,27,44,.6) 0%,transparent 50%); }
+}
+/* year badge */
+.sb-badge { position:absolute; bottom:18px; left:18px; z-index:3; background:rgba(250,247,242,.94); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,.8); padding:14px 20px; box-shadow:var(--sh2); clip-path:polygon(0 0,calc(100% - 7px) 0,100% 7px,100% 100%,7px 100%,0 calc(100% - 7px)); }
+@media(min-width:600px) { .sb-badge { bottom:24px; left:24px; padding:18px 24px; } }
+.sb-badge-n { font-size:clamp(30px,5vw,42px); font-weight:900; font-style:italic; color:var(--navy); line-height:1; letter-spacing:-2px; }
+.sb-badge-l { font-size:11px; font-weight:500; color:var(--muted); margin-top:2px; }
+
+.sb-text { padding:44px 20px 52px; display:flex; flex-direction:column; justify-content:center; }
+@media(min-width:600px)  { .sb-text { padding:52px 28px 60px; } }
+@media(min-width:900px)  { .sb-text { padding:64px 48px 64px 56px; } }
+@media(min-width:1100px) { .sb-text { padding:80px 56px 80px 64px; } }
+.sb-text .body-t { margin-bottom:16px; }
+
+/* Flip for second block (image right) */
+@media(min-width:900px) {
+  .story-block.flip { direction:rtl; }
+  .story-block.flip > * { direction:ltr; }
+  .story-block.flip .sb-img::after { background:linear-gradient(to left,transparent 55%,var(--paper) 100%), linear-gradient(to top,rgba(14,27,44,.6) 0%,transparent 50%); }
+  .story-block.flip .sb-text { padding:80px 64px 80px 48px; }
+}
+/* divider between blocks */
+.story-divider { height:1px; background:var(--line); }
+
+/* ════════════════════════════════════
+   MISSION / VISION / VALUES (MVV)
+════════════════════════════════════ */
+.mvv { background:var(--ivory); }
+.mvv-grid {
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+}
+@media(min-width:560px) { .mvv-grid { grid-template-columns:1fr 1fr; } }
+@media(min-width:1024px) { .mvv-grid { grid-template-columns:1fr 1fr 1fr; } }
+
+.mvv-card {
+  background:var(--white); border:1px solid var(--line);
+  padding:36px 30px 40px;
+  position:relative; overflow:hidden;
+  transition:all .4s var(--ease);
+}
+.mvv-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--gold-grad); transform:scaleX(0); transform-origin:left; transition:transform .42s var(--ease); }
+.mvv-card:hover { transform:translateY(-7px); box-shadow:var(--sh2); border-color:transparent; }
+.mvv-card:hover::before { transform:scaleX(1); }
+/* large number watermark */
+.mvv-wm { position:absolute; bottom:-16px; right:-8px; font-size:120px; font-weight:900; font-style:italic; color:rgba(14,27,44,.03); line-height:1; pointer-events:none; }
+.mvv-ico { font-size:36px; margin-bottom:20px; }
+.mvv-card h3 { font-size:clamp(20px,2.5vw,24px); font-weight:800; color:var(--navy); margin-bottom:10px; }
+.mvv-card h3 em { font-style:italic; color:var(--gold); }
+.mvv-card p { font-size:14.5px; font-weight:300; color:var(--slate); line-height:1.82; }
+/* Dark accent card — Vision */
+.mvv-card.dark { background:var(--navy); border-color:var(--navy); }
+.mvv-card.dark h3 { color:#fff; }
+.mvv-card.dark p { color:rgba(255,255,255,.5); }
+.mvv-card.dark::before { background:linear-gradient(90deg,var(--amber),var(--gold)); }
+
+/* ════════════════════════════════════
+   CORE VALUES GRID
+════════════════════════════════════ */
+.values-sec { background:var(--paper); border-top:1px solid var(--line); }
+.values-hd { text-align:center; margin-bottom:52px; }
+
+.val-grid {
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+}
+@media(min-width:480px) { .val-grid { grid-template-columns:1fr 1fr; } }
+@media(min-width:768px) { .val-grid { grid-template-columns:repeat(3,1fr); } }
+@media(min-width:1024px){ .val-grid { grid-template-columns:repeat(6,1fr); } }
+
+.val-item {
+  background:var(--white); border:1px solid var(--line);
+  padding:28px 22px;
+  display:flex; flex-direction:column; align-items:flex-start;
+  position:relative; overflow:hidden;
+  transition:all .35s var(--ease);
+}
+.val-item::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--gold-grad); transform:scaleX(0); transform-origin:left; transition:transform .4s var(--ease); }
+.val-item:hover { background:var(--navy); border-color:var(--navy); transform:translateY(-5px); box-shadow:var(--sh2); }
+.val-item:hover .val-ic { background:rgba(196,136,28,.2); border-color:rgba(196,136,28,.35); }
+.val-item:hover h4 { color:#fff; }
+.val-item:hover p { color:rgba(255,255,255,.45); }
+.val-item:hover::after { transform:scaleX(1); background:linear-gradient(90deg,var(--amber),var(--gold)); }
+.val-ic { width:46px; height:46px; border:1.5px solid var(--line); background:var(--ivory); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:16px; transition:all .3s; }
+.val-item h4 { font-size:14.5px; font-weight:700; color:var(--navy); margin-bottom:7px; transition:color .25s; }
+.val-item p { font-size:12.5px; font-weight:300; color:var(--slate); line-height:1.6; transition:color .25s; }
+
+/* ════════════════════════════════════
+   TIMELINE
+════════════════════════════════════ */
+.timeline-sec { background:var(--white); }
+.tl-hd { text-align:center; margin-bottom:60px; }
+.tl-wrap { position:relative; }
+/* center line — desktop only */
+@media(min-width:900px) {
+  .tl-wrap::before { content:''; position:absolute; top:0; bottom:0; left:50%; width:1.5px; background:var(--gold-grad); transform:translateX(-50%); animation:barIn 1.2s var(--ease) both; }
+}
+
+.tl-items { display:flex; flex-direction:column; gap:0; }
+.tl-item {
+  display:flex; flex-direction:column; gap:0;
+  padding-left:28px;
+  border-left:2px solid var(--line);
+  padding-bottom:44px;
+  position:relative;
+}
+.tl-item:last-child { padding-bottom:0; }
+/* dot on the line */
+.tl-item::before {
+  content:''; position:absolute; left:-7px; top:6px;
+  width:12px; height:12px; border-radius:50%;
+  background:var(--gold-grad);
+  box-shadow:0 0 0 3px var(--white), 0 0 0 5px rgba(196,136,28,.25);
+}
+@media(min-width:900px) {
+  .tl-item {
+    display:grid; grid-template-columns:1fr 56px 1fr;
+    align-items:start; gap:0;
+    padding-left:0; border-left:none; padding-bottom:0; margin-bottom:52px;
+  }
+  .tl-item:last-child { margin-bottom:0; }
+  .tl-item::before { left:50%; top:8px; transform:translateX(-50%); width:14px; height:14px; box-shadow:0 0 0 4px var(--white),0 0 0 6px rgba(196,136,28,.2); }
+  /* alternating: even items flip */
+  .tl-item:nth-child(even) { direction:rtl; }
+  .tl-item:nth-child(even) > * { direction:ltr; }
+  .tl-item .tl-center { display:flex; flex-direction:column; align-items:center; padding-top:4px; }
+}
+
+.tl-year-col { display:none; }
+@media(min-width:900px) {
+  .tl-year-col { display:block; }
+  .tl-item:nth-child(odd) .tl-year-col { text-align:right; padding-right:32px; padding-top:4px; }
+  .tl-item:nth-child(even) .tl-year-col { text-align:left; padding-left:32px; padding-top:4px; }
+}
+.tl-year {
+  font-size:clamp(28px,4vw,40px); font-weight:900; font-style:italic;
+  color:var(--gold); line-height:1; letter-spacing:-2px;
+}
+.tl-center { display:none; }
+@media(min-width:900px) { .tl-center { display:flex; } }
+
+.tl-content { padding:0; }
+@media(min-width:900px) {
+  .tl-item:nth-child(odd) .tl-content  { padding-left:32px; }
+  .tl-item:nth-child(even) .tl-content { padding-right:32px; }
+}
+
+/* Mobile year shown inline */
+.tl-year-mob {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:clamp(22px,5vw,30px); font-weight:900; font-style:italic;
+  color:var(--gold); letter-spacing:-1.5px;
+  margin-bottom:8px;
+}
+@media(min-width:900px) { .tl-year-mob { display:none; } }
+
+.tl-card {
+  background:var(--ivory); border:1px solid var(--line);
+  padding:22px 24px;
+  transition:all .35s var(--ease);
+  position:relative; overflow:hidden;
+}
+.tl-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--gold-grad); transform:scaleX(0); transform-origin:left; transition:transform .4s var(--ease); }
+.tl-card:hover { background:var(--white); box-shadow:var(--sh2); transform:translateY(-4px); border-color:transparent; }
+.tl-card:hover::before { transform:scaleX(1); }
+.tl-card h4 { font-size:clamp(15px,2vw,17px); font-weight:700; color:var(--navy); margin-bottom:8px; }
+.tl-card p  { font-size:13px; font-weight:300; color:var(--slate); line-height:1.65; }
+
+/* ════════════════════════════════════
+   LEADERSHIP TEAM
+════════════════════════════════════ */
+.team-sec { background:var(--ivory); }
+.team-hd { text-align:center; margin-bottom:52px; }
+.team-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:10px;
+}
+@media(min-width:768px)  { .team-grid { grid-template-columns:repeat(3,1fr); } }
+@media(min-width:1100px) { .team-grid { grid-template-columns:repeat(4,1fr); } }
+
+.tm {
+  background:var(--white); border:1px solid var(--line);
+  overflow:hidden; position:relative;
+  transition:all .38s var(--ease);
+}
+.tm:hover { transform:translateY(-7px); box-shadow:var(--sh2); border-color:transparent; }
+.tm-photo { height:clamp(140px,30vw,220px); overflow:hidden; position:relative; background:var(--paper); }
+.tm-photo img { filter:brightness(.85) saturate(.8) grayscale(.3); transition:filter .5s,transform 1.2s var(--ease); }
+.tm:hover .tm-photo img { filter:brightness(.8) saturate(.9); transform:scale(1.05); }
+/* gold line on hover */
+.tm::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--gold-grad); transform:scaleX(0); transform-origin:left; transition:transform .4s var(--ease); z-index:1; }
+.tm:hover::before { transform:scaleX(1); }
+.tm-body { padding:18px 18px 22px; }
+.tm-name { font-size:clamp(14px,2vw,16px); font-weight:800; color:var(--navy); margin-bottom:4px; line-height:1.2; }
+.tm-role { font-size:11.5px; font-weight:600; letter-spacing:.5px; color:var(--gold); margin-bottom:8px; }
+.tm-desc { font-size:12.5px; font-weight:300; color:var(--slate); line-height:1.6; }
+/* placeholder avatar */
+.tm-avatar { width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,var(--navy2),var(--navy3)); }
+.tm-avatar-ic { font-size:clamp(40px,8vw,64px); opacity:.3; }
+
+/* ════════════════════════════════════
+   PARTNERS STRIP
+════════════════════════════════════ */
+.partners-sec { background:var(--white); border-top:1px solid var(--line); padding:72px 0; }
+.partners-hd { text-align:center; margin-bottom:44px; }
+.part-grid { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--line); }
+@media(min-width:768px) { .part-grid { grid-template-columns:repeat(6,1fr); } }
+.pc { height:76px; display:flex; align-items:center; justify-content:center; border-right:1px solid var(--line); border-bottom:1px solid var(--line); cursor:default; transition:all .32s; position:relative; overflow:hidden; }
+@media(min-width:768px) { .pc { height:88px; border-bottom:none; } .pc:last-child { border-right:none; } }
+.pc:nth-child(3n) { border-right:none; }
+@media(min-width:768px) { .pc:nth-child(3n) { border-right:1px solid var(--line); } }
+.pc:nth-last-child(-n+3) { border-bottom:none; }
+.pc::before { content:''; position:absolute; inset:0; background:var(--navy); transform:scaleY(0); transform-origin:bottom; transition:transform .34s var(--ease); }
+.pc:hover::before { transform:scaleY(1); }
+.pc-nm { font-size:clamp(11px,2vw,13px); font-weight:800; letter-spacing:1.5px; text-transform:uppercase; color:var(--sand); transition:color .32s; position:relative; z-index:1; }
+.pc:hover .pc-nm { color:var(--amber); }
+
+/* ════════════════════════════════════
+   CULTURE / WHY JOIN
+════════════════════════════════════ */
+.culture { background:var(--navy); position:relative; overflow:hidden; }
+.culture::before { content:''; position:absolute; inset:0; background-image:radial-gradient(circle,rgba(196,136,28,.06) 1px,transparent 1px); background-size:40px 40px; }
+.culture::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--amber) 70%,transparent); }
+.cul-glow { position:absolute; right:-100px; top:50%; transform:translateY(-50%); width:500px; height:500px; border-radius:50%; background:radial-gradient(circle,rgba(196,136,28,.08) 0%,transparent 70%); pointer-events:none; }
+.cul-inner { display:flex; flex-direction:column; gap:48px; position:relative; z-index:1; }
+@media(min-width:900px) { .cul-inner { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; } }
+.cul-l h2.s-title { margin-bottom:16px; }
+.cul-l .body-t { color:rgba(255,255,255,.45); max-width:480px; margin-bottom:32px; }
+.cul-perks { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.cp { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.07); padding:18px 18px; transition:all .3s; }
+.cp:hover { background:rgba(255,255,255,.07); border-color:rgba(196,136,28,.3); }
+.cp-ic { font-size:22px; margin-bottom:9px; }
+.cp h5 { font-size:13.5px; font-weight:700; color:#fff; margin-bottom:4px; }
+.cp p  { font-size:12px; font-weight:300; color:rgba(255,255,255,.4); line-height:1.55; }
+
+/* ════════════════════════════════════
+   CTA BAND
+════════════════════════════════════ */
+.cta-band { background:var(--paper); border-top:1px solid var(--line); padding:80px 0; text-align:center; position:relative; overflow:hidden; }
+.cta-band::before { content:''; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:clamp(300px,60vw,700px); height:300px; border-radius:50%; background:radial-gradient(ellipse,rgba(196,136,28,.06) 0%,transparent 70%); pointer-events:none; }
+.cta-in { position:relative; z-index:1; }
+.cta-in h2 { font-size:clamp(30px,6vw,60px); font-weight:900; font-style:italic; color:var(--navy); line-height:.95; letter-spacing:-2px; margin-bottom:14px; }
+.cta-in h2 em { font-style:normal; color:var(--gold); }
+.cta-in p { font-size:clamp(14px,2vw,16px); font-weight:300; color:var(--slate); line-height:1.75; margin-bottom:36px; }
+.cta-btns { display:flex; flex-direction:column; align-items:center; gap:10px; }
+@media(min-width:480px) { .cta-btns { flex-direction:row; justify-content:center; } }
+.btn-cta-dark { display:inline-flex; align-items:center; gap:9px; background:var(--navy); color:#fff; padding:16px 36px; font-size:14px; font-weight:800; clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,9px 100%,0 calc(100% - 9px)); position:relative; overflow:hidden; transition:gap .3s,color .3s; }
+.btn-cta-dark::before { content:''; position:absolute; inset:0; background:var(--gold-grad); transform:translateX(-105%); transition:transform .4s var(--ease); }
+.btn-cta-dark:hover::before { transform:translateX(0); }
+.btn-cta-dark:hover { color:var(--navy); gap:13px; }
+.btn-cta-dark span,.btn-cta-dark svg { position:relative; z-index:1; }
+.btn-cta-gold { display:inline-flex; align-items:center; gap:8px; background:transparent; color:var(--slate); font-size:14px; font-weight:600; padding-bottom:3px; border-bottom:1.5px solid var(--lineD); transition:all .25s; }
+.btn-cta-gold:hover { color:var(--gold); border-color:var(--gold); gap:12px; }
+
+/* ════════════════════════════════════
+   FOOTER
+════════════════════════════════════ */
+footer { background:#090e17; border-top:1px solid rgba(196,136,28,.18); }
+.ft-main { width:85%; max-width:1400px; margin:0 auto; padding:60px 0 48px; display:grid; grid-template-columns:1fr; gap:40px; border-bottom:1px solid rgba(255,255,255,.04); }
+@media(max-width:600px) { .ft-main { width:92%; } }
+@media(min-width:600px)  { .ft-main { grid-template-columns:1fr 1fr; gap:36px; } }
+@media(min-width:1024px) { .ft-main { grid-template-columns:2fr 1fr 1fr 1.2fr; gap:48px; } }
+.ft-brand { font-size:clamp(19px,3vw,22px); font-weight:900; color:#fff; margin-bottom:4px; }
+.ft-brand em { font-style:italic; color:var(--amber); }
+.ft-est { font-size:9px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,.18); display:block; margin-bottom:16px; }
+.ft-about { font-size:13px; font-weight:300; color:rgba(255,255,255,.28); line-height:1.85; margin-bottom:22px; }
+.ft-contacts { display:flex; flex-direction:column; gap:8px; margin-bottom:22px; }
+.ftc { font-size:12.5px; font-weight:300; color:rgba(255,255,255,.26); display:flex; align-items:flex-start; gap:7px; }
+.ftc a { color:rgba(255,255,255,.26); transition:color .2s; }
+.ftc a:hover { color:var(--amber); }
+.ft-soc { display:flex; gap:7px; }
+.fso { width:36px; height:36px; border:1px solid rgba(255,255,255,.08); display:flex; align-items:center; justify-content:center; font-size:12px; color:rgba(255,255,255,.22); clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px)); transition:all .22s; }
+.fso:hover { background:var(--gold); border-color:var(--gold); color:var(--navy); }
+.ft-col h5 { font-size:10.5px; font-weight:700; color:rgba(255,255,255,.5); letter-spacing:.5px; margin-bottom:16px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,.05); }
+.ft-col a { display:block; font-size:13px; font-weight:300; color:rgba(255,255,255,.26); margin-bottom:9px; transition:all .22s; }
+.ft-col a:hover { color:var(--amber); padding-left:5px; }
+.ft-bot { width:85%; max-width:1400px; margin:0 auto; padding:18px 0; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
+@media(max-width:600px) { .ft-bot { width:92%; justify-content:center; } }
+.ft-copy { font-size:11px; font-weight:300; color:rgba(255,255,255,.14); }
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="tb-inner">
+    <div class="tb-links">
+      <a href="mailto:contact@tinphat.com" class="tb-link"><span class="tb-dot"></span>contact@tinphat.com</a>
+      <a href="tel:0949299494" class="tb-link"><span class="tb-dot"></span>0949 29 94 94</a>
+    </div>
+    <div class="tb-langs">
+      <span class="tb-lang on">🇻🇳 VI</span>
+      <span class="tb-lang">🇬🇧 EN</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark"><span>TP</span></div>
+      <div class="logo-info">
+        <div class="logo-name">TÍN PHÁT GROUP</div>
+        <div class="logo-sub">Est. 2002 · Bạc Liêu</div>
+      </div>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Trang chủ</a>
+      <a href="#" class="on">Giới thiệu</a>
+      <a href="#">Tin tức</a>
+      <a href="#">Tuyển dụng</a>
+      <a href="#">Hợp tác</a>
+      <a href="#">Ứng dụng</a>
+      <a href="#">Liên hệ</a>
+    </nav>
+    <div class="nav-cta">
+      <button class="btn-nv-outline">🛒 TipaShop</button>
+      <button class="btn-nv-fill"><span>Hợp tác ngay →</span></button>
+    </div>
+    <button class="hamburger" id="ham" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-menu" id="mob">
+  <a href="index.html">Trang chủ</a>
+  <a href="#">Giới thiệu</a>
+  <a href="#">Tin tức</a>
+  <a href="#">Tuyển dụng</a>
+  <a href="#">Hợp tác</a>
+  <a href="#">Ứng dụng</a>
+  <a href="#">Liên hệ</a>
+  <div class="mob-bottom">
+    <a href="#" class="btn-mob">Hợp tác ngay →</a>
+    <a href="#" class="btn-mob2">🛒 TipaShop</a>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <div class="cw">
+    <div class="bc-inner">
+      <a href="index.html">Trang chủ</a>
+      <span class="bc-sep">›</span>
+      <span class="bc-cur">Giới thiệu</span>
+    </div>
+  </div>
+</div>
+
+<!-- ① PAGE HERO -->
+<section class="page-hero">
+  <div class="ph-glow"></div>
+  <div class="cw">
+    <div class="ph-inner">
+      <div class="ph-left">
+        <div class="ph-label">
+          <div class="ph-bar"></div>
+          <span class="ph-txt">Về Tín Phát Group</span>
+          <span class="ph-dot"></span>
+        </div>
+        <div class="ph-title">
+          GIỚI<br><em>THIỆU</em>
+        </div>
+        <p class="ph-desc">Hơn 22 năm kiến tạo và phát triển — từ một doanh nghiệp địa phương tại Bạc Liêu, Tín Phát Group đã vươn lên trở thành Tập đoàn Đầu tư Thương mại đa lĩnh vực với quy mô ngày càng mở rộng.</p>
+      </div>
+      <div class="ph-img-wrap">
+        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=85" alt="Tín Phát Group">
+        <div class="ph-stamp">
+          <div class="ph-stamp-n">2002</div>
+          <div class="ph-stamp-l">Năm thành lập</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ② STORY — BLOCK 1 -->
+<section class="story">
+  <div class="story-block rv">
+    <div class="sb-img">
+      <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=900&q=85" alt="Câu chuyện Tín Phát">
+      <div class="sb-badge">
+        <div class="sb-badge-n">22+</div>
+        <div class="sb-badge-l">Năm hoạt động</div>
+      </div>
+    </div>
+    <div class="sb-text">
+      <div class="eyebrow">Câu chuyện của chúng tôi</div>
+      <h2 class="s-title">Hành Trình<br><em>Từ Năm 2002</em></h2>
+      <span class="g-bar"></span>
+      <p class="body-t d1">Tín Phát Group được thành lập năm <strong>2002</strong> tại Bạc Liêu bởi một đội ngũ trẻ đầy khát vọng với mong muốn mang đến những sản phẩm chất lượng tốt nhất cho người tiêu dùng khu vực Đồng bằng sông Cửu Long.</p>
+      <p class="body-t d2" style="margin-top:14px">Khởi đầu từ hoạt động phân phối dầu nhớt, chúng tôi dần mở rộng sang các lĩnh vực hàng tiêu dùng, ắc quy, lốp xe và thương mại điện tử. Mỗi bước đi đều được xây dựng trên nền tảng <strong>uy tín, tận tâm và chất lượng</strong>.</p>
+      <p class="body-t d3" style="margin-top:14px">Ngày nay, Tín Phát Group tự hào là <strong>đại lý chính thức của Shell, Castrol, Motul, Unilever, GS Battery, Kenda</strong> và là đối tác chiến lược của BEST Express tại ĐBSCL.</p>
+    </div>
+  </div>
+
+  <div class="story-divider"></div>
+
+  <div class="story-block flip rv">
+    <div class="sb-img" style="background:var(--navy2)">
+      <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=900&q=85" alt="Chuyển đổi số Tín Phát">
+    </div>
+    <div class="sb-text">
+      <div class="eyebrow">Định hướng tương lai</div>
+      <h2 class="s-title">Chuyển Đổi Số<br><em>Mô Hình 5.0</em></h2>
+      <span class="g-bar"></span>
+      <p class="body-t d1">Không dừng lại ở thương mại truyền thống, Tín Phát Group tiên phong chuyển đổi số với hệ sinh thái gồm <strong>TipaShop</strong> (thương mại điện tử), <strong>TipaExpress</strong> (logistics) và <strong>Tín Phát CRM</strong> (quản trị doanh nghiệp).</p>
+      <p class="body-t d2" style="margin-top:14px">Ba ứng dụng mobile này không chỉ phục vụ khách hàng và đối tác mà còn là nền tảng quản trị nội bộ theo mô hình <strong>doanh nghiệp 5.0</strong> — kết hợp con người, công nghệ và dữ liệu thông minh.</p>
+      <p class="body-t d3" style="margin-top:14px">Mục tiêu đến <strong>2030</strong>: trở thành Tập đoàn Thương mại Đầu tư có quy mô và uy tín toàn cầu, xuất phát từ Bạc Liêu, vươn ra thế giới.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ③ MISSION / VISION / VALUES -->
+<section class="mvv sec">
+  <div class="cw">
+    <div class="rv" style="text-align:center;margin-bottom:48px">
+      <div class="eyebrow ct">Nền tảng chiến lược</div>
+      <h2 class="s-title ct">Sứ Mệnh, Tầm Nhìn<br><em>&amp; Giá Trị</em></h2>
+      <span class="g-bar ct"></span>
+    </div>
+    <div class="mvv-grid rv d1">
+      <div class="mvv-card">
+        <div class="mvv-wm">01</div>
+        <div class="mvv-ico">🎯</div>
+        <h3>Sứ <em>Mệnh</em></h3>
+        <p>Nâng cao chất lượng cuộc sống cộng đồng bằng cách mang đến những sản phẩm chất lượng, công nghệ đỉnh cao và dịch vụ tận tâm nhất tới tay người tiêu dùng.</p>
+      </div>
+      <div class="mvv-card dark">
+        <div class="mvv-wm" style="color:rgba(255,255,255,.04)">02</div>
+        <div class="mvv-ico">🌏</div>
+        <h3>Tầm <em style="color:var(--amber)">Nhìn</em></h3>
+        <p style="color:rgba(255,255,255,.5)">Trở thành Tập đoàn Đầu tư Thương mại có quy mô và uy tín toàn cầu — từ Bạc Liêu, vươn ra thị trường quốc tế với nền tảng công nghệ 5.0 vững chắc.</p>
+      </div>
+      <div class="mvv-card">
+        <div class="mvv-wm">03</div>
+        <div class="mvv-ico">💎</div>
+        <h3>Giá Trị <em>Cốt Lõi</em></h3>
+        <p><strong>Chính trực · Tuân thủ · An toàn</strong> — ba trụ cột không thỏa hiệp. Văn hóa doanh nghiệp: <strong>Trách nhiệm · Kỷ luật · Đoàn kết</strong> trong mọi hoạt động và quyết định.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ④ CORE VALUES -->
+<section class="values-sec sec">
+  <div class="cw">
+    <div class="values-hd rv">
+      <div class="eyebrow ct">Văn hóa doanh nghiệp</div>
+      <h2 class="s-title ct">6 Giá Trị <em>Cốt Lõi</em></h2>
+      <span class="g-bar ct"></span>
+      <p class="body-t" style="text-align:center;margin:0 auto;max-width:500px">Những giá trị này là kim chỉ nam cho mọi hành động và quyết định của toàn thể cán bộ nhân viên Tín Phát Group.</p>
+    </div>
+    <div class="val-grid rv d1">
+      <div class="val-item">
+        <div class="val-ic">🔒</div>
+        <h4>Chính trực</h4>
+        <p>Trung thực, minh bạch trong mọi giao dịch và quan hệ đối tác.</p>
+      </div>
+      <div class="val-item">
+        <div class="val-ic">📋</div>
+        <h4>Tuân thủ</h4>
+        <p>Nghiêm túc chấp hành pháp luật, quy định và cam kết đã đề ra.</p>
+      </div>
+      <div class="val-item">
+        <div class="val-ic">🛡️</div>
+        <h4>An toàn</h4>
+        <p>Đặt an toàn lên hàng đầu trong sản phẩm, dịch vụ và môi trường làm việc.</p>
+      </div>
+      <div class="val-item">
+        <div class="val-ic">💪</div>
+        <h4>Trách nhiệm</h4>
+        <p>Cam kết hoàn thành nhiệm vụ và chịu trách nhiệm với kết quả công việc.</p>
+      </div>
+      <div class="val-item">
+        <div class="val-ic">📐</div>
+        <h4>Kỷ luật</h4>
+        <p>Tự giác, nghiêm túc trong công việc và tuân thủ nội quy doanh nghiệp.</p>
+      </div>
+      <div class="val-item">
+        <div class="val-ic">🤝</div>
+        <h4>Đoàn kết</h4>
+        <p>Hợp tác, hỗ trợ lẫn nhau cùng hướng tới mục tiêu chung của tập đoàn.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑤ TIMELINE -->
+<section class="timeline-sec sec">
+  <div class="cw">
+    <div class="tl-hd rv">
+      <div class="eyebrow ct">Lịch sử phát triển</div>
+      <h2 class="s-title ct">Hành Trình <em>22 Năm</em></h2>
+      <span class="g-bar ct"></span>
+    </div>
+    <div class="tl-wrap">
+      <div class="tl-items">
+
+        <div class="tl-item rv">
+          <div class="tl-year-col"><div class="tl-year">2002</div></div>
+          <div class="tl-center"></div>
+          <div class="tl-content">
+            <div class="tl-year-mob">2002</div>
+            <div class="tl-card">
+              <h4>🏢 Thành lập Tín Phát</h4>
+              <p>Công ty TNHH Tín Phát được thành lập tại Bạc Liêu. Bắt đầu hoạt động phân phối dầu nhớt và hàng tiêu dùng tại khu vực ĐBSCL.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item rv">
+          <div class="tl-year-col"><div class="tl-year">2006</div></div>
+          <div class="tl-center"></div>
+          <div class="tl-content">
+            <div class="tl-year-mob">2006</div>
+            <div class="tl-card">
+              <h4>🛢️ Đại lý chính thức Shell & Castrol</h4>
+              <p>Ký kết hợp đồng đại lý chính thức với Shell và Castrol — bước ngoặt khẳng định vị thế trong ngành phân phối dầu nhớt toàn khu vực.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item rv">
+          <div class="tl-year-col"><div class="tl-year">2010</div></div>
+          <div class="tl-center"></div>
+          <div class="tl-content">
+            <div class="tl-year-mob">2010</div>
+            <div class="tl-card">
+              <h4>🧴 Mở rộng — Unilever & GS Battery</h4>
+              <p>Trở thành nhà phân phối chính thức Unilever và GS Battery, mở rộng danh mục sản phẩm và hệ thống đại lý sang các tỉnh Cà Mau, Sóc Trăng.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item rv">
+          <div class="tl-year-col"><div class="tl-year">2015</div></div>
+          <div class="tl-center"></div>
+          <div class="tl-content">
+            <div class="tl-year-mob">2015</div>
+            <div class="tl-card">
+              <h4>🏍️ Thêm Motul, Kenda & TAHASA</h4>
+              <p>Bổ sung các thương hiệu Motul (dầu nhớt cao cấp), Kenda (lốp xe) và TAHASA vào danh mục phân phối. Hệ thống vươn ra 5 tỉnh thành.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item rv">
+          <div class="tl-year-col"><div class="tl-year">2019</div></div>
+          <div class="tl-center"></div>
+          <div class="tl-content">
+            <div class="tl-year-mob">2019</div>
+            <div class="tl-card">
+              <h4>🚚 Ra mắt TipaExpress & BEST Express</h4>
+              <p>Liên kết chiến lược với BEST Express, ra mắt thương hiệu TipaExpress — mạng lưới giao hàng nhanh phủ sóng toàn Đồng bằng sông Cửu Long.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item rv">
+          <div class="tl-year-col"><div class="tl-year">2021</div></div>
+          <div class="tl-center"></div>
+          <div class="tl-content">
+            <div class="tl-year-mob">2021</div>
+            <div class="tl-card">
+              <h4>🛒 Ra mắt TipaShop — TMĐT</h4>
+              <p>Bước vào lĩnh vực thương mại điện tử với nền tảng TipaShop — mua sắm đa danh mục, giao hàng nhanh, phục vụ hàng nghìn khách hàng mỗi tháng.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item rv">
+          <div class="tl-year-col"><div class="tl-year">2023</div></div>
+          <div class="tl-center"></div>
+          <div class="tl-content">
+            <div class="tl-year-mob">2023</div>
+            <div class="tl-card">
+              <h4>📲 Tín Phát CRM & Chuyển đổi số 5.0</h4>
+              <p>Ra mắt hệ thống CRM nội bộ tích hợp quản lý KPI, OKR và hiệu suất toàn đội ngũ. Chính thức vận hành mô hình doanh nghiệp 5.0.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-item rv">
+          <div class="tl-year-col"><div class="tl-year">2026</div></div>
+          <div class="tl-center"></div>
+          <div class="tl-content">
+            <div class="tl-year-mob">2026</div>
+            <div class="tl-card" style="border-color:var(--gold);background:linear-gradient(135deg,rgba(196,136,28,.06),transparent)">
+              <h4>🌏 Tín Phát Group — Bứt phá toàn cầu</h4>
+              <p>Tái cơ cấu thành Tập đoàn, mở rộng quy mô hoạt động và đẩy mạnh chuyển đổi số. Đặt mục tiêu phát triển thị trường quốc tế vào năm 2030.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑥ LEADERSHIP -->
+<section class="team-sec sec">
+  <div class="cw">
+    <div class="team-hd rv">
+      <div class="eyebrow ct">Con người</div>
+      <h2 class="s-title ct">Ban <em>Lãnh Đạo</em></h2>
+      <span class="g-bar ct"></span>
+      <p class="body-t" style="text-align:center;margin:0 auto;max-width:480px">Đội ngũ lãnh đạo Tín Phát Group là những con người tận tâm với tầm nhìn chiến lược và tinh thần đổi mới không ngừng.</p>
+    </div>
+    <div class="team-grid rv d1">
+      <div class="tm">
+        <div class="tm-photo">
+          <div class="tm-avatar"><div class="tm-avatar-ic">👨‍💼</div></div>
+        </div>
+        <div class="tm-body">
+          <div class="tm-name">Nguyễn Văn A</div>
+          <div class="tm-role">Chủ tịch Tập đoàn</div>
+          <p class="tm-desc">Người sáng lập với hơn 22 năm dẫn dắt Tín Phát từ doanh nghiệp địa phương thành Tập đoàn đa lĩnh vực.</p>
+        </div>
+      </div>
+      <div class="tm">
+        <div class="tm-photo">
+          <div class="tm-avatar"><div class="tm-avatar-ic">👩‍💼</div></div>
+        </div>
+        <div class="tm-body">
+          <div class="tm-name">Trần Thị B</div>
+          <div class="tm-role">Tổng Giám đốc</div>
+          <p class="tm-desc">Điều hành toàn bộ hoạt động kinh doanh, chuyên gia phát triển hệ thống phân phối và quan hệ đối tác.</p>
+        </div>
+      </div>
+      <div class="tm">
+        <div class="tm-photo">
+          <div class="tm-avatar"><div class="tm-avatar-ic">👨‍💻</div></div>
+        </div>
+        <div class="tm-body">
+          <div class="tm-name">Lê Văn C</div>
+          <div class="tm-role">Giám đốc Công nghệ (CTO)</div>
+          <p class="tm-desc">Kiến trúc sư chuyển đổi số TipaShop, TipaExpress và hệ thống CRM theo mô hình doanh nghiệp 5.0.</p>
+        </div>
+      </div>
+      <div class="tm">
+        <div class="tm-photo">
+          <div class="tm-avatar"><div class="tm-avatar-ic">👩‍📊</div></div>
+        </div>
+        <div class="tm-body">
+          <div class="tm-name">Phạm Thị D</div>
+          <div class="tm-role">Giám đốc Tài chính (CFO)</div>
+          <p class="tm-desc">Quản lý tài chính và đầu tư chiến lược, đảm bảo tăng trưởng bền vững cho toàn hệ thống Tín Phát.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑦ PARTNERS -->
+<section class="partners-sec">
+  <div class="cw">
+    <div class="partners-hd rv">
+      <div class="eyebrow ct">Đối tác chiến lược</div>
+      <h2 class="s-title ct">Được Tin Tưởng Bởi<br><em>Các Thương Hiệu Hàng Đầu</em></h2>
+    </div>
+    <div class="part-grid rv d1">
+      <div class="pc"><div class="pc-nm">SHELL</div></div>
+      <div class="pc"><div class="pc-nm">CASTROL</div></div>
+      <div class="pc"><div class="pc-nm">MOTUL</div></div>
+      <div class="pc"><div class="pc-nm">UNILEVER</div></div>
+      <div class="pc"><div class="pc-nm">GS BATTERY</div></div>
+      <div class="pc"><div class="pc-nm">KENDA</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑧ CULTURE -->
+<section class="culture sec">
+  <div class="cul-glow"></div>
+  <div class="cw">
+    <div class="cul-inner">
+      <div class="cul-l rv rl">
+        <div class="eyebrow lt">Môi trường làm việc</div>
+        <h2 class="s-title wh">Văn Hóa<br><em>Tín Phát</em></h2>
+        <span class="g-bar"></span>
+        <p class="body-t">Tín Phát Group xây dựng môi trường làm việc năng động, cởi mở và đầy cơ hội. Chúng tôi tin rằng đội ngũ nhân viên chính là tài sản quý giá nhất của tập đoàn.</p>
+        <a href="#" class="btn-primary" style="margin-top:32px;width:fit-content">
+          <span>Xem vị trí tuyển dụng</span>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        </a>
+      </div>
+      <div class="cul-perks rv rr d1">
+        <div class="cp"><div class="cp-ic">💰</div><h5>Thu nhập cạnh tranh</h5><p>Lương thưởng hấp dẫn, xét tăng lương định kỳ và thưởng KPI hàng quý.</p></div>
+        <div class="cp"><div class="cp-ic">📈</div><h5>Phát triển sự nghiệp</h5><p>Lộ trình thăng tiến rõ ràng, đào tạo nội bộ và hỗ trợ học kỹ năng mới.</p></div>
+        <div class="cp"><div class="cp-ic">🏥</div><h5>Phúc lợi toàn diện</h5><p>BHXH, BHYT đầy đủ, khám sức khỏe định kỳ và du lịch hàng năm.</p></div>
+        <div class="cp"><div class="cp-ic">🤝</div><h5>Văn hóa đội nhóm</h5><p>Môi trường đoàn kết, tôn trọng lẫn nhau và cùng nhau phát triển.</p></div>
+        <div class="cp"><div class="cp-ic">🌐</div><h5>Công nghệ hiện đại</h5><p>Làm việc với hệ thống CRM 5.0, công cụ số hóa tiên tiến nhất ngành.</p></div>
+        <div class="cp"><div class="cp-ic">🏆</div><h5>Khen thưởng xứng đáng</h5><p>Ghi nhận thành tích hàng tháng, nhân viên xuất sắc và tập thể mạnh.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ⑨ CTA -->
+<section class="cta-band">
+  <div class="cw cta-in rv">
+    <h2>Cùng xây dựng<br><em>tương lai</em> với chúng tôi</h2>
+    <p>Dù bạn là đối tác kinh doanh, nhà cung cấp hay ứng viên tiềm năng — Tín Phát Group luôn chào đón những con người có chung khát vọng phát triển.</p>
+    <div class="cta-btns">
+      <a href="#" class="btn-cta-dark">
+        <span>Liên hệ ngay</span>
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>
+      <a href="#" class="btn-cta-gold">Xem tuyển dụng →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-main">
+    <div>
+      <div class="ft-brand">Tín Phát <em>Group</em></div>
+      <span class="ft-est">Est. 2002 · Bạc Liêu, Việt Nam</span>
+      <p class="ft-about">"Chuyên nghiệp – Tận tình – Chất lượng." Cam kết mang lại dịch vụ tốt nhất, hướng tới Tập đoàn Thương mại quy mô toàn cầu.</p>
+      <div class="ft-contacts">
+        <span class="ftc">📍 315 Nguyễn Thị Minh Khai, P.5, TP Bạc Liêu</span>
+        <span class="ftc"><a href="tel:0949299494">📞 0949 29 94 94 · 02913-99-2299</a></span>
+        <span class="ftc"><a href="mailto:contact@tinphat.com">✉ contact@tinphat.com</a></span>
+      </div>
+      <div class="ft-soc">
+        <a href="#" class="fso">f</a><a href="#" class="fso">t</a>
+        <a href="#" class="fso">z</a><a href="#" class="fso">▶</a>
+      </div>
+    </div>
+    <div class="ft-col">
+      <h5>Về chúng tôi</h5>
+      <a href="#">Giới thiệu</a><a href="#">Các lĩnh vực</a>
+      <a href="#">Ban lãnh đạo</a><a href="#">Tin tức</a>
+    </div>
+    <div class="ft-col">
+      <h5>Dịch vụ</h5>
+      <a href="#">Dầu nhớt & Ắc quy</a><a href="#">TipaShop</a>
+      <a href="#">TipaExpress</a><a href="#">Tín Phát CRM</a>
+    </div>
+    <div class="ft-col">
+      <h5>Hợp tác</h5>
+      <a href="#">Đăng ký đại lý</a><a href="#">Tham gia TipaShop</a>
+      <a href="#">Cung ứng sản phẩm</a><a href="#">Tuyển dụng</a>
+    </div>
+  </div>
+  <div class="ft-bot">
+    <p class="ft-copy">© 2026 Tín Phát Group · Bạc Liêu, Việt Nam · tinphat.com</p>
+  </div>
+</footer>
+
+<script>
+/* scroll progress */
+const prog = document.getElementById('prog');
+window.addEventListener('scroll', () => {
+  const s = document.documentElement.scrollTop;
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  prog.style.width = (h > 0 ? s/h*100 : 0) + '%';
+}, {passive:true});
+
+/* sticky nav */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('on', scrollY > 50), {passive:true});
+
+/* hamburger */
+const ham = document.getElementById('ham'), mob = document.getElementById('mob');
+let open = false;
+ham.addEventListener('click', () => {
+  open = !open;
+  ham.classList.toggle('open', open);
+  mob.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  open = false; ham.classList.remove('open'); mob.classList.remove('open');
+  document.body.style.overflow = '';
+}));
+
+/* reveal */
+const obs = new IntersectionObserver(e => {
+  e.forEach(el => { if(el.isIntersecting) el.target.classList.add('on'); });
+}, {threshold:.06, rootMargin:'0px 0px -28px 0px'});
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+/* timeline line draw animation */
+const tlObs = new IntersectionObserver(e => {
+  if(e[0].isIntersecting) {
+    const line = document.querySelector('.tl-wrap::before');
+    e[0].target.style.setProperty('--line-done','1');
+    tlObs.disconnect();
+  }
+}, {threshold:.1});
+const tlw = document.querySelector('.tl-wrap');
+if(tlw) tlObs.observe(tlw);
+</script>
+</body>
+</html>
