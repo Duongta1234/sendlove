@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tin Tức — TÍN PHÁT GROUP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ivory:#FAF7F2;--paper:#F3EDE3;--warm:#E8DFD0;--sand:#D6CBBA;--white:#FEFEFE;
+  --navy:#0E1B2C;--navy2:#1A2E4A;--navy3:#243E62;
+  --gold:#C4881C;--gold2:#D9A030;--amber:#EDBA48;
+  --body:#3C3630;--slate:#68605A;--muted:#9E9288;
+  --line:#E4DACC;--lineD:#CFC3B2;
+  --sh1:0 2px 16px rgba(14,27,44,.06);--sh2:0 8px 48px rgba(14,27,44,.10);--sh3:0 20px 80px rgba(14,27,44,.15);
+  --shG:0 12px 40px rgba(196,136,28,.25);
+  --ease:cubic-bezier(.16,1,.3,1);
+  --gg:linear-gradient(135deg,var(--gold),var(--amber));
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Exo 2',sans-serif;background:var(--ivory);color:var(--navy);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{text-decoration:none;color:inherit}
+button{font-family:'Exo 2',sans-serif;cursor:pointer;border:none;outline:none;background:none}
+
+body::before{content:'';position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.4;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.028'/%3E%3C/svg%3E")}
+
+.cw{width:85%;max-width:1400px;margin:0 auto}
+@media(max-width:600px){.cw{width:92%}}
+
+.rv{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+.rv.on{opacity:1;transform:none}
+.rv.rl{transform:translateX(-28px)}.rv.rl.on{transform:none;opacity:1}
+.rv.rr{transform:translateX(28px)}.rv.rr.on{transform:none;opacity:1}
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}.d4{transition-delay:.28s}
+
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes ken{from{transform:scale(1.06)}to{transform:scale(1)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+@keyframes ticker{to{transform:translateX(-50%)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+#prog{position:fixed;top:0;left:0;z-index:8999;height:2px;width:0%;background:var(--gg)}
+
+/* ─── TOPBAR ─── */
+.topbar{display:none}
+@media(min-width:768px){
+  .topbar{display:block;background:var(--navy);border-bottom:1px solid rgba(196,136,28,.15)}
+  .tb-inner{width:85%;max-width:1400px;margin:0 auto;height:38px;display:flex;align-items:center;justify-content:space-between}
+  .tb-links{display:flex}
+  .tb-link{display:flex;align-items:center;gap:6px;height:38px;padding:0 14px;font-size:11.5px;font-weight:400;color:rgba(255,255,255,.3);border-right:1px solid rgba(255,255,255,.06);transition:color .2s}
+  .tb-link:first-child{padding-left:0}
+  .tb-link:hover{color:var(--amber)}
+  .tb-dot{width:3px;height:3px;border-radius:50%;background:var(--gold);opacity:.5}
+  .tb-langs{display:flex}
+  .tb-lang{height:38px;padding:0 12px;font-size:10.5px;font-weight:700;letter-spacing:.5px;color:rgba(255,255,255,.25);display:flex;align-items:center;border-left:1px solid rgba(255,255,255,.06);cursor:pointer;transition:color .2s}
+  .tb-lang:hover,.tb-lang.on{color:var(--amber)}
+}
+
+/* ─── NAVBAR ─── */
+.navbar{position:sticky;top:0;z-index:990;background:rgba(250,247,242,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--line);transition:box-shadow .3s,border-color .3s}
+.navbar.on{box-shadow:0 4px 32px rgba(14,27,44,.07);border-bottom-color:var(--lineD)}
+.nav-inner{width:85%;max-width:1400px;margin:0 auto;height:62px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+@media(max-width:600px){.nav-inner{width:92%}}
+@media(min-width:1024px){.nav-inner{height:70px}}
+
+.logo{display:flex;align-items:center;gap:11px;flex-shrink:0}
+.logo-mark{width:38px;height:38px;flex-shrink:0;background:var(--navy);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%)}
+.logo-mark::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--gg)}
+.logo-mark span{font-size:12px;font-weight:900;color:var(--amber);letter-spacing:.5px}
+.logo-info{display:flex;flex-direction:column}
+.logo-name{font-size:15px;font-weight:900;color:var(--navy);letter-spacing:.2px;line-height:1}
+.logo-sub{font-size:8px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-top:3px}
+@media(min-width:1024px){.logo-mark{width:42px;height:42px}.logo-name{font-size:17px}.logo-sub{font-size:8.5px}}
+
+.nav-links{display:none}
+@media(min-width:1024px){
+  .nav-links{display:flex;gap:0}
+  .nav-links a{font-size:13px;font-weight:500;color:var(--slate);padding:0 12px;height:70px;display:flex;align-items:center;white-space:nowrap;position:relative;transition:color .2s}
+  .nav-links a::after{content:'';position:absolute;bottom:0;left:12px;right:12px;height:2px;background:var(--gg);transform:scaleX(0);transform-origin:center;transition:transform .3s var(--ease)}
+  .nav-links a:hover,.nav-links a.on{color:var(--navy)}
+  .nav-links a:hover::after,.nav-links a.on::after{transform:scaleX(1)}
+}
+.nav-cta{display:none}
+@media(min-width:1024px){
+  .nav-cta{display:flex;gap:9px;flex-shrink:0}
+  .btn-nvo{padding:9px 16px;font-size:12.5px;font-weight:600;color:var(--slate);border:1.5px solid var(--line);transition:all .22s;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px))}
+  .btn-nvo:hover{border-color:var(--navy);color:var(--navy)}
+  .btn-nvf{padding:10px 22px;font-size:12.5px;font-weight:800;color:#fff;background:var(--navy);position:relative;overflow:hidden;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));transition:color .28s}
+  .btn-nvf::before{content:'';position:absolute;inset:0;background:var(--gg);transform:translateY(105%);transition:transform .36s var(--ease)}
+  .btn-nvf:hover::before{transform:translateY(0)}
+  .btn-nvf:hover{color:var(--navy)}
+  .btn-nvf span{position:relative;z-index:1}
+}
+.hamburger{display:flex;flex-direction:column;gap:5px;width:40px;height:40px;align-items:center;justify-content:center;flex-shrink:0}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--navy);border-radius:2px;transition:all .3s var(--ease)}
+.hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+@media(min-width:1024px){.hamburger{display:none}}
+
+.mob-menu{position:fixed;inset:0;z-index:980;background:var(--navy);display:flex;flex-direction:column;padding:100px 32px 48px;transform:translateX(100%);transition:transform .45s var(--ease)}
+.mob-menu.open{transform:translateX(0)}
+.mob-menu a{display:block;font-size:28px;font-weight:800;color:rgba(255,255,255,.85);padding:14px 0;border-bottom:1px solid rgba(255,255,255,.07);transition:color .2s,padding-left .25s var(--ease)}
+.mob-menu a:hover{color:var(--amber);padding-left:8px}
+.mob-bot{margin-top:40px;display:flex;flex-direction:column;gap:12px}
+.btn-mob{padding:16px 24px;font-size:15px;font-weight:800;color:var(--navy);background:var(--gg);text-align:center;display:block;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px))}
+.btn-mob2{padding:15px 24px;font-size:15px;font-weight:600;color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.18);text-align:center;display:block}
+@media(min-width:1024px){.mob-menu{display:none}}
+
+/* ─── BREADCRUMB ─── */
+.breadcrumb{background:var(--white);border-bottom:1px solid var(--line);padding:14px 0}
+.bc-inner{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:500;color:var(--muted)}
+.bc-inner a{color:var(--muted);transition:color .2s}.bc-inner a:hover{color:var(--gold)}
+.bc-sep{color:var(--lineD);font-size:10px}
+.bc-cur{color:var(--navy);font-weight:600}
+
+/* ════════════════════════════════
+   PAGE HERO
+════════════════════════════════ */
+.page-hero{background:var(--navy);position:relative;overflow:hidden;padding:72px 0 80px}
+@media(min-width:768px){.page-hero{padding:88px 0 96px}}
+@media(min-width:1024px){.page-hero{padding:104px 0 112px}}
+.page-hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(196,136,28,.07) 1px,transparent 1px);background-size:40px 40px}
+.page-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--amber) 70%,transparent)}
+.ph-glow{position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(196,136,28,.1) 0%,transparent 70%);pointer-events:none}
+.ph-inner{position:relative;z-index:1}
+.ph-label{display:flex;align-items:center;gap:10px;margin-bottom:18px;animation:up .6s both}
+.ph-bar{height:1.5px;width:28px;background:var(--gg);flex-shrink:0}
+.ph-txt{font-size:10px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:rgba(196,136,28,.85)}
+.ph-dot{width:5px;height:5px;clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);background:var(--gold);animation:blink 2.5s infinite}
+.ph-title{font-size:clamp(48px,9vw,100px);font-weight:900;color:#fff;line-height:.88;letter-spacing:-3px;margin-bottom:20px;animation:up .6s .08s both}
+.ph-title em{display:block;font-style:italic;color:var(--amber);font-size:.72em;letter-spacing:-2px}
+.ph-desc{font-size:clamp(14px,2vw,17px);font-weight:300;color:rgba(255,255,255,.45);line-height:1.8;max-width:520px;animation:up .6s .15s both}
+
+/* ════════════════════════════════
+   SHARED
+════════════════════════════════ */
+.sec{padding:72px 0}
+@media(min-width:768px){.sec{padding:88px 0}}
+@media(min-width:1024px){.sec{padding:108px 0}}
+.eyebrow{display:flex;align-items:center;gap:10px;font-size:10px;font-weight:700;letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.eyebrow::before{content:'';width:20px;height:1.5px;background:var(--gg);flex-shrink:0}
+.eyebrow.ct{justify-content:center}.eyebrow.ct::before{display:none}
+.s-ttl{font-size:clamp(32px,6vw,58px);font-weight:900;line-height:.92;letter-spacing:-2px;color:var(--navy);margin-bottom:16px}
+.s-ttl em{font-style:italic;color:var(--gold)}
+.s-ttl.ct{text-align:center}
+.gbar{display:block;width:36px;height:2px;background:var(--gg);margin:14px 0 24px}
+.gbar.ct{margin:14px auto 24px}
+
+/* ════════════════════════════════
+   FEATURED / HIGHLIGHT
+════════════════════════════════ */
+.featured-sec{background:var(--white)}
+.feat-grid{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:900px){
+  .feat-grid{
+    grid-template-columns:1.7fr 1fr;
+    grid-template-rows:auto auto;
+    min-height:520px;
+  }
+}
+/* Big featured card */
+.fc-big{
+  background:var(--navy);
+  position:relative;overflow:hidden;
+  cursor:pointer;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  min-height:clamp(300px,50vw,480px);
+}
+@media(min-width:900px){.fc-big{grid-row:1/3}}
+.fc-big-img{position:absolute;inset:0}
+.fc-big-img img{filter:brightness(.45) saturate(.8);animation:ken 18s ease-in-out infinite alternate;transition:filter .6s}
+.fc-big:hover .fc-big-img img{filter:brightness(.38) saturate(.85)}
+.fc-big::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(14,27,44,.95) 0%,rgba(14,27,44,.4) 50%,transparent 100%)}
+.fc-big-body{position:relative;z-index:2;padding:28px 28px 32px}
+@media(min-width:600px){.fc-big-body{padding:36px 40px 40px}}
+.fc-big-badge{display:inline-flex;align-items:center;gap:7px;background:var(--gg);color:var(--navy);font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;margin-bottom:14px;clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px))}
+.fc-big h2{font-size:clamp(20px,3.5vw,32px);font-weight:900;color:#fff;line-height:1.2;margin-bottom:12px;letter-spacing:-.5px;transition:color .25s}
+.fc-big:hover h2{color:var(--amber)}
+.fc-big p{font-size:14px;font-weight:300;color:rgba(255,255,255,.55);line-height:1.7;max-width:480px}
+.fc-big-meta{display:flex;align-items:center;gap:14px;margin-top:16px}
+.fc-meta-item{font-size:12px;font-weight:400;color:rgba(255,255,255,.4);display:flex;align-items:center;gap:5px}
+.fc-read-more{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--amber);transition:gap .22s}
+.fc-big:hover .fc-read-more{gap:10px}
+
+/* Small side cards */
+.fc-small{
+  background:var(--white);border:1px solid var(--line);
+  overflow:hidden;cursor:pointer;
+  display:flex;
+  transition:all .35s var(--ease);
+}
+.fc-small:hover{box-shadow:var(--sh2);border-color:transparent}
+.fc-sm-img{width:130px;flex-shrink:0;overflow:hidden;background:var(--paper);position:relative}
+@media(min-width:600px){.fc-sm-img{width:150px}}
+.fc-sm-img img{filter:brightness(.9) saturate(.85);transition:transform .7s var(--ease)}
+.fc-small:hover .fc-sm-img img{transform:scale(1.08)}
+.fc-sm-body{padding:18px 20px;display:flex;flex-direction:column;justify-content:space-between;flex:1}
+.fc-sm-cat{font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+.fc-sm-body h3{font-size:clamp(14px,2vw,16px);font-weight:700;color:var(--navy);line-height:1.4;transition:color .22s}
+.fc-small:hover .fc-sm-body h3{color:var(--gold)}
+.fc-sm-meta{font-size:11.5px;color:var(--muted);margin-top:9px}
+/* gold left bar on hover */
+.fc-small::before{content:'';display:block;width:3px;background:var(--gg);transform:scaleY(0);transform-origin:bottom;transition:transform .35s var(--ease);flex-shrink:0}
+.fc-small:hover::before{transform:scaleY(1)}
+
+/* ════════════════════════════════
+   TICKER strip
+════════════════════════════════ */
+.ticker-strip{background:var(--navy);overflow:hidden;position:relative}
+.ticker-strip::before,.ticker-strip::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none}
+.ticker-strip::before{left:0;background:linear-gradient(90deg,var(--navy),transparent)}
+.ticker-strip::after{right:0;background:linear-gradient(-90deg,var(--navy),transparent)}
+.ticker-rail{display:flex;animation:ticker 24s linear infinite}
+.ticker-rail:hover{animation-play-state:paused}
+.t-set{display:flex;align-items:center;flex-shrink:0}
+.t-item{display:flex;align-items:center;gap:0}
+.t-txt{font-size:11.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);padding:13px 22px;white-space:nowrap;transition:color .2s;cursor:default}
+.t-txt:hover{color:var(--amber)}
+.t-div{width:1px;height:10px;background:rgba(255,255,255,.07);flex-shrink:0}
+
+/* ════════════════════════════════
+   MAIN CONTENT LAYOUT
+════════════════════════════════ */
+.news-main{background:var(--ivory)}
+.news-layout{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:40px;
+}
+@media(min-width:1024px){
+  .news-layout{grid-template-columns:1fr 300px;gap:52px;align-items:start}
+}
+
+/* ─ CATEGORY TABS ─ */
+.cat-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px}
+.cat-btn{
+  padding:9px 18px;font-size:12.5px;font-weight:700;
+  color:var(--slate);background:var(--white);
+  border:1.5px solid var(--line);
+  clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px));
+  transition:all .25s;cursor:pointer;
+}
+.cat-btn:hover{border-color:var(--navy);color:var(--navy)}
+.cat-btn.on{background:var(--navy);border-color:var(--navy);color:#fff}
+
+/* ─ SEARCH ─ */
+.news-search{position:relative;margin-bottom:32px}
+.news-search input{width:100%;background:var(--white);border:1.5px solid var(--line);padding:13px 46px 13px 16px;font-family:'Exo 2',sans-serif;font-size:14px;color:var(--navy);outline:none;transition:all .25s}
+.news-search input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(196,136,28,.1)}
+.news-search input::placeholder{color:var(--muted);font-weight:300}
+.ns-ico{position:absolute;right:15px;top:50%;transform:translateY(-50%);font-size:16px;color:var(--muted);pointer-events:none}
+
+/* ─ ARTICLES GRID ─ */
+.articles-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:8px}
+.am-count{font-size:13px;font-weight:600;color:var(--slate)}.am-count span{color:var(--navy);font-weight:800}
+
+.articles-grid{display:grid;grid-template-columns:1fr;gap:10px}
+@media(min-width:600px) and (max-width:1023px){.articles-grid{grid-template-columns:1fr 1fr}}
+
+/* Article card */
+.ac{
+  background:var(--white);border:1px solid var(--line);
+  overflow:hidden;cursor:pointer;
+  transition:all .38s var(--ease);
+  display:flex;flex-direction:column;
+}
+.ac:hover{box-shadow:var(--sh2);border-color:transparent;transform:translateY(-4px)}
+.ac-img{height:clamp(160px,25vw,220px);overflow:hidden;position:relative;flex-shrink:0}
+.ac-img img{filter:brightness(.92) saturate(.85);transition:transform .8s var(--ease)}
+.ac:hover .ac-img img{transform:scale(1.06)}
+.ac-cat{position:absolute;top:13px;left:13px;font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:4px 11px;clip-path:polygon(0 0,calc(100% - 4px) 0,100% 4px,100% 100%,4px 100%,0 calc(100% - 4px))}
+.ac-cat.green{background:#1a6b3c;color:#fff}
+.ac-cat.blue{background:var(--navy);color:#fff}
+.ac-cat.orange{background:var(--gold);color:#fff}
+.ac-cat.red{background:#c0392b;color:#fff}
+.ac-cat.purple{background:#6b3fa0;color:#fff}
+
+.ac-body{padding:20px 22px;flex:1;display:flex;flex-direction:column}
+.ac-body h3{font-size:clamp(14.5px,2vw,17px);font-weight:700;color:var(--navy);line-height:1.4;margin-bottom:9px;transition:color .22s}
+.ac:hover .ac-body h3{color:var(--gold)}
+.ac-body p{font-size:13px;font-weight:300;color:var(--slate);line-height:1.65;flex:1}
+.ac-foot{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.ac-date{font-size:11.5px;font-weight:500;color:var(--muted)}
+.ac-arr{width:32px;height:32px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--muted);transition:all .25s;clip-path:polygon(0 0,calc(100% - 4px) 0,100% 4px,100% 100%,4px 100%,0 calc(100% - 4px))}
+.ac:hover .ac-arr{background:var(--navy);border-color:var(--navy);color:#fff}
+
+/* gold top accent */
+.ac::before{content:'';display:block;height:2px;background:var(--gg);transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+.ac:hover::before{transform:scaleX(1)}
+
+/* no results */
+.no-articles{text-align:center;padding:60px 20px;color:var(--muted);display:none}
+.no-articles.show{display:block}
+.na-ico{font-size:48px;margin-bottom:14px}
+.na-p{font-size:15px;font-weight:300}
+
+/* Pagination */
+.pagination{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:40px;flex-wrap:wrap}
+.pg-btn{width:40px;height:40px;display:flex;align-items:center;justify-content:center;font-size:13.5px;font-weight:700;color:var(--slate);border:1.5px solid var(--line);background:var(--white);transition:all .22s;cursor:pointer;clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px))}
+.pg-btn:hover,.pg-btn.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.pg-btn:disabled{opacity:.35;cursor:default}
+.pg-btn:disabled:hover{background:var(--white);border-color:var(--line);color:var(--slate)}
+
+/* ─ SIDEBAR ─ */
+.sidebar{display:flex;flex-direction:column;gap:24px}
+
+.sb-widget{background:var(--white);border:1px solid var(--line);overflow:hidden}
+.sw-head{padding:16px 20px;border-bottom:1px solid var(--line);font-size:10.5px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:var(--navy);display:flex;align-items:center;gap:9px}
+.sw-head::before{content:'';width:16px;height:2px;background:var(--gg);flex-shrink:0}
+.sw-body{padding:16px 18px}
+
+/* Popular */
+.pop-item{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);cursor:pointer;transition:all .22s}
+.pop-item:last-child{border-bottom:none}
+.pop-item:hover{padding-left:4px}
+.pop-num{font-size:22px;font-weight:900;font-style:italic;color:var(--line);line-height:1;flex-shrink:0;min-width:28px}
+.pop-title{font-size:13px;font-weight:600;color:var(--navy);line-height:1.4;transition:color .2s}
+.pop-item:hover .pop-title{color:var(--gold)}
+.pop-date{font-size:11px;color:var(--muted);margin-top:3px}
+
+/* Categories sidebar */
+.cat-list{display:flex;flex-direction:column;gap:0}
+.cat-row{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line);cursor:pointer;transition:all .22s}
+.cat-row:last-child{border-bottom:none}
+.cat-row:hover{padding-left:5px}
+.cat-row-name{font-size:13px;font-weight:600;color:var(--navy);display:flex;align-items:center;gap:7px;transition:color .22s}
+.cat-row:hover .cat-row-name{color:var(--gold)}
+.cat-row-ico{font-size:14px}
+.cat-row-count{font-size:11px;font-weight:700;color:rgba(255,255,255,.7);background:var(--navy);padding:2px 8px;clip-path:polygon(0 0,calc(100% - 3px) 0,100% 3px,100% 100%,3px 100%,0 calc(100% - 3px))}
+
+/* Tags cloud */
+.tags-cloud{display:flex;flex-wrap:wrap;gap:7px}
+.tag-pill{padding:6px 13px;font-size:11.5px;font-weight:600;color:var(--slate);background:var(--ivory);border:1px solid var(--line);transition:all .22s;cursor:pointer;clip-path:polygon(0 0,calc(100% - 4px) 0,100% 4px,100% 100%,4px 100%,0 calc(100% - 4px))}
+.tag-pill:hover{background:var(--navy);border-color:var(--navy);color:#fff}
+
+/* Newsletter widget */
+.nl-widget{background:var(--navy);border:none}
+.nl-widget .sw-head{color:var(--amber);border-bottom-color:rgba(255,255,255,.07)}
+.nl-widget .sw-head::before{background:var(--amber)}
+.nl-body{padding:18px}
+.nl-body p{font-size:13px;font-weight:300;color:rgba(255,255,255,.45);line-height:1.65;margin-bottom:14px}
+.nl-input{width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);padding:11px 14px;color:#fff;font-family:'Exo 2',sans-serif;font-size:13.5px;outline:none;margin-bottom:9px;transition:all .25s}
+.nl-input:focus{border-color:var(--gold);background:rgba(255,255,255,.1)}
+.nl-input::placeholder{color:rgba(255,255,255,.3);font-weight:300}
+.btn-nl{width:100%;padding:12px;font-family:'Exo 2',sans-serif;font-size:13px;font-weight:800;color:var(--navy);background:var(--gg);border:none;cursor:pointer;transition:all .25s;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px))}
+.btn-nl:hover{transform:translateY(-2px);box-shadow:var(--shG)}
+
+/* ════════════════════════════════
+   ARTICLE DRAWER
+════════════════════════════════ */
+.drawer-overlay{position:fixed;inset:0;z-index:1000;background:rgba(14,27,44,.55);backdrop-filter:blur(4px);opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+.drawer-overlay.open{opacity:1;visibility:visible}
+.drawer{position:fixed;top:0;right:0;bottom:0;z-index:1001;width:min(720px,100%);background:var(--white);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .45s var(--ease);overflow-y:auto}
+.drawer-overlay.open .drawer{transform:translateX(0)}
+
+.d-head{padding:0;flex-shrink:0;position:sticky;top:0;z-index:2}
+.d-hero{height:clamp(200px,35vw,320px);overflow:hidden;position:relative;flex-shrink:0}
+.d-hero img{filter:brightness(.75) saturate(.8);animation:ken 14s ease-in-out infinite alternate}
+.d-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(14,27,44,.85) 0%,transparent 55%)}
+.d-hero-body{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:24px 28px}
+.d-cat{display:inline-block;font-size:9px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;margin-bottom:10px;clip-path:polygon(0 0,calc(100% - 4px) 0,100% 4px,100% 100%,4px 100%,0 calc(100% - 4px))}
+.d-title{font-size:clamp(18px,3vw,26px);font-weight:900;color:#fff;line-height:1.2;letter-spacing:-.5px}
+.d-close{position:absolute;top:14px;right:14px;width:38px;height:38px;background:rgba(14,27,44,.6);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:17px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .22s;z-index:3;clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px))}
+.d-close:hover{background:rgba(196,136,28,.8)}
+
+.d-body{padding:28px 28px 48px;flex:1}
+@media(min-width:600px){.d-body{padding:36px 40px 56px}}
+.d-meta{display:flex;align-items:center;flex-wrap:wrap;gap:12px;padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:28px}
+.d-meta-item{font-size:12px;font-weight:500;color:var(--muted);display:flex;align-items:center;gap:5px}
+.d-content{font-size:15px;font-weight:300;color:var(--body);line-height:1.9}
+.d-content p{margin-bottom:18px}
+.d-content p:last-child{margin-bottom:0}
+.d-content h3{font-size:clamp(17px,2.5vw,21px);font-weight:800;color:var(--navy);margin:28px 0 12px;letter-spacing:-.3px}
+.d-content ul{margin:12px 0 18px;display:flex;flex-direction:column;gap:7px}
+.d-content ul li{font-size:14.5px;font-weight:300;color:var(--slate);padding-left:18px;position:relative;line-height:1.6}
+.d-content ul li::before{content:'›';position:absolute;left:0;color:var(--gold);font-weight:700}
+.d-content blockquote{border-left:3px solid var(--amber);padding:14px 20px;background:var(--ivory);margin:20px 0;font-style:italic;color:var(--slate);font-size:15.5px;line-height:1.75}
+.d-content img{width:100%;margin:20px 0;filter:brightness(.95)}
+.d-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:28px;padding-top:20px;border-top:1px solid var(--line)}
+
+/* ─── FOOTER ─── */
+footer{background:#090e17;border-top:1px solid rgba(196,136,28,.18)}
+.ft-main{width:85%;max-width:1400px;margin:0 auto;padding:60px 0 48px;display:grid;grid-template-columns:1fr;gap:40px;border-bottom:1px solid rgba(255,255,255,.04)}
+@media(max-width:600px){.ft-main{width:92%}}
+@media(min-width:600px){.ft-main{grid-template-columns:1fr 1fr;gap:36px}}
+@media(min-width:1024px){.ft-main{grid-template-columns:2fr 1fr 1fr 1.2fr;gap:48px}}
+.ft-brand{font-size:clamp(19px,3vw,22px);font-weight:900;color:#fff;margin-bottom:4px}
+.ft-brand em{font-style:italic;color:var(--amber)}
+.ft-est{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.18);display:block;margin-bottom:16px}
+.ft-about{font-size:13px;font-weight:300;color:rgba(255,255,255,.28);line-height:1.85;margin-bottom:22px}
+.ft-contacts{display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
+.ftc{font-size:12.5px;font-weight:300;color:rgba(255,255,255,.26);display:flex;align-items:flex-start;gap:7px}
+.ftc a{color:rgba(255,255,255,.26);transition:color .2s}.ftc a:hover{color:var(--amber)}
+.ft-soc{display:flex;gap:7px}
+.fso{width:36px;height:36px;border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:12px;color:rgba(255,255,255,.22);clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px));transition:all .22s}
+.fso:hover{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.ft-col h5{font-size:10.5px;font-weight:700;color:rgba(255,255,255,.5);letter-spacing:.5px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.05)}
+.ft-col a{display:block;font-size:13px;font-weight:300;color:rgba(255,255,255,.26);margin-bottom:9px;transition:all .22s}
+.ft-col a:hover{color:var(--amber);padding-left:5px}
+.ft-bot{width:85%;max-width:1400px;margin:0 auto;padding:18px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+@media(max-width:600px){.ft-bot{width:92%;justify-content:center}}
+.ft-copy{font-size:11px;font-weight:300;color:rgba(255,255,255,.14)}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="tb-inner">
+    <div class="tb-links">
+      <a href="mailto:contact@tinphat.com" class="tb-link"><span class="tb-dot"></span>contact@tinphat.com</a>
+      <a href="tel:0949299494" class="tb-link"><span class="tb-dot"></span>0949 29 94 94</a>
+    </div>
+    <div class="tb-langs">
+      <span class="tb-lang on">🇻🇳 VI</span>
+      <span class="tb-lang">🇬🇧 EN</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark"><span>TP</span></div>
+      <div class="logo-info">
+        <div class="logo-name">TÍN PHÁT GROUP</div>
+        <div class="logo-sub">Est. 2002 · Bạc Liêu</div>
+      </div>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Trang chủ</a>
+      <a href="gioi-thieu.html">Giới thiệu</a>
+      <a href="#" class="on">Tin tức</a>
+      <a href="tuyen-dung.html">Tuyển dụng</a>
+      <a href="hop-tac.html">Hợp tác</a>
+      <a href="#">Ứng dụng</a>
+      <a href="lien-he.html">Liên hệ</a>
+    </nav>
+    <div class="nav-cta">
+      <button class="btn-nvo">🛒 TipaShop</button>
+      <button class="btn-nvf"><span>Hợp tác ngay →</span></button>
+    </div>
+    <button class="hamburger" id="ham" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mob-menu" id="mob">
+  <a href="index.html">Trang chủ</a>
+  <a href="gioi-thieu.html">Giới thiệu</a>
+  <a href="#">Tin tức</a>
+  <a href="tuyen-dung.html">Tuyển dụng</a>
+  <a href="hop-tac.html">Hợp tác</a>
+  <a href="#">Ứng dụng</a>
+  <a href="lien-he.html">Liên hệ</a>
+  <div class="mob-bot">
+    <a href="hop-tac.html" class="btn-mob">Đăng ký hợp tác →</a>
+    <a href="#" class="btn-mob2">🛒 TipaShop</a>
+  </div>
+</div>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <div class="cw">
+    <div class="bc-inner">
+      <a href="index.html">Trang chủ</a>
+      <span class="bc-sep">›</span>
+      <span class="bc-cur">Tin tức</span>
+    </div>
+  </div>
+</div>
+
+<!-- ① PAGE HERO -->
+<section class="page-hero">
+  <div class="ph-glow"></div>
+  <div class="cw">
+    <div class="ph-inner">
+      <div class="ph-label">
+        <div class="ph-bar"></div>
+        <span class="ph-txt">Cập nhật mới nhất</span>
+        <span class="ph-dot"></span>
+      </div>
+      <div class="ph-title">TIN<br><em>TỨC</em></div>
+      <p class="ph-desc">Khám phá những tin tức mới nhất về hoạt động kinh doanh, chương trình khuyến mãi, tuyển dụng và sự kiện nổi bật của Tín Phát Group.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ② FEATURED STORIES -->
+<section class="featured-sec sec">
+  <div class="cw">
+    <div class="rv" style="margin-bottom:32px">
+      <div class="eyebrow">Tin nổi bật</div>
+      <h2 class="s-ttl">Câu Chuyện <em>Đáng Đọc</em></h2>
+      <span class="gbar"></span>
+    </div>
+    <div class="feat-grid rv d1">
+      <!-- Big featured -->
+      <div class="fc-big" onclick="openArticle(1)">
+        <div class="fc-big-img">
+          <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1000&q=85" alt="">
+        </div>
+        <div class="fc-big-body">
+          <div class="fc-big-badge">🏢 Tin Công Ty</div>
+          <h2>Tín Phát Việt khai trương đầu năm 2026 với khí thế bứt phá mạnh mẽ</h2>
+          <p>Khởi đầu mới – Khí thế mới – Thành công mới. Tín Phát Group chính thức khai trương với quyết tâm bứt phá mạnh mẽ trong năm 2026.</p>
+          <div class="fc-big-meta">
+            <span class="fc-meta-item">📅 24/02/2026</span>
+            <span class="fc-meta-item">👁 1.2K lượt xem</span>
+            <span class="fc-read-more">Đọc tiếp →</span>
+          </div>
+        </div>
+      </div>
+      <!-- Small cards -->
+      <div class="fc-small" onclick="openArticle(2)">
+        <div class="fc-small::before"></div>
+        <div class="fc-sm-img">
+          <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400&q=80" alt="">
+        </div>
+        <div class="fc-sm-body">
+          <div class="fc-sm-cat">🏆 Khen thưởng</div>
+          <h3>Tín Phát Group khen thưởng nhân viên xuất sắc tháng 12/2025</h3>
+          <div class="fc-sm-meta">📅 16/01/2026 · 845 lượt xem</div>
+        </div>
+      </div>
+      <div class="fc-small" onclick="openArticle(3)">
+        <div class="fc-sm-img">
+          <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&q=80" alt="">
+        </div>
+        <div class="fc-sm-body">
+          <div class="fc-sm-cat">🛢 Khuyến mãi</div>
+          <h3>SALE OFF Dầu Cầu Mekong Penda EP 85W90 — Ưu đãi đặc biệt tháng 2</h3>
+          <div class="fc-sm-meta">📅 28/02/2026 · 672 lượt xem</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-strip">
+  <div class="ticker-rail">
+    <div class="t-set">
+      <div class="t-item"><span class="t-txt">Shell</span><div class="t-div"></div></div>
+      <div class="t-item"><span class="t-txt">Castrol</span><div class="t-div"></div></div>
+      <div class="t-item"><span class="t-txt">Motul</span><div class="t-div"></div></div>
+      <div class="t-item"><span class="t-txt">Unilever</span><div class="t-div"></div></div>
+      <div class="t-item"><span class="t-txt">GS Battery</span><div class="t-div"></div></div>
+      <div class="t-item"><span class="t-txt">Kenda</span><div class="t-div"></div></div>
+      <div class="t-item"><span class="t-txt">Mekong Penda</span><div class="t-div"></div></div>
+      <div class="t-item"><span class="t-txt">TipaShop</span><div class="t-div"></div></div>
+      <div class="t-item"><span class="t-txt">TipaExpress</span><div class="t-div"></div></div>
+    </div>
+    <div class="t-set" aria-hidden="true">
+      <div class="t-item"><span class="t-txt">Shell</span><div class="t-div"></div></div>
+      <div class="t-item"><span class="t-txt">Castrol</span><div class="t-div"></div></div>
+      <div class="t-item"><span class="t-txt">Motul</span><div class="t-div"></div></div>
+      <div class="t-item"><span class="t-txt">Unilever</span><div class="t-div"></div></div>
+      <div class="t-item"><span class="t-txt">GS Battery</span><div class="t-div"></div></div>
+      <div class="t-item"><span class="t-txt">Kenda</span><div class="t-div"></div></div>
+      <div class="t-item"><span class="t-txt">Mekong Penda</span><div class="t-div"></div></div>
+      <div class="t-item"><span class="t-txt">TipaShop</span><div class="t-div"></div></div>
+      <div class="t-item"><span class="t-txt">TipaExpress</span><div class="t-div"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ③ MAIN NEWS + SIDEBAR -->
+<section class="news-main sec">
+  <div class="cw">
+    <div class="news-layout">
+
+      <!-- LEFT: Articles -->
+      <div>
+        <!-- Category tabs -->
+        <div class="cat-tabs rv">
+          <button class="cat-btn on" data-cat="all">🗂 Tất cả</button>
+          <button class="cat-btn" data-cat="cty">🏢 Công ty</button>
+          <button class="cat-btn" data-cat="khuyen-mai">🛢 Khuyến mãi</button>
+          <button class="cat-btn" data-cat="khen-thuong">🏆 Khen thưởng</button>
+          <button class="cat-btn" data-cat="tuyen-dung">💼 Tuyển dụng</button>
+          <button class="cat-btn" data-cat="su-kien">🎉 Sự kiện</button>
+        </div>
+
+        <!-- Search -->
+        <div class="news-search rv d1">
+          <input type="text" id="newsSearch" placeholder="🔍  Tìm kiếm tin tức...">
+          <span class="ns-ico"></span>
+        </div>
+
+        <!-- Meta + Grid -->
+        <div class="articles-meta rv d2">
+          <div class="am-count">Tìm thấy <span id="artCount">12</span> bài viết</div>
+        </div>
+        <div class="articles-grid rv d2" id="artGrid"></div>
+        <div class="no-articles" id="noArt">
+          <div class="na-ico">📰</div>
+          <p class="na-p">Không tìm thấy bài viết phù hợp.<br>Hãy thử từ khóa hoặc danh mục khác.</p>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination rv d3" id="pagination"></div>
+      </div>
+
+      <!-- RIGHT: Sidebar -->
+      <div class="sidebar rv d2">
+        <!-- Popular -->
+        <div class="sb-widget">
+          <div class="sw-head">Đọc nhiều nhất</div>
+          <div class="sw-body">
+            <div class="pop-item" onclick="openArticle(1)">
+              <div class="pop-num">01</div>
+              <div><div class="pop-title">Tín Phát Việt khai trương đầu năm 2026 với khí thế bứt phá</div><div class="pop-date">24/02/2026</div></div>
+            </div>
+            <div class="pop-item" onclick="openArticle(4)">
+              <div class="pop-num">02</div>
+              <div><div class="pop-title">Họp kinh doanh định kỳ tháng 10/2025 — Đội ngũ sẵn sàng</div><div class="pop-date">14/11/2025</div></div>
+            </div>
+            <div class="pop-item" onclick="openArticle(5)">
+              <div class="pop-num">03</div>
+              <div><div class="pop-title">Tín Phát ra mắt ứng dụng TipaShop phiên bản 2.0</div><div class="pop-date">01/12/2025</div></div>
+            </div>
+            <div class="pop-item" onclick="openArticle(3)">
+              <div class="pop-num">04</div>
+              <div><div class="pop-title">SALE OFF Dầu Cầu Mekong Penda EP 85W90 tháng 2</div><div class="pop-date">28/02/2026</div></div>
+            </div>
+            <div class="pop-item" onclick="openArticle(6)">
+              <div class="pop-num">05</div>
+              <div><div class="pop-title">Tuyển dụng shipper TipaExpress — Thu nhập 8–14 triệu</div><div class="pop-date">10/01/2026</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Categories -->
+        <div class="sb-widget">
+          <div class="sw-head">Danh mục</div>
+          <div class="sw-body">
+            <div class="cat-list">
+              <div class="cat-row" onclick="filterCat('cty')"><span class="cat-row-name"><span class="cat-row-ico">🏢</span>Tin Công Ty</span><span class="cat-row-count">4</span></div>
+              <div class="cat-row" onclick="filterCat('khuyen-mai')"><span class="cat-row-name"><span class="cat-row-ico">🛢</span>Khuyến Mãi</span><span class="cat-row-count">3</span></div>
+              <div class="cat-row" onclick="filterCat('khen-thuong')"><span class="cat-row-name"><span class="cat-row-ico">🏆</span>Khen Thưởng</span><span class="cat-row-count">2</span></div>
+              <div class="cat-row" onclick="filterCat('tuyen-dung')"><span class="cat-row-name"><span class="cat-row-ico">💼</span>Tuyển Dụng</span><span class="cat-row-count">2</span></div>
+              <div class="cat-row" onclick="filterCat('su-kien')"><span class="cat-row-name"><span class="cat-row-ico">🎉</span>Sự Kiện</span><span class="cat-row-count">1</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        <div class="sb-widget">
+          <div class="sw-head">Từ khóa</div>
+          <div class="sw-body">
+            <div class="tags-cloud">
+              <span class="tag-pill">Shell</span><span class="tag-pill">Castrol</span><span class="tag-pill">Dầu nhớt</span>
+              <span class="tag-pill">TipaShop</span><span class="tag-pill">TipaExpress</span><span class="tag-pill">Khuyến mãi</span>
+              <span class="tag-pill">Unilever</span><span class="tag-pill">Tuyển dụng</span><span class="tag-pill">Bạc Liêu</span>
+              <span class="tag-pill">Kenda</span><span class="tag-pill">GS Battery</span><span class="tag-pill">ĐBSCL</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="sb-widget nl-widget">
+          <div class="sw-head">Nhận bản tin</div>
+          <div class="nl-body">
+            <p>Đăng ký nhận thông tin mới nhất về sản phẩm, chương trình ưu đãi và sự kiện của Tín Phát Group.</p>
+            <input type="email" class="nl-input" placeholder="Email của bạn...">
+            <button class="btn-nl" onclick="this.textContent='✓ Đã đăng ký!'">Đăng ký →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-main">
+    <div>
+      <div class="ft-brand">Tín Phát <em>Group</em></div>
+      <span class="ft-est">Est. 2002 · Bạc Liêu, Việt Nam</span>
+      <p class="ft-about">"Chuyên nghiệp – Tận tình – Chất lượng." Cam kết mang lại dịch vụ tốt nhất, hướng tới Tập đoàn Thương mại quy mô toàn cầu.</p>
+      <div class="ft-contacts">
+        <span class="ftc">📍 315 Nguyễn Thị Minh Khai, P.5, TP Bạc Liêu</span>
+        <span class="ftc"><a href="tel:0949299494">📞 0949 29 94 94</a></span>
+        <span class="ftc"><a href="mailto:contact@tinphat.com">✉ contact@tinphat.com</a></span>
+      </div>
+      <div class="ft-soc"><a href="#" class="fso">f</a><a href="#" class="fso">t</a><a href="#" class="fso">z</a><a href="#" class="fso">▶</a></div>
+    </div>
+    <div class="ft-col"><h5>Về chúng tôi</h5><a href="gioi-thieu.html">Giới thiệu</a><a href="#">Các lĩnh vực</a><a href="#">Ban lãnh đạo</a><a href="#">Tin tức</a></div>
+    <div class="ft-col"><h5>Dịch vụ</h5><a href="#">Dầu nhớt & Ắc quy</a><a href="#">TipaShop</a><a href="#">TipaExpress</a><a href="#">Tín Phát CRM</a></div>
+    <div class="ft-col"><h5>Hợp tác</h5><a href="hop-tac.html">Đăng ký đại lý</a><a href="#">Tham gia TipaShop</a><a href="#">Cung ứng sản phẩm</a><a href="tuyen-dung.html">Tuyển dụng</a></div>
+  </div>
+  <div class="ft-bot">
+    <p class="ft-copy">© 2026 Tín Phát Group · Bạc Liêu, Việt Nam · tinphat.com</p>
+  </div>
+</footer>
+
+<!-- ARTICLE DRAWER -->
+<div class="drawer-overlay" id="drawerOverlay">
+  <div class="drawer" id="drawer">
+    <div class="d-head" id="dHead"></div>
+    <div class="d-body" id="dBody"></div>
+  </div>
+</div>
+
+<script>
+/* ═══════════════════════════════
+   DATA
+═══════════════════════════════ */
+const ARTICLES = [
+  {
+    id:1, cat:'cty', catLabel:'Tin Công Ty', catColor:'blue',
+    img:'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&q=85',
+    title:'Tín Phát Việt khai trương đầu năm 2026 với khí thế bứt phá mạnh mẽ',
+    excerpt:'Khởi đầu mới – Khí thế mới – Thành công mới. Tín Phát Group chính thức khai trương với quyết tâm bứt phá trong năm 2026.',
+    date:'24/02/2026', views:'1.234',
+    tags:['Khai trương','2026','Tín Phát Group'],
+    content:`<p>Sáng ngày 24/02/2026, Công ty TNHH SX & TM Tín Phát Việt đã chính thức tổ chức lễ khai trương đầu năm tại trụ sở 315 Nguyễn Thị Minh Khai, TP Bạc Liêu trong không khí tràn đầy hứng khởi và quyết tâm.</p>
+    <h3>Khởi đầu với khí thế mới</h3>
+    <p>Buổi lễ có sự tham dự của toàn thể Ban Giám đốc, cán bộ nhân viên và các đối tác chiến lược. Đây là sự kiện thường niên đánh dấu sự khởi đầu của một năm làm việc mới, đồng thời là dịp để toàn đội ngũ cùng nhìn lại thành quả năm qua và cam kết hướng tới những mục tiêu lớn hơn.</p>
+    <blockquote>"Năm 2026 là năm bản lề — chúng tôi không chỉ tăng trưởng về doanh số mà còn đầu tư mạnh vào công nghệ, nhân sự và mở rộng thị trường ra ngoài ĐBSCL." — Giám đốc Tín Phát Group</blockquote>
+    <h3>Mục tiêu năm 2026</h3>
+    <ul>
+      <li>Tăng trưởng doanh thu 35% so với năm 2025</li>
+      <li>Mở rộng hệ thống phân phối lên 7 tỉnh thành</li>
+      <li>Ra mắt TipaShop phiên bản 3.0 với tính năng AI gợi ý sản phẩm</li>
+      <li>Tuyển dụng thêm 30 nhân sự chất lượng cao</li>
+      <li>Hoàn thiện hệ thống CRM tích hợp toàn bộ chuỗi cung ứng</li>
+    </ul>
+    <p>Sau lễ khai trương, toàn thể nhân viên cùng dùng bữa sáng và nhận những phần quà ý nghĩa từ Ban Giám đốc — biểu tượng cho tinh thần đoàn kết và gắn bó của đại gia đình Tín Phát.</p>`
+  },
+  {
+    id:2, cat:'khen-thuong', catLabel:'Khen Thưởng', catColor:'orange',
+    img:'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80',
+    title:'Tín Phát Group khen thưởng nhân viên xuất sắc tháng 12/2025',
+    excerpt:'Chương trình khen thưởng nhân viên xuất sắc tháng 12/2025 đã ghi nhận những đóng góp tận tâm của đội ngũ trong năm qua.',
+    date:'16/01/2026', views:'845',
+    tags:['Khen thưởng','Nhân viên','2025'],
+    content:`<p>Trong buổi họp tổng kết tháng 12/2025, Ban Giám đốc Tín Phát Group đã tổ chức lễ trao thưởng đặc biệt nhằm ghi nhận và tôn vinh những nhân viên có thành tích xuất sắc trong năm qua.</p>
+    <h3>Các hạng mục khen thưởng</h3>
+    <ul>
+      <li>Nhân viên kinh doanh xuất sắc nhất — 3 giải</li>
+      <li>Nhân viên có tinh thần đồng đội tốt nhất — 2 giải</li>
+      <li>Sáng kiến cải tiến được áp dụng hiệu quả — 1 giải</li>
+      <li>Bộ phận hoàn thành KPI 100% — 2 bộ phận</li>
+    </ul>
+    <p>Mỗi giải thưởng đi kèm với phần thưởng tiền mặt và bằng khen của Ban Giám đốc. Đây là hoạt động thường niên nhằm tạo động lực và khuyến khích tinh thần thi đua trong toàn công ty.</p>
+    <blockquote>"Mỗi thành công của nhân viên chính là thành công của Tín Phát. Chúng tôi cam kết luôn ghi nhận xứng đáng sự cống hiến của từng người." — HR Manager</blockquote>`
+  },
+  {
+    id:3, cat:'khuyen-mai', catLabel:'Khuyến Mãi', catColor:'orange',
+    img:'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80',
+    title:'SALE OFF Dầu Cầu Mekong Penda EP 85W90 — Ưu đãi đặc biệt tháng 2/2026',
+    excerpt:'Ưu đãi giá sốc cho đại lý dịp đầu năm. Bảo vệ bánh răng tốt – chịu tải cao – vận hành êm ái. Số lượng có hạn!',
+    date:'28/02/2026', views:'672',
+    tags:['Mekong Penda','Dầu cầu','Khuyến mãi','Đại lý'],
+    content:`<p>Nhân dịp đầu xuân 2026, Tín Phát Group triển khai chương trình ưu đãi đặc biệt dành cho toàn hệ thống đại lý với sản phẩm Dầu Cầu Mekong Penda EP 85W90.</p>
+    <h3>Thông tin sản phẩm</h3>
+    <ul>
+      <li>Sản phẩm: Dầu Cầu Mekong Penda EP 85W90</li>
+      <li>Quy cách đóng gói: Can 4L, can 18L, thùng 200L</li>
+      <li>Ứng dụng: Dùng cho hộp số, cầu sau xe tải, xe khách</li>
+      <li>Tiêu chuẩn: API GL-4/GL-5</li>
+    </ul>
+    <h3>Chi tiết chương trình ưu đãi</h3>
+    <p>Chiết khấu thêm <strong>8% trên giá niêm yết</strong> cho đơn hàng từ 50 can 4L trở lên. Tặng kèm 2 can miễn phí cho đơn từ 100 can. Áp dụng đến hết ngày 31/03/2026 hoặc khi hết hàng.</p>
+    <blockquote>Liên hệ ngay sales@tinphat.com hoặc 0949 29 94 94 để đặt hàng và nhận báo giá tốt nhất!</blockquote>`
+  },
+  {
+    id:4, cat:'cty', catLabel:'Tin Công Ty', catColor:'blue',
+    img:'https://images.unsplash.com/photo-1573164574511-73c773193279?w=800&q=80',
+    title:'Họp kinh doanh định kỳ tháng 10/2025 — Đội ngũ sẵn sàng cho Q4',
+    excerpt:'Buổi họp toàn khối kinh doanh với sự tham dự đầy đủ. Kế hoạch Q4 được phê duyệt với nhiều điểm mới hứa hẹn.',
+    date:'14/11/2025', views:'534',
+    tags:['Họp kinh doanh','Q4','Kế hoạch'],
+    content:`<p>Ngày 14/11/2025, Tín Phát Group tổ chức buổi họp kinh doanh định kỳ tháng 10 với sự tham dự của toàn bộ đội ngũ kinh doanh tại trụ sở Bạc Liêu.</p>
+    <h3>Nội dung chính</h3>
+    <ul>
+      <li>Tổng kết kết quả kinh doanh 9 tháng đầu năm 2025</li>
+      <li>Phân tích thị trường và đối thủ cạnh tranh Q4</li>
+      <li>Phê duyệt kế hoạch kinh doanh tháng 11–12/2025</li>
+      <li>Triển khai chương trình khuyến mãi dịp cuối năm</li>
+      <li>Thảo luận về việc mở rộng thị trường sang Kiên Giang</li>
+    </ul>
+    <p>Kết quả 9 tháng đầu năm đạt 87% kế hoạch, với tốc độ tăng trưởng doanh thu 28% so với cùng kỳ. Đội ngũ đã thống nhất các giải pháp đẩy mạnh doanh số trong Q4 để hoàn thành mục tiêu năm.</p>`
+  },
+  {
+    id:5, cat:'cty', catLabel:'Tin Công Ty', catColor:'blue',
+    img:'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80',
+    title:'Tín Phát ra mắt ứng dụng TipaShop phiên bản 2.0 với nhiều tính năng mới',
+    excerpt:'TipaShop 2.0 chính thức ra mắt với giao diện mới, tính năng theo dõi đơn hàng real-time và tích hợp thanh toán đa dạng hơn.',
+    date:'01/12/2025', views:'1.089',
+    tags:['TipaShop','Ứng dụng','Công nghệ','Ra mắt'],
+    content:`<p>Ngày 01/12/2025, Tín Phát Group chính thức ra mắt TipaShop phiên bản 2.0 — bước nâng cấp toàn diện về trải nghiệm người dùng và tính năng thương mại điện tử.</p>
+    <h3>Tính năng mới nổi bật</h3>
+    <ul>
+      <li>Giao diện hoàn toàn mới, tối ưu cho mobile</li>
+      <li>Theo dõi đơn hàng real-time với bản đồ tài xế</li>
+      <li>Tích hợp MoMo, ZaloPay, VNPay và thẻ tín dụng</li>
+      <li>Hệ thống đánh giá sản phẩm với hình ảnh</li>
+      <li>Chương trình tích điểm TipaPoint cho khách hàng thân thiết</li>
+      <li>Chatbot hỗ trợ 24/7 được tích hợp AI</li>
+    </ul>
+    <p>TipaShop 2.0 có thể tải miễn phí trên App Store và Google Play. Người dùng cũ sẽ được tự động cập nhật và giữ nguyên toàn bộ lịch sử giao dịch.</p>
+    <blockquote>"TipaShop 2.0 là kết quả của hơn 6 tháng phát triển dựa trên phản hồi thực tế từ hàng nghìn người dùng. Chúng tôi tự hào mang đến trải nghiệm mua sắm tốt nhất cho người dân ĐBSCL." — CTO Tín Phát Group</blockquote>`
+  },
+  {
+    id:6, cat:'tuyen-dung', catLabel:'Tuyển Dụng', catColor:'green',
+    img:'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80',
+    title:'Tuyển dụng Shipper TipaExpress — Thu nhập 8–14 triệu, giờ làm linh hoạt',
+    excerpt:'TipaExpress đang tuyển shipper toàn thời gian tại Bạc Liêu, Cà Mau và Sóc Trăng. Thu nhập hấp dẫn, thưởng tuần, hỗ trợ trang thiết bị.',
+    date:'10/01/2026', views:'456',
+    tags:['Tuyển dụng','TipaExpress','Shipper','Logistics'],
+    content:`<p>TipaExpress — Đơn vị giao hàng nhanh của Tín Phát Group kết nối BEST Express đang tuyển dụng Shipper tại các khu vực Hòa Bình, Vĩnh Lợi (Bạc Liêu), Cà Mau và Sóc Trăng.</p>
+    <h3>Mô tả công việc</h3>
+    <ul>
+      <li>Nhận đơn hàng qua app TipaExpress và giao hàng đúng địa chỉ</li>
+      <li>Xử lý đơn COD (thu tiền khi giao) an toàn và chính xác</li>
+      <li>Liên hệ khách hàng khi cần thiết để sắp xếp giao hàng</li>
+      <li>Báo cáo tình trạng đơn hàng qua app theo thời gian thực</li>
+    </ul>
+    <h3>Quyền lợi</h3>
+    <ul>
+      <li>Lương cơ bản 4–6 triệu + hoa hồng theo đơn (tổng 8–14 triệu/tháng)</li>
+      <li>Thưởng đơn hàng hoàn thành 100% trong ngày</li>
+      <li>Hỗ trợ áo đồng phục, túi giao hàng và bảo hiểm tai nạn</li>
+      <li>Ca làm việc linh hoạt (sáng/chiều/tối)</li>
+      <li>Thanh toán lương hàng tuần, không chậm trễ</li>
+    </ul>
+    <p>Ứng tuyển ngay qua form trên trang tuyển dụng của Tín Phát hoặc gọi trực tiếp HR: <strong>0949 29 94 94</strong></p>`
+  },
+  {
+    id:7, cat:'khuyen-mai', catLabel:'Khuyến Mãi', catColor:'orange',
+    img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
+    title:'Chương trình ưu đãi Shell Advance Ultra — Mua 5 tặng 1 tháng 3/2026',
+    excerpt:'Shell Advance Ultra triển khai chương trình khuyến mãi đặc biệt dành riêng cho đại lý Tín Phát trong tháng 3/2026.',
+    date:'03/03/2026', views:'389',
+    tags:['Shell','Dầu nhớt','Khuyến mãi','Tháng 3'],
+    content:`<p>Nhằm hỗ trợ hệ thống đại lý đẩy mạnh doanh số trong mùa cao điểm, Tín Phát Group phối hợp với Shell Việt Nam triển khai chương trình ưu đãi hấp dẫn trong tháng 3/2026.</p>
+    <h3>Chi tiết chương trình</h3>
+    <ul>
+      <li>Sản phẩm áp dụng: Shell Advance Ultra 10W-40, 15W-50 (can 0.8L và 1L)</li>
+      <li>Mua 5 can bất kỳ tặng 1 can cùng loại</li>
+      <li>Áp dụng cho tất cả đại lý cấp 1 và cấp 2 của Tín Phát</li>
+      <li>Thời gian: 01/03/2026 – 31/03/2026</li>
+    </ul>
+    <blockquote>Đặt hàng ngay để đảm bảo nguồn cung vì số lượng chương trình có hạn. Liên hệ sales của Tín Phát để được tư vấn thêm.</blockquote>`
+  },
+  {
+    id:8, cat:'su-kien', catLabel:'Sự Kiện', catColor:'purple',
+    img:'https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80',
+    title:'Tín Phát Group tổ chức chuyến du lịch team building Đà Nẵng 2025',
+    excerpt:'Chuyến du lịch team building Đà Nẵng 3 ngày 2 đêm với toàn thể nhân viên — kết nối đội ngũ, gắn kết văn hóa doanh nghiệp.',
+    date:'20/08/2025', views:'923',
+    tags:['Team building','Đà Nẵng','Du lịch','Nhân viên'],
+    content:`<p>Từ ngày 15–17/08/2025, toàn thể cán bộ nhân viên Tín Phát Group đã có chuyến du lịch team building đáng nhớ tại Đà Nẵng — thành phố biển xinh đẹp miền Trung.</p>
+    <h3>Hành trình 3 ngày 2 đêm</h3>
+    <ul>
+      <li>Ngày 1: Di chuyển, nhận phòng, tham quan Bà Nà Hills và Sun World</li>
+      <li>Ngày 2: Tắm biển Mỹ Khê, ăn hải sản, tiệc gala dinner với các tiết mục văn nghệ</li>
+      <li>Ngày 3: Tham quan Ngũ Hành Sơn, mua sắm và về Bạc Liêu</li>
+    </ul>
+    <p>Chuyến đi không chỉ là dịp nghỉ ngơi thư giãn mà còn là cơ hội để toàn đội ngũ thêm gắn kết, hiểu nhau hơn sau những ngày làm việc căng thẳng. Ban Giám đốc chi trả 100% chi phí cho tất cả nhân viên.</p>
+    <blockquote>"Team building là khoản đầu tư quan trọng nhất vào văn hóa doanh nghiệp. Nhân viên vui, công ty mạnh." — CEO Tín Phát Group</blockquote>`
+  },
+  {
+    id:9, cat:'khen-thuong', catLabel:'Khen Thưởng', catColor:'orange',
+    img:'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&q=80',
+    title:'Trao giải "Nhân viên của năm 2025" — Vinh danh những ngôi sao sáng',
+    excerpt:'Lễ trao giải thường niên ghi nhận thành tích xuất sắc của những cá nhân có đóng góp nổi bật cho sự phát triển của Tín Phát năm 2025.',
+    date:'05/01/2026', views:'678',
+    tags:['Khen thưởng','Nhân viên của năm','2025'],
+    content:`<p>Ngày 05/01/2026, Tín Phát Group tổ chức lễ trao giải "Nhân viên của năm 2025" — sự kiện thường niên được toàn thể nhân viên mong chờ nhất trong năm.</p>
+    <h3>Các hạng mục giải thưởng</h3>
+    <ul>
+      <li>Nhân viên Kinh doanh xuất sắc nhất năm</li>
+      <li>Nhân viên hậu cần & logistics tiêu biểu</li>
+      <li>Nhân viên văn phòng xuất sắc</li>
+      <li>Đề xuất sáng kiến có giá trị nhất</li>
+      <li>Bộ phận/Team hoàn thành KPI cao nhất</li>
+    </ul>
+    <p>Mỗi giải thưởng đi kèm phần thưởng tiền mặt từ 3–15 triệu đồng, bằng khen và ưu tiên xét thăng chức trong chu kỳ đánh giá tiếp theo. Tiêu chí chấm điểm dựa trên KPI, đánh giá đồng nghiệp và đóng góp vào văn hóa công ty.</p>`
+  },
+  {
+    id:10, cat:'tuyen-dung', catLabel:'Tuyển Dụng', catColor:'green',
+    img:'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80',
+    title:'Tuyển dụng chuyên viên Marketing & Social Media — Sáng tạo không giới hạn',
+    excerpt:'Tín Phát Group tìm kiếm Chuyên viên Marketing đam mê digital, thành thạo Facebook Ads/TikTok Ads và có khả năng sáng tạo content xuất sắc.',
+    date:'15/02/2026', views:'512',
+    tags:['Tuyển dụng','Marketing','Digital','Social Media'],
+    content:`<p>Tín Phát Group đang tìm kiếm một Chuyên viên Marketing & Social Media để tham gia đội ngũ và cùng xây dựng thương hiệu số của tập đoàn trong năm 2026.</p>
+    <h3>Yêu cầu</h3>
+    <ul>
+      <li>Kinh nghiệm 1+ năm digital marketing</li>
+      <li>Thành thạo Facebook Ads, TikTok Ads Manager</li>
+      <li>Kỹ năng thiết kế cơ bản: Canva, Adobe Express</li>
+      <li>Khả năng viết content tiếng Việt tốt, sáng tạo</li>
+      <li>Ưu tiên có kinh nghiệm trong ngành phân phối hoặc FMCG</li>
+    </ul>
+    <h3>Quyền lợi</h3>
+    <ul>
+      <li>Lương 12–18 triệu/tháng tùy năng lực</li>
+      <li>Ngân sách quảng cáo thực chiến để thể hiện tài năng</li>
+      <li>Môi trường trẻ trung, thoải mái và sáng tạo</li>
+      <li>Cơ hội phát triển thành Marketing Manager trong 2 năm</li>
+    </ul>`
+  },
+  {
+    id:11, cat:'cty', catLabel:'Tin Công Ty', catColor:'blue',
+    img:'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80',
+    title:'Tín Phát Group ký kết hợp tác chiến lược với đối tác mới tại Kiên Giang',
+    excerpt:'Buổi lễ ký kết hợp tác phân phối giữa Tín Phát Group và công ty thương mại địa phương tại Kiên Giang mở ra cơ hội mở rộng thị trường mới.',
+    date:'18/01/2026', views:'334',
+    tags:['Hợp tác','Kiên Giang','Mở rộng thị trường'],
+    content:`<p>Ngày 18/01/2026, Tín Phát Group tổ chức lễ ký kết hợp tác chiến lược với Công ty TNHH Thương mại Phú Vượng tại Kiên Giang — đối tác phân phối mới trong khu vực.</p>
+    <h3>Ý nghĩa của hợp tác</h3>
+    <p>Đây là bước tiến quan trọng trong chiến lược mở rộng thị trường của Tín Phát Group ra ngoài khu vực Bạc Liêu, Cà Mau và Sóc Trăng. Kiên Giang với dân số hơn 1,8 triệu người là thị trường tiêu thụ tiềm năng lớn cho các sản phẩm dầu nhớt, ắc quy và hàng tiêu dùng.</p>
+    <ul>
+      <li>Phú Vượng sẽ là đại lý độc quyền tại Kiên Giang cho dầu nhớt Shell và GS Battery</li>
+      <li>Mục tiêu doanh thu năm đầu: 5 tỷ đồng</li>
+      <li>Hỗ trợ đào tạo, POSM và logistics qua TipaExpress</li>
+    </ul>
+    <blockquote>"Kiên Giang là cửa ngõ để chúng tôi tiến vào thị trường miền Tây rộng lớn hơn. Đây là kết quả của nhiều tháng đàm phán và chuẩn bị kỹ lưỡng." — Giám đốc Kinh doanh</blockquote>`
+  },
+  {
+    id:12, cat:'khuyen-mai', catLabel:'Khuyến Mãi', catColor:'orange',
+    img:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80',
+    title:'Lốp xe Kenda — Giảm 15% cho đơn hàng từ 20 bộ tháng 4/2026',
+    excerpt:'Chương trình giảm giá đặc biệt cho lốp xe Kenda trong tháng 4. Áp dụng cho cả đại lý xe máy và ô tô trong hệ thống Tín Phát.',
+    date:'01/04/2026', views:'278',
+    tags:['Kenda','Lốp xe','Khuyến mãi','Tháng 4'],
+    content:`<p>Để hỗ trợ hệ thống đại lý đẩy hàng cuối quý 1, Tín Phát Group triển khai chương trình ưu đãi đặc biệt cho dòng lốp xe Kenda trong tháng 4/2026.</p>
+    <h3>Chi tiết ưu đãi</h3>
+    <ul>
+      <li>Giảm 15% trên giá niêm yết cho đơn từ 20 bộ trở lên</li>
+      <li>Tặng thêm 2 bộ lốp cho đơn từ 50 bộ</li>
+      <li>Áp dụng cho tất cả size lốp xe máy phổ thông (2.50-17, 2.75-17, 3.00-17)</li>
+      <li>Thời gian: 01/04/2026 – 30/04/2026</li>
+    </ul>
+    <p>Kenda là thương hiệu lốp xe Đài Loan với hơn 50 năm kinh nghiệm, được sử dụng rộng rãi tại Việt Nam và Đông Nam Á. Chất lượng ổn định, giá thành cạnh tranh — là lựa chọn lý tưởng cho thị trường xe máy phổ thông.</p>`
+  }
+];
+
+/* ═══════════════════════════════
+   RENDER + FILTER
+═══════════════════════════════ */
+let activeCat = 'all', searchQ = '', page = 1;
+const PER_PAGE = 6;
+
+function getFiltered() {
+  return ARTICLES.filter(a => {
+    const catOk = activeCat === 'all' || a.cat === activeCat;
+    const srchOk = !searchQ || a.title.toLowerCase().includes(searchQ) || a.excerpt.toLowerCase().includes(searchQ);
+    return catOk && srchOk;
+  });
+}
+
+function renderGrid() {
+  const list = getFiltered();
+  const total = list.length;
+  const totalPages = Math.ceil(total / PER_PAGE);
+  page = Math.min(page, totalPages || 1);
+  const slice = list.slice((page-1)*PER_PAGE, page*PER_PAGE);
+
+  document.getElementById('artCount').textContent = total;
+  const grid = document.getElementById('artGrid');
+  const noArt = document.getElementById('noArt');
+
+  if (!slice.length) {
+    grid.innerHTML = '';
+    noArt.classList.add('show');
+  } else {
+    noArt.classList.remove('show');
+    grid.innerHTML = slice.map(a => `
+      <div class="ac" onclick="openArticle(${a.id})">
+        <div class="ac-img">
+          <img src="${a.img}" alt="${a.title}" loading="lazy">
+          <span class="ac-cat ${a.catColor}">${a.catLabel}</span>
+        </div>
+        <div class="ac-body">
+          <h3>${a.title}</h3>
+          <p>${a.excerpt}</p>
+          <div class="ac-foot">
+            <span class="ac-date">📅 ${a.date} · 👁 ${a.views}</span>
+            <div class="ac-arr">→</div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // pagination
+  const pgEl = document.getElementById('pagination');
+  if (totalPages <= 1) { pgEl.innerHTML = ''; return; }
+  let btns = `<button class="pg-btn" onclick="goPage(${page-1})" ${page===1?'disabled':''}>‹</button>`;
+  for (let i=1; i<=totalPages; i++) {
+    btns += `<button class="pg-btn ${i===page?'on':''}" onclick="goPage(${i})">${i}</button>`;
+  }
+  btns += `<button class="pg-btn" onclick="goPage(${page+1})" ${page===totalPages?'disabled':''}>›</button>`;
+  pgEl.innerHTML = btns;
+}
+
+function goPage(p) {
+  page = p;
+  renderGrid();
+  document.getElementById('jobs') && document.querySelector('.news-main').scrollIntoView({behavior:'smooth'});
+}
+
+renderGrid();
+
+/* category filter */
+document.querySelectorAll('.cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    activeCat = btn.dataset.cat;
+    page = 1;
+    renderGrid();
+  });
+});
+
+/* sidebar category */
+function filterCat(cat) {
+  activeCat = cat;
+  page = 1;
+  document.querySelectorAll('.cat-btn').forEach(b => {
+    b.classList.toggle('on', b.dataset.cat === cat);
+  });
+  renderGrid();
+  document.querySelector('.news-main').scrollIntoView({behavior:'smooth'});
+}
+
+/* search */
+document.getElementById('newsSearch').addEventListener('input', e => {
+  searchQ = e.target.value.toLowerCase().trim();
+  page = 1;
+  renderGrid();
+});
+
+/* ═══════════════════════════════
+   ARTICLE DRAWER
+═══════════════════════════════ */
+const CATCOLORS = { green:'#1a6b3c', blue:'var(--navy)', orange:'var(--gold)', red:'#c0392b', purple:'#6b3fa0' };
+
+function openArticle(id) {
+  const a = ARTICLES.find(x => x.id === id);
+  if (!a) return;
+
+  document.getElementById('dHead').innerHTML = `
+    <div class="d-hero">
+      <img src="${a.img}" alt="">
+      <div class="d-hero-body">
+        <div class="d-cat" style="background:${CATCOLORS[a.catColor]||'var(--navy)'};color:#fff">${a.catLabel}</div>
+        <div class="d-title">${a.title}</div>
+      </div>
+      <div class="d-close" id="dClose">✕</div>
+    </div>
+  `;
+
+  document.getElementById('dBody').innerHTML = `
+    <div class="d-meta">
+      <span class="d-meta-item">📅 ${a.date}</span>
+      <span class="d-meta-item">👁 ${a.views} lượt xem</span>
+      <span class="d-meta-item">🏷 ${a.catLabel}</span>
+    </div>
+    <div class="d-content">${a.content}</div>
+    <div class="d-tags">
+      ${a.tags.map(t => `<span class="tag-pill">${t}</span>`).join('')}
+    </div>
+  `;
+
+  document.getElementById('drawerOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('drawer').scrollTop = 0;
+
+  document.getElementById('dClose').addEventListener('click', closeDrawer);
+}
+
+function closeDrawer() {
+  document.getElementById('drawerOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('drawerOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('drawerOverlay')) closeDrawer();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDrawer(); });
+
+/* ═══════════════════════════════
+   BASE
+═══════════════════════════════ */
+const prog = document.getElementById('prog');
+window.addEventListener('scroll', () => {
+  const s = document.documentElement.scrollTop, h = document.documentElement.scrollHeight - window.innerHeight;
+  prog.style.width = (h > 0 ? s/h*100 : 0) + '%';
+}, {passive:true});
+
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('on', scrollY > 50), {passive:true});
+
+const ham = document.getElementById('ham'), mob = document.getElementById('mob');
+let menuOpen = false;
+ham.addEventListener('click', () => {
+  menuOpen = !menuOpen;
+  ham.classList.toggle('open', menuOpen);
+  mob.classList.toggle('open', menuOpen);
+  document.body.style.overflow = menuOpen ? 'hidden' : '';
+});
+mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  menuOpen = false; ham.classList.remove('open'); mob.classList.remove('open');
+  document.body.style.overflow = '';
+}));
+
+const obs = new IntersectionObserver(e => {
+  e.forEach(el => { if (el.isIntersecting) el.target.classList.add('on'); });
+}, {threshold:.06, rootMargin:'0px 0px -28px 0px'});
+document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
