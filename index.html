@@ -1165,6 +1165,13 @@ footer { background:#090e17; border-top:1px solid rgba(196,136,28,.18); }
 .btn-main, .btn-primary, .btn-nav-fill, .btn-cta-fill, .btn-mob-fill {
   min-height:44px;
 }
+   @media (min-width: 900px) {
+    .hero {
+        display: grid;
+        grid-template-columns: 1fr 52%;
+        min-height: calc(100svh - 108px);
+    }
+}
 </style>
 </head>
 <body>
