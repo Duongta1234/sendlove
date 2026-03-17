@@ -113,6 +113,13 @@ body::before {
 /* ═══════════════════════════════════
    TOPBAR  (hidden on mobile)
 ═══════════════════════════════════ */
+   @media (min-width: 900px) {
+    .hero {
+        display: grid;
+        grid-template-columns: 1fr 52%;
+        min-height: calc(100svh - 108px);
+    }
+}
 .topbar { display:none; }
 @media(min-width:768px) {
   .topbar {
