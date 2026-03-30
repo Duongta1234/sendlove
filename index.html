@@ -1,1561 +1,665 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bảo Hiểm Sức Khỏe Trọn Đời – AIA Việt Nam</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
   :root {
-    --rose: #e8536a;
-    --rose-light: #f4778a;
-    --rose-pale: #fce9ec;
-    --rose-muted: #f8d7dc;
-    --blush: #fdf0f2;
-    --cream: #fdf6f0;
-    --warm-white: #fffaf8;
-    --charcoal: #2a1c1e;
-    --text: #3d2c2e;
-    --text-muted: #7a5c60;
-    --gold: #c9923a;
-    --teal: #2d7d7a;
-    --sky: #5ba4c8;
-    --font-display: 'Playfair Display', serif;
-    --font-body: 'Be Vietnam Pro', sans-serif;
-    --shadow-soft: 0 4px 30px rgba(232, 83, 106, 0.08);
-    --shadow-card: 0 8px 40px rgba(60, 20, 25, 0.10);
-    --radius: 20px;
-    --radius-sm: 12px;
+    --rose: #E8396A;
+    --rose-light: #F4799A;
+    --rose-pale: #FCE8EF;
+    --rose-blush: #FDF1F5;
+    --rose-deep: #C02555;
+    --cream: #FFF8F5;
+    --text-dark: #1A1218;
+    --text-mid: #4A3040;
+    --text-soft: #8A6878;
+    --white: #FFFFFF;
+    --gold: #D4A855;
+    --teal: #3AACB0;
+    --shadow-rose: 0 20px 60px rgba(232,57,106,0.18);
+    --shadow-soft: 0 8px 32px rgba(74,48,64,0.10);
   }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Be Vietnam Pro',sans-serif;background:var(--cream);color:var(--text-dark);overflow-x:hidden;}
 
-  html { scroll-behavior: smooth; }
+  /* NAVBAR */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,248,245,0.94);backdrop-filter:blur(12px);border-bottom:1px solid rgba(232,57,106,0.1);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:68px;transition:box-shadow 0.3s;}
+  nav.scrolled{box-shadow:0 4px 24px rgba(232,57,106,0.10);}
+  .nav-logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:var(--rose);letter-spacing:-0.5px;}
+  .nav-logo span{color:var(--text-dark);}
+  .nav-links{display:flex;gap:2rem;list-style:none;}
+  .nav-links a{text-decoration:none;color:var(--text-mid);font-size:0.88rem;font-weight:500;transition:color 0.2s;}
+  .nav-links a:hover{color:var(--rose);}
+  .nav-cta{background:var(--rose);color:#fff;border:none;padding:0.55rem 1.4rem;border-radius:50px;font-size:0.88rem;font-weight:600;cursor:pointer;transition:background 0.2s,transform 0.2s;font-family:'Be Vietnam Pro',sans-serif;white-space:nowrap;}
+  .nav-cta:hover{background:var(--rose-deep);transform:translateY(-1px);}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+  .hamburger span{width:24px;height:2px;background:var(--rose);border-radius:2px;display:block;transition:0.3s;}
+  .mobile-menu{display:none;position:fixed;top:68px;left:0;right:0;background:var(--cream);z-index:99;padding:1.5rem 5%;box-shadow:0 8px 24px rgba(0,0,0,0.1);flex-direction:column;gap:1.2rem;}
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{color:var(--text-mid);text-decoration:none;font-weight:500;font-size:1rem;}
 
-  body {
-    font-family: var(--font-body);
-    background: var(--warm-white);
-    color: var(--text);
-    overflow-x: hidden;
-    line-height: 1.7;
-  }
+  /* HERO */
+  .hero{min-height:100vh;background:linear-gradient(135deg,#FDF1F5 0%,#FFF0F5 40%,#FCE8EF 100%);display:flex;align-items:center;padding:100px 5% 60px;position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;top:-120px;right:-120px;width:600px;height:600px;background:radial-gradient(circle,rgba(232,57,106,0.12) 0%,transparent 70%);border-radius:50%;}
+  .hero::after{content:'';position:absolute;bottom:-80px;left:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(58,172,176,0.08) 0%,transparent 70%);border-radius:50%;}
+  .hero-inner{max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:1;}
+  .hero-badge{display:inline-flex;align-items:center;gap:0.5rem;background:var(--white);border:1px solid rgba(232,57,106,0.2);padding:0.4rem 1rem;border-radius:50px;font-size:0.78rem;font-weight:600;color:var(--rose);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:1.5rem;box-shadow:0 2px 12px rgba(232,57,106,0.12);animation:fadeUp 0.6s ease both;}
+  .hero-badge::before{content:'♦';font-size:0.6rem;}
+  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:900;line-height:1.12;color:var(--text-dark);margin-bottom:1.2rem;animation:fadeUp 0.6s 0.1s ease both;}
+  .hero h1 em{color:var(--rose);font-style:italic;}
+  .hero-sub{font-size:1rem;color:var(--text-mid);line-height:1.8;margin-bottom:2rem;font-weight:400;animation:fadeUp 0.6s 0.2s ease both;}
+  .hero-actions{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp 0.6s 0.3s ease both;}
+  .btn-primary{background:linear-gradient(135deg,var(--rose),var(--rose-deep));color:#fff;border:none;padding:0.9rem 2rem;border-radius:50px;font-size:0.95rem;font-weight:700;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 8px 24px rgba(232,57,106,0.35);font-family:'Be Vietnam Pro',sans-serif;text-decoration:none;display:inline-block;}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(232,57,106,0.45);}
+  .btn-outline{background:transparent;color:var(--rose);border:2px solid var(--rose);padding:0.9rem 2rem;border-radius:50px;font-size:0.95rem;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:'Be Vietnam Pro',sans-serif;text-decoration:none;display:inline-block;}
+  .btn-outline:hover{background:var(--rose);color:#fff;}
+  .hero-visual{position:relative;animation:fadeUp 0.8s 0.2s ease both;}
+  .hero-card{background:var(--white);border-radius:24px;padding:2rem;box-shadow:var(--shadow-rose);position:relative;overflow:hidden;}
+  .hero-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--rose),var(--rose-light),var(--teal));}
+  .hero-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem;}
+  .hero-stat{background:var(--rose-blush);border-radius:14px;padding:1.1rem;text-align:center;}
+  .hero-stat .num{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:900;color:var(--rose);line-height:1;}
+  .hero-stat .label{font-size:0.72rem;color:var(--text-mid);margin-top:0.3rem;font-weight:500;line-height:1.4;}
+  .hero-card-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--text-dark);margin-bottom:0.2rem;}
+  .hero-card-sub{font-size:0.8rem;color:var(--text-soft);}
+  .float-badge{position:absolute;background:var(--white);border-radius:14px;padding:0.65rem 1rem;box-shadow:var(--shadow-soft);font-size:0.76rem;font-weight:600;color:var(--text-mid);display:flex;align-items:center;gap:0.5rem;white-space:nowrap;}
+  .float-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--rose);}
+  .float-badge-1{top:-18px;left:-20px;animation:float 3s ease-in-out infinite;}
+  .float-badge-2{bottom:20px;right:-10px;animation:float 3s 1.5s ease-in-out infinite;}
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(255,250,248,0.92);
-    backdrop-filter: blur(18px);
-    border-bottom: 1px solid rgba(232,83,106,0.12);
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 5%;
-    height: 68px;
-    transition: box-shadow .3s;
-  }
-  nav.scrolled { box-shadow: 0 2px 24px rgba(232,83,106,0.12); }
-  .nav-logo {
-    display: flex; align-items: center; gap: 10px;
-    font-family: var(--font-display); font-size: 1.35rem; font-weight: 700;
-    color: var(--rose); text-decoration: none;
-  }
-  .nav-logo span { color: var(--charcoal); font-weight: 400; font-style: italic; font-size: 1.05rem; }
-  .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: .9rem; font-weight: 500; transition: color .2s; }
-  .nav-links a:hover { color: var(--rose); }
-  .nav-cta {
-    background: var(--rose); color: white; border: none; padding: 10px 24px;
-    border-radius: 50px; font-size: .88rem; font-weight: 600; cursor: pointer;
-    transition: transform .2s, box-shadow .2s;
-    font-family: var(--font-body);
-  }
-  .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(232,83,106,.4); }
-  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-  .hamburger span { width: 24px; height: 2px; background: var(--charcoal); border-radius: 2px; transition: .3s; }
+  /* SECTIONS */
+  .section{padding:90px 5%;}
+  .section-inner{max-width:1200px;margin:0 auto;}
+  .section-label{font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--rose);margin-bottom:0.8rem;}
+  .section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;line-height:1.2;color:var(--text-dark);margin-bottom:1rem;}
+  .section-title em{color:var(--rose);font-style:italic;}
+  .section-desc{font-size:0.97rem;color:var(--text-mid);line-height:1.8;max-width:560px;}
 
-  /* ── HERO ── */
-  #hero {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #fff0f3 0%, #fce9ec 35%, #fdf4f0 70%, #f8f0ff 100%);
-    position: relative; overflow: hidden;
-    display: flex; align-items: center;
-    padding: 90px 5% 60px;
-  }
-  .hero-bg-shape {
-    position: absolute; border-radius: 50%;
-    background: radial-gradient(circle, rgba(232,83,106,.15), transparent 70%);
-    pointer-events: none;
-  }
-  .hero-bg-shape.s1 { width: 700px; height: 700px; top: -200px; right: -200px; }
-  .hero-bg-shape.s2 { width: 400px; height: 400px; bottom: -100px; left: -100px; background: radial-gradient(circle, rgba(91,164,200,.12), transparent 70%); }
-  .hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; width: 100%; }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: white; border: 1px solid rgba(232,83,106,.25);
-    padding: 6px 16px; border-radius: 50px;
-    font-size: .8rem; font-weight: 600; color: var(--rose);
-    margin-bottom: 20px;
-    animation: fadeUp .8s ease both;
-  }
-  .hero-badge::before { content: '●'; font-size: .55rem; animation: pulse 2s infinite; }
-  @keyframes pulse { 0%,100%{ opacity:1 } 50%{ opacity:.3 } }
-  .hero-title {
-    font-family: var(--font-display);
-    font-size: clamp(2.4rem, 5vw, 3.8rem);
-    font-weight: 900; line-height: 1.15;
-    color: var(--charcoal);
-    animation: fadeUp .8s .1s ease both;
-  }
-  .hero-title em { color: var(--rose); font-style: italic; }
-  .hero-subtitle {
-    margin-top: 18px; font-size: 1.05rem; color: var(--text-muted); font-weight: 400;
-    max-width: 480px; animation: fadeUp .8s .2s ease both;
-  }
-  .hero-stats {
-    display: flex; gap: 28px; margin-top: 36px;
-    animation: fadeUp .8s .3s ease both;
-  }
-  .hero-stat { text-align: center; }
-  .hero-stat .num { font-family: var(--font-display); font-size: 1.9rem; font-weight: 700; color: var(--rose); line-height: 1; }
-  .hero-stat .lbl { font-size: .72rem; color: var(--text-muted); font-weight: 500; margin-top: 4px; }
-  .hero-divider { width: 1px; background: rgba(232,83,106,.2); }
-  .hero-actions { display: flex; gap: 14px; margin-top: 36px; flex-wrap: wrap; animation: fadeUp .8s .4s ease both; }
-  .btn-primary {
-    background: var(--rose); color: white; padding: 14px 30px; border-radius: 50px;
-    font-size: .92rem; font-weight: 600; border: none; cursor: pointer;
-    transition: transform .2s, box-shadow .2s; text-decoration: none; display: inline-block;
-    font-family: var(--font-body);
-  }
-  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(232,83,106,.4); }
-  .btn-outline {
-    background: transparent; color: var(--rose); padding: 14px 30px; border-radius: 50px;
-    font-size: .92rem; font-weight: 600; border: 2px solid var(--rose); cursor: pointer;
-    transition: all .2s; text-decoration: none; display: inline-block;
-    font-family: var(--font-body);
-  }
-  .btn-outline:hover { background: var(--rose); color: white; }
+  /* WHY */
+  .why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem;}
+  .why-card{background:var(--white);border-radius:20px;padding:1.8rem 1.5rem;box-shadow:var(--shadow-soft);transition:transform 0.3s,box-shadow 0.3s;border:1px solid rgba(232,57,106,0.08);position:relative;overflow:hidden;}
+  .why-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--rose),transparent);transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
+  .why-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-rose);}
+  .why-card:hover::after{transform:scaleX(1);}
+  .why-icon{width:54px;height:54px;border-radius:14px;background:var(--rose-pale);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1.1rem;}
+  .why-card h3{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--text-dark);margin-bottom:0.5rem;}
+  .why-card p{font-size:0.83rem;color:var(--text-soft);line-height:1.7;}
+  .why-big{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--rose);line-height:1;margin-bottom:0.2rem;}
 
-  .hero-visual { position: relative; animation: fadeUp .8s .2s ease both; }
-  .hero-card {
-    background: white; border-radius: 28px;
-    box-shadow: var(--shadow-card);
-    padding: 40px; position: relative; overflow: hidden;
-  }
-  .hero-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px;
-    background: linear-gradient(90deg, var(--rose), var(--rose-light), var(--sky));
-  }
-  .hero-card-label { font-size: .75rem; font-weight: 700; letter-spacing: .1em; color: var(--rose); text-transform: uppercase; margin-bottom: 12px; }
-  .hero-card-title { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--charcoal); margin-bottom: 8px; }
-  .hero-card-sub { font-size: .88rem; color: var(--text-muted); margin-bottom: 28px; }
-  .coverage-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
-  .coverage-list li {
-    display: flex; align-items: center; gap: 12px;
-    background: var(--blush); border-radius: 12px; padding: 12px 16px;
-    font-size: .88rem; font-weight: 500;
-  }
-  .coverage-list li .icon { width: 36px; height: 36px; background: var(--rose-pale); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
-  .floating-pill {
-    position: absolute;
-    background: white; border-radius: 50px;
-    padding: 8px 18px; box-shadow: 0 4px 20px rgba(0,0,0,.1);
-    font-size: .78rem; font-weight: 700;
-    animation: float 4s ease-in-out infinite;
-  }
-  .floating-pill.p1 { top: -16px; right: 20px; color: var(--rose); border: 1.5px solid var(--rose-pale); }
-  .floating-pill.p2 { bottom: -12px; left: 0; color: var(--teal); border: 1.5px solid rgba(45,125,122,.2); animation-delay: -2s; }
-  @keyframes float { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-10px) } }
+  /* STATS */
+  .stats-banner{background:linear-gradient(135deg,var(--rose) 0%,var(--rose-deep) 100%);padding:60px 5%;position:relative;overflow:hidden;}
+  .stats-banner::before{content:'';position:absolute;top:-50%;right:-10%;width:500px;height:500px;background:rgba(255,255,255,0.06);border-radius:50%;}
+  .stats-banner-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center;position:relative;z-index:1;}
+  .stat-num{font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:900;color:#fff;line-height:1;}
+  .stat-unit{font-size:1rem;font-weight:600;color:rgba(255,255,255,0.7);}
+  .stat-label{font-size:0.8rem;color:rgba(255,255,255,0.82);margin-top:0.5rem;line-height:1.5;}
 
-  @keyframes fadeUp { from { opacity:0; transform: translateY(28px) } to { opacity:1; transform: translateY(0) } }
+  /* PLANS */
+  .plans-section{background:var(--rose-blush);padding:90px 5%;}
+  .plans-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:3rem;}
+  .plan-card{background:var(--white);border-radius:24px;padding:1.8rem 1.4rem;position:relative;box-shadow:var(--shadow-soft);transition:transform 0.3s,box-shadow 0.3s;border:2px solid transparent;overflow:hidden;}
+  .plan-card:hover{transform:translateY(-6px);}
+  .plan-card.featured{border-color:var(--rose);box-shadow:var(--shadow-rose);transform:translateY(-8px);}
+  .plan-badge{position:absolute;top:1rem;right:1rem;background:var(--rose);color:#fff;font-size:0.68rem;font-weight:700;padding:0.2rem 0.65rem;border-radius:50px;letter-spacing:0.5px;text-transform:uppercase;}
+  .plan-tier{font-size:0.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--rose);margin-bottom:0.4rem;}
+  .plan-name{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:var(--text-dark);margin-bottom:0.4rem;}
+  .plan-stbh{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:var(--rose);}
+  .plan-stbh span{font-size:0.75rem;font-weight:500;color:var(--text-soft);font-family:'Be Vietnam Pro',sans-serif;}
+  .plan-divider{height:1px;background:var(--rose-pale);margin:1.1rem 0;}
+  .plan-features{list-style:none;display:flex;flex-direction:column;gap:0.6rem;}
+  .plan-features li{display:flex;align-items:flex-start;gap:0.55rem;font-size:0.8rem;color:var(--text-mid);line-height:1.5;}
+  .plan-features li::before{content:'✓';color:var(--rose);font-weight:700;font-size:0.82rem;flex-shrink:0;margin-top:1px;}
+  .plan-cta{width:100%;margin-top:1.4rem;padding:0.75rem;border-radius:50px;font-size:0.86rem;font-weight:700;cursor:pointer;transition:all 0.2s;font-family:'Be Vietnam Pro',sans-serif;}
+  .plan-cta.solid{background:var(--rose);color:#fff;border:2px solid var(--rose);}
+  .plan-cta.outline{background:transparent;color:var(--rose);border:2px solid var(--rose);}
+  .plan-cta:hover{background:var(--rose-deep);color:#fff;border-color:var(--rose-deep);transform:translateY(-1px);}
 
-  /* ── SECTION COMMONS ── */
-  section { padding: 90px 5%; }
-  .section-tag {
-    display: inline-block; background: var(--rose-pale); color: var(--rose);
-    font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
-    padding: 5px 14px; border-radius: 50px; margin-bottom: 14px;
-  }
-  .section-title {
-    font-family: var(--font-display);
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-    font-weight: 700; line-height: 1.2; color: var(--charcoal);
-  }
-  .section-title em { color: var(--rose); font-style: italic; }
-  .section-sub { color: var(--text-muted); font-size: 1rem; max-width: 600px; margin-top: 12px; }
-  .container { max-width: 1200px; margin: 0 auto; }
+  /* BENEFITS */
+  .benefits-section{padding:90px 5%;}
+  .benefits-tabs{display:flex;gap:0.7rem;flex-wrap:wrap;margin:2rem 0;}
+  .tab-btn{padding:0.5rem 1.2rem;border-radius:50px;border:2px solid var(--rose-pale);font-size:0.83rem;font-weight:600;cursor:pointer;transition:all 0.2s;background:transparent;color:var(--text-mid);font-family:'Be Vietnam Pro',sans-serif;}
+  .tab-btn.active{background:var(--rose);color:#fff;border-color:var(--rose);}
+  .tab-btn:hover:not(.active){border-color:var(--rose);color:var(--rose);}
+  .tab-panel{display:none;}
+  .tab-panel.active{display:block;}
+  .benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;}
+  .benefit-item{background:var(--white);border-radius:16px;padding:1.4rem;border:1px solid rgba(232,57,106,0.1);transition:border-color 0.2s,box-shadow 0.2s;}
+  .benefit-item:hover{border-color:var(--rose);box-shadow:var(--shadow-soft);}
+  .benefit-icon{font-size:1.5rem;margin-bottom:0.7rem;}
+  .benefit-name{font-weight:700;color:var(--text-dark);font-size:0.88rem;margin-bottom:0.3rem;}
+  .benefit-val{font-size:1.1rem;font-weight:900;color:var(--rose);font-family:'Playfair Display',serif;}
+  .benefit-note{font-size:0.73rem;color:var(--text-soft);margin-top:0.3rem;}
 
-  /* ── WHY SECTION ── */
-  #why { background: var(--blush); }
-  .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-top: 50px; }
-  .why-card {
-    background: white; border-radius: var(--radius); padding: 32px 28px;
-    box-shadow: var(--shadow-soft); border: 1px solid rgba(232,83,106,.08);
-    transition: transform .3s, box-shadow .3s;
-  }
-  .why-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-card); }
-  .why-icon { font-size: 2.4rem; margin-bottom: 16px; }
-  .why-card h3 { font-size: 1.5rem; font-weight: 700; color: var(--rose); margin-bottom: 6px; font-family: var(--font-display); }
-  .why-card p { font-size: .88rem; color: var(--text-muted); font-weight: 400; }
+  /* PROCESS */
+  .process-section{background:var(--rose-blush);padding:90px 5%;}
+  .process-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-top:3rem;position:relative;}
+  .process-steps::before{content:'';position:absolute;top:38px;left:8%;right:8%;height:2px;background:linear-gradient(90deg,var(--rose-pale),var(--rose),var(--rose-pale));z-index:0;}
+  .process-step{text-align:center;position:relative;z-index:1;}
+  .step-circle{width:76px;height:76px;border-radius:50%;background:var(--white);border:3px solid var(--rose);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:1.5rem;box-shadow:0 4px 16px rgba(232,57,106,0.2);transition:transform 0.3s;position:relative;}
+  .process-step:hover .step-circle{transform:scale(1.1);}
+  .step-num{position:absolute;top:-8px;right:-4px;background:var(--rose);color:#fff;width:22px;height:22px;border-radius:50%;font-size:0.68rem;font-weight:700;display:flex;align-items:center;justify-content:center;}
+  .step-title{font-weight:700;font-size:0.86rem;color:var(--text-dark);margin-bottom:0.35rem;}
+  .step-desc{font-size:0.76rem;color:var(--text-soft);line-height:1.6;}
 
-  /* ── STATS BAND ── */
-  #stats {
-    background: linear-gradient(135deg, var(--rose) 0%, #c43d55 100%);
-    padding: 70px 5%;
-  }
-  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; max-width: 1100px; margin: 0 auto; text-align: center; }
-  .stat-item { color: white; }
-  .stat-item .big { font-family: var(--font-display); font-size: 2.8rem; font-weight: 700; line-height: 1; margin-bottom: 8px; }
-  .stat-item .label { font-size: .85rem; opacity: .85; font-weight: 400; line-height: 1.4; }
-  .stat-divider { width: 1px; background: rgba(255,255,255,.2); align-self: stretch; }
+  /* VITALITY */
+  .vitality-section{padding:90px 5%;}
+  .vitality-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
+  .vitality-levels{display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem;}
+  .vitality-level{display:flex;align-items:center;gap:1rem;background:var(--white);border-radius:14px;padding:1rem 1.3rem;box-shadow:var(--shadow-soft);transition:transform 0.2s;}
+  .vitality-level:hover{transform:translateX(6px);}
+  .level-icon{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;}
+  .level-info{flex:1;}
+  .level-name{font-weight:700;font-size:0.88rem;color:var(--text-dark);}
+  .level-pts{font-size:0.76rem;color:var(--text-soft);}
+  .level-reward{font-weight:700;font-size:0.88rem;color:var(--rose);text-align:right;}
+  .vitality-highlight{background:linear-gradient(135deg,var(--rose-pale) 0%,#FFF0F5 100%);border-radius:22px;padding:2.2rem;border:1px solid rgba(232,57,106,0.15);}
+  .vitality-highlight h3{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:var(--text-dark);margin-bottom:0.9rem;}
+  .vitality-highlight p{font-size:0.9rem;color:var(--text-mid);line-height:1.8;margin-bottom:0.9rem;}
+  .vh-feature{display:flex;align-items:center;gap:0.8rem;margin-bottom:0.7rem;}
+  .vh-feature-text{font-size:0.86rem;color:var(--text-mid);font-weight:500;}
 
-  /* ── PLANS ── */
-  #plans { background: white; }
-  .plans-header { text-align: center; margin-bottom: 50px; }
-  .plans-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; }
-  .plan-card {
-    background: white; border: 2px solid var(--rose-muted);
-    border-radius: var(--radius); overflow: hidden;
-    transition: transform .3s, box-shadow .3s;
-    position: relative;
-  }
-  .plan-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-card); }
-  .plan-card.featured { border-color: var(--rose); box-shadow: 0 0 0 4px var(--rose-pale); }
-  .plan-card.featured .plan-header { background: linear-gradient(135deg, var(--rose), var(--rose-light)); }
-  .plan-badge {
-    position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
-    background: var(--gold); color: white; font-size: .7rem; font-weight: 700;
-    padding: 4px 14px; border-radius: 0 0 10px 10px; letter-spacing: .05em; text-transform: uppercase;
-  }
-  .plan-header { background: var(--rose-pale); padding: 28px 24px 22px; text-align: center; }
-  .plan-header .name { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--charcoal); margin-bottom: 4px; }
-  .plan-card.featured .plan-header .name { color: white; }
-  .plan-header .stbh { font-size: .8rem; color: var(--text-muted); }
-  .plan-card.featured .plan-header .stbh { color: rgba(255,255,255,.85); }
-  .plan-header .amount { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--rose); margin-top: 6px; }
-  .plan-card.featured .plan-header .amount { color: white; }
-  .plan-body { padding: 22px 20px; }
-  .plan-feature { display: flex; gap: 10px; align-items: flex-start; font-size: .82rem; padding: 8px 0; border-bottom: 1px solid var(--rose-muted); line-height: 1.45; }
-  .plan-feature:last-child { border-bottom: none; }
-  .plan-feature .check { color: var(--rose); font-size: .9rem; flex-shrink: 0; margin-top: 1px; }
-  .plan-feature .val { font-weight: 600; color: var(--charcoal); }
-  .plan-cta-wrap { padding: 0 20px 24px; }
-  .plan-cta { width: 100%; background: var(--rose-pale); color: var(--rose); border: none; padding: 12px; border-radius: 50px; font-size: .88rem; font-weight: 700; cursor: pointer; transition: background .2s; font-family: var(--font-body); }
-  .plan-cta:hover { background: var(--rose); color: white; }
-  .plan-card.featured .plan-cta { background: var(--rose); color: white; }
-  .plan-card.featured .plan-cta:hover { background: #c43d55; }
+  /* EXAMPLE */
+  .example-section{background:var(--rose-blush);padding:90px 5%;}
+  .example-persons{display:flex;gap:0.8rem;margin:1.5rem 0;flex-wrap:wrap;}
+  .person-chip{display:flex;align-items:center;gap:0.5rem;background:var(--white);border:1px solid rgba(232,57,106,0.15);border-radius:50px;padding:0.45rem 0.9rem;font-size:0.8rem;font-weight:600;color:var(--text-mid);}
+  .person-chip .age{color:var(--rose);}
+  .example-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;}
+  .example-card{background:var(--white);border-radius:18px;padding:1.4rem;box-shadow:var(--shadow-soft);text-align:center;transition:transform 0.3s;}
+  .example-card:hover{transform:translateY(-4px);}
+  .example-amount{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--rose);}
+  .example-case{font-size:0.8rem;color:var(--text-mid);line-height:1.6;margin:0.4rem 0;}
+  .example-label{font-size:0.7rem;font-weight:600;color:var(--text-soft);text-transform:uppercase;letter-spacing:0.5px;}
+  .example-total{background:linear-gradient(135deg,var(--rose),var(--rose-deep));border-radius:20px;padding:1.8rem;color:#fff;text-align:center;margin-top:1.5rem;}
+  .example-total-label{font-size:0.86rem;opacity:0.9;margin-bottom:0.4rem;}
+  .example-total-num{font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:900;}
+  .example-total-sub{font-size:0.8rem;opacity:0.85;margin-top:0.3rem;}
 
-  /* ── BENEFITS ── */
-  #benefits { background: var(--cream); }
-  .benefits-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; max-width: 1200px; margin: 50px auto 0; }
-  .benefit-tabs { display: flex; flex-direction: column; gap: 12px; }
-  .benefit-tab {
-    background: white; border-radius: var(--radius-sm); padding: 18px 22px;
-    cursor: pointer; border: 2px solid transparent;
-    transition: all .25s; display: flex; align-items: center; gap: 14px;
-  }
-  .benefit-tab.active { border-color: var(--rose); background: var(--rose-pale); }
-  .benefit-tab .tab-icon { width: 44px; height: 44px; background: var(--rose-pale); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
-  .benefit-tab.active .tab-icon { background: var(--rose); }
-  .benefit-tab h4 { font-size: .92rem; font-weight: 600; color: var(--charcoal); }
-  .benefit-tab p { font-size: .78rem; color: var(--text-muted); margin-top: 2px; }
-  .benefit-detail { background: white; border-radius: var(--radius); padding: 38px; box-shadow: var(--shadow-soft); position: sticky; top: 90px; }
-  .benefit-detail-icon { font-size: 2.8rem; margin-bottom: 16px; }
-  .benefit-detail h3 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--charcoal); margin-bottom: 10px; }
-  .benefit-detail p { color: var(--text-muted); font-size: .9rem; line-height: 1.7; margin-bottom: 20px; }
-  .benefit-items { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .benefit-items li { display: flex; gap: 10px; align-items: flex-start; font-size: .87rem; }
-  .benefit-items li::before { content: '✦'; color: var(--rose); font-size: .65rem; margin-top: 4px; flex-shrink: 0; }
+  /* FORM */
+  .form-section{padding:90px 5%;background:linear-gradient(135deg,#fff 0%,var(--rose-blush) 100%);position:relative;overflow:hidden;}
+  .form-section::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(232,57,106,0.08) 0%,transparent 70%);border-radius:50%;}
+  .form-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1;}
+  .form-info h2{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:var(--text-dark);margin-bottom:1rem;line-height:1.2;}
+  .form-info h2 em{color:var(--rose);font-style:italic;}
+  .form-info p{font-size:0.97rem;color:var(--text-mid);line-height:1.8;margin-bottom:1.8rem;}
+  .form-perks{display:flex;flex-direction:column;gap:0.85rem;}
+  .perk{display:flex;align-items:center;gap:1rem;font-size:0.88rem;color:var(--text-mid);font-weight:500;}
+  .perk-icon{width:38px;height:38px;border-radius:11px;background:var(--rose-pale);display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0;}
+  .form-box{background:var(--white);border-radius:28px;padding:2.4rem 1.9rem;box-shadow:0 24px 64px rgba(232,57,106,0.15);border:1px solid rgba(232,57,106,0.1);}
+  .form-box-title{font-family:'Playfair Display',serif;font-size:1.45rem;font-weight:900;color:var(--text-dark);margin-bottom:0.3rem;}
+  .form-box-sub{font-size:0.83rem;color:var(--text-soft);margin-bottom:1.6rem;}
+  .form-group{margin-bottom:1rem;}
+  .form-group label{display:block;font-size:0.8rem;font-weight:600;color:var(--text-mid);margin-bottom:0.35rem;}
+  .form-group label .req{color:var(--rose);}
+  .form-control{width:100%;padding:0.78rem 1rem;border:1.5px solid rgba(232,57,106,0.2);border-radius:11px;font-size:0.88rem;font-family:'Be Vietnam Pro',sans-serif;color:var(--text-dark);background:var(--rose-blush);transition:border-color 0.2s,box-shadow 0.2s;outline:none;}
+  .form-control:focus{border-color:var(--rose);box-shadow:0 0 0 3px rgba(232,57,106,0.12);background:#fff;}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+  select.form-control{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23E8396A' fill='none' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem;cursor:pointer;}
+  textarea.form-control{resize:vertical;min-height:95px;}
+  .form-submit{width:100%;padding:1rem;background:linear-gradient(135deg,var(--rose),var(--rose-deep));color:#fff;border:none;border-radius:13px;font-size:0.97rem;font-weight:700;cursor:pointer;margin-top:0.5rem;transition:transform 0.2s,box-shadow 0.2s;font-family:'Be Vietnam Pro',sans-serif;box-shadow:0 8px 24px rgba(232,57,106,0.35);}
+  .form-submit:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(232,57,106,0.45);}
+  .form-note{text-align:center;font-size:0.73rem;color:var(--text-soft);margin-top:0.9rem;line-height:1.6;}
+  .checkbox-group{display:flex;align-items:flex-start;gap:0.7rem;margin-top:0.2rem;}
+  .checkbox-group input{margin-top:3px;accent-color:var(--rose);cursor:pointer;}
+  .checkbox-group label{font-size:0.78rem;color:var(--text-mid);cursor:pointer;line-height:1.5;}
+  .form-success{display:none;text-align:center;padding:2rem;}
+  .form-success-icon{font-size:3rem;margin-bottom:1rem;}
+  .form-success h3{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--rose);margin-bottom:0.5rem;}
+  .form-success p{font-size:0.88rem;color:var(--text-mid);}
 
-  /* ── EXAMPLE ── */
-  #example { background: linear-gradient(180deg, white 0%, var(--blush) 100%); }
-  .example-header { text-align: center; margin-bottom: 50px; }
-  .example-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1100px; margin: 0 auto; }
-  .example-card {
-    background: white; border-radius: var(--radius); padding: 36px;
-    box-shadow: var(--shadow-soft); border: 1px solid var(--rose-muted);
-    position: relative; overflow: hidden;
-  }
-  .example-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--rose), var(--sky)); }
-  .example-family { font-size: .78rem; font-weight: 700; color: var(--rose); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; }
-  .example-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--charcoal); margin-bottom: 16px; }
-  .example-events { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
-  .event-row { display: flex; justify-content: space-between; align-items: center; background: var(--blush); border-radius: 10px; padding: 10px 14px; font-size: .83rem; }
-  .event-row .event-name { color: var(--text-muted); }
-  .event-row .event-amount { font-weight: 700; color: var(--charcoal); }
-  .example-total { background: var(--rose); color: white; border-radius: var(--radius-sm); padding: 18px 22px; }
-  .example-total .label { font-size: .78rem; opacity: .85; margin-bottom: 4px; }
-  .example-total .value { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; }
-  .example-total .sub { font-size: .75rem; opacity: .8; margin-top: 4px; }
+  /* FOOTER */
+  footer{background:var(--text-dark);color:rgba(255,255,255,0.7);padding:60px 5% 30px;}
+  .footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,0.1);}
+  .footer-logo{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;color:var(--rose);margin-bottom:1rem;}
+  .footer-brand p{font-size:0.84rem;line-height:1.8;}
+  .footer-contact{margin-top:1.1rem;}
+  .footer-contact a{display:flex;align-items:center;gap:0.5rem;color:var(--rose-light);font-size:0.86rem;font-weight:600;text-decoration:none;margin-bottom:0.45rem;transition:color 0.2s;}
+  .footer-contact a:hover{color:#fff;}
+  .footer-col h4{color:#fff;font-size:0.88rem;font-weight:700;margin-bottom:1.1rem;}
+  .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:0.65rem;}
+  .footer-col ul a{color:rgba(255,255,255,0.6);text-decoration:none;font-size:0.82rem;transition:color 0.2s;}
+  .footer-col ul a:hover{color:var(--rose-light);}
+  .footer-bottom{max-width:1200px;margin:0 auto;padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:0.77rem;}
+  .footer-disclaimer{max-width:1200px;margin:1.5rem auto 0;font-size:0.71rem;color:rgba(255,255,255,0.38);line-height:1.7;border-top:1px solid rgba(255,255,255,0.06);padding-top:1.5rem;}
 
-  /* ── VITALITY ── */
-  #vitality { background: var(--charcoal); color: white; }
-  .vitality-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1200px; margin: 0 auto; }
-  .vitality-text .section-title { color: white; }
-  .vitality-text .section-sub { color: rgba(255,255,255,.65); }
-  .vitality-levels { display: flex; flex-direction: column; gap: 12px; margin-top: 30px; }
-  .vitality-level { display: flex; align-items: center; gap: 16px; }
-  .level-bar-wrap { flex: 1; background: rgba(255,255,255,.1); border-radius: 50px; height: 8px; overflow: hidden; }
-  .level-bar { height: 100%; border-radius: 50px; transition: width 1s ease; }
-  .level-info { display: flex; align-items: center; gap: 10px; min-width: 130px; }
-  .level-badge { padding: 4px 12px; border-radius: 50px; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
-  .level-pts { font-size: .75rem; color: rgba(255,255,255,.55); }
-  .lv-dong { background: #c87941; color: white; }
-  .lv-bac { background: #8faab8; color: white; }
-  .lv-vang { background: var(--gold); color: white; }
-  .lv-bachkim { background: linear-gradient(90deg, #c0c0c0, #e8e8e8); color: #333; }
-  .lb-dong { background: rgba(200,121,65,.4); width: 25%; }
-  .lb-bac { background: rgba(143,170,184,.5); width: 50%; }
-  .lb-vang { background: rgba(201,146,58,.6); width: 75%; }
-  .lb-bachkim { background: linear-gradient(90deg, rgba(192,192,192,.5), rgba(232,232,232,.5)); width: 100%; }
-  .vitality-rewards { display: flex; flex-direction: column; gap: 16px; }
-  .reward-card { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius-sm); padding: 22px; }
-  .reward-card .rew-title { font-size: .88rem; font-weight: 600; color: rgba(255,255,255,.9); margin-bottom: 6px; }
-  .reward-card .rew-desc { font-size: .8rem; color: rgba(255,255,255,.55); line-height: 1.5; }
-  .reward-card .rew-num { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--rose-light); margin-top: 4px; }
+  /* ANIMATIONS */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+  @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
 
-  /* ── NETWORK ── */
-  #network { background: var(--blush); }
-  .network-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1200px; margin: 0 auto; }
-  .network-map { background: white; border-radius: var(--radius); padding: 36px; box-shadow: var(--shadow-soft); }
-  .map-svg-wrap { position: relative; background: linear-gradient(135deg, rgba(91,164,200,.08), rgba(45,125,122,.05)); border-radius: 16px; padding: 24px; }
-  .continent-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-  .continent-card { background: white; border: 1px solid rgba(232,83,106,.15); border-radius: 12px; padding: 16px; text-align: center; }
-  .continent-card .cont-icon { font-size: 1.6rem; margin-bottom: 6px; }
-  .continent-card .cont-name { font-size: .8rem; font-weight: 600; color: var(--charcoal); }
-  .continent-card .cont-flag { font-size: .7rem; color: var(--rose); font-weight: 500; }
-  .network-text { display: flex; flex-direction: column; gap: 22px; }
-  .net-stat { display: flex; gap: 18px; align-items: flex-start; }
-  .net-stat .stat-icon { width: 52px; height: 52px; background: var(--rose-pale); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
-  .net-stat h4 { font-family: var(--font-display); font-size: 1.45rem; font-weight: 700; color: var(--rose); }
-  .net-stat p { font-size: .85rem; color: var(--text-muted); }
+  /* SCROLL TOP */
+  .scroll-top{position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;border-radius:50%;background:var(--rose);color:#fff;border:none;font-size:1.1rem;cursor:pointer;box-shadow:0 4px 16px rgba(232,57,106,0.4);display:none;align-items:center;justify-content:center;z-index:50;transition:transform 0.2s;}
+  .scroll-top.show{display:flex;}
+  .scroll-top:hover{transform:translateY(-3px);}
 
-  /* ── WHO ── */
-  #who { background: white; }
-  .who-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; max-width: 1200px; margin: 50px auto 0; }
-  .info-block { background: var(--blush); border-radius: var(--radius); padding: 34px; border-left: 4px solid var(--rose); }
-  .info-block h3 { font-size: 1rem; font-weight: 700; color: var(--rose); margin-bottom: 14px; text-transform: uppercase; letter-spacing: .08em; }
-  .info-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .info-list li { display: flex; gap: 10px; font-size: .88rem; }
-  .info-list li .key { font-weight: 600; color: var(--charcoal); min-width: 200px; flex-shrink: 0; }
-  .info-list li .val { color: var(--text-muted); }
-  .exclusions-grid { display: flex; flex-direction: column; gap: 10px; }
-  .excl-item { display: flex; gap: 10px; align-items: flex-start; font-size: .85rem; }
-  .excl-item::before { content: '✕'; color: var(--rose-light); font-size: .8rem; flex-shrink: 0; margin-top: 2px; }
-
-  /* ── CTA ── */
-  #cta {
-    background: linear-gradient(135deg, var(--rose) 0%, #c43d55 50%, #a83548 100%);
-    text-align: center; padding: 100px 5%;
-    position: relative; overflow: hidden;
+  /* RESPONSIVE */
+  @media(max-width:1024px){
+    .why-grid,.plans-grid{grid-template-columns:repeat(2,1fr);}
+    .process-steps{grid-template-columns:repeat(3,1fr);}
+    .process-steps::before{display:none;}
+    .stats-banner-inner{grid-template-columns:repeat(2,1fr);}
+    .footer-inner{grid-template-columns:1fr 1fr;}
   }
-  #cta::before {
-    content: ''; position: absolute; width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(255,255,255,.08), transparent 70%);
-    top: -200px; right: -100px; border-radius: 50%;
+  @media(max-width:768px){
+    nav{padding:0 4%;}
+    .nav-links,.nav-cta{display:none;}
+    .hamburger{display:flex;}
+    .hero-inner{grid-template-columns:1fr;gap:2rem;text-align:center;}
+    .hero-actions{justify-content:center;}
+    .hero-visual{order:-1;}
+    .float-badge-1{left:0;top:-10px;}
+    .float-badge-2{right:0;}
+    .section-desc{max-width:100%;}
+    .why-grid{grid-template-columns:1fr;}
+    .plans-grid{grid-template-columns:1fr;}
+    .plan-card.featured{transform:none;}
+    .benefits-grid{grid-template-columns:1fr 1fr;}
+    .process-steps{grid-template-columns:1fr 1fr;}
+    .vitality-inner{grid-template-columns:1fr;}
+    .form-inner{grid-template-columns:1fr;gap:2.5rem;}
+    .form-row{grid-template-columns:1fr;}
+    .example-cards{grid-template-columns:1fr 1fr;}
+    .footer-inner{grid-template-columns:1fr;gap:2rem;}
+    .footer-bottom{flex-direction:column;text-align:center;}
   }
-  #cta h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: white; margin-bottom: 16px; }
-  #cta p { color: rgba(255,255,255,.8); font-size: 1.05rem; max-width: 520px; margin: 0 auto 36px; }
-  .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-  .btn-white { background: white; color: var(--rose); padding: 14px 32px; border-radius: 50px; font-size: .95rem; font-weight: 700; border: none; cursor: pointer; transition: transform .2s, box-shadow .2s; text-decoration: none; display: inline-block; font-family: var(--font-body); }
-  .btn-white:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,.2); }
-  .btn-ghost { background: transparent; color: white; padding: 14px 32px; border-radius: 50px; font-size: .95rem; font-weight: 700; border: 2px solid rgba(255,255,255,.6); cursor: pointer; transition: all .2s; text-decoration: none; display: inline-block; font-family: var(--font-body); }
-  .btn-ghost:hover { background: rgba(255,255,255,.15); }
-
-  /* ── CONTACT FORM ── */
-  #contact {
-    background: linear-gradient(160deg, var(--blush) 0%, #fff0f3 40%, var(--cream) 100%);
-    position: relative; overflow: hidden;
+  @media(max-width:480px){
+    .benefits-grid,.example-cards,.process-steps{grid-template-columns:1fr;}
+    .example-persons{flex-direction:column;}
+    .hero-stat-grid{grid-template-columns:1fr 1fr;}
   }
-  #contact::before {
-    content: ''; position: absolute;
-    width: 500px; height: 500px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(232,83,106,.09), transparent 70%);
-    top: -150px; right: -100px; pointer-events: none;
-  }
-  #contact::after {
-    content: ''; position: absolute;
-    width: 320px; height: 320px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(91,164,200,.07), transparent 70%);
-    bottom: -80px; left: -60px; pointer-events: none;
-  }
-  .contact-inner {
-    display: grid; grid-template-columns: 1fr 1.2fr; gap: 70px;
-    align-items: start; max-width: 1100px; margin: 0 auto;
-    position: relative; z-index: 1;
-  }
-  .contact-left { padding-top: 8px; }
-  .contact-left .section-sub { margin-top: 14px; margin-bottom: 36px; }
-  .contact-trust { display: flex; flex-direction: column; gap: 16px; }
-  .trust-item {
-    display: flex; align-items: center; gap: 14px;
-    background: white; border-radius: var(--radius-sm);
-    padding: 14px 18px; box-shadow: var(--shadow-soft);
-    border: 1px solid rgba(232,83,106,.1);
-  }
-  .trust-item .ti-icon {
-    width: 42px; height: 42px; background: var(--rose-pale);
-    border-radius: 10px; display: flex; align-items: center;
-    justify-content: center; font-size: 1.2rem; flex-shrink: 0;
-  }
-  .trust-item h5 { font-size: .88rem; font-weight: 600; color: var(--charcoal); margin-bottom: 2px; }
-  .trust-item p { font-size: .78rem; color: var(--text-muted); }
-
-  /* Form card */
-  .contact-form-card {
-    background: white; border-radius: 28px;
-    box-shadow: 0 16px 60px rgba(60,20,25,.12);
-    overflow: hidden; border: 1px solid rgba(232,83,106,.1);
-  }
-  .form-header {
-    background: linear-gradient(135deg, var(--rose), #c43d55);
-    padding: 28px 36px; position: relative; overflow: hidden;
-  }
-  .form-header::before {
-    content: ''; position: absolute; width: 200px; height: 200px; border-radius: 50%;
-    background: rgba(255,255,255,.06); top: -80px; right: -50px;
-  }
-  .form-header h3 {
-    font-family: var(--font-display); font-size: 1.4rem;
-    font-weight: 700; color: white; margin-bottom: 4px;
-  }
-  .form-header p { font-size: .83rem; color: rgba(255,255,255,.8); }
-  .form-header .form-badge {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: rgba(255,255,255,.15); border-radius: 50px;
-    padding: 4px 12px; font-size: .72rem; font-weight: 600;
-    color: white; margin-bottom: 10px;
-  }
-  .form-body { padding: 32px 36px 36px; }
-
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
-  .form-group label {
-    font-size: .8rem; font-weight: 600; color: var(--charcoal);
-    display: flex; align-items: center; gap: 5px;
-  }
-  .form-group label .req { color: var(--rose); font-size: .85rem; }
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    background: var(--blush); border: 2px solid transparent;
-    border-radius: var(--radius-sm); padding: 12px 16px;
-    font-size: .88rem; color: var(--text); font-family: var(--font-body);
-    transition: border-color .2s, background .2s, box-shadow .2s;
-    outline: none; width: 100%;
-  }
-  .form-group input::placeholder,
-  .form-group textarea::placeholder { color: rgba(122,92,96,.45); }
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    border-color: var(--rose); background: white;
-    box-shadow: 0 0 0 4px rgba(232,83,106,.1);
-  }
-  .form-group input.error,
-  .form-group select.error,
-  .form-group textarea.error {
-    border-color: #e74c3c; background: #fff5f5;
-  }
-  .form-group .err-msg {
-    font-size: .72rem; color: #e74c3c; display: none; align-items: center; gap: 4px;
-  }
-  .form-group .err-msg.show { display: flex; }
-  .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23e8536a' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px; cursor: pointer; }
-  .form-group textarea { resize: vertical; min-height: 90px; }
-
-  /* radio group */
-  .radio-group { display: flex; flex-wrap: wrap; gap: 10px; }
-  .radio-option { display: none; }
-  .radio-label {
-    display: flex; align-items: center; gap: 7px;
-    background: var(--blush); border: 2px solid transparent;
-    border-radius: 50px; padding: 8px 16px;
-    font-size: .8rem; font-weight: 500; color: var(--text-muted);
-    cursor: pointer; transition: all .2s;
-  }
-  .radio-option:checked + .radio-label {
-    background: var(--rose-pale); border-color: var(--rose); color: var(--rose); font-weight: 600;
-  }
-  .radio-label:hover { border-color: var(--rose-light); }
-
-  /* checkbox */
-  .checkbox-wrap { display: flex; align-items: flex-start; gap: 10px; margin-top: 4px; }
-  .checkbox-wrap input[type="checkbox"] { display: none; }
-  .custom-check {
-    width: 20px; height: 20px; border: 2px solid var(--rose-muted);
-    border-radius: 6px; background: var(--blush); flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; transition: all .2s; margin-top: 2px;
-  }
-  .checkbox-wrap input[type="checkbox"]:checked + .custom-check {
-    background: var(--rose); border-color: var(--rose);
-  }
-  .checkbox-wrap input[type="checkbox"]:checked + .custom-check::after {
-    content: '✓'; color: white; font-size: .7rem; font-weight: 700;
-  }
-  .checkbox-wrap .check-text { font-size: .78rem; color: var(--text-muted); line-height: 1.5; }
-  .checkbox-wrap .check-text a { color: var(--rose); text-decoration: none; }
-
-  /* submit button */
-  .form-submit {
-    width: 100%; background: linear-gradient(135deg, var(--rose), #c43d55);
-    color: white; border: none; padding: 16px; border-radius: 50px;
-    font-size: .95rem; font-weight: 700; cursor: pointer;
-    font-family: var(--font-body); transition: transform .2s, box-shadow .2s;
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-    margin-top: 8px;
-  }
-  .form-submit:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(232,83,106,.45); }
-  .form-submit:disabled { opacity: .6; cursor: not-allowed; transform: none; box-shadow: none; }
-  .form-submit .spinner {
-    width: 18px; height: 18px; border: 2.5px solid rgba(255,255,255,.35);
-    border-top-color: white; border-radius: 50%; display: none;
-    animation: spin .7s linear infinite;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .form-submit.loading .btn-text { display: none; }
-  .form-submit.loading .spinner { display: block; }
-
-  /* success state */
-  .form-success {
-    display: none; text-align: center; padding: 40px 20px;
-  }
-  .form-success.show { display: block; }
-  .success-icon {
-    width: 72px; height: 72px; background: linear-gradient(135deg, var(--rose), var(--rose-light));
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-size: 2rem; margin: 0 auto 20px; animation: popIn .5s cubic-bezier(.175,.885,.32,1.275) both;
-  }
-  @keyframes popIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-  .form-success h4 { font-family: var(--font-display); font-size: 1.5rem; color: var(--charcoal); margin-bottom: 8px; }
-  .form-success p { font-size: .88rem; color: var(--text-muted); max-width: 280px; margin: 0 auto; }
-
-  /* step indicator */
-  .form-steps {
-    display: flex; align-items: center; gap: 0; margin-bottom: 28px;
-  }
-  .form-step {
-    display: flex; align-items: center; gap: 8px;
-    font-size: .75rem; font-weight: 600; color: var(--text-muted);
-  }
-  .form-step .step-num {
-    width: 26px; height: 26px; border-radius: 50%;
-    background: var(--rose-muted); color: var(--text-muted);
-    display: flex; align-items: center; justify-content: center;
-    font-size: .72rem; font-weight: 700; transition: all .3s; flex-shrink: 0;
-  }
-  .form-step.active .step-num { background: var(--rose); color: white; }
-  .form-step.active { color: var(--rose); }
-  .form-step.done .step-num { background: #27ae60; color: white; }
-  .step-line { flex: 1; height: 2px; background: var(--rose-muted); margin: 0 8px; min-width: 20px; }
-  .step-line.done { background: var(--rose); }
-
-  @media (max-width: 900px) {
-    .contact-inner { grid-template-columns: 1fr; gap: 40px; }
-    .form-row { grid-template-columns: 1fr; gap: 0; }
-    .form-body { padding: 24px 24px 28px; }
-    .form-header { padding: 22px 24px; }
-  }
-  @media (max-width: 480px) {
-    .form-body { padding: 20px 18px 24px; }
-    .radio-group { gap: 8px; }
-    .radio-label { padding: 7px 12px; font-size: .76rem; }
-  }
-
-  /* ── FOOTER ── */
-  footer { background: var(--charcoal); color: rgba(255,255,255,.65); padding: 50px 5% 30px; }
-  .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 50px; max-width: 1200px; margin: 0 auto 40px; }
-  .footer-brand .brand-name { font-family: var(--font-display); font-size: 1.4rem; color: white; font-weight: 700; margin-bottom: 10px; }
-  .footer-brand .brand-name span { color: var(--rose-light); }
-  .footer-brand p { font-size: .82rem; line-height: 1.6; max-width: 280px; }
-  .footer-brand .contact { margin-top: 16px; font-size: .85rem; }
-  .footer-brand .contact a { color: var(--rose-light); text-decoration: none; }
-  .footer-col h4 { color: white; font-size: .88rem; font-weight: 600; margin-bottom: 14px; text-transform: uppercase; letter-spacing: .08em; }
-  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-  .footer-col ul li a { color: rgba(255,255,255,.55); text-decoration: none; font-size: .83rem; transition: color .2s; }
-  .footer-col ul li a:hover { color: var(--rose-light); }
-  .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); max-width: 1200px; margin: 0 auto; padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: .78rem; flex-wrap: gap; }
-  .footer-bottom .disclaimer { max-width: 600px; line-height: 1.5; opacity: .5; }
-
-  /* ── MOBILE NAV ── */
-  .mobile-menu {
-    display: none; position: fixed; top: 68px; left: 0; right: 0; bottom: 0; z-index: 99;
-    background: white; flex-direction: column; padding: 30px 5%;
-    gap: 20px;
-  }
-  .mobile-menu.open { display: flex; }
-  .mobile-menu a { font-size: 1.1rem; font-weight: 500; color: var(--text); text-decoration: none; padding: 12px 0; border-bottom: 1px solid var(--rose-muted); }
-  .mobile-menu .btn-primary { text-align: center; margin-top: 8px; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 1024px) {
-    .plans-grid { grid-template-columns: repeat(2, 1fr); }
-  }
-
-  @media (max-width: 768px) {
-    .nav-links, .nav-cta { display: none; }
-    .hamburger { display: flex; }
-    .hero-inner { grid-template-columns: 1fr; }
-    .hero-visual { display: none; }
-    .hero-stats { gap: 18px; }
-    .hero-stat .num { font-size: 1.5rem; }
-    .plans-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
-    .benefits-wrap { grid-template-columns: 1fr; }
-    .benefit-detail { position: static; }
-    .example-grid { grid-template-columns: 1fr; }
-    .vitality-inner { grid-template-columns: 1fr; }
-    .network-inner { grid-template-columns: 1fr; }
-    .who-inner { grid-template-columns: 1fr; }
-    .footer-top { grid-template-columns: 1fr; gap: 30px; }
-    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
-    section { padding: 60px 5%; }
-    .hero-actions { flex-direction: column; }
-    .btn-primary, .btn-outline { text-align: center; }
-  }
-
-  @media (max-width: 480px) {
-    .hero-title { font-size: 2rem; }
-    .plans-grid { max-width: 100%; }
-    .stat-divider { display: none; }
-    .hero-stats { flex-wrap: wrap; }
-  }
-
-  /* ── SCROLL ANIMATIONS ── */
-  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav id="navbar">
-  <a class="nav-logo" href="#">AIA <span>Việt Nam</span></a>
+  <div class="nav-logo">AIA<span> Việt Nam</span></div>
   <ul class="nav-links">
     <li><a href="#why">Tại sao chọn AIA</a></li>
     <li><a href="#plans">Gói bảo hiểm</a></li>
     <li><a href="#benefits">Quyền lợi</a></li>
     <li><a href="#vitality">AIA Vitality</a></li>
-    <li><a href="#example">Ví dụ</a></li>
-    <li><a href="#contact">Liên hệ</a></li>
+    <li><a href="#form">Tư vấn</a></li>
   </ul>
-  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Tư vấn ngay</button>
-  <div class="hamburger" id="hamburger">
-    <span></span><span></span><span></span>
-  </div>
+  <button class="nav-cta" onclick="document.getElementById('form').scrollIntoView({behavior:'smooth'})">Đăng ký ngay</button>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
-
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#why" onclick="closeMobile()">Tại sao chọn AIA</a>
-  <a href="#plans" onclick="closeMobile()">Gói bảo hiểm</a>
-  <a href="#benefits" onclick="closeMobile()">Quyền lợi</a>
-  <a href="#vitality" onclick="closeMobile()">AIA Vitality</a>
-  <a href="#example" onclick="closeMobile()">Ví dụ minh hoạ</a>
-  <a href="#who" onclick="closeMobile()">Điều kiện tham gia</a>
-  <a href="#contact" onclick="closeMobile()">Đăng ký tư vấn</a>
-  <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});closeMobile()">Tư vấn ngay</button>
+  <a href="#why" onclick="toggleMenu()">Tại sao chọn AIA</a>
+  <a href="#plans" onclick="toggleMenu()">Gói bảo hiểm</a>
+  <a href="#benefits" onclick="toggleMenu()">Quyền lợi</a>
+  <a href="#vitality" onclick="toggleMenu()">AIA Vitality</a>
+  <a href="#form" onclick="toggleMenu()">Tư vấn miễn phí</a>
 </div>
 
 <!-- HERO -->
-<section id="hero">
-  <div class="hero-bg-shape s1"></div>
-  <div class="hero-bg-shape s2"></div>
+<section class="hero">
   <div class="hero-inner">
-    <div class="hero-text">
-      <div class="hero-badge">Bảo hiểm Sức Khỏe hàng đầu Việt Nam</div>
-      <h1 class="hero-title">Bảo Hiểm Sức Khỏe<br /><em>Trọn Đời</em></h1>
-      <p class="hero-subtitle">Đồng hành xuyên suốt – trọn đời an tâm. Bảo vệ sức khỏe từ 30 ngày tuổi đến 100 tuổi với quyền lợi toàn diện và không gián đoạn.</p>
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="num">100</div>
-          <div class="lbl">Tuổi bảo vệ tối đa</div>
-        </div>
-        <div class="hero-divider"></div>
-        <div class="hero-stat">
-          <div class="num">1.2 tỷ</div>
-          <div class="lbl">STBH tối đa/năm</div>
-        </div>
-        <div class="hero-divider"></div>
-        <div class="hero-stat">
-          <div class="num">10.000+</div>
-          <div class="lbl">Cơ sở y tế toàn cầu</div>
-        </div>
-      </div>
+    <div>
+      <div class="hero-badge">Bảo Hiểm Sức Khỏe Hàng Đầu Việt Nam</div>
+      <h1>Bảo Vệ <em>Trọn Đời</em><br>An Tâm Mỗi Ngày</h1>
+      <p class="hero-sub">Bảo Hiểm Sức Khỏe Trọn Đời – đồng hành từ 30 ngày tuổi đến 100 tuổi, bảo vệ không gián đoạn qua mọi giai đoạn cuộc sống của bạn và gia đình.</p>
       <div class="hero-actions">
-        <a href="#plans" class="btn-primary">Xem gói bảo hiểm</a>
-        <a href="#example" class="btn-outline">Xem ví dụ minh hoạ</a>
+        <a href="#form" class="btn-primary">🛡️ Nhận tư vấn miễn phí</a>
+        <a href="#plans" class="btn-outline">Xem các gói bảo hiểm</a>
       </div>
     </div>
     <div class="hero-visual">
+      <div class="float-badge float-badge-1"><div class="dot"></div>Bảo vệ từ 30 ngày tuổi</div>
       <div class="hero-card">
-        <div class="floating-pill p1">✦ Bảo vệ trọn đời</div>
-        <div class="floating-pill p2">🌏 Toàn cầu</div>
-        <div class="hero-card-label">Chiếc Dù Bảo Vệ AIA</div>
-        <div class="hero-card-title">Bảo vệ không gián đoạn</div>
-        <div class="hero-card-sub">Từng giai đoạn cuộc đời đều được bảo vệ</div>
-        <ul class="coverage-list">
-          <li><div class="icon">🏥</div><div><strong>Điều trị nội trú</strong> toàn diện – phẫu thuật, ICU, ghép tạng</div></li>
-          <li><div class="icon">🎗️</div><div><strong>Điều trị ung thư</strong> theo chi phí y tế thực tế</div></li>
-          <li><div class="icon">🤰</div><div><strong>Quyền lợi thai sản</strong> toàn diện từ gói Toàn Diện</div></li>
-          <li><div class="icon">💊</div><div><strong>Điều trị ngoại trú</strong> & chăm sóc nha khoa mở rộng</div></li>
-        </ul>
+        <div class="hero-card-title">Bảo Hiểm Sức Khỏe Trọn Đời</div>
+        <div class="hero-card-sub">AIA Việt Nam · Đồng hành xuyên suốt</div>
+        <div class="hero-stat-grid">
+          <div class="hero-stat"><div class="num">100</div><div class="label">Tuổi bảo vệ tối đa</div></div>
+          <div class="hero-stat"><div class="num">4</div><div class="label">Gói bảo hiểm linh hoạt</div></div>
+          <div class="hero-stat"><div class="num">1.2<small style="font-size:0.9rem">tỷ</small></div><div class="label">STBH tối đa/năm</div></div>
+          <div class="hero-stat"><div class="num">60%</div><div class="label">Thưởng sống khỏe</div></div>
+        </div>
       </div>
+      <div class="float-badge float-badge-2"><div class="dot"></div>Mạng lưới toàn cầu</div>
     </div>
   </div>
 </section>
 
 <!-- WHY -->
-<section id="why">
-  <div class="container reveal">
-    <div class="section-tag">Lý do cần bảo hiểm trọn đời</div>
-    <h2 class="section-title">Sức khỏe không chờ đợi –<br/><em>bạn có sẵn sàng?</em></h2>
-    <p class="section-sub">Chi phí y tế tăng gấp 1.6 lần tỷ lệ lạm phát mỗi năm. Trung bình người cao tuổi mắc 3–4 bệnh mãn tính và nhập viện 2.3 lần/năm.</p>
+<section class="section" id="why">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Tại sao bạn cần</div>
+      <h2 class="section-title">Sự Bảo Vệ <em>Toàn Diện</em></h2>
+      <p class="section-desc">Chi phí y tế tại Việt Nam tăng gấp 1,6 lần tỷ lệ lạm phát. Một người cao tuổi trung bình mắc 3–4 bệnh mãn tính và nhập viện 2,3 lần mỗi năm.</p>
+    </div>
     <div class="why-grid">
-      <div class="why-card">
-        <div class="why-icon">👴</div>
-        <h3>74.7 tuổi</h3>
-        <p>Tuổi thọ trung bình 2024. Người cao tuổi cần bảo vệ sức khỏe dài hạn và liên tục.</p>
-      </div>
-      <div class="why-card">
-        <div class="why-icon">💊</div>
-        <h3>3–4 bệnh</h3>
-        <p>Trung bình mỗi người cao tuổi mắc 3–4 bệnh mãn tính cùng lúc theo Bộ Y Tế.</p>
-      </div>
-      <div class="why-card">
-        <div class="why-icon">💸</div>
-        <h3>8–10 lần</h3>
-        <p>Chi phí điều trị người cao tuổi cao hơn người trẻ từ 8 đến 10 lần mỗi năm.</p>
-      </div>
-      <div class="why-card">
-        <div class="why-icon">📈</div>
-        <h3>×1.6 lạm phát</h3>
-        <p>Chi phí y tế tăng nhanh hơn tỷ lệ lạm phát, ảnh hưởng trực tiếp đến tài chính gia đình.</p>
-      </div>
+      <div class="why-card reveal"><div class="why-icon">👴</div><div class="why-big">74,7</div><h3>Tuổi thọ trung bình 2024</h3><p>Việt Nam đang già hóa nhanh với dự báo thêm 16,8 triệu người cao tuổi trước năm 2040.</p></div>
+      <div class="why-card reveal"><div class="why-icon">💊</div><div class="why-big">3–4</div><h3>Bệnh mãn tính mỗi người cao tuổi</h3><p>Chi phí điều trị người cao tuổi cao gấp 8–10 lần so với người trẻ mỗi năm.</p></div>
+      <div class="why-card reveal"><div class="why-icon">🏥</div><div class="why-big">×1.6</div><h3>Lạm phát y tế so với CPI</h3><p>Chi phí y tế tăng mạnh: phòng bệnh 180K–4 triệu/ngày; ghép tạng ~1 tỷ đồng/lần.</p></div>
+      <div class="why-card reveal"><div class="why-icon">🛡️</div><div class="why-big">AIA</div><h3>Giải pháp bảo vệ trọn đời</h3><p>Bảo hiểm liên tục từ 30 ngày tuổi đến 100 tuổi, không lo gián đoạn quyền lợi.</p></div>
     </div>
   </div>
 </section>
 
-<!-- STATS BAND -->
-<section id="stats">
-  <div class="stats-grid reveal">
-    <div class="stat-item">
-      <div class="big">~1 tỷ</div>
-      <div class="label">Chi phí ghép tạng<br/>mỗi lần</div>
-    </div>
-    <div class="stat-divider"></div>
-    <div class="stat-item">
-      <div class="big">~176 tr</div>
-      <div class="label">Chi phí điều trị<br/>ung thư/năm</div>
-    </div>
-    <div class="stat-divider"></div>
-    <div class="stat-item">
-      <div class="big">~100 tr</div>
-      <div class="label">Phẫu thuật<br/>nội soi robot</div>
-    </div>
-    <div class="stat-divider"></div>
-    <div class="stat-item">
-      <div class="big">4 tr/ngày</div>
-      <div class="label">Phòng và giường<br/>bệnh (tối đa)</div>
-    </div>
+<!-- STATS BANNER -->
+<div class="stats-banner">
+  <div class="stats-banner-inner">
+    <div class="reveal"><div class="stat-num">176M<span class="stat-unit">đ</span></div><div class="stat-label">Chi phí điều trị ung thư mỗi năm</div></div>
+    <div class="reveal"><div class="stat-num">1<span class="stat-unit"> tỷ đ</span></div><div class="stat-label">Chi phí ghép tạng mỗi lần</div></div>
+    <div class="reveal"><div class="stat-num">100M<span class="stat-unit">đ</span></div><div class="stat-label">Phẫu thuật nội soi robot mỗi lần</div></div>
+    <div class="reveal"><div class="stat-num">4M<span class="stat-unit">đ</span></div><div class="stat-label">Chi phí phòng bệnh tối đa mỗi ngày</div></div>
   </div>
-</section>
+</div>
 
 <!-- PLANS -->
-<section id="plans">
-  <div class="plans-header reveal">
-    <div class="section-tag">Gói bảo hiểm</div>
-    <h2 class="section-title">Chọn gói phù hợp<br/><em>với bạn</em></h2>
-    <p class="section-sub">Bốn chương trình linh hoạt, phạm vi bảo vệ từ Việt Nam đến Toàn cầu (trừ Hoa Kỳ)</p>
-  </div>
-  <div class="plans-grid">
-    <!-- CƠ BẢN -->
-    <div class="plan-card reveal">
-      <div class="plan-header">
-        <div class="name">Cơ Bản</div>
-        <div class="stbh">STBH / năm hợp đồng</div>
-        <div class="amount">150 triệu đ</div>
-      </div>
-      <div class="plan-body">
-        <div class="plan-feature"><span class="check">✓</span><div>Phòng/giường bệnh <span class="val">850k/ngày</span></div></div>
-        <div class="plan-feature"><span class="check">✓</span><div>Phẫu thuật theo chi phí y tế</div></div>
-        <div class="plan-feature"><span class="check">✓</span><div>ICU theo chi phí y tế</div></div>
-        <div class="plan-feature"><span class="check">✓</span><div>Hỗ trợ nằm viện <span class="val">150k/ngày</span></div></div>
-        <div class="plan-feature"><span class="check">✓</span><div>Điều trị ung thư theo chi phí</div></div>
-        <div class="plan-feature"><span class="check">✓</span><div>Cấp cứu: <span class="val">3 triệu/lần</span></div></div>
-        <div class="plan-feature"><span class="check">✓</span><div>Lọc máu: <span class="val">5 triệu/năm</span></div></div>
-      </div>
-      <div class="plan-cta-wrap"><button class="plan-cta">Chọn gói này</button></div>
+<section class="plans-section" id="plans">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Gói bảo hiểm</div>
+      <h2 class="section-title">Chọn Gói Phù Hợp <em>Với Bạn</em></h2>
+      <p class="section-desc">Bốn chương trình linh hoạt, đáp ứng mọi nhu cầu và ngân sách gia đình.</p>
     </div>
-
-    <!-- NÂNG CAO -->
-    <div class="plan-card reveal">
-      <div class="plan-header">
-        <div class="name">Nâng Cao</div>
-        <div class="stbh">STBH / năm hợp đồng</div>
-        <div class="amount">350 triệu đ</div>
+    <div class="plans-grid">
+      <div class="plan-card reveal">
+        <div class="plan-tier">Gói 01</div>
+        <div class="plan-name">Cơ Bản</div>
+        <div class="plan-stbh">150 triệu <span>đồng/năm</span></div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Phòng & giường bệnh 850.000đ/ngày</li>
+          <li>Điều trị cấp cứu 3.000.000đ/lần</li>
+          <li>Lọc máu 5.000.000đ/năm</li>
+          <li>Nhân đôi bảo vệ tại bệnh viện công (+150 triệu)</li>
+          <li>Phạm vi Việt Nam hoặc Toàn Cầu</li>
+        </ul>
+        <button class="plan-cta outline" onclick="document.getElementById('form').scrollIntoView({behavior:'smooth'})">Tư vấn gói này</button>
       </div>
-      <div class="plan-body">
-        <div class="plan-feature"><span class="check">✓</span><div>Phòng/giường bệnh <span class="val">2 tr/ngày</span></div></div>
-        <div class="plan-feature"><span class="check">✓</span><div>Phẫu thuật theo chi phí y tế</div></div>
-        <div class="plan-feature"><span class="check">✓</span><div>ICU theo chi phí y tế</div></div>
-        <div class="plan-feature"><span class="check">✓</span><div>Hỗ trợ nằm viện <span class="val">250k/ngày</span></div></div>
-        <div class="plan-feature"><span class="check">✓</span><div>Điều trị ung thư theo chi phí</div></div>
-        <div class="plan-feature"><span class="check">✓</span><div>Cấp cứu: <span class="val">6 triệu/lần</span></div></div>
-        <div class="plan-feature"><span class="check">✓</span><div>Lọc máu: <span class="val">7 triệu/năm</span></div></div>
+      <div class="plan-card reveal">
+        <div class="plan-tier">Gói 02</div>
+        <div class="plan-name">Nâng Cao</div>
+        <div class="plan-stbh">350 triệu <span>đồng/năm</span></div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Phòng & giường bệnh 2.000.000đ/ngày</li>
+          <li>Chăm sóc y tế tại nhà 250.000đ/ngày</li>
+          <li>Điều trị cấp cứu 6.000.000đ/lần</li>
+          <li>Nhân đôi bảo vệ tại bệnh viện công (+350 triệu)</li>
+          <li>Ngoại trú 12.000.000đ/năm (tuỳ chọn)</li>
+        </ul>
+        <button class="plan-cta outline" onclick="document.getElementById('form').scrollIntoView({behavior:'smooth'})">Tư vấn gói này</button>
       </div>
-      <div class="plan-cta-wrap"><button class="plan-cta">Chọn gói này</button></div>
-    </div>
-
-    <!-- TOÀN DIỆN -->
-    <div class="plan-card featured reveal">
-      <div class="plan-badge">Phổ biến nhất</div>
-      <div class="plan-header">
-        <div class="name">Toàn Diện</div>
-        <div class="stbh">STBH / năm hợp đồng</div>
-        <div class="amount">700 triệu đ</div>
+      <div class="plan-card featured reveal">
+        <div class="plan-badge">Phổ biến nhất</div>
+        <div class="plan-tier">Gói 03</div>
+        <div class="plan-name">Toàn Diện</div>
+        <div class="plan-stbh">700 triệu <span>đồng/năm</span></div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Phòng & giường bệnh 3.000.000đ/ngày</li>
+          <li>Quyền lợi thai sản toàn diện</li>
+          <li>Điều trị giảm nhẹ 25.000.000đ</li>
+          <li>Song hành y tế Toàn Cầu (trừ Hoa Kỳ)</li>
+          <li>Ngoại trú + sức khỏe tâm thần</li>
+        </ul>
+        <button class="plan-cta solid" onclick="document.getElementById('form').scrollIntoView({behavior:'smooth'})">Chọn gói này</button>
       </div>
-      <div class="plan-body">
-        <div class="plan-feature"><span class="check">✓</span><div>Phòng/giường bệnh <span class="val">3 tr/ngày</span></div></div>
-        <div class="plan-feature"><span class="check">✓</span><div>Phẫu thuật theo chi phí y tế</div></div>
-        <div class="plan-feature"><span class="check">✓</span><div>Quyền lợi thai sản toàn diện</div></div>
-        <div class="plan-feature"><span class="check">✓</span><div>Điều trị giảm nhẹ <span class="val">25 tr</span></div></div>
-        <div class="plan-feature"><span class="check">✓</span><div>Điều trị ung thư theo chi phí</div></div>
-        <div class="plan-feature"><span class="check">✓</span><div>Cấp cứu: <span class="val">10 triệu/lần</span></div></div>
-        <div class="plan-feature"><span class="check">✓</span><div>Lọc máu: <span class="val">10 triệu/năm</span></div></div>
+      <div class="plan-card reveal">
+        <div class="plan-tier">Gói 04</div>
+        <div class="plan-name">Hoàn Hảo</div>
+        <div class="plan-stbh">1,2 tỷ <span>đồng/năm</span></div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li>Phòng & giường bệnh 5.500.000đ/ngày</li>
+          <li>Hỗ trợ nằm viện 600.000đ/ngày</li>
+          <li>Điều trị ung thư theo chi phí y tế</li>
+          <li>Điều trị giảm nhẹ 50.000.000đ</li>
+          <li>Quyền lợi thai sản 40.000.000đ/năm</li>
+        </ul>
+        <button class="plan-cta outline" onclick="document.getElementById('form').scrollIntoView({behavior:'smooth'})">Tư vấn gói này</button>
       </div>
-      <div class="plan-cta-wrap"><button class="plan-cta">Chọn gói này</button></div>
-    </div>
-
-    <!-- HOÀN HẢO -->
-    <div class="plan-card reveal">
-      <div class="plan-header">
-        <div class="name">Hoàn Hảo</div>
-        <div class="stbh">STBH / năm hợp đồng</div>
-        <div class="amount">1.2 tỷ đ</div>
-      </div>
-      <div class="plan-body">
-        <div class="plan-feature"><span class="check">✓</span><div>Phòng/giường bệnh <span class="val">5.5 tr/ngày</span></div></div>
-        <div class="plan-feature"><span class="check">✓</span><div>Phẫu thuật theo chi phí y tế</div></div>
-        <div class="plan-feature"><span class="check">✓</span><div>Thai sản STBH <span class="val">40 triệu</span></div></div>
-        <div class="plan-feature"><span class="check">✓</span><div>Điều trị giảm nhẹ <span class="val">50 tr</span></div></div>
-        <div class="plan-feature"><span class="check">✓</span><div>Cấp cứu theo chi phí y tế</div></div>
-        <div class="plan-feature"><span class="check">✓</span><div>Lọc máu: <span class="val">50 triệu/năm</span></div></div>
-        <div class="plan-feature"><span class="check">✓</span><div>Hỗ trợ nằm viện <span class="val">600k/ngày</span></div></div>
-      </div>
-      <div class="plan-cta-wrap"><button class="plan-cta">Chọn gói này</button></div>
     </div>
   </div>
 </section>
 
 <!-- BENEFITS -->
-<section id="benefits">
-  <div class="container">
+<section class="benefits-section" id="benefits">
+  <div class="section-inner">
     <div class="reveal">
-      <div class="section-tag">Quyền lợi sản phẩm</div>
-      <h2 class="section-title">Bảo vệ <em>toàn diện</em><br/>mọi giai đoạn</h2>
+      <div class="section-label">Quyền lợi bảo hiểm</div>
+      <h2 class="section-title">Bảo Vệ <em>Toàn Diện</em> Từng Khía Cạnh</h2>
     </div>
-    <div class="benefits-wrap">
-      <div class="benefit-tabs" id="benefitTabs">
-        <div class="benefit-tab active" data-tab="0">
-          <div class="tab-icon">🏥</div>
-          <div>
-            <h4>Điều trị Nội trú</h4>
-            <p>Nằm viện, phẫu thuật, ICU không giới hạn phụ</p>
-          </div>
-        </div>
-        <div class="benefit-tab" data-tab="1">
-          <div class="tab-icon">🤰</div>
-          <div>
-            <h4>Quyền lợi Thai sản</h4>
-            <p>Khám thai, sinh nở, biến chứng, trẻ sơ sinh</p>
-          </div>
-        </div>
-        <div class="benefit-tab" data-tab="2">
-          <div class="tab-icon">🎗️</div>
-          <div>
-            <h4>Điều trị Ung thư</h4>
-            <p>Chi trả toàn bộ theo chi phí y tế thực tế</p>
-          </div>
-        </div>
-        <div class="benefit-tab" data-tab="3">
-          <div class="tab-icon">🦷</div>
-          <div>
-            <h4>Quyền lợi Nha khoa</h4>
-            <p>Tối đa 10 triệu/năm – khám, trám, nhổ, bọc răng</p>
-          </div>
-        </div>
-        <div class="benefit-tab" data-tab="4">
-          <div class="tab-icon">🏨</div>
-          <div>
-            <h4>Điều trị Ngoại trú</h4>
-            <p>Khám bệnh, xét nghiệm, thuốc theo toa</p>
-          </div>
-        </div>
-        <div class="benefit-tab" data-tab="5">
-          <div class="tab-icon">🏛️</div>
-          <div>
-            <h4>Nhân đôi tại Bệnh viện công</h4>
-            <p>Gấp đôi hạn mức khi điều trị bệnh viện công</p>
-          </div>
-        </div>
+    <div class="benefits-tabs">
+      <button class="tab-btn active" onclick="showTab('inpatient',this)">Điều trị nội trú</button>
+      <button class="tab-btn" onclick="showTab('outpatient',this)">Điều trị ngoại trú</button>
+      <button class="tab-btn" onclick="showTab('maternity',this)">Thai sản</button>
+      <button class="tab-btn" onclick="showTab('cancer',this)">Ung thư & ghép tạng</button>
+      <button class="tab-btn" onclick="showTab('dental',this)">Nha khoa</button>
+    </div>
+    <div id="tab-inpatient" class="tab-panel active">
+      <div class="benefits-grid">
+        <div class="benefit-item reveal"><div class="benefit-icon">🛏️</div><div class="benefit-name">Phòng & Giường bệnh</div><div class="benefit-val">Đến 5,5 triệu/ngày</div><div class="benefit-note">Tối đa 100 ngày/năm</div></div>
+        <div class="benefit-item reveal"><div class="benefit-icon">⚕️</div><div class="benefit-name">Phòng ICU</div><div class="benefit-val">Theo chi phí y tế</div><div class="benefit-note">Tối đa 30 ngày/năm</div></div>
+        <div class="benefit-item reveal"><div class="benefit-icon">🔪</div><div class="benefit-name">Phẫu thuật</div><div class="benefit-val">Theo chi phí y tế</div><div class="benefit-note">Không giới hạn mỗi đợt điều trị</div></div>
+        <div class="benefit-item reveal"><div class="benefit-icon">🏠</div><div class="benefit-name">Chăm sóc tại nhà</div><div class="benefit-val">Đến 1 triệu/ngày</div><div class="benefit-note">Tối đa 30 ngày/năm</div></div>
+        <div class="benefit-item reveal"><div class="benefit-icon">👨‍👩‍👧</div><div class="benefit-name">Giường người thân</div><div class="benefit-val">Đến 1 triệu/ngày</div><div class="benefit-note">Dành cho NĐBH dưới 18 hoặc trên 60 tuổi</div></div>
+        <div class="benefit-item reveal"><div class="benefit-icon">💳</div><div class="benefit-name">Hỗ trợ nằm viện BHYT</div><div class="benefit-val">Đến 600K/ngày</div><div class="benefit-note">Tối đa 30 ngày/năm</div></div>
       </div>
+    </div>
+    <div id="tab-outpatient" class="tab-panel">
+      <div class="benefits-grid">
+        <div class="benefit-item"><div class="benefit-icon">🩺</div><div class="benefit-name">Khám bệnh & xét nghiệm</div><div class="benefit-val">Đến 4,8 triệu/lần</div><div class="benefit-note">Chi trả 80% chi phí y tế</div></div>
+        <div class="benefit-item"><div class="benefit-icon">💊</div><div class="benefit-name">Thuốc theo toa</div><div class="benefit-val">Theo chi phí y tế</div><div class="benefit-note">Trong phạm vi STBH ngoại trú</div></div>
+        <div class="benefit-item"><div class="benefit-icon">🧘</div><div class="benefit-name">Sức khỏe tâm thần</div><div class="benefit-val">Đến 4 triệu/năm</div><div class="benefit-note">Gói Toàn Diện & Hoàn Hảo</div></div>
+        <div class="benefit-item"><div class="benefit-icon">🦴</div><div class="benefit-name">Vật lý trị liệu</div><div class="benefit-val">Theo chi phí y tế</div><div class="benefit-note">Trong phạm vi STBH ngoại trú</div></div>
+        <div class="benefit-item"><div class="benefit-icon">🔬</div><div class="benefit-name">Chẩn đoán hình ảnh</div><div class="benefit-val">Theo chi phí y tế</div><div class="benefit-note">X-quang, siêu âm, MRI...</div></div>
+        <div class="benefit-item"><div class="benefit-icon">📋</div><div class="benefit-name">STBH ngoại trú/năm</div><div class="benefit-val">6M – 48 triệu</div><div class="benefit-note">Tuỳ chương trình lựa chọn</div></div>
+      </div>
+    </div>
+    <div id="tab-maternity" class="tab-panel">
+      <div class="benefits-grid">
+        <div class="benefit-item"><div class="benefit-icon">🤰</div><div class="benefit-name">Khám thai định kỳ</div><div class="benefit-val">Đến 3 triệu/lần</div><div class="benefit-note">Tối đa 8 lần/năm</div></div>
+        <div class="benefit-item"><div class="benefit-icon">🏥</div><div class="benefit-name">Phòng & giường sinh</div><div class="benefit-val">Đến 5,5 triệu/ngày</div><div class="benefit-note">Tối đa 100 ngày/năm</div></div>
+        <div class="benefit-item"><div class="benefit-icon">👶</div><div class="benefit-name">Sinh thường / sinh mổ</div><div class="benefit-val">Theo chi phí y tế</div><div class="benefit-note">Theo chỉ định bác sĩ</div></div>
+        <div class="benefit-item"><div class="benefit-icon">⚠️</div><div class="benefit-name">Biến chứng thai sản</div><div class="benefit-val">Theo chi phí y tế</div><div class="benefit-note">Năm HĐ thứ 3 trở đi: 100%</div></div>
+        <div class="benefit-item"><div class="benefit-icon">🍼</div><div class="benefit-name">Chăm sóc trẻ sơ sinh</div><div class="benefit-val">Theo chi phí y tế</div><div class="benefit-note">Tối đa 7 ngày sau sinh</div></div>
+        <div class="benefit-item"><div class="benefit-icon">💰</div><div class="benefit-name">STBH thai sản/năm</div><div class="benefit-val">25M – 40 triệu</div><div class="benefit-note">Gói Toàn Diện & Hoàn Hảo (18–45 tuổi)</div></div>
+      </div>
+    </div>
+    <div id="tab-cancer" class="tab-panel">
+      <div class="benefits-grid">
+        <div class="benefit-item"><div class="benefit-icon">🎗️</div><div class="benefit-name">Điều trị ung thư</div><div class="benefit-val">Theo chi phí y tế</div><div class="benefit-note">Mỗi lần điều trị, không giới hạn số lần</div></div>
+        <div class="benefit-item"><div class="benefit-icon">💉</div><div class="benefit-name">Hóa trị / Xạ trị</div><div class="benefit-val">Theo chi phí y tế</div><div class="benefit-note">Nhân đôi tại BV công khi hết STBH</div></div>
+        <div class="benefit-item"><div class="benefit-icon">🫀</div><div class="benefit-name">Ghép tạng</div><div class="benefit-val">Theo chi phí y tế</div><div class="benefit-note">Tim, phổi, gan, tụy, thận, tủy xương</div></div>
+        <div class="benefit-item"><div class="benefit-icon">🌿</div><div class="benefit-name">Điều trị giảm nhẹ</div><div class="benefit-val">25M – 50 triệu</div><div class="benefit-note">Suốt thời gian có hiệu lực BHSK</div></div>
+        <div class="benefit-item"><div class="benefit-icon">🩸</div><div class="benefit-name">Lọc máu</div><div class="benefit-val">5M – 50 triệu/năm</div><div class="benefit-note">Tuỳ theo chương trình tham gia</div></div>
+        <div class="benefit-item"><div class="benefit-icon">🧬</div><div class="benefit-name">Người hiến tạng</div><div class="benefit-val">50% phí phẫu thuật</div><div class="benefit-note">Chi trả cho người hiến tạng không phải NĐBH</div></div>
+      </div>
+    </div>
+    <div id="tab-dental" class="tab-panel">
+      <div class="benefits-grid">
+        <div class="benefit-item"><div class="benefit-icon">🦷</div><div class="benefit-name">Khám & tư vấn nha khoa</div><div class="benefit-val">80% chi phí y tế</div><div class="benefit-note">Xét nghiệm và chẩn đoán hình ảnh</div></div>
+        <div class="benefit-item"><div class="benefit-icon">🪥</div><div class="benefit-name">Cạo vôi răng</div><div class="benefit-val">Theo chi phí y tế</div><div class="benefit-note">Tối đa 2 lần/năm</div></div>
+        <div class="benefit-item"><div class="benefit-icon">🔧</div><div class="benefit-name">Trám răng & nhổ răng</div><div class="benefit-val">Theo chi phí y tế</div><div class="benefit-note">Amalgam, composite, GIC...</div></div>
+        <div class="benefit-item"><div class="benefit-icon">🩺</div><div class="benefit-name">Điều trị tủy răng</div><div class="benefit-val">Theo chi phí y tế</div><div class="benefit-note">Cắt cuống răng, cắt u mô cứng</div></div>
+        <div class="benefit-item"><div class="benefit-icon">👑</div><div class="benefit-name">Bọc răng</div><div class="benefit-val">Theo chi phí y tế</div><div class="benefit-note">Loại trừ implant và cầu răng</div></div>
+        <div class="benefit-item"><div class="benefit-icon">💰</div><div class="benefit-name">STBH nha khoa/năm</div><div class="benefit-val">1M – 10 triệu</div><div class="benefit-note">Tuỳ chương trình, phạm vi Việt Nam</div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      <div class="benefit-detail" id="benefitDetail">
-        <!-- filled by JS -->
+<!-- PROCESS -->
+<section class="process-section">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Hành trình bảo vệ</div>
+      <h2 class="section-title">Chăm Sóc <em>Toàn Diện</em> 5 Giai Đoạn</h2>
+    </div>
+    <div class="process-steps">
+      <div class="process-step reveal"><div class="step-circle">🔍<div class="step-num">1</div></div><div class="step-title">Dự đoán</div><div class="step-desc">Tầm soát sức khỏe, phát hiện nguy cơ sớm qua AIA Vitality</div></div>
+      <div class="process-step reveal"><div class="step-circle">🛡️<div class="step-num">2</div></div><div class="step-title">Phòng ngừa</div><div class="step-desc">Thông tin sức khỏe đáng tin cậy, rèn luyện lối sống lành mạnh</div></div>
+      <div class="process-step reveal"><div class="step-circle">🔬<div class="step-num">3</div></div><div class="step-title">Chẩn đoán</div><div class="step-desc">Song hành y tế Teladoc Health – tư vấn chuyên gia quốc tế</div></div>
+      <div class="process-step reveal"><div class="step-circle">💊<div class="step-num">4</div></div><div class="step-title">Điều trị</div><div class="step-desc">Chi trả theo chi phí y tế, mạng lưới 10.000+ cơ sở toàn cầu</div></div>
+      <div class="process-step reveal"><div class="step-circle">❤️‍🩹<div class="step-num">5</div></div><div class="step-title">Phục hồi</div><div class="step-desc">Chăm sóc sau xuất viện, chăm sóc y tế tại nhà liên tục</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VITALITY -->
+<section class="vitality-section" id="vitality">
+  <div class="vitality-inner">
+    <div class="reveal">
+      <div class="section-label">AIA Vitality</div>
+      <h2 class="section-title">Sống Khỏe – Nhận <em>Thưởng Lớn</em></h2>
+      <p style="font-size:0.97rem;color:var(--text-mid);line-height:1.8;margin:1rem 0 1.5rem;">AIA Vitality là chương trình sống khỏe dựa trên nghiên cứu khoa học, giúp bạn hiểu rõ sức khỏe và cải thiện lối sống. Hạng thành viên càng cao, phần thưởng càng lớn.</p>
+      <div class="vitality-highlight">
+        <h3>Thưởng đến 60% phí bảo hiểm</h3>
+        <p>Cứ mỗi 3 năm, bạn nhận thưởng dựa trên hạng thành viên Vitality và trung bình phí bảo hiểm đã đóng.</p>
+        <div class="vh-feature"><span>🏆</span><div class="vh-feature-text">Tỷ lệ thưởng ban đầu 15%, tăng dần theo hạng thành viên</div></div>
+        <div class="vh-feature"><span>📈</span><div class="vh-feature-text">Hạng Bạch Kim: +10% mỗi kỳ xét thưởng</div></div>
+        <div class="vh-feature"><span>🎯</span><div class="vh-feature-text">Tối đa không vượt quá 60% trong mọi trường hợp</div></div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="section-label" style="margin-bottom:1.2rem;">Hạng thành viên</div>
+      <div class="vitality-levels">
+        <div class="vitality-level"><div class="level-icon" style="background:#CD7F3222;color:#8B5E27;">🥉</div><div class="level-info"><div class="level-name">Đồng</div><div class="level-pts">0 – 9.999 điểm</div></div><div class="level-reward" style="color:var(--text-soft);">–5%</div></div>
+        <div class="vitality-level"><div class="level-icon" style="background:#C0C0C022;color:#707070;">🥈</div><div class="level-info"><div class="level-name">Bạc</div><div class="level-pts">10.000 – 19.999 điểm</div></div><div class="level-reward" style="color:var(--text-soft);">–2,5%</div></div>
+        <div class="vitality-level"><div class="level-icon" style="background:#FFD70022;color:#A88000;">🥇</div><div class="level-info"><div class="level-name">Vàng</div><div class="level-pts">20.000 – 29.999 điểm</div></div><div class="level-reward" style="color:var(--gold);">+5%</div></div>
+        <div class="vitality-level" style="border:2px solid var(--rose);"><div class="level-icon" style="background:#F4E6FF;color:#7B2FBE;">💎</div><div class="level-info"><div class="level-name">Bạch Kim</div><div class="level-pts">30.000+ điểm</div></div><div class="level-reward" style="color:var(--rose);font-size:1.1rem;">+10%</div></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- EXAMPLE -->
-<section id="example">
-  <div class="example-header reveal">
-    <div class="section-tag">Ví dụ minh hoạ</div>
-    <h2 class="section-title">Thực tế <em>quyền lợi</em><br/>ra sao?</h2>
-    <p class="section-sub">Quyền lợi thực tế có thể gấp hàng chục lần phí đóng trong năm đầu tiên</p>
-  </div>
-  <div class="example-grid">
-    <!-- Family 1 -->
-    <div class="example-card reveal">
-      <div class="example-family">Gia đình anh A – Chương trình Nâng Cao</div>
-      <div class="example-title">3 người • Phí 21.4 triệu/năm</div>
-      <div class="example-events">
-        <div class="event-row"><span class="event-name">Bé C – Viêm phế quản (ngoại trú)</span><span class="event-amount">2.5 tr</span></div>
-        <div class="event-row"><span class="event-name">Anh A – Viêm ruột thừa (5 ngày)</span><span class="event-amount">40 tr</span></div>
-        <div class="event-row"><span class="event-name">Chị B – U trực tràng, phẫu thuật</span><span class="event-amount">300 tr</span></div>
-        <div class="event-row"><span class="event-name">Chị B – Xạ trị ung thư (bv công)</span><span class="event-amount">200 tr</span></div>
-        <div class="event-row"><span class="event-name">Bé C – Rối loạn tiêu hóa (5 ngày)</span><span class="event-amount">15 tr</span></div>
-        <div class="event-row"><span class="event-name">Hỗ trợ nằm viện (30 ngày)</span><span class="event-amount">7.5 tr</span></div>
-      </div>
-      <div class="example-total">
-        <div class="label">Tổng quyền lợi nhận được</div>
-        <div class="value">565 triệu đ</div>
-        <div class="sub">Gấp hơn 26 lần tổng phí đóng</div>
-      </div>
+<section class="example-section">
+  <div class="section-inner">
+    <div class="reveal">
+      <div class="section-label">Ví dụ thực tế</div>
+      <h2 class="section-title">Quyền Lợi <em>Thực Tế</em> Nhận Được</h2>
     </div>
-
-    <!-- Family 2 -->
-    <div class="example-card reveal">
-      <div class="example-family">Chị D + Bà H – Chương trình Toàn Diện</div>
-      <div class="example-title">2 người • Phí 24.7 triệu/năm</div>
-      <div class="example-events">
-        <div class="event-row"><span class="event-name">Chị D – Khám thai & sinh thường</span><span class="event-amount">30 tr</span></div>
-        <div class="event-row"><span class="event-name">Bà H – Phẫu thuật thay khớp gối</span><span class="event-amount">150 tr</span></div>
-        <div class="event-row"><span class="event-name">Bà H – Chăm sóc y tế tại nhà 20 ngày</span><span class="event-amount">10 tr</span></div>
-        <div class="event-row"><span class="event-name">Bà H – Ung thư xương (hóa trị 3 năm)</span><span class="event-amount">200 tr/năm</span></div>
-        <div class="event-row"><span class="event-name">Bà H – Điều trị giảm nhẹ</span><span class="event-amount">25 tr</span></div>
-        <div class="event-row"><span class="event-name">Trẻ sơ sinh chăm sóc 7 ngày</span><span class="event-amount">10 tr</span></div>
-      </div>
-      <div class="example-total">
-        <div class="label">Tổng quyền lợi sau 8 năm</div>
-        <div class="value">825 triệu đ</div>
-        <div class="sub">Gấp gần 4 lần tổng phí đóng</div>
-      </div>
+    <div class="example-persons">
+      <div class="person-chip">👨 Anh A <span class="age">(35 tuổi)</span> · 7.764.000đ/năm</div>
+      <div class="person-chip">👩 Chị B <span class="age">(30 tuổi)</span> · 6.866.000đ/năm</div>
+      <div class="person-chip">👦 Bé C <span class="age">(5 tuổi)</span> · 6.813.000đ/năm</div>
+      <div class="person-chip" style="background:var(--rose-pale);border-color:var(--rose);color:var(--rose);">Gói Nâng Cao · Toàn Cầu trừ Hoa Kỳ</div>
+    </div>
+    <div class="example-cards">
+      <div class="example-card reveal"><div class="example-label">Bé C – Viêm phế quản</div><div class="example-amount">2,5 triệu</div><div class="example-case">Điều trị trong ngày tại bệnh viện, thực hiện khí dung và về trong ngày</div></div>
+      <div class="example-card reveal"><div class="example-label">Anh A – Viêm ruột thừa</div><div class="example-amount">40 triệu</div><div class="example-case">Nằm viện 5 ngày, phẫu thuật cắt ruột thừa, giường 3 triệu/ngày</div></div>
+      <div class="example-card reveal"><div class="example-label">Chị B – Ung thư trực tràng</div><div class="example-amount">300 triệu</div><div class="example-case">Phẫu thuật + điều trị nội trú 20 ngày sau phẫu thuật</div></div>
+      <div class="example-card reveal"><div class="example-label">Cả gia đình – Hỗ trợ BHYT</div><div class="example-amount">7,5 triệu</div><div class="example-case">250K/ngày × 30 ngày nằm viện tổng cộng của cả gia đình</div></div>
+      <div class="example-card reveal"><div class="example-label">Bé C – Rối loạn tiêu hóa</div><div class="example-amount">15 triệu</div><div class="example-case">Nằm viện 5 ngày tại bệnh viện tư, bao gồm giường người thân</div></div>
+      <div class="example-card reveal"><div class="example-label">Chị B – Xạ trị ung thư</div><div class="example-amount">200 triệu</div><div class="example-case">2 lần xạ trị tại BV Ung Bướu, nhân đôi bảo vệ tại bệnh viện công</div></div>
+    </div>
+    <div class="example-total reveal">
+      <div class="example-total-label">Tổng phí gia đình đóng 1 năm: <strong>21,4 triệu đồng</strong></div>
+      <div class="example-total-num">565 triệu đồng</div>
+      <div class="example-total-sub">Tổng quyền lợi nhận được · Gấp hơn 26 lần tổng phí đóng</div>
     </div>
   </div>
 </section>
 
-<!-- VITALITY -->
-<section id="vitality">
-  <div class="vitality-inner">
-    <div class="vitality-text reveal">
-      <div class="section-tag" style="background:rgba(232,83,106,.25);color:var(--rose-light)">AIA Vitality</div>
-      <h2 class="section-title">Sống khỏe,<br/><em style="color:var(--rose-light)">nhận thưởng</em></h2>
-      <p class="section-sub">Chương trình sống khỏe dựa trên nghiên cứu khoa học – giúp bạn cải thiện sức khỏe toàn diện và nhận thưởng lên đến 60% phí bảo hiểm.</p>
-      <div class="vitality-levels">
-        <div class="vitality-level">
-          <div class="level-info"><span class="level-badge lv-dong">Đồng</span><span class="level-pts">0 – 9.999 điểm</span></div>
-          <div class="level-bar-wrap"><div class="level-bar lb-dong"></div></div>
-        </div>
-        <div class="vitality-level">
-          <div class="level-info"><span class="level-badge lv-bac">Bạc</span><span class="level-pts">10.000 – 19.999</span></div>
-          <div class="level-bar-wrap"><div class="level-bar lb-bac"></div></div>
-        </div>
-        <div class="vitality-level">
-          <div class="level-info"><span class="level-badge lv-vang">Vàng</span><span class="level-pts">20.000 – 29.999</span></div>
-          <div class="level-bar-wrap"><div class="level-bar lb-vang"></div></div>
-        </div>
-        <div class="vitality-level">
-          <div class="level-info"><span class="level-badge lv-bachkim">Bạch Kim</span><span class="level-pts">30.000+ điểm</span></div>
-          <div class="level-bar-wrap"><div class="level-bar lb-bachkim"></div></div>
-        </div>
+<!-- FORM -->
+<section class="form-section" id="form">
+  <div class="form-inner">
+    <div class="form-info reveal">
+      <div class="section-label">Tư vấn miễn phí</div>
+      <h2>Nhận Tư Vấn <em>Ngay Hôm Nay</em></h2>
+      <p>Để lại thông tin, chuyên gia AIA sẽ liên hệ trong vòng 24 giờ để tư vấn gói bảo hiểm phù hợp nhất với nhu cầu và ngân sách của bạn.</p>
+      <div class="form-perks">
+        <div class="perk"><div class="perk-icon">🎁</div>Tư vấn hoàn toàn miễn phí, không ràng buộc</div>
+        <div class="perk"><div class="perk-icon">⚡</div>Phản hồi trong vòng 24 giờ làm việc</div>
+        <div class="perk"><div class="perk-icon">🌐</div>Bảo vệ toàn cầu, mạng lưới 10.000+ cơ sở y tế</div>
+        <div class="perk"><div class="perk-icon">🔒</div>Thông tin của bạn được bảo mật tuyệt đối</div>
+        <div class="perk"><div class="perk-icon">💎</div>Chuyên gia AIA tận tình, chuyên nghiệp</div>
       </div>
     </div>
-
-    <div class="vitality-rewards reveal">
-      <div class="reward-card">
-        <div class="rew-title">🎁 Thưởng sống khỏe Vitality</div>
-        <div class="rew-num">Đến 60%</div>
-        <div class="rew-desc">Nhận thưởng lên đến 60% trung bình phí bảo hiểm đã đóng trong 3 năm hợp đồng, mỗi 3 năm một lần.</div>
-      </div>
-      <div class="reward-card">
-        <div class="rew-title">📊 Tỷ lệ thưởng theo hạng thành viên</div>
-        <div class="rew-desc">
-          Bắt đầu từ 15% (năm đầu). Mỗi năm thay đổi theo hạng:<br/>
-          Bạch Kim: <strong style="color:var(--rose-light)">+10%</strong> &nbsp;|&nbsp; Vàng: <strong style="color:var(--rose-light)">+5%</strong> &nbsp;|&nbsp; Bạc: -2.5% &nbsp;|&nbsp; Đồng: -5%
+    <div class="form-box reveal">
+      <div id="formContent">
+        <div class="form-box-title">Đăng ký tư vấn</div>
+        <div class="form-box-sub">Điền thông tin để được tư vấn gói phù hợp nhất</div>
+        <div class="form-row">
+          <div class="form-group"><label>Họ và tên <span class="req">*</span></label><input type="text" id="fname" class="form-control" placeholder="Nguyễn Văn A"></div>
+          <div class="form-group"><label>Số điện thoại <span class="req">*</span></label><input type="tel" id="fphone" class="form-control" placeholder="09xx xxx xxx"></div>
         </div>
-      </div>
-      <div class="reward-card">
-        <div class="rew-title">🔬 Cách hoạt động</div>
-        <div class="rew-desc">Hiểu rõ sức khỏe bản thân → Cải thiện lối sống → Tích lũy điểm → Nâng hạng thành viên → Nhận phần thưởng và ưu đãi ngày càng lớn hơn.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- NETWORK -->
-<section id="network">
-  <div class="network-inner">
-    <div class="network-map reveal">
-      <div class="section-tag">Hộ chiếu sức khỏe AIA</div>
-      <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--charcoal);margin-bottom:20px">Mạng lưới y tế <em style="color:var(--rose)">toàn cầu</em></h3>
-      <div class="continent-grid">
-        <div class="continent-card"><div class="cont-icon">🌏</div><div class="cont-name">Châu Á</div><div class="cont-flag">125+ bệnh viện hàng đầu</div></div>
-        <div class="continent-card"><div class="cont-icon">🌍</div><div class="cont-name">Châu Âu</div><div class="cont-flag">Mạng lưới rộng khắp</div></div>
-        <div class="continent-card"><div class="cont-icon">🌎</div><div class="cont-name">Châu Mỹ**</div><div class="cont-flag">Ngoại trừ Hoa Kỳ</div></div>
-        <div class="continent-card"><div class="cont-icon">🦘</div><div class="cont-name">Châu Úc</div><div class="cont-flag">Cơ sở y tế đẳng cấp</div></div>
-      </div>
-      <p style="font-size:.72rem;color:var(--text-muted);margin-top:12px">**Áp dụng cho Chương trình Toàn Diện và Hoàn Hảo</p>
-    </div>
-
-    <div class="network-text reveal">
-      <div>
-        <div class="section-tag">Dịch vụ Song hành y tế</div>
-        <h3 style="font-family:var(--font-display);font-size:1.7rem;color:var(--charcoal);margin-bottom:24px">Bền trí lực –<br/><em style="color:var(--rose)">Vững đồng hành</em></h3>
-      </div>
-      <div class="net-stat">
-        <div class="stat-icon">🔬</div>
-        <div><h4>10.000+</h4><p>Cơ sở y tế trên toàn cầu tiếp cận được qua dịch vụ Song hành y tế</p></div>
-      </div>
-      <div class="net-stat">
-        <div class="stat-icon">🩺</div>
-        <div><h4>Đánh giá chẩn đoán</h4><p>Kiểm tra và xác định kế hoạch điều trị cùng chuyên gia quốc tế</p></div>
-      </div>
-      <div class="net-stat">
-        <div class="stat-icon">💬</div>
-        <div><h4>Hỗ trợ không giới hạn</h4><p>Giải đáp mọi thắc mắc trong suốt quá trình điều trị, không giới hạn thời gian</p></div>
-      </div>
-      <div class="net-stat">
-        <div class="stat-icon">🏆</div>
-        <div><h4>20+ năm kinh nghiệm</h4><p>Teladoc Health – đối tác hàng đầu thế giới về chăm sóc sức khỏe trực tuyến</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- WHO -->
-<section id="who" style="background: white;">
-  <div class="container">
-    <div class="reveal" style="text-align:center;margin-bottom:50px">
-      <div class="section-tag">Điều kiện tham gia</div>
-      <h2 class="section-title">Ai có thể <em>tham gia?</em></h2>
-    </div>
-    <div class="who-inner">
-      <div>
-        <div class="info-block reveal" style="margin-bottom:24px">
-          <h3>Thông tin cơ bản</h3>
-          <ul class="info-list">
-            <li><span class="key">Tuổi tham gia:</span><span class="val">30 ngày tuổi đến 70 tuổi</span></li>
-            <li><span class="key">Tuổi tham gia AIA Vitality:</span><span class="val">Từ 18 tuổi trở lên</span></li>
-            <li><span class="key">Tuổi tái tục tối đa:</span><span class="val">99 tuổi</span></li>
-            <li><span class="key">Thời hạn hợp đồng:</span><span class="val">1 năm, tái tục hàng năm</span></li>
-            <li><span class="key">Định kỳ đóng phí:</span><span class="val">Theo sản phẩm bảo hiểm nhân thọ</span></li>
-          </ul>
+        <div class="form-group"><label>Email</label><input type="email" id="femail" class="form-control" placeholder="email@example.com"></div>
+        <div class="form-row">
+          <div class="form-group"><label>Độ tuổi <span class="req">*</span></label><select id="fage" class="form-control"><option value="">Chọn độ tuổi</option><option>Dưới 25 tuổi</option><option>25 – 35 tuổi</option><option>36 – 45 tuổi</option><option>46 – 55 tuổi</option><option>56 – 65 tuổi</option><option>Trên 65 tuổi</option></select></div>
+          <div class="form-group"><label>Số người cần bảo hiểm</label><select id="fmembers" class="form-control"><option value="">Chọn số người</option><option>Chỉ mình tôi</option><option>Tôi + vợ/chồng</option><option>Cả gia đình (3 người)</option><option>Cả gia đình (4+ người)</option></select></div>
         </div>
-        <div class="info-block reveal">
-          <h3>Thời gian chờ</h3>
-          <ul class="info-list">
-            <li><span class="key">Bệnh đặc biệt, ung thư, ghép tạng:</span><span class="val">90 ngày</span></li>
-            <li><span class="key">Quyền lợi thai sản khác:</span><span class="val">270 ngày</span></li>
-            <li><span class="key">Các bệnh thông thường:</span><span class="val">30 ngày</span></li>
-            <li><span class="key">Tai nạn:</span><span class="val">Không có thời gian chờ</span></li>
-          </ul>
-        </div>
+        <div class="form-group"><label>Gói quan tâm</label><select id="fplan" class="form-control"><option value="">Chọn gói bảo hiểm</option><option>Cơ Bản – 150 triệu/năm</option><option>Nâng Cao – 350 triệu/năm</option><option>Toàn Diện – 700 triệu/năm</option><option>Hoàn Hảo – 1,2 tỷ/năm</option><option>Chưa quyết định, cần tư vấn</option></select></div>
+        <div class="form-group"><label>Ghi chú hoặc câu hỏi</label><textarea id="fnote" class="form-control" placeholder="Ví dụ: Tôi có bệnh nền, muốn biết có được bảo hiểm không..."></textarea></div>
+        <div class="form-group"><div class="checkbox-group"><input type="checkbox" id="fterms" checked><label for="fterms">Tôi đồng ý để AIA Việt Nam liên hệ tư vấn và đồng ý với chính sách bảo mật thông tin</label></div></div>
+        <button class="form-submit" onclick="submitForm()">🛡️ Gửi yêu cầu tư vấn ngay</button>
+        <div class="form-note">AIA Việt Nam cam kết bảo mật thông tin. Tài liệu chỉ mang tính tham khảo, không phải hợp đồng bảo hiểm.</div>
       </div>
-
-      <div class="info-block reveal" style="background:white;border-color:var(--rose-muted);border-left-width:2px">
-        <h3 style="color:var(--text-muted)">Một số trường hợp loại trừ chính</h3>
-        <div class="exclusions-grid">
-          <div class="excl-item">Bệnh có sẵn (chưa được khai báo khi tham gia)</div>
-          <div class="excl-item">Bệnh bẩm sinh, dị tật bẩm sinh</div>
-          <div class="excl-item">Điều trị thử nghiệm chưa được công nhận</div>
-          <div class="excl-item">Tự gây thương tích, ảnh hưởng bởi rượu, ma túy</div>
-          <div class="excl-item">Phá thai không có nguyên nhân bệnh lý</div>
-          <div class="excl-item">Phẫu thuật thẩm mỹ (trừ phục hồi chức năng do tai nạn)</div>
-          <div class="excl-item">HIV/AIDS, bệnh lây truyền qua đường tình dục</div>
-          <div class="excl-item">Thể thao mạo hiểm chuyên nghiệp</div>
-          <div class="excl-item">Chiến tranh, khủng bố</div>
-          <div class="excl-item">Gian lận bảo hiểm</div>
-        </div>
-        <p style="font-size:.75rem;color:var(--text-muted);margin-top:16px">Chi tiết đầy đủ tại Quy tắc và Điều khoản sản phẩm Bảo hiểm Sức Khỏe Trọn Đời.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT FORM -->
-<section id="contact">
-  <div class="contact-inner">
-
-    <!-- LEFT: intro & trust signals -->
-    <div class="contact-left reveal">
-      <div class="section-tag">Đăng ký tư vấn</div>
-      <h2 class="section-title">Để chuyên gia<br/><em>liên hệ bạn</em></h2>
-      <p class="section-sub">Điền thông tin bên dưới, chuyên gia AIA sẽ gọi lại trong vòng 24 giờ để tư vấn gói bảo hiểm phù hợp nhất – hoàn toàn miễn phí, không ràng buộc.</p>
-      <div class="contact-trust">
-        <div class="trust-item">
-          <div class="ti-icon">⚡</div>
-          <div>
-            <h5>Phản hồi trong 24 giờ</h5>
-            <p>Chuyên gia AIA sẽ chủ động liên hệ bạn</p>
-          </div>
-        </div>
-        <div class="trust-item">
-          <div class="ti-icon">🔒</div>
-          <div>
-            <h5>Bảo mật thông tin tuyệt đối</h5>
-            <p>Dữ liệu của bạn được bảo vệ theo tiêu chuẩn quốc tế</p>
-          </div>
-        </div>
-        <div class="trust-item">
-          <div class="ti-icon">🎁</div>
-          <div>
-            <h5>Miễn phí, không ràng buộc</h5>
-            <p>Tư vấn hoàn toàn miễn phí – bạn quyết định mọi thứ</p>
-          </div>
-        </div>
-        <div class="trust-item">
-          <div class="ti-icon">🏆</div>
-          <div>
-            <h5>Chuyên gia được chứng nhận</h5>
-            <p>Đội ngũ tư vấn chuyên nghiệp, giàu kinh nghiệm</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- RIGHT: form card -->
-    <div class="contact-form-card reveal">
-      <div class="form-header">
-        <div class="form-badge">✦ Đăng ký ngay hôm nay</div>
-        <h3>Nhận tư vấn miễn phí</h3>
-        <p>Chỉ mất 2 phút – chuyên gia sẽ gọi lại cho bạn</p>
-      </div>
-
-      <div class="form-body" id="formBody">
-        <!-- Step indicator -->
-        <div class="form-steps">
-          <div class="form-step active" id="stepEl1"><div class="step-num">1</div><span>Thông tin</span></div>
-          <div class="step-line" id="stepLine1"></div>
-          <div class="form-step" id="stepEl2"><div class="step-num">2</div><span>Nhu cầu</span></div>
-          <div class="step-line" id="stepLine2"></div>
-          <div class="form-step" id="stepEl3"><div class="step-num">3</div><span>Xác nhận</span></div>
-        </div>
-
-        <!-- STEP 1 -->
-        <div id="step1">
-          <div class="form-row">
-            <div class="form-group">
-              <label>Họ và tên <span class="req">*</span></label>
-              <input type="text" id="fullName" placeholder="Nguyễn Văn A" />
-              <div class="err-msg" id="errFullName">⚠ Vui lòng nhập họ tên</div>
-            </div>
-            <div class="form-group">
-              <label>Số điện thoại <span class="req">*</span></label>
-              <input type="tel" id="phone" placeholder="0912 345 678" />
-              <div class="err-msg" id="errPhone">⚠ Số điện thoại không hợp lệ</div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input type="email" id="email" placeholder="example@email.com" />
-            <div class="err-msg" id="errEmail">⚠ Email không hợp lệ</div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Ngày sinh <span class="req">*</span></label>
-              <input type="date" id="dob" />
-              <div class="err-msg" id="errDob">⚠ Vui lòng chọn ngày sinh</div>
-            </div>
-            <div class="form-group">
-              <label>Tỉnh / Thành phố</label>
-              <select id="city">
-                <option value="">-- Chọn tỉnh/thành --</option>
-                <option>Hà Nội</option><option>TP. Hồ Chí Minh</option>
-                <option>Đà Nẵng</option><option>Cần Thơ</option>
-                <option>Hải Phòng</option><option>Phú Thọ</option>
-                <option>Nghệ An</option><option>Thanh Hóa</option>
-                <option>Bình Dương</option><option>Đồng Nai</option>
-                <option>Khác</option>
-              </select>
-            </div>
-          </div>
-          <button class="form-submit" onclick="goStep(2)">
-            <span class="btn-text">Tiếp theo →</span>
-            <div class="spinner"></div>
-          </button>
-        </div>
-
-        <!-- STEP 2 -->
-        <div id="step2" style="display:none">
-          <div class="form-group">
-            <label>Bạn quan tâm đến gói nào? <span class="req">*</span></label>
-            <div class="radio-group">
-              <input type="radio" name="plan" id="p1" class="radio-option" value="Cơ Bản" /><label for="p1" class="radio-label">🌱 Cơ Bản</label>
-              <input type="radio" name="plan" id="p2" class="radio-option" value="Nâng Cao" /><label for="p2" class="radio-label">⭐ Nâng Cao</label>
-              <input type="radio" name="plan" id="p3" class="radio-option" value="Toàn Diện" /><label for="p3" class="radio-label">💎 Toàn Diện</label>
-              <input type="radio" name="plan" id="p4" class="radio-option" value="Hoàn Hảo" /><label for="p4" class="radio-label">👑 Hoàn Hảo</label>
-              <input type="radio" name="plan" id="p5" class="radio-option" value="Chưa biết" /><label for="p5" class="radio-label">🤔 Chưa biết</label>
-            </div>
-            <div class="err-msg" id="errPlan">⚠ Vui lòng chọn gói quan tâm</div>
-          </div>
-          <div class="form-group">
-            <label>Bạn muốn bảo vệ ai?</label>
-            <div class="radio-group">
-              <input type="radio" name="who" id="w1" class="radio-option" value="Bản thân" /><label for="w1" class="radio-label">👤 Bản thân</label>
-              <input type="radio" name="who" id="w2" class="radio-option" value="Gia đình" /><label for="w2" class="radio-label">👨‍👩‍👧 Gia đình</label>
-              <input type="radio" name="who" id="w3" class="radio-option" value="Bố mẹ" /><label for="w3" class="radio-label">👴👵 Bố/Mẹ</label>
-              <input type="radio" name="who" id="w4" class="radio-option" value="Con cái" /><label for="w4" class="radio-label">🧒 Con cái</label>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Thời gian thuận tiện để tư vấn</label>
-            <select id="timeSlot">
-              <option value="">-- Chọn khung giờ --</option>
-              <option>Buổi sáng (8:00 – 12:00)</option>
-              <option>Buổi chiều (12:00 – 17:00)</option>
-              <option>Buổi tối (17:00 – 20:00)</option>
-              <option>Bất kỳ lúc nào</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Ghi chú thêm (không bắt buộc)</label>
-            <textarea id="notes" placeholder="Ví dụ: Tôi có tiền sử bệnh lý... / Muốn hỏi về quyền lợi thai sản..."></textarea>
-          </div>
-          <div style="display:flex;gap:12px">
-            <button class="form-submit" style="background:var(--blush);color:var(--rose);box-shadow:none;flex:0 0 auto;width:auto;padding:16px 24px" onclick="goStep(1)">← Quay lại</button>
-            <button class="form-submit" style="flex:1" onclick="goStep(3)">
-              <span class="btn-text">Xem lại thông tin →</span>
-              <div class="spinner"></div>
-            </button>
-          </div>
-        </div>
-
-        <!-- STEP 3: CONFIRM -->
-        <div id="step3" style="display:none">
-          <div style="background:var(--blush);border-radius:var(--radius-sm);padding:20px 22px;margin-bottom:22px;border:1px solid rgba(232,83,106,.15)">
-            <div style="font-size:.78rem;font-weight:700;color:var(--rose);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px">Xác nhận thông tin</div>
-            <div id="confirmSummary" style="display:flex;flex-direction:column;gap:9px"></div>
-          </div>
-          <div class="form-group">
-            <div class="checkbox-wrap">
-              <input type="checkbox" id="agree" />
-              <label class="custom-check" for="agree"></label>
-              <div class="check-text">Tôi đồng ý cho AIA Việt Nam liên hệ tư vấn và xử lý thông tin theo <a href="#">Chính sách bảo mật</a>. Thông tin chỉ dùng cho mục đích tư vấn bảo hiểm.</div>
-            </div>
-            <div class="err-msg" id="errAgree">⚠ Vui lòng đồng ý điều khoản để tiếp tục</div>
-          </div>
-          <div style="display:flex;gap:12px">
-            <button class="form-submit" style="background:var(--blush);color:var(--rose);box-shadow:none;flex:0 0 auto;width:auto;padding:16px 24px" onclick="goStep(2)">← Quay lại</button>
-            <button class="form-submit" id="submitBtn" style="flex:1" onclick="submitForm()">
-              <span class="btn-text">🎉 Gửi đăng ký tư vấn</span>
-              <div class="spinner"></div>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- SUCCESS -->
       <div class="form-success" id="formSuccess">
-        <div class="success-icon">✓</div>
-        <h4>Đăng ký thành công!</h4>
-        <p>Cảm ơn bạn đã quan tâm. Chuyên gia AIA sẽ liên hệ trong vòng 24 giờ làm việc. Chúc bạn sức khỏe!</p>
-        <div style="margin-top:20px;font-size:.78rem;color:var(--text-muted)">Hotline hỗ trợ: <a href="tel:02838122777" style="color:var(--rose);font-weight:600">028 3812 2777</a></div>
+        <div class="form-success-icon">✅</div>
+        <h3>Đăng ký thành công!</h3>
+        <p>Cảm ơn bạn đã tin tưởng AIA Việt Nam. Chuyên gia của chúng tôi sẽ liên hệ trong vòng 24 giờ làm việc.</p>
+        <p style="margin-top:1rem;font-size:0.8rem;color:var(--text-soft);">Hotline: <strong style="color:var(--rose);">028 3812 2777</strong> · aia.com.vn</p>
       </div>
     </div>
-
-  </div>
-</section>
-
-<!-- CTA -->
-<section id="cta">
-  <h2>Bắt đầu hành trình<br/>bảo vệ sức khỏe hôm nay</h2>
-  <p>Đồng hành xuyên suốt – trọn đời an tâm cùng AIA Việt Nam. Tư vấn miễn phí, không ràng buộc.</p>
-  <div class="cta-actions">
-    <a href="tel:02838122777" class="btn-white">📞 028 3812 2777</a>
-    <a href="https://aia.com.vn" target="_blank" class="btn-ghost">Truy cập aia.com.vn</a>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-top">
+  <div class="footer-inner">
     <div class="footer-brand">
-      <div class="brand-name">AIA <span>Việt Nam</span></div>
-      <p>Sống Khỏe Hơn, Lâu Hơn, Hạnh Phúc Hơn. Công ty TNHH Bảo hiểm Nhân thọ AIA (Việt Nam) – đồng hành cùng sức khỏe của bạn.</p>
-      <div class="contact">
-        Hotline: <a href="tel:02838122777">028 3812 2777</a><br/>
-        Website: <a href="https://aia.com.vn" target="_blank">aia.com.vn</a>
+      <div class="footer-logo">AIA Việt Nam</div>
+      <p>Công ty TNHH Bảo hiểm Nhân thọ AIA (Việt Nam) – đồng hành cùng hàng triệu gia đình Việt hướng tới cuộc sống Khỏe hơn, Lâu hơn, Hạnh phúc hơn.</p>
+      <div class="footer-contact">
+        <a href="tel:02838122777">📞 028 3812 2777</a>
+        <a href="https://aia.com.vn" target="_blank">🌐 aia.com.vn</a>
       </div>
     </div>
-    <div class="footer-col">
-      <h4>Sản phẩm</h4>
-      <ul>
-        <li><a href="#plans">Gói Cơ Bản</a></li>
-        <li><a href="#plans">Gói Nâng Cao</a></li>
-        <li><a href="#plans">Gói Toàn Diện</a></li>
-        <li><a href="#plans">Gói Hoàn Hảo</a></li>
-        <li><a href="#benefits">Quyền lợi bổ sung</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Tìm hiểu thêm</h4>
-      <ul>
-        <li><a href="#vitality">AIA Vitality</a></li>
-        <li><a href="#network">Song hành y tế</a></li>
-        <li><a href="#example">Ví dụ minh hoạ</a></li>
-        <li><a href="#who">Điều kiện tham gia</a></li>
-        <li><a href="#cta">Liên hệ tư vấn</a></li>
-      </ul>
-    </div>
+    <div class="footer-col"><h4>Sản phẩm</h4><ul><li><a href="#plans">Gói Cơ Bản</a></li><li><a href="#plans">Gói Nâng Cao</a></li><li><a href="#plans">Gói Toàn Diện</a></li><li><a href="#plans">Gói Hoàn Hảo</a></li><li><a href="#vitality">AIA Vitality</a></li></ul></div>
+    <div class="footer-col"><h4>Quyền lợi</h4><ul><li><a href="#benefits">Điều trị nội trú</a></li><li><a href="#benefits">Điều trị ngoại trú</a></li><li><a href="#benefits">Quyền lợi thai sản</a></li><li><a href="#benefits">Điều trị ung thư</a></li><li><a href="#benefits">Nha khoa</a></li></ul></div>
+    <div class="footer-col"><h4>Hỗ trợ</h4><ul><li><a href="#form">Tư vấn miễn phí</a></li><li><a href="#why">Tại sao chọn AIA</a></li><li><a href="#vitality">Song hành y tế</a></li><li><a href="tel:02838122777">Hotline 24/7</a></li></ul></div>
   </div>
   <div class="footer-bottom">
-    <div class="disclaimer">Tài liệu này chỉ mang tính tham khảo và không phải là hợp đồng bảo hiểm. Chi tiết quyền lợi được quy định trong Quy tắc và Điều khoản của sản phẩm Bảo hiểm Sức Khỏe Trọn Đời.</div>
-    <div>© 2025 AIA Việt Nam. All rights reserved.</div>
+    <div>© 2025 AIA Việt Nam. Tất cả quyền được bảo lưu.</div>
+    <div style="color:var(--rose-light);">Sống Khỏe Hơn · Lâu Hơn · Hạnh Phúc Hơn</div>
   </div>
+  <div class="footer-disclaimer">Tài liệu này nhằm mục đích giới thiệu về sản phẩm bảo hiểm sức khỏe của Công ty TNHH Bảo hiểm Nhân thọ AIA (Việt Nam). Tài liệu này chỉ mang tính tham khảo và không phải là hợp đồng bảo hiểm. Chi tiết về quyền lợi bảo hiểm được quy định trong Quy tắc và Điều khoản của sản phẩm Bảo hiểm Sức Khỏe Trọn Đời. Điều kiện và điều khoản áp dụng.</div>
 </footer>
 
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
 <script>
-  // NAV SCROLL
-  window.addEventListener('scroll', () => {
-    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
-  });
-
-  // HAMBURGER
-  document.getElementById('hamburger').addEventListener('click', () => {
-    document.getElementById('mobileMenu').classList.toggle('open');
-  });
-  function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
-
-  // SCROLL REVEAL
-  const reveals = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-  reveals.forEach(r => obs.observe(r));
-
-  // BENEFIT TABS
-  const benefitData = [
-    {
-      icon: '🏥', title: 'Quyền lợi Điều trị Nội trú',
-      desc: 'Chi trả toàn bộ chi phí điều trị nội trú bao gồm phẫu thuật, ICU, thuốc và chăm sóc y tế tại nhà sau xuất viện.',
-      items: [
-        'Phòng và giường bệnh: tối đa 5.5 triệu đ/ngày (gói Hoàn Hảo)',
-        'Phòng ICU theo chi phí y tế thực tế (tối đa 30 ngày/năm)',
-        'Phẫu thuật – theo chi phí y tế thực tế, không giới hạn',
-        'Điều trị trước nhập viện (30 ngày) và sau xuất viện (60 ngày)',
-        'Giường người thân khi NĐBH dưới 18 tuổi hoặc từ 60 tuổi trở lên',
-        'Chăm sóc y tế tại nhà: đến 1 triệu đ/ngày (tối đa 30 ngày/năm)'
-      ]
-    },
-    {
-      icon: '🤰', title: 'Quyền lợi Thai sản',
-      desc: 'Áp dụng cho NĐBH từ 18 đến 45 tuổi, tại Việt Nam. Bảo vệ toàn diện hành trình mang thai và sinh nở.',
-      items: [
-        'Khám thai: đến 3 triệu đ/lần (tối đa 8 lần/năm – gói Hoàn Hảo)',
-        'Phòng và giường bệnh thai sản: đến 5.5 triệu đ/ngày',
-        'Sinh thường hoặc sinh mổ theo chi phí y tế thực tế',
-        'Biến chứng thai sản theo chi phí y tế thực tế',
-        'Chăm sóc trẻ sơ sinh: tối đa 7 ngày sau khi sinh',
-        'Tỷ lệ chi trả: 50% (năm 1) → 80% (năm 2) → 100% (từ năm 3)'
-      ]
-    },
-    {
-      icon: '🎗️', title: 'Điều trị Ung thư & Ghép tạng',
-      desc: 'Chi trả toàn bộ chi phí điều trị ung thư theo thực tế, và hỗ trợ ghép tạng toàn diện.',
-      items: [
-        'Điều trị ung thư: theo chi phí y tế thực tế mỗi lần điều trị',
-        'Ghép tạng (tim, phổi, gan, tụy, thận, tủy xương): theo chi phí y tế',
-        'Hỗ trợ người hiến tạng: 50% chi phí phẫu thuật',
-        'Điều trị giảm nhẹ: đến 50 triệu đ (gói Toàn Diện và Hoàn Hảo)',
-        'Nhân đôi bảo vệ tại bệnh viện công sau khi hết hạn mức',
-        'Không giới hạn số lần điều trị trong suốt thời gian BHSK có hiệu lực'
-      ]
-    },
-    {
-      icon: '🦷', title: 'Quyền lợi Nha khoa',
-      desc: 'Tùy chọn bổ sung với phạm vi điều trị nha khoa toàn diện tại Việt Nam.',
-      items: [
-        'STBH: từ 1 triệu đến 10 triệu đ/năm hợp đồng',
-        'Khám, tư vấn, xét nghiệm và chẩn đoán',
-        'Chẩn đoán hình ảnh X-quang theo chỉ định',
-        'Cạo vôi răng: tối đa 2 lần/năm',
-        'Trám răng, nhổ răng, điều trị tủy, viêm nướu, nha chu',
-        'Bọc răng (loại trừ implant và cầu răng)',
-        'AIA Việt Nam chi trả 80% chi phí y tế'
-      ]
-    },
-    {
-      icon: '🏨', title: 'Quyền lợi Điều trị Ngoại trú',
-      desc: 'Tùy chọn bổ sung, áp dụng tại Việt Nam, giúp kiểm soát chi phí khám bệnh hàng ngày.',
-      items: [
-        'STBH: từ 6 triệu đến 48 triệu đ/năm hợp đồng',
-        'Khám bệnh: từ 600k đến 4.8 triệu/lần khám',
-        'Xét nghiệm và chẩn đoán hình ảnh theo chỉ định',
-        'Thuốc theo toa của bác sĩ',
-        'Vật lý trị liệu theo chỉ định',
-        'Tư vấn/Điều trị sức khỏe tâm thần (gói Toàn Diện, Hoàn Hảo)',
-        'AIA Việt Nam chi trả 80% chi phí y tế'
-      ]
-    },
-    {
-      icon: '🏛️', title: 'Nhân đôi bảo vệ tại Bệnh viện công',
-      desc: 'Quyền lợi đặc biệt: khi đã dùng hết hạn mức STBH trong năm, AIA tiếp tục chi trả gấp đôi.',
-      items: [
-        'Áp dụng khi đã chi trả hết toàn bộ STBH trong năm hợp đồng',
-        'Tự động kích hoạt khi điều trị tại bệnh viện công',
-        'Cộng thêm: từ 150 triệu (gói Cơ Bản) đến 1.2 tỷ đ (gói Hoàn Hảo)',
-        'Không áp dụng cho Quyền lợi Thai sản và Điều trị giảm nhẹ',
-        'Bảo vệ tối đa trong những ca bệnh nặng, chi phí cao',
-        'Hoạt động song song với bảo hiểm y tế nhà nước'
-      ]
-    }
-  ];
-
-  // ── CONTACT FORM MULTI-STEP ──
-  let currentStep = 1;
-
-  function goStep(n) {
-    if (n === 2 && !validateStep1()) return;
-    if (n === 3) {
-      if (!validateStep2()) return;
-      buildSummary();
-    }
-    // update UI
-    document.getElementById('step' + currentStep).style.display = 'none';
-    document.getElementById('step' + n).style.display = 'block';
-
-    // update step indicators
-    for (let i = 1; i <= 3; i++) {
-      const el = document.getElementById('stepEl' + i);
-      el.classList.remove('active', 'done');
-      if (i < n) el.classList.add('done');
-      else if (i === n) el.classList.add('active');
-    }
-    for (let i = 1; i <= 2; i++) {
-      const line = document.getElementById('stepLine' + i);
-      if (line) line.classList.toggle('done', i < n);
-    }
-    currentStep = n;
-    // scroll form into view on mobile
-    document.querySelector('.contact-form-card').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
-
-  function validateStep1() {
-    let ok = true;
-    const name = document.getElementById('fullName').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const dob = document.getElementById('dob').value;
-
-    setError('fullName', 'errFullName', !name);
-    if (!name) ok = false;
-
-    const phoneOk = /^(0|\+84)[0-9]{8,10}$/.test(phone.replace(/\s/g, ''));
-    setError('phone', 'errPhone', !phoneOk);
-    if (!phoneOk) ok = false;
-
-    if (email) {
-      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-      setError('email', 'errEmail', !emailOk);
-      if (!emailOk) ok = false;
-    }
-
-    setError('dob', 'errDob', !dob);
-    if (!dob) ok = false;
-
-    return ok;
-  }
-
-  function validateStep2() {
-    const plan = document.querySelector('input[name="plan"]:checked');
-    const hasErr = !plan;
-    setError(null, 'errPlan', hasErr);
-    return !hasErr;
-  }
-
-  function setError(fieldId, errId, hasErr) {
-    if (fieldId) {
-      const el = document.getElementById(fieldId);
-      if (el) el.classList.toggle('error', hasErr);
-    }
-    const err = document.getElementById(errId);
-    if (err) err.classList.toggle('show', hasErr);
-  }
-
-  function buildSummary() {
-    const plan = document.querySelector('input[name="plan"]:checked');
-    const who = document.querySelector('input[name="who"]:checked');
-    const slot = document.getElementById('timeSlot').value;
-    const city = document.getElementById('city').value;
-    const rows = [
-      ['👤 Họ tên', document.getElementById('fullName').value],
-      ['📱 Điện thoại', document.getElementById('phone').value],
-      ['📅 Ngày sinh', formatDate(document.getElementById('dob').value)],
-      ['📍 Tỉnh/Thành', city || 'Chưa chọn'],
-      ['📧 Email', document.getElementById('email').value || 'Không điền'],
-      ['💎 Gói quan tâm', plan ? plan.value : '—'],
-      ['👥 Bảo vệ cho', who ? who.value : 'Chưa chọn'],
-      ['🕐 Khung giờ', slot || 'Chưa chọn'],
-    ];
-    document.getElementById('confirmSummary').innerHTML = rows.map(([k, v]) =>
-      `<div style="display:flex;gap:8px;font-size:.82rem"><span style="color:var(--text-muted);min-width:130px;flex-shrink:0">${k}:</span><span style="font-weight:600;color:var(--charcoal)">${v}</span></div>`
-    ).join('');
-  }
-
-  function formatDate(d) {
-    if (!d) return '—';
-    const [y, m, day] = d.split('-');
-    return `${day}/${m}/${y}`;
-  }
-
-  function submitForm() {
-    const agree = document.getElementById('agree').checked;
-    setError(null, 'errAgree', !agree);
-    if (!agree) return;
-
-    const btn = document.getElementById('submitBtn');
-    btn.classList.add('loading');
-    btn.disabled = true;
-
-    // Simulate API call
-    setTimeout(() => {
-      document.getElementById('formBody').style.display = 'none';
-      document.getElementById('formSuccess').classList.add('show');
-    }, 1800);
-  }
-
-  // live clear errors on input
-  ['fullName','phone','email','dob'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('input', () => el.classList.remove('error'));
-  });
-
-    const d = benefitData[idx];
-    document.getElementById('benefitDetail').innerHTML = `
-      <div class="benefit-detail-icon">${d.icon}</div>
-      <h3>${d.title}</h3>
-      <p>${d.desc}</p>
-      <ul class="benefit-items">${d.items.map(i => `<li>${i}</li>`).join('')}</ul>
-    `;
-  }
-
-  renderBenefit(0);
-
-  document.querySelectorAll('.benefit-tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('.benefit-tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      renderBenefit(parseInt(tab.dataset.tab));
-    });
-  });
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
+  document.getElementById('scrollTop').classList.toggle('show',window.scrollY>400);
+});
+function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*60);obs.unobserve(e.target);}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+function showTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+function submitForm(){
+  const n=document.getElementById('fname').value.trim();
+  const p=document.getElementById('fphone').value.trim();
+  const a=document.getElementById('fage').value;
+  const t=document.getElementById('fterms').checked;
+  if(!n){alert('Vui lòng nhập họ và tên.');return;}
+  if(!p){alert('Vui lòng nhập số điện thoại.');return;}
+  if(!a){alert('Vui lòng chọn độ tuổi.');return;}
+  if(!t){alert('Vui lòng đồng ý với điều khoản.');return;}
+  document.getElementById('formContent').style.display='none';
+  document.getElementById('formSuccess').style.display='block';
+}
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{e.preventDefault();const el=document.querySelector(a.getAttribute('href'));if(el)el.scrollIntoView({behavior:'smooth'});});
+});
 </script>
 </body>
 </html>
