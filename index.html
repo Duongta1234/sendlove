@@ -359,6 +359,207 @@
   .btn-ghost { background: transparent; color: white; padding: 14px 32px; border-radius: 50px; font-size: .95rem; font-weight: 700; border: 2px solid rgba(255,255,255,.6); cursor: pointer; transition: all .2s; text-decoration: none; display: inline-block; font-family: var(--font-body); }
   .btn-ghost:hover { background: rgba(255,255,255,.15); }
 
+  /* ── CONTACT FORM ── */
+  #contact {
+    background: linear-gradient(160deg, var(--blush) 0%, #fff0f3 40%, var(--cream) 100%);
+    position: relative; overflow: hidden;
+  }
+  #contact::before {
+    content: ''; position: absolute;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,83,106,.09), transparent 70%);
+    top: -150px; right: -100px; pointer-events: none;
+  }
+  #contact::after {
+    content: ''; position: absolute;
+    width: 320px; height: 320px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(91,164,200,.07), transparent 70%);
+    bottom: -80px; left: -60px; pointer-events: none;
+  }
+  .contact-inner {
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 70px;
+    align-items: start; max-width: 1100px; margin: 0 auto;
+    position: relative; z-index: 1;
+  }
+  .contact-left { padding-top: 8px; }
+  .contact-left .section-sub { margin-top: 14px; margin-bottom: 36px; }
+  .contact-trust { display: flex; flex-direction: column; gap: 16px; }
+  .trust-item {
+    display: flex; align-items: center; gap: 14px;
+    background: white; border-radius: var(--radius-sm);
+    padding: 14px 18px; box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(232,83,106,.1);
+  }
+  .trust-item .ti-icon {
+    width: 42px; height: 42px; background: var(--rose-pale);
+    border-radius: 10px; display: flex; align-items: center;
+    justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+  }
+  .trust-item h5 { font-size: .88rem; font-weight: 600; color: var(--charcoal); margin-bottom: 2px; }
+  .trust-item p { font-size: .78rem; color: var(--text-muted); }
+
+  /* Form card */
+  .contact-form-card {
+    background: white; border-radius: 28px;
+    box-shadow: 0 16px 60px rgba(60,20,25,.12);
+    overflow: hidden; border: 1px solid rgba(232,83,106,.1);
+  }
+  .form-header {
+    background: linear-gradient(135deg, var(--rose), #c43d55);
+    padding: 28px 36px; position: relative; overflow: hidden;
+  }
+  .form-header::before {
+    content: ''; position: absolute; width: 200px; height: 200px; border-radius: 50%;
+    background: rgba(255,255,255,.06); top: -80px; right: -50px;
+  }
+  .form-header h3 {
+    font-family: var(--font-display); font-size: 1.4rem;
+    font-weight: 700; color: white; margin-bottom: 4px;
+  }
+  .form-header p { font-size: .83rem; color: rgba(255,255,255,.8); }
+  .form-header .form-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,.15); border-radius: 50px;
+    padding: 4px 12px; font-size: .72rem; font-weight: 600;
+    color: white; margin-bottom: 10px;
+  }
+  .form-body { padding: 32px 36px 36px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+  .form-group label {
+    font-size: .8rem; font-weight: 600; color: var(--charcoal);
+    display: flex; align-items: center; gap: 5px;
+  }
+  .form-group label .req { color: var(--rose); font-size: .85rem; }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: var(--blush); border: 2px solid transparent;
+    border-radius: var(--radius-sm); padding: 12px 16px;
+    font-size: .88rem; color: var(--text); font-family: var(--font-body);
+    transition: border-color .2s, background .2s, box-shadow .2s;
+    outline: none; width: 100%;
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(122,92,96,.45); }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--rose); background: white;
+    box-shadow: 0 0 0 4px rgba(232,83,106,.1);
+  }
+  .form-group input.error,
+  .form-group select.error,
+  .form-group textarea.error {
+    border-color: #e74c3c; background: #fff5f5;
+  }
+  .form-group .err-msg {
+    font-size: .72rem; color: #e74c3c; display: none; align-items: center; gap: 4px;
+  }
+  .form-group .err-msg.show { display: flex; }
+  .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23e8536a' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px; cursor: pointer; }
+  .form-group textarea { resize: vertical; min-height: 90px; }
+
+  /* radio group */
+  .radio-group { display: flex; flex-wrap: wrap; gap: 10px; }
+  .radio-option { display: none; }
+  .radio-label {
+    display: flex; align-items: center; gap: 7px;
+    background: var(--blush); border: 2px solid transparent;
+    border-radius: 50px; padding: 8px 16px;
+    font-size: .8rem; font-weight: 500; color: var(--text-muted);
+    cursor: pointer; transition: all .2s;
+  }
+  .radio-option:checked + .radio-label {
+    background: var(--rose-pale); border-color: var(--rose); color: var(--rose); font-weight: 600;
+  }
+  .radio-label:hover { border-color: var(--rose-light); }
+
+  /* checkbox */
+  .checkbox-wrap { display: flex; align-items: flex-start; gap: 10px; margin-top: 4px; }
+  .checkbox-wrap input[type="checkbox"] { display: none; }
+  .custom-check {
+    width: 20px; height: 20px; border: 2px solid var(--rose-muted);
+    border-radius: 6px; background: var(--blush); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all .2s; margin-top: 2px;
+  }
+  .checkbox-wrap input[type="checkbox"]:checked + .custom-check {
+    background: var(--rose); border-color: var(--rose);
+  }
+  .checkbox-wrap input[type="checkbox"]:checked + .custom-check::after {
+    content: '✓'; color: white; font-size: .7rem; font-weight: 700;
+  }
+  .checkbox-wrap .check-text { font-size: .78rem; color: var(--text-muted); line-height: 1.5; }
+  .checkbox-wrap .check-text a { color: var(--rose); text-decoration: none; }
+
+  /* submit button */
+  .form-submit {
+    width: 100%; background: linear-gradient(135deg, var(--rose), #c43d55);
+    color: white; border: none; padding: 16px; border-radius: 50px;
+    font-size: .95rem; font-weight: 700; cursor: pointer;
+    font-family: var(--font-body); transition: transform .2s, box-shadow .2s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    margin-top: 8px;
+  }
+  .form-submit:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(232,83,106,.45); }
+  .form-submit:disabled { opacity: .6; cursor: not-allowed; transform: none; box-shadow: none; }
+  .form-submit .spinner {
+    width: 18px; height: 18px; border: 2.5px solid rgba(255,255,255,.35);
+    border-top-color: white; border-radius: 50%; display: none;
+    animation: spin .7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .form-submit.loading .btn-text { display: none; }
+  .form-submit.loading .spinner { display: block; }
+
+  /* success state */
+  .form-success {
+    display: none; text-align: center; padding: 40px 20px;
+  }
+  .form-success.show { display: block; }
+  .success-icon {
+    width: 72px; height: 72px; background: linear-gradient(135deg, var(--rose), var(--rose-light));
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; margin: 0 auto 20px; animation: popIn .5s cubic-bezier(.175,.885,.32,1.275) both;
+  }
+  @keyframes popIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .form-success h4 { font-family: var(--font-display); font-size: 1.5rem; color: var(--charcoal); margin-bottom: 8px; }
+  .form-success p { font-size: .88rem; color: var(--text-muted); max-width: 280px; margin: 0 auto; }
+
+  /* step indicator */
+  .form-steps {
+    display: flex; align-items: center; gap: 0; margin-bottom: 28px;
+  }
+  .form-step {
+    display: flex; align-items: center; gap: 8px;
+    font-size: .75rem; font-weight: 600; color: var(--text-muted);
+  }
+  .form-step .step-num {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--rose-muted); color: var(--text-muted);
+    display: flex; align-items: center; justify-content: center;
+    font-size: .72rem; font-weight: 700; transition: all .3s; flex-shrink: 0;
+  }
+  .form-step.active .step-num { background: var(--rose); color: white; }
+  .form-step.active { color: var(--rose); }
+  .form-step.done .step-num { background: #27ae60; color: white; }
+  .step-line { flex: 1; height: 2px; background: var(--rose-muted); margin: 0 8px; min-width: 20px; }
+  .step-line.done { background: var(--rose); }
+
+  @media (max-width: 900px) {
+    .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+    .form-row { grid-template-columns: 1fr; gap: 0; }
+    .form-body { padding: 24px 24px 28px; }
+    .form-header { padding: 22px 24px; }
+  }
+  @media (max-width: 480px) {
+    .form-body { padding: 20px 18px 24px; }
+    .radio-group { gap: 8px; }
+    .radio-label { padding: 7px 12px; font-size: .76rem; }
+  }
+
   /* ── FOOTER ── */
   footer { background: var(--charcoal); color: rgba(255,255,255,.65); padding: 50px 5% 30px; }
   .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 50px; max-width: 1200px; margin: 0 auto 40px; }
@@ -433,8 +634,9 @@
     <li><a href="#benefits">Quyền lợi</a></li>
     <li><a href="#vitality">AIA Vitality</a></li>
     <li><a href="#example">Ví dụ</a></li>
+    <li><a href="#contact">Liên hệ</a></li>
   </ul>
-  <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Tư vấn ngay</button>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Tư vấn ngay</button>
   <div class="hamburger" id="hamburger">
     <span></span><span></span><span></span>
   </div>
@@ -447,7 +649,8 @@
   <a href="#vitality" onclick="closeMobile()">AIA Vitality</a>
   <a href="#example" onclick="closeMobile()">Ví dụ minh hoạ</a>
   <a href="#who" onclick="closeMobile()">Điều kiện tham gia</a>
-  <button class="btn-primary" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'});closeMobile()">Tư vấn ngay</button>
+  <a href="#contact" onclick="closeMobile()">Đăng ký tư vấn</a>
+  <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'});closeMobile()">Tư vấn ngay</button>
 </div>
 
 <!-- HERO -->
@@ -887,6 +1090,190 @@
   </div>
 </section>
 
+<!-- CONTACT FORM -->
+<section id="contact">
+  <div class="contact-inner">
+
+    <!-- LEFT: intro & trust signals -->
+    <div class="contact-left reveal">
+      <div class="section-tag">Đăng ký tư vấn</div>
+      <h2 class="section-title">Để chuyên gia<br/><em>liên hệ bạn</em></h2>
+      <p class="section-sub">Điền thông tin bên dưới, chuyên gia AIA sẽ gọi lại trong vòng 24 giờ để tư vấn gói bảo hiểm phù hợp nhất – hoàn toàn miễn phí, không ràng buộc.</p>
+      <div class="contact-trust">
+        <div class="trust-item">
+          <div class="ti-icon">⚡</div>
+          <div>
+            <h5>Phản hồi trong 24 giờ</h5>
+            <p>Chuyên gia AIA sẽ chủ động liên hệ bạn</p>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="ti-icon">🔒</div>
+          <div>
+            <h5>Bảo mật thông tin tuyệt đối</h5>
+            <p>Dữ liệu của bạn được bảo vệ theo tiêu chuẩn quốc tế</p>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="ti-icon">🎁</div>
+          <div>
+            <h5>Miễn phí, không ràng buộc</h5>
+            <p>Tư vấn hoàn toàn miễn phí – bạn quyết định mọi thứ</p>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="ti-icon">🏆</div>
+          <div>
+            <h5>Chuyên gia được chứng nhận</h5>
+            <p>Đội ngũ tư vấn chuyên nghiệp, giàu kinh nghiệm</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: form card -->
+    <div class="contact-form-card reveal">
+      <div class="form-header">
+        <div class="form-badge">✦ Đăng ký ngay hôm nay</div>
+        <h3>Nhận tư vấn miễn phí</h3>
+        <p>Chỉ mất 2 phút – chuyên gia sẽ gọi lại cho bạn</p>
+      </div>
+
+      <div class="form-body" id="formBody">
+        <!-- Step indicator -->
+        <div class="form-steps">
+          <div class="form-step active" id="stepEl1"><div class="step-num">1</div><span>Thông tin</span></div>
+          <div class="step-line" id="stepLine1"></div>
+          <div class="form-step" id="stepEl2"><div class="step-num">2</div><span>Nhu cầu</span></div>
+          <div class="step-line" id="stepLine2"></div>
+          <div class="form-step" id="stepEl3"><div class="step-num">3</div><span>Xác nhận</span></div>
+        </div>
+
+        <!-- STEP 1 -->
+        <div id="step1">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Họ và tên <span class="req">*</span></label>
+              <input type="text" id="fullName" placeholder="Nguyễn Văn A" />
+              <div class="err-msg" id="errFullName">⚠ Vui lòng nhập họ tên</div>
+            </div>
+            <div class="form-group">
+              <label>Số điện thoại <span class="req">*</span></label>
+              <input type="tel" id="phone" placeholder="0912 345 678" />
+              <div class="err-msg" id="errPhone">⚠ Số điện thoại không hợp lệ</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="email" placeholder="example@email.com" />
+            <div class="err-msg" id="errEmail">⚠ Email không hợp lệ</div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Ngày sinh <span class="req">*</span></label>
+              <input type="date" id="dob" />
+              <div class="err-msg" id="errDob">⚠ Vui lòng chọn ngày sinh</div>
+            </div>
+            <div class="form-group">
+              <label>Tỉnh / Thành phố</label>
+              <select id="city">
+                <option value="">-- Chọn tỉnh/thành --</option>
+                <option>Hà Nội</option><option>TP. Hồ Chí Minh</option>
+                <option>Đà Nẵng</option><option>Cần Thơ</option>
+                <option>Hải Phòng</option><option>Phú Thọ</option>
+                <option>Nghệ An</option><option>Thanh Hóa</option>
+                <option>Bình Dương</option><option>Đồng Nai</option>
+                <option>Khác</option>
+              </select>
+            </div>
+          </div>
+          <button class="form-submit" onclick="goStep(2)">
+            <span class="btn-text">Tiếp theo →</span>
+            <div class="spinner"></div>
+          </button>
+        </div>
+
+        <!-- STEP 2 -->
+        <div id="step2" style="display:none">
+          <div class="form-group">
+            <label>Bạn quan tâm đến gói nào? <span class="req">*</span></label>
+            <div class="radio-group">
+              <input type="radio" name="plan" id="p1" class="radio-option" value="Cơ Bản" /><label for="p1" class="radio-label">🌱 Cơ Bản</label>
+              <input type="radio" name="plan" id="p2" class="radio-option" value="Nâng Cao" /><label for="p2" class="radio-label">⭐ Nâng Cao</label>
+              <input type="radio" name="plan" id="p3" class="radio-option" value="Toàn Diện" /><label for="p3" class="radio-label">💎 Toàn Diện</label>
+              <input type="radio" name="plan" id="p4" class="radio-option" value="Hoàn Hảo" /><label for="p4" class="radio-label">👑 Hoàn Hảo</label>
+              <input type="radio" name="plan" id="p5" class="radio-option" value="Chưa biết" /><label for="p5" class="radio-label">🤔 Chưa biết</label>
+            </div>
+            <div class="err-msg" id="errPlan">⚠ Vui lòng chọn gói quan tâm</div>
+          </div>
+          <div class="form-group">
+            <label>Bạn muốn bảo vệ ai?</label>
+            <div class="radio-group">
+              <input type="radio" name="who" id="w1" class="radio-option" value="Bản thân" /><label for="w1" class="radio-label">👤 Bản thân</label>
+              <input type="radio" name="who" id="w2" class="radio-option" value="Gia đình" /><label for="w2" class="radio-label">👨‍👩‍👧 Gia đình</label>
+              <input type="radio" name="who" id="w3" class="radio-option" value="Bố mẹ" /><label for="w3" class="radio-label">👴👵 Bố/Mẹ</label>
+              <input type="radio" name="who" id="w4" class="radio-option" value="Con cái" /><label for="w4" class="radio-label">🧒 Con cái</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Thời gian thuận tiện để tư vấn</label>
+            <select id="timeSlot">
+              <option value="">-- Chọn khung giờ --</option>
+              <option>Buổi sáng (8:00 – 12:00)</option>
+              <option>Buổi chiều (12:00 – 17:00)</option>
+              <option>Buổi tối (17:00 – 20:00)</option>
+              <option>Bất kỳ lúc nào</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Ghi chú thêm (không bắt buộc)</label>
+            <textarea id="notes" placeholder="Ví dụ: Tôi có tiền sử bệnh lý... / Muốn hỏi về quyền lợi thai sản..."></textarea>
+          </div>
+          <div style="display:flex;gap:12px">
+            <button class="form-submit" style="background:var(--blush);color:var(--rose);box-shadow:none;flex:0 0 auto;width:auto;padding:16px 24px" onclick="goStep(1)">← Quay lại</button>
+            <button class="form-submit" style="flex:1" onclick="goStep(3)">
+              <span class="btn-text">Xem lại thông tin →</span>
+              <div class="spinner"></div>
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 3: CONFIRM -->
+        <div id="step3" style="display:none">
+          <div style="background:var(--blush);border-radius:var(--radius-sm);padding:20px 22px;margin-bottom:22px;border:1px solid rgba(232,83,106,.15)">
+            <div style="font-size:.78rem;font-weight:700;color:var(--rose);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px">Xác nhận thông tin</div>
+            <div id="confirmSummary" style="display:flex;flex-direction:column;gap:9px"></div>
+          </div>
+          <div class="form-group">
+            <div class="checkbox-wrap">
+              <input type="checkbox" id="agree" />
+              <label class="custom-check" for="agree"></label>
+              <div class="check-text">Tôi đồng ý cho AIA Việt Nam liên hệ tư vấn và xử lý thông tin theo <a href="#">Chính sách bảo mật</a>. Thông tin chỉ dùng cho mục đích tư vấn bảo hiểm.</div>
+            </div>
+            <div class="err-msg" id="errAgree">⚠ Vui lòng đồng ý điều khoản để tiếp tục</div>
+          </div>
+          <div style="display:flex;gap:12px">
+            <button class="form-submit" style="background:var(--blush);color:var(--rose);box-shadow:none;flex:0 0 auto;width:auto;padding:16px 24px" onclick="goStep(2)">← Quay lại</button>
+            <button class="form-submit" id="submitBtn" style="flex:1" onclick="submitForm()">
+              <span class="btn-text">🎉 Gửi đăng ký tư vấn</span>
+              <div class="spinner"></div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="form-success" id="formSuccess">
+        <div class="success-icon">✓</div>
+        <h4>Đăng ký thành công!</h4>
+        <p>Cảm ơn bạn đã quan tâm. Chuyên gia AIA sẽ liên hệ trong vòng 24 giờ làm việc. Chúc bạn sức khỏe!</p>
+        <div style="margin-top:20px;font-size:.78rem;color:var(--text-muted)">Hotline hỗ trợ: <a href="tel:02838122777" style="color:var(--rose);font-weight:600">028 3812 2777</a></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- CTA -->
 <section id="cta">
   <h2>Bắt đầu hành trình<br/>bảo vệ sức khỏe hôm nay</h2>
@@ -1032,7 +1419,125 @@
     }
   ];
 
-  function renderBenefit(idx) {
+  // ── CONTACT FORM MULTI-STEP ──
+  let currentStep = 1;
+
+  function goStep(n) {
+    if (n === 2 && !validateStep1()) return;
+    if (n === 3) {
+      if (!validateStep2()) return;
+      buildSummary();
+    }
+    // update UI
+    document.getElementById('step' + currentStep).style.display = 'none';
+    document.getElementById('step' + n).style.display = 'block';
+
+    // update step indicators
+    for (let i = 1; i <= 3; i++) {
+      const el = document.getElementById('stepEl' + i);
+      el.classList.remove('active', 'done');
+      if (i < n) el.classList.add('done');
+      else if (i === n) el.classList.add('active');
+    }
+    for (let i = 1; i <= 2; i++) {
+      const line = document.getElementById('stepLine' + i);
+      if (line) line.classList.toggle('done', i < n);
+    }
+    currentStep = n;
+    // scroll form into view on mobile
+    document.querySelector('.contact-form-card').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function validateStep1() {
+    let ok = true;
+    const name = document.getElementById('fullName').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const dob = document.getElementById('dob').value;
+
+    setError('fullName', 'errFullName', !name);
+    if (!name) ok = false;
+
+    const phoneOk = /^(0|\+84)[0-9]{8,10}$/.test(phone.replace(/\s/g, ''));
+    setError('phone', 'errPhone', !phoneOk);
+    if (!phoneOk) ok = false;
+
+    if (email) {
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      setError('email', 'errEmail', !emailOk);
+      if (!emailOk) ok = false;
+    }
+
+    setError('dob', 'errDob', !dob);
+    if (!dob) ok = false;
+
+    return ok;
+  }
+
+  function validateStep2() {
+    const plan = document.querySelector('input[name="plan"]:checked');
+    const hasErr = !plan;
+    setError(null, 'errPlan', hasErr);
+    return !hasErr;
+  }
+
+  function setError(fieldId, errId, hasErr) {
+    if (fieldId) {
+      const el = document.getElementById(fieldId);
+      if (el) el.classList.toggle('error', hasErr);
+    }
+    const err = document.getElementById(errId);
+    if (err) err.classList.toggle('show', hasErr);
+  }
+
+  function buildSummary() {
+    const plan = document.querySelector('input[name="plan"]:checked');
+    const who = document.querySelector('input[name="who"]:checked');
+    const slot = document.getElementById('timeSlot').value;
+    const city = document.getElementById('city').value;
+    const rows = [
+      ['👤 Họ tên', document.getElementById('fullName').value],
+      ['📱 Điện thoại', document.getElementById('phone').value],
+      ['📅 Ngày sinh', formatDate(document.getElementById('dob').value)],
+      ['📍 Tỉnh/Thành', city || 'Chưa chọn'],
+      ['📧 Email', document.getElementById('email').value || 'Không điền'],
+      ['💎 Gói quan tâm', plan ? plan.value : '—'],
+      ['👥 Bảo vệ cho', who ? who.value : 'Chưa chọn'],
+      ['🕐 Khung giờ', slot || 'Chưa chọn'],
+    ];
+    document.getElementById('confirmSummary').innerHTML = rows.map(([k, v]) =>
+      `<div style="display:flex;gap:8px;font-size:.82rem"><span style="color:var(--text-muted);min-width:130px;flex-shrink:0">${k}:</span><span style="font-weight:600;color:var(--charcoal)">${v}</span></div>`
+    ).join('');
+  }
+
+  function formatDate(d) {
+    if (!d) return '—';
+    const [y, m, day] = d.split('-');
+    return `${day}/${m}/${y}`;
+  }
+
+  function submitForm() {
+    const agree = document.getElementById('agree').checked;
+    setError(null, 'errAgree', !agree);
+    if (!agree) return;
+
+    const btn = document.getElementById('submitBtn');
+    btn.classList.add('loading');
+    btn.disabled = true;
+
+    // Simulate API call
+    setTimeout(() => {
+      document.getElementById('formBody').style.display = 'none';
+      document.getElementById('formSuccess').classList.add('show');
+    }, 1800);
+  }
+
+  // live clear errors on input
+  ['fullName','phone','email','dob'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', () => el.classList.remove('error'));
+  });
+
     const d = benefitData[idx];
     document.getElementById('benefitDetail').innerHTML = `
       <div class="benefit-detail-icon">${d.icon}</div>
