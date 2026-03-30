@@ -1,1640 +1,1056 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TÍN PHÁT GROUP — Tập Đoàn Đầu Tư Thương Mại</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bảo Hiểm Sức Khỏe Trọn Đời – AIA Việt Nam</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <style>
-/* ═══════════════════════════════════
-   TOKENS — design system
-═══════════════════════════════════ */
-:root {
-  --ivory:   #FAF7F2;
-  --paper:   #F3EDE3;
-  --warm:    #E8DFD0;
-  --sand:    #D6CBBA;
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  --navy:    #2287c9;
-  --navy2:   #1A2E4A;
-  --navy3:   #243E62;
-
-  --gold:    #C4881C;
-  --gold2:   #D9A030;
-  --amber:   #EDBA48;
-
-  --body:    #3C3630;
-  --slate:   #68605A;
-  --muted:   #9E9288;
-  --line:    #E4DACC;
-  --lineD:   #CFC3B2;
-
-  --sh1: 0 2px 16px rgba(14,27,44,.06);
-  --sh2: 0 8px 48px rgba(14,27,44,.10);
-  --sh3: 0 20px 80px rgba(14,27,44,.15);
-  --shG: 0 12px 40px rgba(196,136,28,.25);
-
-  --ease: cubic-bezier(.16,1,.3,1);
-  --gold-grad: linear-gradient(135deg, var(--gold), var(--amber));
-}
-
-/* ═══════════════════════════════════
-   RESET + BASE  (mobile-first)
-═══════════════════════════════════ */
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; font-size:16px; }
-body {
-  font-family:'Exo 2', sans-serif;
-  background:var(--ivory);
-  color:var(--navy);
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-}
-img { display:block; width:100%; height:100%; object-fit:cover; }
-a { text-decoration:none; color:inherit; }
-button { font-family:'Exo 2',sans-serif; cursor:pointer; border:none; outline:none; background:none; }
-ul { list-style:none; }
-
-/* ═══════════════════════════════════
-   LAYOUT WRAPPER
-═══════════════════════════════════ */
-.cw { width:85%; max-width:1400px; margin:0 auto; }
-@media(min-width:600px)  { .cw { padding:0 28px; } }
-@media(min-width:1024px) { .cw { padding:0 40px; } }
-
-/* ═══════════════════════════════════
-   GRAIN OVERLAY
-═══════════════════════════════════ */
-body::before {
-  content:'';
-  position:fixed; inset:0; z-index:9000;
-  pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='g'%3E%3CfeTurbulence baseFrequency='.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23g)' opacity='.028'/%3E%3C/svg%3E");
-  opacity:.5; mix-blend-mode:multiply;
-}
-
-/* ═══════════════════════════════════
-   SCROLL REVEAL
-═══════════════════════════════════ */
-.rv {
-  opacity:0;
-  transform:translateY(28px);
-  transition:opacity .75s var(--ease), transform .75s var(--ease);
-}
-.rv.on { opacity:1; transform:none; }
-.rv.rl { transform:translateX(-28px); } .rv.rl.on { transform:none; opacity:1; }
-.rv.rr { transform:translateX(28px); } .rv.rr.on { transform:none; opacity:1; }
-.d1{transition-delay:.07s} .d2{transition-delay:.14s} .d3{transition-delay:.21s}
-.d4{transition-delay:.28s} .d5{transition-delay:.35s}
-
-/* ═══════════════════════════════════
-   KEYFRAMES
-═══════════════════════════════════ */
-@keyframes up     { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:none} }
-@keyframes ken    { from{transform:scale(1.07)} to{transform:scale(1)} }
-@keyframes blink  { 0%,100%{opacity:1} 50%{opacity:.2} }
-@keyframes drift  { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-@keyframes ticker { to{transform:translateX(-50%)} }
-@keyframes barIn  { from{transform:scaleX(0)} to{transform:scaleX(1)} }
-@keyframes spin   { to{transform:rotate(360deg)} }
-
-/* ═══════════════════════════════════
-   SCROLL PROGRESS
-═══════════════════════════════════ */
-#prog {
-  position:fixed; top:0; left:0; z-index:8999;
-  height:2px; width:0%;
-  background:var(--gold-grad);
-}
-
-/* ═══════════════════════════════════
-   TOPBAR  (hidden on mobile)
-═══════════════════════════════════ */
-   @media (min-width: 900px) {
-    .hero {
-        display: grid;
-        grid-template-columns: 1fr 52%;
-        min-height: calc(100svh - 108px);
-    }
-}
-.topbar { display:none; }
-@media(min-width:768px) {
-  .topbar {
-    display:block;
-    background:var(--navy);
-    border-bottom:1px solid rgba(196,136,28,.15);
+  :root {
+    --rose: #e8536a;
+    --rose-light: #f4778a;
+    --rose-pale: #fce9ec;
+    --rose-muted: #f8d7dc;
+    --blush: #fdf0f2;
+    --cream: #fdf6f0;
+    --warm-white: #fffaf8;
+    --charcoal: #2a1c1e;
+    --text: #3d2c2e;
+    --text-muted: #7a5c60;
+    --gold: #c9923a;
+    --teal: #2d7d7a;
+    --sky: #5ba4c8;
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'Be Vietnam Pro', sans-serif;
+    --shadow-soft: 0 4px 30px rgba(232, 83, 106, 0.08);
+    --shadow-card: 0 8px 40px rgba(60, 20, 25, 0.10);
+    --radius: 20px;
+    --radius-sm: 12px;
   }
-  .tb-inner {
-    max-width:1100px; margin:0 auto; padding:0 40px;
-    height:38px; display:flex; align-items:center; justify-content:space-between;
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--warm-white);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.7;
   }
-  .tb-links { display:flex; }
-  .tb-link {
-    display:flex; align-items:center; gap:6px;
-    height:38px; padding:0 14px;
-    font-size:11.5px; font-weight:400; color:rgba(255,255,255,.3);
-    border-right:1px solid rgba(255,255,255,.06);
-    transition:color .2s;
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,250,248,0.92);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(232,83,106,0.12);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%;
+    height: 68px;
+    transition: box-shadow .3s;
   }
-  .tb-link:first-child { padding-left:0; }
-  .tb-link:hover { color:var(--amber); }
-  .tb-link-dot { width:3px; height:3px; border-radius:50%; background:var(--gold); opacity:.5; }
-  .tb-langs { display:flex; }
-  .tb-lang {
-    height:38px; padding:0 12px;
-    font-size:10.5px; font-weight:700; letter-spacing:.5px;
-    color:rgba(255,255,255,.25); display:flex; align-items:center;
-    border-left:1px solid rgba(255,255,255,.06);
-    cursor:pointer; transition:color .2s;
+  nav.scrolled { box-shadow: 0 2px 24px rgba(232,83,106,0.12); }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: var(--font-display); font-size: 1.35rem; font-weight: 700;
+    color: var(--rose); text-decoration: none;
   }
-  .tb-lang:hover, .tb-lang.on { color:var(--amber); }
-}
-
-/* ═══════════════════════════════════
-   NAVBAR
-═══════════════════════════════════ */
-.navbar {
-  position:sticky; top:0; z-index:990;
-  background:rgba(250,247,242,.97);
-  backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--line);
-  transition:box-shadow .3s, border-color .3s;
-}
-.navbar.on { box-shadow:0 4px 32px rgba(14,27,44,.07); border-bottom-color:var(--lineD); }
-
-.nav-inner {
-  max-width:1100px; margin:0 auto;
-  padding:0 20px;
-  height:62px;
-  display:flex; align-items:center; justify-content:space-between; gap:16px;
-}
-@media(min-width:600px)  { .nav-inner { padding:0 28px; } }
-@media(min-width:1024px) { .nav-inner { padding:0 40px; height:70px; } }
-
-/* Logo */
-.logo { display:flex; align-items:center; gap:11px; flex-shrink:0; }
-.logo-mark {
-  width:38px; height:38px; flex-shrink:0;
-  background:var(--navy);
-  display:flex; align-items:center; justify-content:center;
-  position:relative; overflow:hidden;
-  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
-}
-.logo-mark::after {
-  content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
-  background:var(--gold-grad);
-}
-.logo-mark span { font-size:12px; font-weight:900; color:var(--amber); letter-spacing:.5px; }
-.logo-info { display:flex; flex-direction:column; }
-.logo-name { font-size:15px; font-weight:900; color:var(--navy); letter-spacing:.2px; line-height:1; }
-.logo-sub  { font-size:8px; font-weight:600; letter-spacing:2.5px; text-transform:uppercase; color:var(--muted); margin-top:3px; }
-@media(min-width:1024px) {
-  .logo-mark { width:42px; height:42px; }
-  .logo-name { font-size:17px; }
-  .logo-sub  { font-size:8.5px; }
-}
-
-/* Desktop nav links */
-.nav-links { display:none; }
-@media(min-width:1024px) {
-  .nav-links { display:flex; gap:0; }
-  .nav-links a {
-    font-size:13px; font-weight:500; color:var(--slate);
-    padding:0 12px; height:70px; display:flex; align-items:center;
-    white-space:nowrap; position:relative; transition:color .2s;
+  .nav-logo span { color: var(--charcoal); font-weight: 400; font-style: italic; font-size: 1.05rem; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: .9rem; font-weight: 500; transition: color .2s; }
+  .nav-links a:hover { color: var(--rose); }
+  .nav-cta {
+    background: var(--rose); color: white; border: none; padding: 10px 24px;
+    border-radius: 50px; font-size: .88rem; font-weight: 600; cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+    font-family: var(--font-body);
   }
-  .nav-links a::after {
-    content:''; position:absolute; bottom:0; left:12px; right:12px; height:2px;
-    background:var(--gold-grad);
-    transform:scaleX(0); transform-origin:center;
-    transition:transform .3s var(--ease);
+  .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(232,83,106,.4); }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 24px; height: 2px; background: var(--charcoal); border-radius: 2px; transition: .3s; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #fff0f3 0%, #fce9ec 35%, #fdf4f0 70%, #f8f0ff 100%);
+    position: relative; overflow: hidden;
+    display: flex; align-items: center;
+    padding: 90px 5% 60px;
   }
-  .nav-links a:hover, .nav-links a.on { color:var(--navy); }
-  .nav-links a:hover::after, .nav-links a.on::after { transform:scaleX(1); }
-}
-
-/* Desktop CTA */
-.nav-cta { display:none; }
-@media(min-width:1024px) {
-  .nav-cta { display:flex; gap:9px; flex-shrink:0; }
-  .btn-nav-outline {
-    padding:9px 16px; font-size:12.5px; font-weight:600;
-    color:var(--slate); border:1.5px solid var(--line);
-    transition:all .22s;
-    clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px));
+  .hero-bg-shape {
+    position: absolute; border-radius: 50%;
+    background: radial-gradient(circle, rgba(232,83,106,.15), transparent 70%);
+    pointer-events: none;
   }
-  .btn-nav-outline:hover { border-color:var(--navy); color:var(--navy); }
-  .btn-nav-fill {
-    padding:10px 22px; font-size:12.5px; font-weight:800; color:#fff;
-    background:var(--navy); position:relative; overflow:hidden;
-    clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
-    transition:color .28s;
+  .hero-bg-shape.s1 { width: 700px; height: 700px; top: -200px; right: -200px; }
+  .hero-bg-shape.s2 { width: 400px; height: 400px; bottom: -100px; left: -100px; background: radial-gradient(circle, rgba(91,164,200,.12), transparent 70%); }
+  .hero-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; width: 100%; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: white; border: 1px solid rgba(232,83,106,.25);
+    padding: 6px 16px; border-radius: 50px;
+    font-size: .8rem; font-weight: 600; color: var(--rose);
+    margin-bottom: 20px;
+    animation: fadeUp .8s ease both;
   }
-  .btn-nav-fill::before {
-    content:''; position:absolute; inset:0;
-    background:var(--gold-grad);
-    transform:translateY(105%);
-    transition:transform .36s var(--ease);
+  .hero-badge::before { content: '●'; font-size: .55rem; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{ opacity:1 } 50%{ opacity:.3 } }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 900; line-height: 1.15;
+    color: var(--charcoal);
+    animation: fadeUp .8s .1s ease both;
   }
-  .btn-nav-fill:hover::before { transform:translateY(0); }
-  .btn-nav-fill:hover { color:var(--navy); }
-  .btn-nav-fill span { position:relative; z-index:1; }
-}
-
-/* Hamburger (mobile) */
-.hamburger {
-  display:flex; flex-direction:column; gap:5px;
-  width:40px; height:40px; align-items:center; justify-content:center;
-  flex-shrink:0;
-}
-.hamburger span {
-  display:block; width:22px; height:1.5px;
-  background:var(--navy); border-radius:2px;
-  transition:all .3s var(--ease);
-}
-.hamburger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
-.hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
-.hamburger.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
-@media(min-width:1024px) { .hamburger { display:none; } }
-
-/* Mobile drawer */
-.mobile-menu {
-  position:fixed; top:0; left:0; right:0; bottom:0; z-index:980;
-  background:var(--navy);
-  display:flex; flex-direction:column;
-  padding:100px 32px 48px;
-  transform:translateX(100%);
-  transition:transform .45s var(--ease);
-}
-.mobile-menu.open { transform:translateX(0); }
-.mobile-menu a {
-  display:block; font-size:28px; font-weight:800; color:rgba(255,255,255,.85);
-  padding:14px 0; border-bottom:1px solid rgba(255,255,255,.07);
-  transition:color .2s, padding-left .25s var(--ease);
-}
-.mobile-menu a:hover { color:var(--amber); padding-left:8px; }
-.mobile-menu-bottom { margin-top:40px; display:flex; flex-direction:column; gap:12px; }
-.btn-mob-fill {
-  padding:16px 24px; font-size:15px; font-weight:800;
-  color:var(--navy); background:var(--gold-grad); text-align:center;
-  clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
-}
-.btn-mob-outline {
-  padding:15px 24px; font-size:15px; font-weight:600;
-  color:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.18); text-align:center;
-}
-@media(min-width:1024px) { .mobile-menu { display:none; } }
-
-/* ═══════════════════════════════════
-   HERO
-═══════════════════════════════════ */
-.hero {
-  background:var(--ivory);
-  position:relative; overflow:hidden;
-  min-height:100svh;
-  display:flex; flex-direction:column;
-}
-@media(min-width:900px) {
-  .hero {
-    display:grid;
-    grid-template-columns:1fr 44%;
-    min-height:calc(100svh - 108px);
+  .hero-title em { color: var(--rose); font-style: italic; }
+  .hero-subtitle {
+    margin-top: 18px; font-size: 1.05rem; color: var(--text-muted); font-weight: 400;
+    max-width: 480px; animation: fadeUp .8s .2s ease both;
   }
-}
-
-/* Hero left — text */
-.hero-text {
-  padding:56px 20px 48px;
-  display:flex; flex-direction:column; justify-content:center;
-  position:relative; z-index:2;
-  order:2;
-}
-@media(min-width:600px)  { .hero-text { padding:64px 28px 52px; } }
-@media(min-width:900px)  {
-  .hero-text {
-    padding:72px 72px 64px 40px;
-    max-width:640px; justify-self:end; width:100%;
-    order:1;
+  .hero-stats {
+    display: flex; gap: 28px; margin-top: 36px;
+    animation: fadeUp .8s .3s ease both;
   }
-}
-@media(min-width:1100px) { .hero-text { padding:80px 80px 72px 40px; } }
-
-/* Eyebrow label */
-.h-eyebrow {
-  display:flex; align-items:center; gap:10px;
-  margin-bottom:22px;
-  animation:up .7s both;
-}
-.h-ew-bar { height:1.5px; width:28px; background:var(--gold-grad); flex-shrink:0; }
-.h-ew-txt {
-  font-size:10px; font-weight:700; letter-spacing:3.5px;
-  text-transform:uppercase; color:var(--gold);
-}
-.h-ew-dot {
-  width:5px; height:5px; flex-shrink:0;
-  background:var(--gold);
-  clip-path:polygon(50% 0%,100% 50%,50% 100%,0% 50%);
-  animation:blink 2.5s infinite;
-}
-@media(min-width:600px) {
-  .h-ew-txt { font-size:11px; letter-spacing:4px; }
-  .h-ew-bar { width:32px; }
-}
-
-/* H1 */
-.hero-h1 {
-  margin-bottom:22px;
-  animation:up .7s .09s both;
-}
-.h1-over {
-  display:block;
-  font-size:clamp(11px,2.5vw,16px);
-  font-weight:200; letter-spacing:6px;
-  text-transform:uppercase; color:var(--slate);
-  margin-bottom:2px;
-}
-.h1-big {
-  display:block;
-  font-size:clamp(58px,12vw,100px);
-  font-weight:900; line-height:.88;
-  letter-spacing:-3px; color:var(--navy);
-}
-.h1-italic {
-  display:block;
-  font-size:clamp(50px,10.5vw,88px);
-  font-weight:800; font-style:italic;
-  line-height:.88; letter-spacing:-2.5px;
-  color:var(--gold);
-}
-.h1-group {
-  display:block;
-  font-size:clamp(14px,3vw,26px);
-  font-weight:200; letter-spacing:clamp(8px,2vw,18px);
-  color:var(--slate); margin-top:8px;
-  text-transform:uppercase;
-}
-@media(min-width:480px) {
-  .h1-big    { letter-spacing:-2.5px; }
-  .h1-italic { letter-spacing:-2px; }
-}
-
-.hero-p {
-  font-size:clamp(14px,2vw,16px);
-  font-weight:300; line-height:1.85;
-  color:var(--slate); max-width:420px;
-  margin-bottom:32px;
-  animation:up .7s .18s both;
-}
-@media(min-width:900px) { .hero-p { margin-bottom:36px; } }
-
-/* Hero CTAs */
-.hero-btns {
-  display:flex; flex-wrap:wrap; align-items:center; gap:12px;
-  margin-bottom:48px;
-  animation:up .7s .25s both;
-}
-@media(min-width:600px) { .hero-btns { gap:16px; margin-bottom:56px; flex-wrap:nowrap; } }
-
-.btn-main {
-  display:inline-flex; align-items:center; gap:10px;
-  background:var(--navy); color:#fff;
-  padding:15px 32px; font-size:14px; font-weight:700;
-  position:relative; overflow:hidden;
-  clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,9px 100%,0 calc(100% - 9px));
-  transition:gap .3s, color .3s; white-space:nowrap;
-}
-.btn-main::before {
-  content:''; position:absolute; inset:0;
-  background:var(--gold-grad);
-  transform:translateX(-105%);
-  transition:transform .4s var(--ease);
-}
-.btn-main:hover::before { transform:translateX(0); }
-.btn-main:hover { color:var(--navy); gap:14px; }
-.btn-main span, .btn-main svg { position:relative; z-index:1; }
-
-.btn-sec {
-  font-size:13.5px; font-weight:600; color:var(--slate);
-  display:inline-flex; align-items:center; gap:7px;
-  padding-bottom:2px; border-bottom:1.5px solid var(--lineD);
-  transition:all .25s; white-space:nowrap;
-}
-.btn-sec:hover { color:var(--gold); border-color:var(--gold); gap:11px; }
-
-/* Hero Stats */
-.hero-stats {
-  display:flex; flex-wrap:wrap; gap:0;
-  border-top:1px solid var(--line);
-  padding-top:28px;
-  animation:up .7s .32s both;
-}
-.hs {
-  flex:1; min-width:90px;
-  padding:0 20px 12px 0;
-}
-.hs + .hs { padding-left:20px; border-left:1px solid var(--line); padding-right:0; }
-.hs-n {
-  font-size:clamp(34px,6vw,50px);
-  font-weight:900; font-style:italic;
-  color:var(--navy); line-height:1; letter-spacing:-2px;
-}
-.hs-n sup { font-size:.42em; color:var(--gold); font-style:normal; }
-.hs-l { font-size:11.5px; font-weight:400; color:var(--muted); margin-top:4px; line-height:1.4; }
-@media(min-width:600px) {
-  .hs-n { font-size:clamp(40px,5vw,52px); }
-  .hs-l { font-size:12px; }
-}
-
-/* Hero right — image */
-.hero-img {
-  position:relative; overflow:hidden;
-  background:var(--paper);
-  order:1;
-  height:60vw; max-height:500px;
-}
-@media(min-width:900px) {
-  .hero-img { height:auto; max-height:none; order:2; }
-}
-.hero-img img {
-  position:absolute; inset:0;
-  filter:brightness(.82) saturate(.88);
-  animation:ken 20s ease-in-out infinite alternate;
-}
-.hero-img::before {
-  content:''; position:absolute; inset:0; z-index:1;
-  background:
-    linear-gradient(to bottom, rgba(250,247,242,.6) 0%, transparent 30%),
-    linear-gradient(to top, rgba(14,27,44,.55) 0%, transparent 50%);
-}
-@media(min-width:900px) {
-  .hero-img::before {
-    background:
-      linear-gradient(90deg, var(--ivory) 0%, transparent 28%),
-      linear-gradient(to top, rgba(14,27,44,.5) 0%, transparent 50%);
+  .hero-stat { text-align: center; }
+  .hero-stat .num { font-family: var(--font-display); font-size: 1.9rem; font-weight: 700; color: var(--rose); line-height: 1; }
+  .hero-stat .lbl { font-size: .72rem; color: var(--text-muted); font-weight: 500; margin-top: 4px; }
+  .hero-divider { width: 1px; background: rgba(232,83,106,.2); }
+  .hero-actions { display: flex; gap: 14px; margin-top: 36px; flex-wrap: wrap; animation: fadeUp .8s .4s ease both; }
+  .btn-primary {
+    background: var(--rose); color: white; padding: 14px 30px; border-radius: 50px;
+    font-size: .92rem; font-weight: 600; border: none; cursor: pointer;
+    transition: transform .2s, box-shadow .2s; text-decoration: none; display: inline-block;
+    font-family: var(--font-body);
   }
-}
-.hero-img::after {
-  content:''; position:absolute; bottom:0; left:0; right:0; height:3px; z-index:3;
-  background:linear-gradient(90deg, transparent, var(--gold), var(--amber));
-}
-
-/* Floating badge on image */
-.h-badge {
-  position:absolute; z-index:3;
-  bottom:20px; left:20px;
-  background:rgba(250,247,242,.95);
-  backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
-  border:1px solid rgba(255,255,255,.85);
-  padding:14px 20px;
-  box-shadow:var(--sh2);
-  clip-path:polygon(0 0,calc(100% - 7px) 0,100% 7px,100% 100%,7px 100%,0 calc(100% - 7px));
-  animation:up .7s .5s both;
-}
-@media(min-width:600px) { .h-badge { bottom:28px; left:28px; padding:18px 24px; } }
-.h-badge-n { font-size:clamp(32px,6vw,44px); font-weight:900; font-style:italic; color:var(--navy); line-height:1; letter-spacing:-2px; }
-.h-badge-l { font-size:11px; font-weight:500; color:var(--muted); margin-top:2px; }
-
-.h-pip {
-  position:absolute; z-index:3;
-  top:20px; right:20px;
-  width:64px; height:64px; border-radius:50%;
-  background:rgba(196,136,28,.12);
-  border:1.5px solid rgba(196,136,28,.4);
-  backdrop-filter:blur(8px);
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  animation:drift 8s ease-in-out infinite;
-}
-@media(min-width:600px) { .h-pip { width:72px; height:72px; top:28px; right:28px; } }
-.h-pip-n { font-size:16px; font-weight:900; color:var(--gold); line-height:1; letter-spacing:-1px; }
-.h-pip-l { font-size:7px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); opacity:.7; margin-top:2px; }
-
-/* ═══════════════════════════════════
-   TICKER
-═══════════════════════════════════ */
-.ticker {
-  background:var(--navy); overflow:hidden;
-  border-top:1px solid rgba(196,136,28,.15);
-  border-bottom:1px solid rgba(196,136,28,.15);
-  position:relative;
-}
-.ticker::before, .ticker::after {
-  content:''; position:absolute; top:0; bottom:0; width:60px; z-index:2; pointer-events:none;
-}
-.ticker::before { left:0; background:linear-gradient(90deg,var(--navy),transparent); }
-.ticker::after  { right:0; background:linear-gradient(-90deg,var(--navy),transparent); }
-.ticker-rail { display:flex; animation:ticker 24s linear infinite; }
-.ticker-rail:hover { animation-play-state:paused; }
-.t-set { display:flex; align-items:center; flex-shrink:0; }
-.t-brand {
-  font-size:11.5px; font-weight:700; letter-spacing:2.5px;
-  text-transform:uppercase; color:rgba(255,255,255,.22);
-  padding:14px 20px; white-space:nowrap; transition:color .2s; cursor:default;
-}
-.t-brand:hover { color:var(--amber); }
-.t-divider { width:1px; height:10px; background:rgba(255,255,255,.07); flex-shrink:0; }
-@media(min-width:768px) {
-  .t-brand { font-size:12px; padding:16px 24px; letter-spacing:3px; }
-}
-
-/* ═══════════════════════════════════
-   SHARED SECTION STYLES
-═══════════════════════════════════ */
-.sec { padding:72px 0; }
-@media(min-width:768px)  { .sec { padding:88px 0; } }
-@media(min-width:1024px) { .sec { padding:108px 0; } }
-
-.eyebrow {
-  display:flex; align-items:center; gap:10px;
-  font-size:10px; font-weight:700; letter-spacing:3.5px;
-  text-transform:uppercase; color:var(--gold);
-  margin-bottom:12px;
-}
-.eyebrow::before { content:''; width:20px; height:1.5px; background:var(--gold-grad); flex-shrink:0; }
-.eyebrow.center { justify-content:center; }
-.eyebrow.center::before { display:none; }
-.eyebrow.light { color:rgba(255,255,255,.4); }
-.eyebrow.light::before { background:rgba(255,255,255,.25); }
-
-.s-title {
-  font-size:clamp(34px,7vw,60px);
-  font-weight:900; line-height:.92; letter-spacing:-2px;
-  color:var(--navy); margin-bottom:16px;
-}
-.s-title em { font-style:italic; color:var(--gold); }
-.s-title.white { color:#fff; }
-.s-title.center { text-align:center; }
-
-.g-bar { display:block; width:36px; height:2px; background:var(--gold-grad); margin:14px 0 24px; }
-.g-bar.center { margin:14px auto 24px; }
-
-.sec-body { font-size:15px; font-weight:300; line-height:1.88; color:var(--slate); }
-.sec-body strong { color:var(--navy); font-weight:600; }
-
-.row-hd {
-  display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-end;
-  gap:16px; margin-bottom:40px; padding-bottom:24px;
-  border-bottom:1px solid var(--line);
-}
-@media(min-width:768px) { .row-hd { margin-bottom:48px; } }
-
-.see-all {
-  font-size:12.5px; font-weight:700; color:var(--slate);
-  display:inline-flex; align-items:center; gap:6px; white-space:nowrap;
-  padding-bottom:2px; border-bottom:1.5px solid var(--lineD);
-  transition:all .25s;
-}
-.see-all:hover { color:var(--gold); border-color:var(--gold); gap:10px; }
-
-/* ═══════════════════════════════════
-   ABOUT
-═══════════════════════════════════ */
-.about { background:#fff; }
-.about-inner {
-  display:flex; flex-direction:column; gap:0;
-}
-@media(min-width:900px) {
-  .about-inner { display:grid; grid-template-columns:1fr 1fr; min-height:620px; }
-}
-
-/* Image panel */
-.ab-img {
-  position:relative; overflow:hidden;
-  background:var(--paper);
-  height:64vw; max-height:480px;
-}
-@media(min-width:900px) { .ab-img { height:auto; max-height:none; } }
-.ab-img img {
-  position:absolute; inset:0;
-  filter:brightness(.82) saturate(.88);
-  transition:transform 1.4s var(--ease);
-}
-.ab-img:hover img { transform:scale(1.04); }
-.ab-img::after {
-  content:''; position:absolute; inset:0;
-  background:linear-gradient(to top, rgba(14,27,44,.8) 0%, transparent 55%);
-}
-@media(min-width:900px) {
-  .ab-img::after {
-    background:
-      linear-gradient(to right, transparent 55%, #fff 100%),
-      linear-gradient(to top, rgba(14,27,44,.78) 0%, transparent 55%);
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(232,83,106,.4); }
+  .btn-outline {
+    background: transparent; color: var(--rose); padding: 14px 30px; border-radius: 50px;
+    font-size: .92rem; font-weight: 600; border: 2px solid var(--rose); cursor: pointer;
+    transition: all .2s; text-decoration: none; display: inline-block;
+    font-family: var(--font-body);
   }
-}
-.ab-pull {
-  position:absolute; bottom:0; left:0; right:0; z-index:2;
-  padding:24px 24px 28px;
-  background:linear-gradient(to top, rgba(14,27,44,.9) 0%, transparent 100%);
-}
-@media(min-width:600px) { .ab-pull { padding:32px 36px 36px; } }
-.ab-q {
-  font-size:clamp(14px,2.5vw,18px);
-  font-weight:300; font-style:italic; color:rgba(255,255,255,.82);
-  line-height:1.6; border-left:2px solid var(--amber); padding-left:16px;
-}
-.ab-attr { font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--gold); margin-top:9px; padding-left:18px; }
+  .btn-outline:hover { background: var(--rose); color: white; }
 
-/* Floating stat card */
-.ab-stat {
-  display:none;
-}
-@media(min-width:900px) {
-  .ab-stat {
-    display:block;
-    position:absolute; top:36px; right:-16px; z-index:4;
-    background:var(--navy); padding:22px 26px;
-    box-shadow:var(--sh3);
-    animation:drift 9s ease-in-out infinite;
-    clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
+  .hero-visual { position: relative; animation: fadeUp .8s .2s ease both; }
+  .hero-card {
+    background: white; border-radius: 28px;
+    box-shadow: var(--shadow-card);
+    padding: 40px; position: relative; overflow: hidden;
   }
-  .ab-stat-n { font-size:50px; font-weight:900; font-style:italic; color:#fff; line-height:1; letter-spacing:-3px; }
-  .ab-stat-n em { font-style:normal; font-size:.48em; color:var(--amber); vertical-align:super; }
-  .ab-stat-l { font-size:10px; font-weight:500; color:rgba(255,255,255,.38); margin-top:4px; letter-spacing:.3px; }
-  .ab-stat-bar { height:2px; background:var(--gold-grad); margin-top:12px; }
-}
-
-/* Text panel */
-.ab-text {
-  padding:44px 20px 52px;
-  display:flex; flex-direction:column; justify-content:center;
-}
-@media(min-width:600px)  { .ab-text { padding:52px 28px 60px; } }
-@media(min-width:900px)  { .ab-text { padding:72px 48px 72px 64px; } }
-@media(min-width:1100px) { .ab-text { padding:88px 52px 88px 72px; } }
-
-.ab-body { font-size:clamp(14.5px,2vw,15.5px); font-weight:300; line-height:1.88; color:var(--slate); margin-bottom:14px; }
-.ab-body strong { color:var(--navy); font-weight:600; }
-
-/* Value tags */
-.vtags { display:flex; flex-wrap:wrap; gap:8px; margin:22px 0 28px; }
-.vt {
-  display:flex; align-items:center; gap:7px;
-  background:var(--ivory); border:1px solid var(--line);
-  padding:9px 14px; font-size:13px; font-weight:600; color:var(--body);
-  transition:all .3s var(--ease);
-  position:relative; overflow:hidden;
-}
-.vt::before {
-  content:''; position:absolute; left:0; top:0; bottom:0; width:2px;
-  background:var(--gold-grad);
-  transform:scaleY(0); transform-origin:bottom;
-  transition:transform .3s var(--ease);
-}
-.vt:hover { background:#fff; border-color:var(--lineD); transform:translateX(4px); }
-.vt:hover::before { transform:scaleY(1); }
-.vt-ic { font-size:14px; }
-
-/* CTA row */
-.ab-ctas { display:flex; flex-wrap:wrap; align-items:center; gap:12px; }
-.btn-primary {
-  display:inline-flex; align-items:center; gap:9px;
-  background:var(--navy); color:#fff;
-  padding:14px 28px; font-size:14px; font-weight:700;
-  clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
-  position:relative; overflow:hidden; transition:gap .3s, color .3s;
-}
-.btn-primary::before {
-  content:''; position:absolute; inset:0;
-  background:var(--gold-grad);
-  transform:translateX(-105%);
-  transition:transform .38s var(--ease);
-}
-.btn-primary:hover::before { transform:translateX(0); }
-.btn-primary:hover { color:var(--navy); gap:13px; }
-.btn-primary span, .btn-primary svg { position:relative; z-index:1; }
-.btn-link { font-size:13.5px; font-weight:500; color:var(--slate); display:inline-flex; align-items:center; gap:7px; border-bottom:1px solid var(--lineD); padding-bottom:2px; transition:all .25s; }
-.btn-link:hover { color:var(--gold); border-color:var(--gold); gap:11px; }
-
-/* ═══════════════════════════════════
-   NUMBERS BAND
-═══════════════════════════════════ */
-.numbers { background:var(--navy); position:relative; overflow:hidden; }
-.numbers::before {
-  content:''; position:absolute; inset:0;
-  background-image:radial-gradient(circle,rgba(196,136,28,.07) 1px,transparent 1px);
-  background-size:40px 40px;
-}
-.numbers::after { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--amber) 70%,transparent); }
-.num-glow {
-  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-  width:500px; height:300px; border-radius:50%;
-  background:radial-gradient(ellipse,rgba(196,136,28,.09) 0%,transparent 70%);
-  pointer-events:none;
-}
-/* Mobile: 2 col */
-.num-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  position:relative; z-index:1;
-}
-@media(min-width:768px) { .num-grid { grid-template-columns:repeat(4,1fr); } }
-
-.nm {
-  padding:52px 28px;
-  border-bottom:1px solid rgba(255,255,255,.05);
-  position:relative; overflow:hidden;
-  transition:background .3s;
-}
-.nm:nth-child(odd)  { border-right:1px solid rgba(255,255,255,.05); }
-.nm:last-child { border-bottom:none; }
-@media(min-width:768px) {
-  .nm { padding:68px 44px; border-bottom:none; border-right:1px solid rgba(255,255,255,.05); }
-  .nm:last-child { border-right:none; }
-  .nm:nth-child(odd) { border-right:1px solid rgba(255,255,255,.05); }
-}
-.nm:hover { background:rgba(255,255,255,.03); }
-.nm-line {
-  position:absolute; bottom:0; left:0; right:0; height:2px;
-  background:var(--gold-grad);
-  transform:scaleX(0); transform-origin:left;
-  transition:transform .6s var(--ease);
-}
-.nm:hover .nm-line { transform:scaleX(1); }
-.nm-pre { font-size:9px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,.15); margin-bottom:18px; }
-.nm-n {
-  font-size:clamp(44px,8vw,72px);
-  font-weight:900; font-style:italic;
-  color:#fff; line-height:.88; letter-spacing:-2.5px; margin-bottom:12px;
-}
-.nm-n sup { font-size:.4em; color:var(--amber); font-style:normal; vertical-align:super; }
-.nm-l { font-size:13px; font-weight:300; color:rgba(255,255,255,.36); line-height:1.5; }
-
-/* ═══════════════════════════════════
-   BUSINESS AREAS — CARDS
-═══════════════════════════════════ */
-.areas { background:var(--ivory); }
-.areas-hd { text-align:center; margin-bottom:48px; }
-
-/* Mobile: 1 col → 2 col → 3 col asymmetric */
-.areas-grid {
-  display:grid;
-  grid-template-columns:1fr;
-  gap:10px;
-}
-@media(min-width:560px) {
-  .areas-grid { grid-template-columns:1fr 1fr; }
-}
-@media(min-width:1024px) {
-  .areas-grid {
-    grid-template-columns:repeat(12,1fr);
-    grid-template-rows:280px 220px;
+  .hero-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px;
+    background: linear-gradient(90deg, var(--rose), var(--rose-light), var(--sky));
   }
-  .ac:nth-child(1) { grid-column:1/5; grid-row:1/3; }
-  .ac:nth-child(2) { grid-column:5/9; grid-row:1; }
-  .ac:nth-child(3) { grid-column:9/13; grid-row:1; }
-  .ac:nth-child(4) { grid-column:5/8; grid-row:2; }
-  .ac:nth-child(5) { grid-column:8/11; grid-row:2; }
-  .ac:nth-child(6) { grid-column:11/13; grid-row:2; }
-}
-@media(min-width:560px) and (max-width:1023px) {
-  .ac:first-child { grid-column:1/3; }
-}
-
-.ac {
-  background:#fff; border:1px solid var(--line);
-  padding:28px 24px;
-  position:relative; overflow:hidden;
-  display:flex; flex-direction:column; justify-content:flex-end;
-  min-height:200px;
-  transition:all .4s var(--ease);
-}
-@media(min-width:768px) { .ac { padding:32px 28px; } }
-.ac::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:2px;
-  background:var(--gold-grad);
-  transform:scaleX(0); transform-origin:left;
-  transition:transform .42s var(--ease);
-}
-.ac:hover { transform:translateY(-6px); box-shadow:var(--sh2); border-color:transparent; z-index:2; }
-.ac:hover::before { transform:scaleX(1); }
-
-/* Photo card */
-.ac.photo { padding:0; min-height:280px; }
-.ac.photo .ac-bg { position:absolute; inset:0; }
-.ac.photo .ac-bg img { filter:brightness(.52) saturate(.8); transition:transform 1.2s var(--ease), filter 1.2s; }
-.ac.photo:hover .ac-bg img { transform:scale(1.06); filter:brightness(.45); }
-.ac.photo::after { content:''; position:absolute; inset:0; background:linear-gradient(to top,rgba(14,27,44,.9) 0%,rgba(14,27,44,.3) 55%,transparent 100%); z-index:1; }
-.ac.photo .ac-body { position:relative; z-index:2; padding:24px 26px; }
-.ac.photo h3 { color:#fff !important; }
-.ac.photo p { color:rgba(255,255,255,.5) !important; }
-.ac.photo .ac-more { color:var(--amber) !important; }
-.ac.photo .ac-ico { border-color:rgba(255,255,255,.15) !important; background:rgba(255,255,255,.07) !important; }
-.ac.photo:hover { transform:none !important; }
-.ac.photo::before { display:none; }
-
-.ac-ghost {
-  position:absolute; top:-8px; right:10px;
-  font-size:clamp(60px,10vw,90px); font-weight:900; font-style:italic;
-  color:rgba(14,27,44,.04); line-height:1; pointer-events:none;
-}
-.ac-ico {
-  width:44px; height:44px;
-  border:1.5px solid var(--line); background:var(--ivory);
-  display:flex; align-items:center; justify-content:center;
-  font-size:18px; margin-bottom:14px; transition:all .3s; flex-shrink:0;
-}
-.ac:not(.photo):hover .ac-ico { background:var(--navy); border-color:var(--navy); }
-.ac h3 { font-size:clamp(15px,2vw,18px); font-weight:700; color:var(--navy); margin-bottom:7px; line-height:1.3; }
-.ac p  { font-size:12.5px; font-weight:300; color:var(--slate); line-height:1.65; }
-.ac-more { display:inline-flex; align-items:center; gap:5px; font-size:11.5px; font-weight:700; color:var(--gold); margin-top:13px; transition:gap .22s; }
-.ac:hover .ac-more { gap:9px; }
-
-/* ═══════════════════════════════════
-   NEWS
-═══════════════════════════════════ */
-.news { background:var(--paper); border-top:1px solid var(--line); }
-
-/* Mobile: stacked. Tablet+: featured left + smalls right */
-.news-grid { display:flex; flex-direction:column; gap:10px; }
-@media(min-width:900px) {
-  .news-grid {
-    display:grid;
-    grid-template-columns:1.6fr 1fr;
-    grid-template-rows:1fr 1fr;
-    min-height:540px;
+  .hero-card-label { font-size: .75rem; font-weight: 700; letter-spacing: .1em; color: var(--rose); text-transform: uppercase; margin-bottom: 12px; }
+  .hero-card-title { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--charcoal); margin-bottom: 8px; }
+  .hero-card-sub { font-size: .88rem; color: var(--text-muted); margin-bottom: 28px; }
+  .coverage-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .coverage-list li {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--blush); border-radius: 12px; padding: 12px 16px;
+    font-size: .88rem; font-weight: 500;
   }
-}
+  .coverage-list li .icon { width: 36px; height: 36px; background: var(--rose-pale); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+  .floating-pill {
+    position: absolute;
+    background: white; border-radius: 50px;
+    padding: 8px 18px; box-shadow: 0 4px 20px rgba(0,0,0,.1);
+    font-size: .78rem; font-weight: 700;
+    animation: float 4s ease-in-out infinite;
+  }
+  .floating-pill.p1 { top: -16px; right: 20px; color: var(--rose); border: 1.5px solid var(--rose-pale); }
+  .floating-pill.p2 { bottom: -12px; left: 0; color: var(--teal); border: 1.5px solid rgba(45,125,122,.2); animation-delay: -2s; }
+  @keyframes float { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-10px) } }
 
-/* Featured */
-.nf {
-  background:#fff; border:1px solid var(--line);
-  overflow:hidden; display:flex; flex-direction:column;
-  transition:all .38s var(--ease);
-}
-@media(min-width:900px) { .nf { grid-row:1/3; } }
-.nf:hover { box-shadow:var(--sh3); border-color:transparent; }
-.nf-img { height:52vw; max-height:280px; overflow:hidden; position:relative; flex-shrink:0; }
-@media(min-width:900px) { .nf-img { height:280px; max-height:none; } }
-.nf-img img { filter:brightness(.93); transition:transform .9s var(--ease); }
-.nf:hover .nf-img img { transform:scale(1.05); }
-.nf-cat {
-  position:absolute; top:14px; left:14px;
-  background:var(--navy); color:#fff;
-  font-size:9px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase;
-  padding:4px 12px;
-  clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px));
-}
-.nf-body { padding:24px 24px 28px; flex:1; display:flex; flex-direction:column; }
-@media(min-width:600px) { .nf-body { padding:28px 32px 32px; } }
-.nf-body h3 { font-size:clamp(17px,3vw,22px); font-weight:700; color:var(--navy); line-height:1.35; margin-bottom:10px; transition:color .25s; }
-.nf:hover .nf-body h3 { color:var(--gold); }
-.nf-body p { font-size:14px; font-weight:300; color:var(--slate); line-height:1.75; flex:1; }
-.nf-foot { display:flex; align-items:center; justify-content:space-between; margin-top:20px; padding-top:14px; border-top:1px solid var(--line); }
-.nf-date { font-size:11.5px; font-weight:500; color:var(--muted); }
-.nf-arr {
-  width:36px; height:36px; border:1px solid var(--line);
-  display:flex; align-items:center; justify-content:center;
-  font-size:14px; color:var(--muted);
-  clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px));
-  transition:all .25s;
-}
-.nf:hover .nf-arr { background:var(--navy); border-color:var(--navy); color:#fff; }
+  @keyframes fadeUp { from { opacity:0; transform: translateY(28px) } to { opacity:1; transform: translateY(0) } }
 
-/* Small cards */
-.ns-wrap { display:flex; flex-direction:column; gap:9px; }
-@media(min-width:900px) { .ns-wrap { gap:10px; } }
-.ns {
-  background:#fff; border:1px solid var(--line);
-  overflow:hidden; display:flex;
-  transition:all .3s;
-}
-.ns:hover { box-shadow:var(--sh2); border-color:transparent; }
-.ns-img { width:90px; flex-shrink:0; overflow:hidden; }
-@media(min-width:600px) { .ns-img { width:110px; } }
-.ns-img img { filter:brightness(.9) saturate(.8); transition:transform .8s var(--ease); }
-.ns:hover .ns-img img { transform:scale(1.08); }
-.ns-body { padding:14px 16px; flex:1; display:flex; flex-direction:column; justify-content:center; }
-@media(min-width:600px) { .ns-body { padding:16px 20px; } }
-.ns-cat { font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
-.ns-body h4 { font-size:clamp(13px,2vw,15px); font-weight:700; color:var(--navy); line-height:1.38; margin-bottom:4px; transition:color .22s; }
-.ns:hover .ns-body h4 { color:var(--gold); }
-.ns-body p { font-size:12px; font-weight:300; color:var(--slate); line-height:1.6; }
-.ns-date { font-size:10.5px; color:var(--muted); margin-top:7px; font-weight:500; }
+  /* ── SECTION COMMONS ── */
+  section { padding: 90px 5%; }
+  .section-tag {
+    display: inline-block; background: var(--rose-pale); color: var(--rose);
+    font-size: .75rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 50px; margin-bottom: 14px;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700; line-height: 1.2; color: var(--charcoal);
+  }
+  .section-title em { color: var(--rose); font-style: italic; }
+  .section-sub { color: var(--text-muted); font-size: 1rem; max-width: 600px; margin-top: 12px; }
+  .container { max-width: 1200px; margin: 0 auto; }
 
-/* ═══════════════════════════════════
-   APP SECTION
-═══════════════════════════════════ */
-.app-sec {
-  background:#fff;
-  border-top:1px solid var(--line);
-  position:relative; overflow:hidden;
-}
-.app-sec::before {
-  content:''; position:absolute;
-  right:-80px; top:50%; transform:translateY(-50%);
-  width:440px; height:440px; border-radius:50%;
-  border:1px solid var(--line); opacity:.5; pointer-events:none;
-}
-.app-sec::after {
-  content:''; position:absolute;
-  right:-30px; top:50%; transform:translateY(-50%);
-  width:260px; height:260px; border-radius:50%;
-  border:1px solid var(--lineD); opacity:.4; pointer-events:none;
-}
-.app-inner {
-  display:flex; flex-direction:column; gap:44px;
-  position:relative; z-index:1;
-}
-@media(min-width:900px) {
-  .app-inner { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
-}
+  /* ── WHY SECTION ── */
+  #why { background: var(--blush); }
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-top: 50px; }
+  .why-card {
+    background: white; border-radius: var(--radius); padding: 32px 28px;
+    box-shadow: var(--shadow-soft); border: 1px solid rgba(232,83,106,.08);
+    transition: transform .3s, box-shadow .3s;
+  }
+  .why-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-card); }
+  .why-icon { font-size: 2.4rem; margin-bottom: 16px; }
+  .why-card h3 { font-size: 1.5rem; font-weight: 700; color: var(--rose); margin-bottom: 6px; font-family: var(--font-display); }
+  .why-card p { font-size: .88rem; color: var(--text-muted); font-weight: 400; }
 
-.app-l h2 { font-size:clamp(32px,5.5vw,52px); font-weight:900; letter-spacing:-2px; color:var(--navy); line-height:.92; margin-bottom:12px; }
-.app-l h2 em { font-style:italic; color:var(--gold); }
-.app-l .sec-body { margin-bottom:32px; }
+  /* ── STATS BAND ── */
+  #stats {
+    background: linear-gradient(135deg, var(--rose) 0%, #c43d55 100%);
+    padding: 70px 5%;
+  }
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; max-width: 1100px; margin: 0 auto; text-align: center; }
+  .stat-item { color: white; }
+  .stat-item .big { font-family: var(--font-display); font-size: 2.8rem; font-weight: 700; line-height: 1; margin-bottom: 8px; }
+  .stat-item .label { font-size: .85rem; opacity: .85; font-weight: 400; line-height: 1.4; }
+  .stat-divider { width: 1px; background: rgba(255,255,255,.2); align-self: stretch; }
 
-.app-rows { display:flex; flex-direction:column; gap:9px; }
-.app-row {
-  display:flex; align-items:center; gap:14px;
-  background:var(--ivory); border:1px solid var(--line);
-  padding:15px 18px;
-  position:relative; overflow:hidden;
-  transition:all .35s var(--ease);
-}
-.app-row::before {
-  content:''; position:absolute; left:0; top:0; bottom:0; width:2px;
-  background:var(--gold-grad);
-  transform:scaleY(0); transform-origin:bottom;
-  transition:transform .3s var(--ease);
-}
-.app-row:hover { background:var(--navy); border-color:var(--navy); transform:translateX(7px); }
-.app-row:hover::before { transform:scaleY(1); }
-.app-row:hover .ar-ico { background:rgba(196,136,28,.2); border-color:rgba(196,136,28,.3); }
-.app-row:hover .ar-nm { color:#fff; }
-.app-row:hover .ar-sb { color:rgba(255,255,255,.38); }
-.app-row:hover .ar-arr { color:var(--amber); transform:translateX(5px); }
-.ar-ico { width:40px; height:40px; background:var(--warm); border:1px solid var(--lineD); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; transition:all .25s; }
-.ar-nm { font-size:14px; font-weight:700; color:var(--navy); transition:color .25s; }
-.ar-sb { font-size:11.5px; font-weight:300; color:var(--muted); margin-top:1px; transition:color .25s; }
-.ar-arr { margin-left:auto; font-size:15px; color:var(--muted); transition:all .25s; }
+  /* ── PLANS ── */
+  #plans { background: white; }
+  .plans-header { text-align: center; margin-bottom: 50px; }
+  .plans-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1200px; margin: 0 auto; }
+  .plan-card {
+    background: white; border: 2px solid var(--rose-muted);
+    border-radius: var(--radius); overflow: hidden;
+    transition: transform .3s, box-shadow .3s;
+    position: relative;
+  }
+  .plan-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-card); }
+  .plan-card.featured { border-color: var(--rose); box-shadow: 0 0 0 4px var(--rose-pale); }
+  .plan-card.featured .plan-header { background: linear-gradient(135deg, var(--rose), var(--rose-light)); }
+  .plan-badge {
+    position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+    background: var(--gold); color: white; font-size: .7rem; font-weight: 700;
+    padding: 4px 14px; border-radius: 0 0 10px 10px; letter-spacing: .05em; text-transform: uppercase;
+  }
+  .plan-header { background: var(--rose-pale); padding: 28px 24px 22px; text-align: center; }
+  .plan-header .name { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--charcoal); margin-bottom: 4px; }
+  .plan-card.featured .plan-header .name { color: white; }
+  .plan-header .stbh { font-size: .8rem; color: var(--text-muted); }
+  .plan-card.featured .plan-header .stbh { color: rgba(255,255,255,.85); }
+  .plan-header .amount { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--rose); margin-top: 6px; }
+  .plan-card.featured .plan-header .amount { color: white; }
+  .plan-body { padding: 22px 20px; }
+  .plan-feature { display: flex; gap: 10px; align-items: flex-start; font-size: .82rem; padding: 8px 0; border-bottom: 1px solid var(--rose-muted); line-height: 1.45; }
+  .plan-feature:last-child { border-bottom: none; }
+  .plan-feature .check { color: var(--rose); font-size: .9rem; flex-shrink: 0; margin-top: 1px; }
+  .plan-feature .val { font-weight: 600; color: var(--charcoal); }
+  .plan-cta-wrap { padding: 0 20px 24px; }
+  .plan-cta { width: 100%; background: var(--rose-pale); color: var(--rose); border: none; padding: 12px; border-radius: 50px; font-size: .88rem; font-weight: 700; cursor: pointer; transition: background .2s; font-family: var(--font-body); }
+  .plan-cta:hover { background: var(--rose); color: white; }
+  .plan-card.featured .plan-cta { background: var(--rose); color: white; }
+  .plan-card.featured .plan-cta:hover { background: #c43d55; }
 
-/* Feature blocks right */
-.app-feats { display:flex; flex-direction:column; gap:10px; }
-.af {
-  background:var(--ivory); border:1px solid var(--line);
-  padding:22px 24px;
-  display:flex; gap:16px; align-items:flex-start;
-  transition:all .28s;
-}
-.af:hover { background:#fff; box-shadow:var(--sh1); transform:translateY(-3px); }
-.af-num { font-size:38px; font-weight:900; font-style:italic; color:var(--warm); line-height:1; flex-shrink:0; margin-top:-4px; min-width:42px; }
-.af h5 { font-size:14px; font-weight:700; color:var(--navy); margin-bottom:4px; }
-.af p  { font-size:13px; font-weight:300; color:var(--slate); line-height:1.65; }
+  /* ── BENEFITS ── */
+  #benefits { background: var(--cream); }
+  .benefits-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; max-width: 1200px; margin: 50px auto 0; }
+  .benefit-tabs { display: flex; flex-direction: column; gap: 12px; }
+  .benefit-tab {
+    background: white; border-radius: var(--radius-sm); padding: 18px 22px;
+    cursor: pointer; border: 2px solid transparent;
+    transition: all .25s; display: flex; align-items: center; gap: 14px;
+  }
+  .benefit-tab.active { border-color: var(--rose); background: var(--rose-pale); }
+  .benefit-tab .tab-icon { width: 44px; height: 44px; background: var(--rose-pale); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+  .benefit-tab.active .tab-icon { background: var(--rose); }
+  .benefit-tab h4 { font-size: .92rem; font-weight: 600; color: var(--charcoal); }
+  .benefit-tab p { font-size: .78rem; color: var(--text-muted); margin-top: 2px; }
+  .benefit-detail { background: white; border-radius: var(--radius); padding: 38px; box-shadow: var(--shadow-soft); position: sticky; top: 90px; }
+  .benefit-detail-icon { font-size: 2.8rem; margin-bottom: 16px; }
+  .benefit-detail h3 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; color: var(--charcoal); margin-bottom: 10px; }
+  .benefit-detail p { color: var(--text-muted); font-size: .9rem; line-height: 1.7; margin-bottom: 20px; }
+  .benefit-items { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .benefit-items li { display: flex; gap: 10px; align-items: flex-start; font-size: .87rem; }
+  .benefit-items li::before { content: '✦'; color: var(--rose); font-size: .65rem; margin-top: 4px; flex-shrink: 0; }
 
-/* ═══════════════════════════════════
-   RECRUITMENT
-═══════════════════════════════════ */
-.recruit { background:var(--ivory); }
-.rec-grid {
-  display:grid;
-  grid-template-columns:1fr;
-  gap:10px;
-}
-@media(min-width:560px) { .rec-grid { grid-template-columns:1fr 1fr; } }
+  /* ── EXAMPLE ── */
+  #example { background: linear-gradient(180deg, white 0%, var(--blush) 100%); }
+  .example-header { text-align: center; margin-bottom: 50px; }
+  .example-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 1100px; margin: 0 auto; }
+  .example-card {
+    background: white; border-radius: var(--radius); padding: 36px;
+    box-shadow: var(--shadow-soft); border: 1px solid var(--rose-muted);
+    position: relative; overflow: hidden;
+  }
+  .example-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--rose), var(--sky)); }
+  .example-family { font-size: .78rem; font-weight: 700; color: var(--rose); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; }
+  .example-title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--charcoal); margin-bottom: 16px; }
+  .example-events { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .event-row { display: flex; justify-content: space-between; align-items: center; background: var(--blush); border-radius: 10px; padding: 10px 14px; font-size: .83rem; }
+  .event-row .event-name { color: var(--text-muted); }
+  .event-row .event-amount { font-weight: 700; color: var(--charcoal); }
+  .example-total { background: var(--rose); color: white; border-radius: var(--radius-sm); padding: 18px 22px; }
+  .example-total .label { font-size: .78rem; opacity: .85; margin-bottom: 4px; }
+  .example-total .value { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; }
+  .example-total .sub { font-size: .75rem; opacity: .8; margin-top: 4px; }
 
-.rc {
-  background:#fff; border:1px solid var(--line);
-  padding:24px 22px;
-  position:relative; overflow:hidden;
-  transition:all .4s var(--ease);
-  min-height:180px;
-}
-.rc::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:2px;
-  background:var(--gold-grad);
-  transform:scaleX(0); transform-origin:left;
-  transition:transform .42s var(--ease);
-}
-.rc:hover { transform:translateY(-7px); box-shadow:var(--sh2); border-color:transparent; }
-.rc:hover::before { transform:scaleX(1); }
-.rc-badge {
-  display:inline-block; background:var(--navy); color:#fff;
-  font-size:9px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
-  padding:4px 11px; margin-bottom:13px;
-  clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px));
-}
-.rc h4 { font-size:clamp(15px,2.5vw,17px); font-weight:700; color:var(--navy); line-height:1.35; margin-bottom:8px; }
-.rc p  { font-size:13px; font-weight:300; color:var(--slate); line-height:1.65; margin-bottom:16px; }
-.rc-loc { font-size:11.5px; font-weight:500; color:var(--muted); display:flex; align-items:center; gap:4px; }
-.rc-arr {
-  position:absolute; bottom:18px; right:18px;
-  width:34px; height:34px; border:1px solid var(--line);
-  display:flex; align-items:center; justify-content:center;
-  font-size:13px; color:var(--muted);
-  clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px));
-  transition:all .25s;
-}
-.rc:hover .rc-arr { background:var(--navy); border-color:var(--navy); color:#fff; }
+  /* ── VITALITY ── */
+  #vitality { background: var(--charcoal); color: white; }
+  .vitality-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1200px; margin: 0 auto; }
+  .vitality-text .section-title { color: white; }
+  .vitality-text .section-sub { color: rgba(255,255,255,.65); }
+  .vitality-levels { display: flex; flex-direction: column; gap: 12px; margin-top: 30px; }
+  .vitality-level { display: flex; align-items: center; gap: 16px; }
+  .level-bar-wrap { flex: 1; background: rgba(255,255,255,.1); border-radius: 50px; height: 8px; overflow: hidden; }
+  .level-bar { height: 100%; border-radius: 50px; transition: width 1s ease; }
+  .level-info { display: flex; align-items: center; gap: 10px; min-width: 130px; }
+  .level-badge { padding: 4px 12px; border-radius: 50px; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
+  .level-pts { font-size: .75rem; color: rgba(255,255,255,.55); }
+  .lv-dong { background: #c87941; color: white; }
+  .lv-bac { background: #8faab8; color: white; }
+  .lv-vang { background: var(--gold); color: white; }
+  .lv-bachkim { background: linear-gradient(90deg, #c0c0c0, #e8e8e8); color: #333; }
+  .lb-dong { background: rgba(200,121,65,.4); width: 25%; }
+  .lb-bac { background: rgba(143,170,184,.5); width: 50%; }
+  .lb-vang { background: rgba(201,146,58,.6); width: 75%; }
+  .lb-bachkim { background: linear-gradient(90deg, rgba(192,192,192,.5), rgba(232,232,232,.5)); width: 100%; }
+  .vitality-rewards { display: flex; flex-direction: column; gap: 16px; }
+  .reward-card { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius-sm); padding: 22px; }
+  .reward-card .rew-title { font-size: .88rem; font-weight: 600; color: rgba(255,255,255,.9); margin-bottom: 6px; }
+  .reward-card .rew-desc { font-size: .8rem; color: rgba(255,255,255,.55); line-height: 1.5; }
+  .reward-card .rew-num { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--rose-light); margin-top: 4px; }
 
-/* ═══════════════════════════════════
-   PARTNERS
-═══════════════════════════════════ */
-.partners { background:#fff; border-top:1px solid var(--line); padding:72px 0; }
-@media(min-width:768px) { .partners { padding:84px 0; } }
-.partners-hd { text-align:center; margin-bottom:44px; }
+  /* ── NETWORK ── */
+  #network { background: var(--blush); }
+  .network-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1200px; margin: 0 auto; }
+  .network-map { background: white; border-radius: var(--radius); padding: 36px; box-shadow: var(--shadow-soft); }
+  .map-svg-wrap { position: relative; background: linear-gradient(135deg, rgba(91,164,200,.08), rgba(45,125,122,.05)); border-radius: 16px; padding: 24px; }
+  .continent-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .continent-card { background: white; border: 1px solid rgba(232,83,106,.15); border-radius: 12px; padding: 16px; text-align: center; }
+  .continent-card .cont-icon { font-size: 1.6rem; margin-bottom: 6px; }
+  .continent-card .cont-name { font-size: .8rem; font-weight: 600; color: var(--charcoal); }
+  .continent-card .cont-flag { font-size: .7rem; color: var(--rose); font-weight: 500; }
+  .network-text { display: flex; flex-direction: column; gap: 22px; }
+  .net-stat { display: flex; gap: 18px; align-items: flex-start; }
+  .net-stat .stat-icon { width: 52px; height: 52px; background: var(--rose-pale); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0; }
+  .net-stat h4 { font-family: var(--font-display); font-size: 1.45rem; font-weight: 700; color: var(--rose); }
+  .net-stat p { font-size: .85rem; color: var(--text-muted); }
 
-.part-grid {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  border:1px solid var(--line);
-}
-@media(min-width:768px) { .part-grid { grid-template-columns:repeat(6,1fr); } }
+  /* ── WHO ── */
+  #who { background: white; }
+  .who-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; max-width: 1200px; margin: 50px auto 0; }
+  .info-block { background: var(--blush); border-radius: var(--radius); padding: 34px; border-left: 4px solid var(--rose); }
+  .info-block h3 { font-size: 1rem; font-weight: 700; color: var(--rose); margin-bottom: 14px; text-transform: uppercase; letter-spacing: .08em; }
+  .info-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .info-list li { display: flex; gap: 10px; font-size: .88rem; }
+  .info-list li .key { font-weight: 600; color: var(--charcoal); min-width: 200px; flex-shrink: 0; }
+  .info-list li .val { color: var(--text-muted); }
+  .exclusions-grid { display: flex; flex-direction: column; gap: 10px; }
+  .excl-item { display: flex; gap: 10px; align-items: flex-start; font-size: .85rem; }
+  .excl-item::before { content: '✕'; color: var(--rose-light); font-size: .8rem; flex-shrink: 0; margin-top: 2px; }
 
-.pc {
-  height:76px; display:flex; align-items:center; justify-content:center;
-  border-right:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  cursor:default; transition:all .32s;
-  position:relative; overflow:hidden;
-}
-@media(min-width:768px) {
-  .pc { height:88px; border-bottom:none; }
-  .pc:last-child { border-right:none; }
-}
-/* on 3-col grid, remove right border on last of each row */
-.pc:nth-child(3n) { border-right:none; }
-@media(min-width:768px) { .pc:nth-child(3n) { border-right:1px solid var(--line); } }
-.pc:nth-last-child(-n+3) { border-bottom:none; }
-@media(min-width:768px) { .pc:nth-last-child(-n+3) { border-bottom:none; } }
+  /* ── CTA ── */
+  #cta {
+    background: linear-gradient(135deg, var(--rose) 0%, #c43d55 50%, #a83548 100%);
+    text-align: center; padding: 100px 5%;
+    position: relative; overflow: hidden;
+  }
+  #cta::before {
+    content: ''; position: absolute; width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(255,255,255,.08), transparent 70%);
+    top: -200px; right: -100px; border-radius: 50%;
+  }
+  #cta h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; color: white; margin-bottom: 16px; }
+  #cta p { color: rgba(255,255,255,.8); font-size: 1.05rem; max-width: 520px; margin: 0 auto 36px; }
+  .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-white { background: white; color: var(--rose); padding: 14px 32px; border-radius: 50px; font-size: .95rem; font-weight: 700; border: none; cursor: pointer; transition: transform .2s, box-shadow .2s; text-decoration: none; display: inline-block; font-family: var(--font-body); }
+  .btn-white:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,.2); }
+  .btn-ghost { background: transparent; color: white; padding: 14px 32px; border-radius: 50px; font-size: .95rem; font-weight: 700; border: 2px solid rgba(255,255,255,.6); cursor: pointer; transition: all .2s; text-decoration: none; display: inline-block; font-family: var(--font-body); }
+  .btn-ghost:hover { background: rgba(255,255,255,.15); }
 
-.pc::before {
-  content:''; position:absolute; inset:0;
-  background:var(--navy);
-  transform:scaleY(0); transform-origin:bottom;
-  transition:transform .34s var(--ease);
-}
-.pc:hover::before { transform:scaleY(1); }
-.pc-nm {
-  font-size:clamp(11px,2vw,13px); font-weight:800; letter-spacing:1.5px;
-  text-transform:uppercase; color:var(--sand);
-  transition:color .32s; position:relative; z-index:1;
-}
-.pc:hover .pc-nm { color:var(--amber); }
+  /* ── FOOTER ── */
+  footer { background: var(--charcoal); color: rgba(255,255,255,.65); padding: 50px 5% 30px; }
+  .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 50px; max-width: 1200px; margin: 0 auto 40px; }
+  .footer-brand .brand-name { font-family: var(--font-display); font-size: 1.4rem; color: white; font-weight: 700; margin-bottom: 10px; }
+  .footer-brand .brand-name span { color: var(--rose-light); }
+  .footer-brand p { font-size: .82rem; line-height: 1.6; max-width: 280px; }
+  .footer-brand .contact { margin-top: 16px; font-size: .85rem; }
+  .footer-brand .contact a { color: var(--rose-light); text-decoration: none; }
+  .footer-col h4 { color: white; font-size: .88rem; font-weight: 600; margin-bottom: 14px; text-transform: uppercase; letter-spacing: .08em; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .footer-col ul li a { color: rgba(255,255,255,.55); text-decoration: none; font-size: .83rem; transition: color .2s; }
+  .footer-col ul li a:hover { color: var(--rose-light); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); max-width: 1200px; margin: 0 auto; padding-top: 24px; display: flex; justify-content: space-between; align-items: center; font-size: .78rem; flex-wrap: gap; }
+  .footer-bottom .disclaimer { max-width: 600px; line-height: 1.5; opacity: .5; }
 
-/* ═══════════════════════════════════
-   CTA BAND
-═══════════════════════════════════ */
-.cta-band {
-  background:var(--navy); padding:80px 0;
-  position:relative; overflow:hidden;
-}
-@media(min-width:768px) { .cta-band { padding:100px 0; } }
-.cta-band::before {
-  content:''; position:absolute; inset:0;
-  background-image:radial-gradient(circle,rgba(196,136,28,.06) 1px,transparent 1px);
-  background-size:40px 40px;
-}
-.cta-band::after {
-  content:''; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
-  width:clamp(400px,80vw,800px); height:300px; border-radius:50%;
-  background:radial-gradient(ellipse,rgba(196,136,28,.08) 0%,transparent 70%);
-  pointer-events:none;
-}
-.cta-top { position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--gold) 30%,var(--amber) 70%,transparent); }
-.cta-in { position:relative; z-index:1; text-align:center; }
-.cta-in h2 { font-size:clamp(34px,7vw,68px); font-weight:900; font-style:italic; color:#fff; line-height:.95; letter-spacing:-2px; margin-bottom:16px; }
-.cta-in h2 em { font-style:normal; color:var(--amber); }
-.cta-in p { font-size:clamp(14px,2vw,16px); font-weight:300; color:rgba(255,255,255,.4); line-height:1.75; margin-bottom:40px; }
-.cta-btns { display:flex; flex-direction:column; align-items:center; gap:10px; }
-@media(min-width:480px) { .cta-btns { flex-direction:row; justify-content:center; } }
-.btn-cta-fill {
-  display:inline-flex; align-items:center; gap:8px;
-  background:var(--gold-grad); color:var(--navy);
-  padding:16px 38px; font-size:14px; font-weight:800;
-  clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,9px 100%,0 calc(100% - 9px));
-  transition:all .28s;
-}
-.btn-cta-fill:hover { transform:translateY(-3px); box-shadow:var(--shG); }
-.btn-cta-ghost {
-  display:inline-flex; align-items:center; justify-content:center;
-  padding:15px 30px; font-size:14px; font-weight:500;
-  color:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.18);
-  clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));
-  transition:all .25s;
-}
-.btn-cta-ghost:hover { border-color:rgba(255,255,255,.5); color:#fff; }
+  /* ── MOBILE NAV ── */
+  .mobile-menu {
+    display: none; position: fixed; top: 68px; left: 0; right: 0; bottom: 0; z-index: 99;
+    background: white; flex-direction: column; padding: 30px 5%;
+    gap: 20px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-size: 1.1rem; font-weight: 500; color: var(--text); text-decoration: none; padding: 12px 0; border-bottom: 1px solid var(--rose-muted); }
+  .mobile-menu .btn-primary { text-align: center; margin-top: 8px; }
 
-/* ═══════════════════════════════════
-   FOOTER
-═══════════════════════════════════ */
-footer { background:#090e17; border-top:1px solid rgba(196,136,28,.18); }
-.ft-main {
-  max-width:1100px; margin:0 auto;
-  padding:60px 20px 48px;
-  display:grid;
-  grid-template-columns:1fr;
-  gap:40px;
-  border-bottom:1px solid rgba(255,255,255,.04);
-}
-@media(min-width:600px)  { .ft-main { padding:64px 28px 52px; grid-template-columns:1fr 1fr; gap:36px; } }
-@media(min-width:1024px) { .ft-main { padding:72px 40px 56px; grid-template-columns:2fr 1fr 1fr 1.2fr; gap:48px; } }
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .plans-grid { grid-template-columns: repeat(2, 1fr); }
+  }
 
-.ft-brand { font-size:clamp(19px,3vw,22px); font-weight:900; color:#fff; margin-bottom:4px; }
-.ft-brand em { font-style:italic; color:var(--amber); }
-.ft-est { font-size:9px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,.18); display:block; margin-bottom:16px; }
-.ft-about { font-size:13px; font-weight:300; color:rgba(255,255,255,.28); line-height:1.85; margin-bottom:22px; }
-.ft-contacts { display:flex; flex-direction:column; gap:8px; margin-bottom:22px; }
-.ftc { font-size:12.5px; font-weight:300; color:rgba(255,255,255,.26); display:flex; align-items:flex-start; gap:7px; }
-.ftc a { color:rgba(255,255,255,.26); transition:color .2s; }
-.ftc a:hover { color:var(--amber); }
-.ft-soc { display:flex; gap:7px; }
-.fso {
-  width:36px; height:36px; border:1px solid rgba(255,255,255,.08);
-  display:flex; align-items:center; justify-content:center;
-  font-size:12px; color:rgba(255,255,255,.22);
-  clip-path:polygon(0 0,calc(100% - 5px) 0,100% 5px,100% 100%,5px 100%,0 calc(100% - 5px));
-  transition:all .22s;
-}
-.fso:hover { background:var(--gold); border-color:var(--gold); color:var(--navy); }
-.ft-col h5 { font-size:10.5px; font-weight:700; color:rgba(255,255,255,.5); letter-spacing:.5px; margin-bottom:16px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,.05); }
-.ft-col a { display:block; font-size:13px; font-weight:300; color:rgba(255,255,255,.26); margin-bottom:9px; transition:all .22s; }
-.ft-col a:hover { color:var(--amber); padding-left:5px; }
-.ft-bottom {
-  max-width:1100px; margin:0 auto;
-  padding:18px 20px;
-  display:flex; justify-content:center; align-items:center; flex-wrap:wrap; gap:8px;
-}
-@media(min-width:600px) { .ft-bottom { padding:18px 28px; justify-content:space-between; } }
-@media(min-width:1024px) { .ft-bottom { padding:18px 40px; } }
-.ft-copy { font-size:11px; font-weight:300; color:rgba(255,255,255,.14); text-align:center; }
+  @media (max-width: 768px) {
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .hero-stats { gap: 18px; }
+    .hero-stat .num { font-size: 1.5rem; }
+    .plans-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+    .benefits-wrap { grid-template-columns: 1fr; }
+    .benefit-detail { position: static; }
+    .example-grid { grid-template-columns: 1fr; }
+    .vitality-inner { grid-template-columns: 1fr; }
+    .network-inner { grid-template-columns: 1fr; }
+    .who-inner { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; gap: 30px; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    section { padding: 60px 5%; }
+    .hero-actions { flex-direction: column; }
+    .btn-primary, .btn-outline { text-align: center; }
+  }
 
-/* Tap targets — ensure 44px minimum height */
-.tb-link, .tb-lang, .nav-links a, .hamburger,
-.btn-main, .btn-primary, .btn-nav-fill, .btn-cta-fill, .btn-mob-fill {
-  min-height:44px;
-}
-   @media (min-width: 900px) {
-    .hero {
-        display: grid;
-        grid-template-columns: 1fr 52%;
-        min-height: calc(100svh - 108px);
-    }
-}
+  @media (max-width: 480px) {
+    .hero-title { font-size: 2rem; }
+    .plans-grid { max-width: 100%; }
+    .stat-divider { display: none; }
+    .hero-stats { flex-wrap: wrap; }
+  }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
 
-<div id="prog"></div>
-
-<!-- ══ TOPBAR ══ -->
-<div class="topbar">
-  <div class="tb-inner">
-    <div class="tb-links">
-      <a href="mailto:contact@tinphat.com" class="tb-link"><span class="tb-link-dot"></span>contact@tinphat.com</a>
-      <a href="tel:0949299494" class="tb-link"><span class="tb-link-dot"></span>0949 29 94 94</a>
-    </div>
-    <div class="tb-langs">
-      <span class="tb-lang on">🇻🇳 VI</span>
-      <span class="tb-lang">🇬🇧 EN</span>
-    </div>
-  </div>
-</div>
-
-<!-- ══ NAVBAR ══ -->
-<nav class="navbar" id="nav">
-  <div class="nav-inner">
-    <a href="#" class="logo">
-      <div class="logo-mark"><span>TP</span></div>
-      <div class="logo-info">
-        <div class="logo-name">TÍN PHÁT GROUP</div>
-        <div class="logo-sub">Est. 2002 · Bạc Liêu</div>
-      </div>
-    </a>
-    <nav class="nav-links">
-      <a href="#" class="on">Trang chủ</a>
-      <a href="https://1412fromduongta.vercel.app/introduce.html">Giới thiệu</a>
-      <a href="https://1412fromduongta.vercel.app/news.html">Tin tức</a>
-      <a href="https://1412fromduongta.vercel.app/recruiment.html">Tuyển dụng</a>
-      <a href="https://1412fromduongta.vercel.app/cooperate.html">Hợp tác</a>
-      <a href="https://1412fromduongta.vercel.app/contact.html">Liên hệ</a>
-    </nav>
-    <div class="nav-cta">
-      <button class="btn-nav-outline">🛒 TipaShop</button>
-      <button class="btn-nav-fill"><span>Hợp tác ngay →</span></button>
-    </div>
-    <button class="hamburger" id="ham" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-logo" href="#">AIA <span>Việt Nam</span></a>
+  <ul class="nav-links">
+    <li><a href="#why">Tại sao chọn AIA</a></li>
+    <li><a href="#plans">Gói bảo hiểm</a></li>
+    <li><a href="#benefits">Quyền lợi</a></li>
+    <li><a href="#vitality">AIA Vitality</a></li>
+    <li><a href="#example">Ví dụ</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Tư vấn ngay</button>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
   </div>
 </nav>
 
-<!-- Mobile drawer -->
-<div class="mobile-menu" id="mob">
-   <a href="#" class="on">Trang chủ</a>
-      <a href="https://1412fromduongta.vercel.app/introduce.html">Giới thiệu</a>
-      <a href="https://1412fromduongta.vercel.app/news.html">Tin tức</a>
-      <a href="https://1412fromduongta.vercel.app/recruiment.html">Tuyển dụng</a>
-      <a href="https://1412fromduongta.vercel.app/cooperate.html">Hợp tác</a>
-      <a href="https://1412fromduongta.vercel.app/contact.html">Liên hệ</a>
-  <div class="mobile-menu-bottom">
-    <a href="#" class="btn-mob-fill">Hợp tác ngay →</a>
-    <a href="#" class="btn-mob-outline">🛒 TipaShop</a>
-  </div>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#why" onclick="closeMobile()">Tại sao chọn AIA</a>
+  <a href="#plans" onclick="closeMobile()">Gói bảo hiểm</a>
+  <a href="#benefits" onclick="closeMobile()">Quyền lợi</a>
+  <a href="#vitality" onclick="closeMobile()">AIA Vitality</a>
+  <a href="#example" onclick="closeMobile()">Ví dụ minh hoạ</a>
+  <a href="#who" onclick="closeMobile()">Điều kiện tham gia</a>
+  <button class="btn-primary" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'});closeMobile()">Tư vấn ngay</button>
 </div>
 
-<!-- ══ HERO ══ -->
-<section class="hero">
-
-  <!-- Image panel (top on mobile, right on desktop) -->
-  <div class="hero-img">
-    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1400&q=90" alt="Tín Phát Group">
-    <div class="h-badge">
-      <div class="h-badge-n">22+</div>
-      <div class="h-badge-l">Năm kinh nghiệm</div>
-    </div>
-    <div class="h-pip">
-      <div class="h-pip-n">2002</div>
-      <div class="h-pip-l">Thành lập</div>
-    </div>
-  </div>
-
-  <!-- Text panel (below on mobile, left on desktop) -->
-  <div class="hero-text">
-    <div class="h-eyebrow">
-      <div class="h-ew-bar"></div>
-      <span class="h-ew-txt">Tập đoàn Đầu tư Thương mại</span>
-      <span class="h-ew-dot"></span>
-    </div>
-    <div class="hero-h1">
-      
-      <span class="h1-big">TÍN PHÁT</span>
-   
-      <span class="h1-group">G · R · O · U · P</span>
-    </div>
-    <p class="hero-p">Nâng cao chất lượng cuộc sống cộng đồng — mang đến sản phẩm chất lượng và công nghệ đỉnh cao. Vươn tới tầm cao thương mại toàn cầu từ Bạc Liêu, Việt Nam.</p>
-    <div class="hero-btns">
-      <a href="#" class="btn-main">
-        <span>Khám phá ngay</span>
-        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-      </a>
-      <a href="#" class="btn-sec">Đăng ký hợp tác →</a>
-    </div>
-    <div class="hero-stats">
-      <div class="hs">
-        <div class="hs-n" data-to="22">0<sup>+</sup></div>
-        <div class="hs-l">Năm hoạt động</div>
-      </div>
-      <div class="hs">
-        <div class="hs-n">8<sup>+</sup></div>
-        <div class="hs-l">Đối tác quốc tế</div>
-      </div>
-      <div class="hs">
-        <div class="hs-n">3</div>
-        <div class="hs-l">Ứng dụng mobile</div>
-      </div>
-    </div>
-  </div>
-
-</section>
-
-<!-- ══ TICKER ══ -->
-<div class="ticker">
-  <div class="ticker-rail">
-    <div class="t-set">
-      <span class="t-brand">Shell</span><div class="t-divider"></div>
-      <span class="t-brand">Castrol</span><div class="t-divider"></div>
-      <span class="t-brand">Motul</span><div class="t-divider"></div>
-      <span class="t-brand">Unilever</span><div class="t-divider"></div>
-      <span class="t-brand">GS Battery</span><div class="t-divider"></div>
-      <span class="t-brand">Kenda</span><div class="t-divider"></div>
-      <span class="t-brand">Mekong Penda</span><div class="t-divider"></div>
-      <span class="t-brand">TAHASA</span><div class="t-divider"></div>
-      <span class="t-brand">Best Express</span><div class="t-divider"></div>
-    </div>
-    <div class="t-set" aria-hidden="true">
-      <span class="t-brand">Shell</span><div class="t-divider"></div>
-      <span class="t-brand">Castrol</span><div class="t-divider"></div>
-      <span class="t-brand">Motul</span><div class="t-divider"></div>
-      <span class="t-brand">Unilever</span><div class="t-divider"></div>
-      <span class="t-brand">GS Battery</span><div class="t-divider"></div>
-      <span class="t-brand">Kenda</span><div class="t-divider"></div>
-      <span class="t-brand">Mekong Penda</span><div class="t-divider"></div>
-      <span class="t-brand">TAHASA</span><div class="t-divider"></div>
-      <span class="t-brand">Best Express</span><div class="t-divider"></div>
-    </div>
-  </div>
-</div>
-
-<!-- ══ ABOUT ══ -->
-<section class="about">
-  <div class="about-inner">
-    <div class="ab-img rv rl">
-      <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=900&q=88" alt="Tín Phát Group">
-      <div class="ab-stat rv d3">
-        <div class="ab-stat-n">22<em>+</em></div>
-        <div class="ab-stat-l">Năm hoạt động</div>
-        <div class="ab-stat-bar"></div>
-      </div>
-      <div class="ab-pull">
-        <p class="ab-q">"Chuyên nghiệp – Tận tình – Chất lượng" là triết lý kinh doanh không thỏa hiệp của Tín Phát Group."</p>
-        <div class="ab-attr">Tín Phát Group · Từ năm 2002</div>
-      </div>
-    </div>
-    <div class="ab-text rv rr">
-      <div class="eyebrow">Về chúng tôi</div>
-      <h2 class="s-title">Từ Bạc Liêu Ra <em>Thế Giới</em></h2>
-      <span class="g-bar"></span>
-      <p class="ab-body d1">Được thành lập năm <strong>2002</strong> tại Bạc Liêu, Tín Phát Group là Tập đoàn Đầu tư Thương mại đa lĩnh vực với hơn <strong>22 năm</strong> phát triển. Đối tác tin cậy của <strong>Shell, Castrol, Motul, Unilever, GS Battery, Kenda</strong> và nhiều thương hiệu quốc tế hàng đầu.</p>
-      <p class="ab-body d2">Tầm nhìn: Trở thành <strong>Tập đoàn Thương mại quy mô toàn cầu</strong>, tiên phong ứng dụng công nghệ số và mô hình doanh nghiệp 5.0.</p>
-      <div class="vtags d3">
-        <div class="vt"><span class="vt-ic">🎯</span>Sứ mệnh</div>
-        <div class="vt"><span class="vt-ic">🔒</span>Chính trực</div>
-        <div class="vt"><span class="vt-ic">📋</span>Tuân thủ</div>
-        <div class="vt"><span class="vt-ic">🛡️</span>An toàn</div>
-        <div class="vt"><span class="vt-ic">💪</span>Trách nhiệm</div>
-        <div class="vt"><span class="vt-ic">🤝</span>Đoàn kết</div>
-      </div>
-      <div class="ab-ctas d4">
-        <a href="#" class="btn-primary">
-          <span>Tìm hiểu thêm</span>
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </a>
-        <a href="#" class="btn-link">Ban lãnh đạo →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ NUMBERS ══ -->
-<div class="numbers">
-  <div class="num-glow"></div>
-  <div class="num-grid">
-    <div class="nm rv d1">
-      <div class="nm-pre">// 01</div>
-      <div class="nm-n" data-cnt="22">0<sup>+</sup></div>
-      <div class="nm-l">Năm hoạt động bền vững</div>
-      <div class="nm-line"></div>
-    </div>
-    <div class="nm rv d2">
-      <div class="nm-pre">// 02</div>
-      <div class="nm-n">8<sup>+</sup></div>
-      <div class="nm-l">Đối tác thương hiệu quốc tế</div>
-      <div class="nm-line"></div>
-    </div>
-    <div class="nm rv d3">
-      <div class="nm-pre">// 03</div>
-      <div class="nm-n">3</div>
-      <div class="nm-l">Ứng dụng mobile hiện đại</div>
-      <div class="nm-line"></div>
-    </div>
-    <div class="nm rv d4">
-      <div class="nm-pre">// 04</div>
-      <div class="nm-n">5<sup>+</sup></div>
-      <div class="nm-l">Tỉnh thành có chi nhánh</div>
-      <div class="nm-line"></div>
-    </div>
-  </div>
-</div>
-
-<!-- ══ AREAS ══ -->
-<section class="areas sec">
-  <div class="cw">
-    <div class="areas-hd rv">
-      <div class="eyebrow center">Lĩnh vực hoạt động</div>
-      <h2 class="s-title center">Đa Lĩnh Vực, <em>Một Tập Đoàn</em></h2>
-      <span class="g-bar center"></span>
-    </div>
-    <div class="areas-grid rv d1">
-      <div class="ac photo">
-        <div class="ac-bg"><img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=85" alt=""></div>
-        <div class="ac-body">
-          <div class="ac-ico">🛢️</div>
-          <h3>Dầu nhớt & Ắc quy</h3>
-          <p>Shell, Castrol, Motul, GS Battery và Mekong Penda tại ĐBSCL.</p>
-          <div class="ac-more">Xem thêm →</div>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-shape s1"></div>
+  <div class="hero-bg-shape s2"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">Bảo hiểm Sức Khỏe hàng đầu Việt Nam</div>
+      <h1 class="hero-title">Bảo Hiểm Sức Khỏe<br /><em>Trọn Đời</em></h1>
+      <p class="hero-subtitle">Đồng hành xuyên suốt – trọn đời an tâm. Bảo vệ sức khỏe từ 30 ngày tuổi đến 100 tuổi với quyền lợi toàn diện và không gián đoạn.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="num">100</div>
+          <div class="lbl">Tuổi bảo vệ tối đa</div>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <div class="num">1.2 tỷ</div>
+          <div class="lbl">STBH tối đa/năm</div>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <div class="num">10.000+</div>
+          <div class="lbl">Cơ sở y tế toàn cầu</div>
         </div>
       </div>
-      <div class="ac"><div class="ac-ghost">02</div><div class="ac-ico">🛒</div><h3>TipaShop – TMĐT</h3><p>Mua sắm trực tuyến đa danh mục, giao hàng nhanh toàn quốc.</p><div class="ac-more">Xem thêm →</div></div>
-      <div class="ac"><div class="ac-ghost">03</div><div class="ac-ico">🚚</div><h3>TipaExpress</h3><p>Giao hàng nhanh kết nối BEST Express — phủ sóng toàn ĐBSCL.</p><div class="ac-more">Xem thêm →</div></div>
-      <div class="ac"><div class="ac-ghost">04</div><div class="ac-ico">🧴</div><h3>Phân phối Unilever</h3><p>Nhà phân phối chính thức tại Bạc Liêu và các tỉnh lân cận.</p><div class="ac-more">Xem thêm →</div></div>
-      <div class="ac"><div class="ac-ghost">05</div><div class="ac-ico">🏍️</div><h3>Lốp xe Kenda</h3><p>Đại lý lốp xe Kenda Đài Loan cho xe máy và ô tô.</p><div class="ac-more">Xem thêm →</div></div>
-      <div class="ac"><div class="ac-ghost">06</div><div class="ac-ico">📲</div><h3>Tín Phát CRM 5.0</h3><p>Hệ thống quản trị doanh nghiệp chuyển đổi số toàn diện.</p><div class="ac-more">Xem thêm →</div></div>
+      <div class="hero-actions">
+        <a href="#plans" class="btn-primary">Xem gói bảo hiểm</a>
+        <a href="#example" class="btn-outline">Xem ví dụ minh hoạ</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="floating-pill p1">✦ Bảo vệ trọn đời</div>
+        <div class="floating-pill p2">🌏 Toàn cầu</div>
+        <div class="hero-card-label">Chiếc Dù Bảo Vệ AIA</div>
+        <div class="hero-card-title">Bảo vệ không gián đoạn</div>
+        <div class="hero-card-sub">Từng giai đoạn cuộc đời đều được bảo vệ</div>
+        <ul class="coverage-list">
+          <li><div class="icon">🏥</div><div><strong>Điều trị nội trú</strong> toàn diện – phẫu thuật, ICU, ghép tạng</div></li>
+          <li><div class="icon">🎗️</div><div><strong>Điều trị ung thư</strong> theo chi phí y tế thực tế</div></li>
+          <li><div class="icon">🤰</div><div><strong>Quyền lợi thai sản</strong> toàn diện từ gói Toàn Diện</div></li>
+          <li><div class="icon">💊</div><div><strong>Điều trị ngoại trú</strong> & chăm sóc nha khoa mở rộng</div></li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ══ NEWS ══ -->
-<section class="news sec">
-  <div class="cw">
-    <div class="row-hd rv">
-      <div>
-        <div class="eyebrow">Cập nhật mới nhất</div>
-        <h2 class="s-title">Tin Tức & <em>Sự Kiện</em></h2>
+<!-- WHY -->
+<section id="why">
+  <div class="container reveal">
+    <div class="section-tag">Lý do cần bảo hiểm trọn đời</div>
+    <h2 class="section-title">Sức khỏe không chờ đợi –<br/><em>bạn có sẵn sàng?</em></h2>
+    <p class="section-sub">Chi phí y tế tăng gấp 1.6 lần tỷ lệ lạm phát mỗi năm. Trung bình người cao tuổi mắc 3–4 bệnh mãn tính và nhập viện 2.3 lần/năm.</p>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">👴</div>
+        <h3>74.7 tuổi</h3>
+        <p>Tuổi thọ trung bình 2024. Người cao tuổi cần bảo vệ sức khỏe dài hạn và liên tục.</p>
       </div>
-      <a href="#" class="see-all">Xem tất cả →</a>
+      <div class="why-card">
+        <div class="why-icon">💊</div>
+        <h3>3–4 bệnh</h3>
+        <p>Trung bình mỗi người cao tuổi mắc 3–4 bệnh mãn tính cùng lúc theo Bộ Y Tế.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">💸</div>
+        <h3>8–10 lần</h3>
+        <p>Chi phí điều trị người cao tuổi cao hơn người trẻ từ 8 đến 10 lần mỗi năm.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📈</div>
+        <h3>×1.6 lạm phát</h3>
+        <p>Chi phí y tế tăng nhanh hơn tỷ lệ lạm phát, ảnh hưởng trực tiếp đến tài chính gia đình.</p>
+      </div>
     </div>
-    <div class="news-grid rv d1">
-      <div class="nf">
-        <div class="nf-img">
-          <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=900&q=85" alt="">
-          <span class="nf-cat">Tin Công Ty</span>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<section id="stats">
+  <div class="stats-grid reveal">
+    <div class="stat-item">
+      <div class="big">~1 tỷ</div>
+      <div class="label">Chi phí ghép tạng<br/>mỗi lần</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <div class="big">~176 tr</div>
+      <div class="label">Chi phí điều trị<br/>ung thư/năm</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <div class="big">~100 tr</div>
+      <div class="label">Phẫu thuật<br/>nội soi robot</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <div class="big">4 tr/ngày</div>
+      <div class="label">Phòng và giường<br/>bệnh (tối đa)</div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANS -->
+<section id="plans">
+  <div class="plans-header reveal">
+    <div class="section-tag">Gói bảo hiểm</div>
+    <h2 class="section-title">Chọn gói phù hợp<br/><em>với bạn</em></h2>
+    <p class="section-sub">Bốn chương trình linh hoạt, phạm vi bảo vệ từ Việt Nam đến Toàn cầu (trừ Hoa Kỳ)</p>
+  </div>
+  <div class="plans-grid">
+    <!-- CƠ BẢN -->
+    <div class="plan-card reveal">
+      <div class="plan-header">
+        <div class="name">Cơ Bản</div>
+        <div class="stbh">STBH / năm hợp đồng</div>
+        <div class="amount">150 triệu đ</div>
+      </div>
+      <div class="plan-body">
+        <div class="plan-feature"><span class="check">✓</span><div>Phòng/giường bệnh <span class="val">850k/ngày</span></div></div>
+        <div class="plan-feature"><span class="check">✓</span><div>Phẫu thuật theo chi phí y tế</div></div>
+        <div class="plan-feature"><span class="check">✓</span><div>ICU theo chi phí y tế</div></div>
+        <div class="plan-feature"><span class="check">✓</span><div>Hỗ trợ nằm viện <span class="val">150k/ngày</span></div></div>
+        <div class="plan-feature"><span class="check">✓</span><div>Điều trị ung thư theo chi phí</div></div>
+        <div class="plan-feature"><span class="check">✓</span><div>Cấp cứu: <span class="val">3 triệu/lần</span></div></div>
+        <div class="plan-feature"><span class="check">✓</span><div>Lọc máu: <span class="val">5 triệu/năm</span></div></div>
+      </div>
+      <div class="plan-cta-wrap"><button class="plan-cta">Chọn gói này</button></div>
+    </div>
+
+    <!-- NÂNG CAO -->
+    <div class="plan-card reveal">
+      <div class="plan-header">
+        <div class="name">Nâng Cao</div>
+        <div class="stbh">STBH / năm hợp đồng</div>
+        <div class="amount">350 triệu đ</div>
+      </div>
+      <div class="plan-body">
+        <div class="plan-feature"><span class="check">✓</span><div>Phòng/giường bệnh <span class="val">2 tr/ngày</span></div></div>
+        <div class="plan-feature"><span class="check">✓</span><div>Phẫu thuật theo chi phí y tế</div></div>
+        <div class="plan-feature"><span class="check">✓</span><div>ICU theo chi phí y tế</div></div>
+        <div class="plan-feature"><span class="check">✓</span><div>Hỗ trợ nằm viện <span class="val">250k/ngày</span></div></div>
+        <div class="plan-feature"><span class="check">✓</span><div>Điều trị ung thư theo chi phí</div></div>
+        <div class="plan-feature"><span class="check">✓</span><div>Cấp cứu: <span class="val">6 triệu/lần</span></div></div>
+        <div class="plan-feature"><span class="check">✓</span><div>Lọc máu: <span class="val">7 triệu/năm</span></div></div>
+      </div>
+      <div class="plan-cta-wrap"><button class="plan-cta">Chọn gói này</button></div>
+    </div>
+
+    <!-- TOÀN DIỆN -->
+    <div class="plan-card featured reveal">
+      <div class="plan-badge">Phổ biến nhất</div>
+      <div class="plan-header">
+        <div class="name">Toàn Diện</div>
+        <div class="stbh">STBH / năm hợp đồng</div>
+        <div class="amount">700 triệu đ</div>
+      </div>
+      <div class="plan-body">
+        <div class="plan-feature"><span class="check">✓</span><div>Phòng/giường bệnh <span class="val">3 tr/ngày</span></div></div>
+        <div class="plan-feature"><span class="check">✓</span><div>Phẫu thuật theo chi phí y tế</div></div>
+        <div class="plan-feature"><span class="check">✓</span><div>Quyền lợi thai sản toàn diện</div></div>
+        <div class="plan-feature"><span class="check">✓</span><div>Điều trị giảm nhẹ <span class="val">25 tr</span></div></div>
+        <div class="plan-feature"><span class="check">✓</span><div>Điều trị ung thư theo chi phí</div></div>
+        <div class="plan-feature"><span class="check">✓</span><div>Cấp cứu: <span class="val">10 triệu/lần</span></div></div>
+        <div class="plan-feature"><span class="check">✓</span><div>Lọc máu: <span class="val">10 triệu/năm</span></div></div>
+      </div>
+      <div class="plan-cta-wrap"><button class="plan-cta">Chọn gói này</button></div>
+    </div>
+
+    <!-- HOÀN HẢO -->
+    <div class="plan-card reveal">
+      <div class="plan-header">
+        <div class="name">Hoàn Hảo</div>
+        <div class="stbh">STBH / năm hợp đồng</div>
+        <div class="amount">1.2 tỷ đ</div>
+      </div>
+      <div class="plan-body">
+        <div class="plan-feature"><span class="check">✓</span><div>Phòng/giường bệnh <span class="val">5.5 tr/ngày</span></div></div>
+        <div class="plan-feature"><span class="check">✓</span><div>Phẫu thuật theo chi phí y tế</div></div>
+        <div class="plan-feature"><span class="check">✓</span><div>Thai sản STBH <span class="val">40 triệu</span></div></div>
+        <div class="plan-feature"><span class="check">✓</span><div>Điều trị giảm nhẹ <span class="val">50 tr</span></div></div>
+        <div class="plan-feature"><span class="check">✓</span><div>Cấp cứu theo chi phí y tế</div></div>
+        <div class="plan-feature"><span class="check">✓</span><div>Lọc máu: <span class="val">50 triệu/năm</span></div></div>
+        <div class="plan-feature"><span class="check">✓</span><div>Hỗ trợ nằm viện <span class="val">600k/ngày</span></div></div>
+      </div>
+      <div class="plan-cta-wrap"><button class="plan-cta">Chọn gói này</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section id="benefits">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-tag">Quyền lợi sản phẩm</div>
+      <h2 class="section-title">Bảo vệ <em>toàn diện</em><br/>mọi giai đoạn</h2>
+    </div>
+    <div class="benefits-wrap">
+      <div class="benefit-tabs" id="benefitTabs">
+        <div class="benefit-tab active" data-tab="0">
+          <div class="tab-icon">🏥</div>
+          <div>
+            <h4>Điều trị Nội trú</h4>
+            <p>Nằm viện, phẫu thuật, ICU không giới hạn phụ</p>
+          </div>
         </div>
-        <div class="nf-body">
-          <h3>Tín Phát Việt khai trương đầu năm 2026 với khí thế bứt phá mạnh mẽ</h3>
-          <p>Khởi đầu mới – Khí thế mới – Thành công mới. Tín Phát Group chính thức khai trương với quyết tâm bứt phá mạnh mẽ trong năm 2026. Toàn đội ngũ sẵn sàng ra quân với tinh thần cao nhất.</p>
-          <div class="nf-foot">
-            <span class="nf-date">24 tháng 02, 2026</span>
-            <div class="nf-arr">→</div>
+        <div class="benefit-tab" data-tab="1">
+          <div class="tab-icon">🤰</div>
+          <div>
+            <h4>Quyền lợi Thai sản</h4>
+            <p>Khám thai, sinh nở, biến chứng, trẻ sơ sinh</p>
+          </div>
+        </div>
+        <div class="benefit-tab" data-tab="2">
+          <div class="tab-icon">🎗️</div>
+          <div>
+            <h4>Điều trị Ung thư</h4>
+            <p>Chi trả toàn bộ theo chi phí y tế thực tế</p>
+          </div>
+        </div>
+        <div class="benefit-tab" data-tab="3">
+          <div class="tab-icon">🦷</div>
+          <div>
+            <h4>Quyền lợi Nha khoa</h4>
+            <p>Tối đa 10 triệu/năm – khám, trám, nhổ, bọc răng</p>
+          </div>
+        </div>
+        <div class="benefit-tab" data-tab="4">
+          <div class="tab-icon">🏨</div>
+          <div>
+            <h4>Điều trị Ngoại trú</h4>
+            <p>Khám bệnh, xét nghiệm, thuốc theo toa</p>
+          </div>
+        </div>
+        <div class="benefit-tab" data-tab="5">
+          <div class="tab-icon">🏛️</div>
+          <div>
+            <h4>Nhân đôi tại Bệnh viện công</h4>
+            <p>Gấp đôi hạn mức khi điều trị bệnh viện công</p>
           </div>
         </div>
       </div>
-      <div class="ns-wrap">
-        <div class="ns">
-          <div class="ns-img"><img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=300&q=80" alt=""></div>
-          <div class="ns-body"><div class="ns-cat">Khen thưởng</div><h4>Khen thưởng tháng 12 năm 2025</h4><p>Nhân viên được ghi nhận với đóng góp xuất sắc.</p><div class="ns-date">16/01/2026</div></div>
-        </div>
-        <div class="ns">
-          <div class="ns-img"><img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=300&q=80" alt=""></div>
-          <div class="ns-body"><div class="ns-cat">Khuyến Mãi</div><h4>SALE OFF Dầu Cầu Mekong Penda EP 85W90</h4><p>Ưu đãi giá sốc dành cho đại lý — số lượng có hạn.</p><div class="ns-date">28/02/2026</div></div>
-        </div>
-        <div class="ns">
-          <div class="ns-img"><img src="https://images.unsplash.com/photo-1573164574511-73c773193279?w=300&q=80" alt=""></div>
-          <div class="ns-body"><div class="ns-cat">Hoạt Động</div><h4>Họp kinh doanh định kỳ tháng 10/2025</h4><p>Buổi họp toàn khối với đầy đủ đội ngũ tham gia.</p><div class="ns-date">14/11/2025</div></div>
-        </div>
+
+      <div class="benefit-detail" id="benefitDetail">
+        <!-- filled by JS -->
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ APP ══ -->
-<section class="app-sec sec">
-  <div class="cw">
-    <div class="app-inner">
-      <div class="rv">
-        <div class="eyebrow">Ứng dụng di động</div>
-        <h2 class="app-l">Tải Ứng Dụng<br><em>Tín Phát</em></h2>
-        <span class="g-bar"></span>
-        <p class="sec-body" style="max-width:400px;margin-bottom:32px">TipaShop, TipaExpress và Tín Phát CRM — mua sắm, giao hàng và quản trị doanh nghiệp ngay trên điện thoại.</p>
-        <div class="app-rows">
-          <a href="#" class="app-row"><div class="ar-ico">🛒</div><div><div class="ar-nm">TipaShop</div><div class="ar-sb">Mua sắm đa danh mục</div></div><div class="ar-arr">→</div></a>
-          <a href="#" class="app-row"><div class="ar-ico">🚚</div><div><div class="ar-nm">TipaExpress</div><div class="ar-sb">Giao hàng toàn ĐBSCL</div></div><div class="ar-arr">→</div></a>
-          <a href="#" class="app-row"><div class="ar-ico">📊</div><div><div class="ar-nm">Tín Phát CRM</div><div class="ar-sb">Quản trị doanh nghiệp 5.0</div></div><div class="ar-arr">→</div></a>
-        </div>
+<!-- EXAMPLE -->
+<section id="example">
+  <div class="example-header reveal">
+    <div class="section-tag">Ví dụ minh hoạ</div>
+    <h2 class="section-title">Thực tế <em>quyền lợi</em><br/>ra sao?</h2>
+    <p class="section-sub">Quyền lợi thực tế có thể gấp hàng chục lần phí đóng trong năm đầu tiên</p>
+  </div>
+  <div class="example-grid">
+    <!-- Family 1 -->
+    <div class="example-card reveal">
+      <div class="example-family">Gia đình anh A – Chương trình Nâng Cao</div>
+      <div class="example-title">3 người • Phí 21.4 triệu/năm</div>
+      <div class="example-events">
+        <div class="event-row"><span class="event-name">Bé C – Viêm phế quản (ngoại trú)</span><span class="event-amount">2.5 tr</span></div>
+        <div class="event-row"><span class="event-name">Anh A – Viêm ruột thừa (5 ngày)</span><span class="event-amount">40 tr</span></div>
+        <div class="event-row"><span class="event-name">Chị B – U trực tràng, phẫu thuật</span><span class="event-amount">300 tr</span></div>
+        <div class="event-row"><span class="event-name">Chị B – Xạ trị ung thư (bv công)</span><span class="event-amount">200 tr</span></div>
+        <div class="event-row"><span class="event-name">Bé C – Rối loạn tiêu hóa (5 ngày)</span><span class="event-amount">15 tr</span></div>
+        <div class="event-row"><span class="event-name">Hỗ trợ nằm viện (30 ngày)</span><span class="event-amount">7.5 tr</span></div>
       </div>
-      <div class="app-feats rv d2">
-        <div class="af"><div class="af-num">01</div><div><h5>TipaShop</h5><p>Mua sắm đa danh mục, hàng chất lượng, giao nhanh toàn quốc. Đặt hàng dễ dàng, thanh toán linh hoạt.</p></div></div>
-        <div class="af"><div class="af-num">02</div><div><h5>TipaExpress</h5><p>Kết nối BEST Express, phủ sóng toàn ĐBSCL. Theo dõi đơn hàng thời gian thực.</p></div></div>
-        <div class="af"><div class="af-num">03</div><div><h5>Tín Phát CRM</h5><p>Theo dõi KPI, OKR và hiệu suất đội ngũ. Chuyển đổi số mô hình 5.0 hiện đại.</p></div></div>
+      <div class="example-total">
+        <div class="label">Tổng quyền lợi nhận được</div>
+        <div class="value">565 triệu đ</div>
+        <div class="sub">Gấp hơn 26 lần tổng phí đóng</div>
+      </div>
+    </div>
+
+    <!-- Family 2 -->
+    <div class="example-card reveal">
+      <div class="example-family">Chị D + Bà H – Chương trình Toàn Diện</div>
+      <div class="example-title">2 người • Phí 24.7 triệu/năm</div>
+      <div class="example-events">
+        <div class="event-row"><span class="event-name">Chị D – Khám thai & sinh thường</span><span class="event-amount">30 tr</span></div>
+        <div class="event-row"><span class="event-name">Bà H – Phẫu thuật thay khớp gối</span><span class="event-amount">150 tr</span></div>
+        <div class="event-row"><span class="event-name">Bà H – Chăm sóc y tế tại nhà 20 ngày</span><span class="event-amount">10 tr</span></div>
+        <div class="event-row"><span class="event-name">Bà H – Ung thư xương (hóa trị 3 năm)</span><span class="event-amount">200 tr/năm</span></div>
+        <div class="event-row"><span class="event-name">Bà H – Điều trị giảm nhẹ</span><span class="event-amount">25 tr</span></div>
+        <div class="event-row"><span class="event-name">Trẻ sơ sinh chăm sóc 7 ngày</span><span class="event-amount">10 tr</span></div>
+      </div>
+      <div class="example-total">
+        <div class="label">Tổng quyền lợi sau 8 năm</div>
+        <div class="value">825 triệu đ</div>
+        <div class="sub">Gấp gần 4 lần tổng phí đóng</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ RECRUIT ══ -->
-<section class="recruit sec">
-  <div class="cw">
-    <div class="row-hd rv">
+<!-- VITALITY -->
+<section id="vitality">
+  <div class="vitality-inner">
+    <div class="vitality-text reveal">
+      <div class="section-tag" style="background:rgba(232,83,106,.25);color:var(--rose-light)">AIA Vitality</div>
+      <h2 class="section-title">Sống khỏe,<br/><em style="color:var(--rose-light)">nhận thưởng</em></h2>
+      <p class="section-sub">Chương trình sống khỏe dựa trên nghiên cứu khoa học – giúp bạn cải thiện sức khỏe toàn diện và nhận thưởng lên đến 60% phí bảo hiểm.</p>
+      <div class="vitality-levels">
+        <div class="vitality-level">
+          <div class="level-info"><span class="level-badge lv-dong">Đồng</span><span class="level-pts">0 – 9.999 điểm</span></div>
+          <div class="level-bar-wrap"><div class="level-bar lb-dong"></div></div>
+        </div>
+        <div class="vitality-level">
+          <div class="level-info"><span class="level-badge lv-bac">Bạc</span><span class="level-pts">10.000 – 19.999</span></div>
+          <div class="level-bar-wrap"><div class="level-bar lb-bac"></div></div>
+        </div>
+        <div class="vitality-level">
+          <div class="level-info"><span class="level-badge lv-vang">Vàng</span><span class="level-pts">20.000 – 29.999</span></div>
+          <div class="level-bar-wrap"><div class="level-bar lb-vang"></div></div>
+        </div>
+        <div class="vitality-level">
+          <div class="level-info"><span class="level-badge lv-bachkim">Bạch Kim</span><span class="level-pts">30.000+ điểm</span></div>
+          <div class="level-bar-wrap"><div class="level-bar lb-bachkim"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vitality-rewards reveal">
+      <div class="reward-card">
+        <div class="rew-title">🎁 Thưởng sống khỏe Vitality</div>
+        <div class="rew-num">Đến 60%</div>
+        <div class="rew-desc">Nhận thưởng lên đến 60% trung bình phí bảo hiểm đã đóng trong 3 năm hợp đồng, mỗi 3 năm một lần.</div>
+      </div>
+      <div class="reward-card">
+        <div class="rew-title">📊 Tỷ lệ thưởng theo hạng thành viên</div>
+        <div class="rew-desc">
+          Bắt đầu từ 15% (năm đầu). Mỗi năm thay đổi theo hạng:<br/>
+          Bạch Kim: <strong style="color:var(--rose-light)">+10%</strong> &nbsp;|&nbsp; Vàng: <strong style="color:var(--rose-light)">+5%</strong> &nbsp;|&nbsp; Bạc: -2.5% &nbsp;|&nbsp; Đồng: -5%
+        </div>
+      </div>
+      <div class="reward-card">
+        <div class="rew-title">🔬 Cách hoạt động</div>
+        <div class="rew-desc">Hiểu rõ sức khỏe bản thân → Cải thiện lối sống → Tích lũy điểm → Nâng hạng thành viên → Nhận phần thưởng và ưu đãi ngày càng lớn hơn.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NETWORK -->
+<section id="network">
+  <div class="network-inner">
+    <div class="network-map reveal">
+      <div class="section-tag">Hộ chiếu sức khỏe AIA</div>
+      <h3 style="font-family:var(--font-display);font-size:1.6rem;color:var(--charcoal);margin-bottom:20px">Mạng lưới y tế <em style="color:var(--rose)">toàn cầu</em></h3>
+      <div class="continent-grid">
+        <div class="continent-card"><div class="cont-icon">🌏</div><div class="cont-name">Châu Á</div><div class="cont-flag">125+ bệnh viện hàng đầu</div></div>
+        <div class="continent-card"><div class="cont-icon">🌍</div><div class="cont-name">Châu Âu</div><div class="cont-flag">Mạng lưới rộng khắp</div></div>
+        <div class="continent-card"><div class="cont-icon">🌎</div><div class="cont-name">Châu Mỹ**</div><div class="cont-flag">Ngoại trừ Hoa Kỳ</div></div>
+        <div class="continent-card"><div class="cont-icon">🦘</div><div class="cont-name">Châu Úc</div><div class="cont-flag">Cơ sở y tế đẳng cấp</div></div>
+      </div>
+      <p style="font-size:.72rem;color:var(--text-muted);margin-top:12px">**Áp dụng cho Chương trình Toàn Diện và Hoàn Hảo</p>
+    </div>
+
+    <div class="network-text reveal">
       <div>
-        <div class="eyebrow">Cơ hội nghề nghiệp</div>
-        <h2 class="s-title">Gia Nhập <em>Tín Phát</em></h2>
+        <div class="section-tag">Dịch vụ Song hành y tế</div>
+        <h3 style="font-family:var(--font-display);font-size:1.7rem;color:var(--charcoal);margin-bottom:24px">Bền trí lực –<br/><em style="color:var(--rose)">Vững đồng hành</em></h3>
       </div>
-      <a href="#" class="see-all">Xem tất cả →</a>
-    </div>
-    <div class="rec-grid rv d1">
-      <div class="rc"><span class="rc-badge">Sales</span><h4>Nhân viên bán hàng Unilever</h4><p>Nam/nữ tốt nghiệp 12/12, giao tiếp tốt, có xe máy. Thu nhập hấp dẫn.</p><div class="rc-loc">📍 Bạc Liêu</div><div class="rc-arr">→</div></div>
-      <div class="rc"><span class="rc-badge">Logistics</span><h4>Shipper BEST Express</h4><p>Giao hàng khu vực Hòa Bình, Bạc Liêu, Vĩnh Lợi. Lương + thưởng tốt.</p><div class="rc-loc">📍 Hòa Bình, Bạc Liêu</div><div class="rc-arr">→</div></div>
-      <div class="rc"><span class="rc-badge">Management</span><h4>Giám sát bán hàng khu vực</h4><p>Triển khai và giám sát bán hàng toàn khu vực ĐBSCL.</p><div class="rc-loc">📍 Cà Mau, Bạc Liêu</div><div class="rc-arr">→</div></div>
-      <div class="rc"><span class="rc-badge">IT</span><h4>Quản trị Website TMĐT</h4><p>WordPress, HTML/CSS/JS. Phát triển nền tảng thương mại điện tử Tín Phát.</p><div class="rc-loc">📍 Bạc Liêu</div><div class="rc-arr">→</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ PARTNERS ══ -->
-<section class="partners">
-  <div class="cw">
-    <div class="partners-hd rv">
-      <div class="eyebrow center">Đối tác chiến lược</div>
-      <h2 class="s-title center">Được Tin Tưởng Bởi<br><em>Các Thương Hiệu Hàng Đầu</em></h2>
-    </div>
-    <div class="part-grid rv d1">
-      <div class="pc"><div class="pc-nm">SHELL</div></div>
-      <div class="pc"><div class="pc-nm">CASTROL</div></div>
-      <div class="pc"><div class="pc-nm">MOTUL</div></div>
-      <div class="pc"><div class="pc-nm">UNILEVER</div></div>
-      <div class="pc"><div class="pc-nm">GS BATTERY</div></div>
-      <div class="pc"><div class="pc-nm">KENDA</div></div>
+      <div class="net-stat">
+        <div class="stat-icon">🔬</div>
+        <div><h4>10.000+</h4><p>Cơ sở y tế trên toàn cầu tiếp cận được qua dịch vụ Song hành y tế</p></div>
+      </div>
+      <div class="net-stat">
+        <div class="stat-icon">🩺</div>
+        <div><h4>Đánh giá chẩn đoán</h4><p>Kiểm tra và xác định kế hoạch điều trị cùng chuyên gia quốc tế</p></div>
+      </div>
+      <div class="net-stat">
+        <div class="stat-icon">💬</div>
+        <div><h4>Hỗ trợ không giới hạn</h4><p>Giải đáp mọi thắc mắc trong suốt quá trình điều trị, không giới hạn thời gian</p></div>
+      </div>
+      <div class="net-stat">
+        <div class="stat-icon">🏆</div>
+        <div><h4>20+ năm kinh nghiệm</h4><p>Teladoc Health – đối tác hàng đầu thế giới về chăm sóc sức khỏe trực tuyến</p></div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ══ CTA ══ -->
-<section class="cta-band">
-  <div class="cta-top"></div>
-  <div class="cw cta-in rv">
-    <h2>Sẵn sàng <em>hợp tác</em><br>cùng chúng tôi?</h2>
-    <p>Đăng ký làm nhà phân phối, đại lý hoặc tham gia hệ sinh thái TipaShop — mở ra cơ hội kinh doanh không giới hạn.</p>
-    <div class="cta-btns">
-      <a href="#" class="btn-cta-fill">Đăng ký ngay →</a>
-      <button class="btn-cta-ghost">Liên hệ tư vấn</button>
+<!-- WHO -->
+<section id="who" style="background: white;">
+  <div class="container">
+    <div class="reveal" style="text-align:center;margin-bottom:50px">
+      <div class="section-tag">Điều kiện tham gia</div>
+      <h2 class="section-title">Ai có thể <em>tham gia?</em></h2>
+    </div>
+    <div class="who-inner">
+      <div>
+        <div class="info-block reveal" style="margin-bottom:24px">
+          <h3>Thông tin cơ bản</h3>
+          <ul class="info-list">
+            <li><span class="key">Tuổi tham gia:</span><span class="val">30 ngày tuổi đến 70 tuổi</span></li>
+            <li><span class="key">Tuổi tham gia AIA Vitality:</span><span class="val">Từ 18 tuổi trở lên</span></li>
+            <li><span class="key">Tuổi tái tục tối đa:</span><span class="val">99 tuổi</span></li>
+            <li><span class="key">Thời hạn hợp đồng:</span><span class="val">1 năm, tái tục hàng năm</span></li>
+            <li><span class="key">Định kỳ đóng phí:</span><span class="val">Theo sản phẩm bảo hiểm nhân thọ</span></li>
+          </ul>
+        </div>
+        <div class="info-block reveal">
+          <h3>Thời gian chờ</h3>
+          <ul class="info-list">
+            <li><span class="key">Bệnh đặc biệt, ung thư, ghép tạng:</span><span class="val">90 ngày</span></li>
+            <li><span class="key">Quyền lợi thai sản khác:</span><span class="val">270 ngày</span></li>
+            <li><span class="key">Các bệnh thông thường:</span><span class="val">30 ngày</span></li>
+            <li><span class="key">Tai nạn:</span><span class="val">Không có thời gian chờ</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="info-block reveal" style="background:white;border-color:var(--rose-muted);border-left-width:2px">
+        <h3 style="color:var(--text-muted)">Một số trường hợp loại trừ chính</h3>
+        <div class="exclusions-grid">
+          <div class="excl-item">Bệnh có sẵn (chưa được khai báo khi tham gia)</div>
+          <div class="excl-item">Bệnh bẩm sinh, dị tật bẩm sinh</div>
+          <div class="excl-item">Điều trị thử nghiệm chưa được công nhận</div>
+          <div class="excl-item">Tự gây thương tích, ảnh hưởng bởi rượu, ma túy</div>
+          <div class="excl-item">Phá thai không có nguyên nhân bệnh lý</div>
+          <div class="excl-item">Phẫu thuật thẩm mỹ (trừ phục hồi chức năng do tai nạn)</div>
+          <div class="excl-item">HIV/AIDS, bệnh lây truyền qua đường tình dục</div>
+          <div class="excl-item">Thể thao mạo hiểm chuyên nghiệp</div>
+          <div class="excl-item">Chiến tranh, khủng bố</div>
+          <div class="excl-item">Gian lận bảo hiểm</div>
+        </div>
+        <p style="font-size:.75rem;color:var(--text-muted);margin-top:16px">Chi tiết đầy đủ tại Quy tắc và Điều khoản sản phẩm Bảo hiểm Sức Khỏe Trọn Đời.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ══ FOOTER ══ -->
+<!-- CTA -->
+<section id="cta">
+  <h2>Bắt đầu hành trình<br/>bảo vệ sức khỏe hôm nay</h2>
+  <p>Đồng hành xuyên suốt – trọn đời an tâm cùng AIA Việt Nam. Tư vấn miễn phí, không ràng buộc.</p>
+  <div class="cta-actions">
+    <a href="tel:02838122777" class="btn-white">📞 028 3812 2777</a>
+    <a href="https://aia.com.vn" target="_blank" class="btn-ghost">Truy cập aia.com.vn</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-  <div class="ft-main">
-    <div>
-      <div class="ft-brand">Tín Phát <em>Group</em></div>
-      <span class="ft-est">Est. 2002 · Bạc Liêu, Việt Nam</span>
-      <p class="ft-about">"Chuyên nghiệp – Tận tình – Chất lượng." Cam kết mang lại dịch vụ tốt nhất, hướng tới Tập đoàn Thương mại quy mô toàn cầu.</p>
-      <div class="ft-contacts">
-        <span class="ftc">📍 315 Nguyễn Thị Minh Khai, P.5, TP Bạc Liêu</span>
-        <span class="ftc"><a href="tel:0949299494">📞 0949 29 94 94 · 02913-99-2299</a></span>
-        <span class="ftc"><a href="mailto:contact@tinphat.com">✉ contact@tinphat.com</a></span>
-      </div>
-      <div class="ft-soc">
-        <a href="#" class="fso">f</a><a href="#" class="fso">t</a>
-        <a href="#" class="fso">z</a><a href="#" class="fso">▶</a>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="brand-name">AIA <span>Việt Nam</span></div>
+      <p>Sống Khỏe Hơn, Lâu Hơn, Hạnh Phúc Hơn. Công ty TNHH Bảo hiểm Nhân thọ AIA (Việt Nam) – đồng hành cùng sức khỏe của bạn.</p>
+      <div class="contact">
+        Hotline: <a href="tel:02838122777">028 3812 2777</a><br/>
+        Website: <a href="https://aia.com.vn" target="_blank">aia.com.vn</a>
       </div>
     </div>
-    <div class="ft-col">
-      <h5>Về chúng tôi</h5>
-      <a href="#">Giới thiệu</a><a href="#">Các lĩnh vực</a>
-      <a href="#">Ban lãnh đạo</a><a href="#">Tin tức</a>
+    <div class="footer-col">
+      <h4>Sản phẩm</h4>
+      <ul>
+        <li><a href="#plans">Gói Cơ Bản</a></li>
+        <li><a href="#plans">Gói Nâng Cao</a></li>
+        <li><a href="#plans">Gói Toàn Diện</a></li>
+        <li><a href="#plans">Gói Hoàn Hảo</a></li>
+        <li><a href="#benefits">Quyền lợi bổ sung</a></li>
+      </ul>
     </div>
-    <div class="ft-col">
-      <h5>Dịch vụ</h5>
-      <a href="#">Dầu nhớt & Ắc quy</a><a href="#">TipaShop</a>
-      <a href="#">TipaExpress</a><a href="#">Tín Phát CRM</a>
-    </div>
-    <div class="ft-col">
-      <h5>Hợp tác</h5>
-      <a href="#">Đăng ký đại lý</a><a href="#">Tham gia TipaShop</a>
-      <a href="#">Cung ứng sản phẩm</a><a href="#">Tuyển dụng</a>
+    <div class="footer-col">
+      <h4>Tìm hiểu thêm</h4>
+      <ul>
+        <li><a href="#vitality">AIA Vitality</a></li>
+        <li><a href="#network">Song hành y tế</a></li>
+        <li><a href="#example">Ví dụ minh hoạ</a></li>
+        <li><a href="#who">Điều kiện tham gia</a></li>
+        <li><a href="#cta">Liên hệ tư vấn</a></li>
+      </ul>
     </div>
   </div>
-  <div class="ft-bottom">
-    <p class="ft-copy">© 2026 Tín Phát Group · Bạc Liêu, Việt Nam · tinphat.com</p>
+  <div class="footer-bottom">
+    <div class="disclaimer">Tài liệu này chỉ mang tính tham khảo và không phải là hợp đồng bảo hiểm. Chi tiết quyền lợi được quy định trong Quy tắc và Điều khoản của sản phẩm Bảo hiểm Sức Khỏe Trọn Đời.</div>
+    <div>© 2025 AIA Việt Nam. All rights reserved.</div>
   </div>
 </footer>
 
 <script>
-/* ── Scroll progress ── */
-const prog = document.getElementById('prog');
-window.addEventListener('scroll', () => {
-  const s = document.documentElement.scrollTop;
-  const h = document.documentElement.scrollHeight - window.innerHeight;
-  prog.style.width = (h > 0 ? s / h * 100 : 0) + '%';
-}, { passive:true });
-
-/* ── Sticky navbar ── */
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('on', scrollY > 50), { passive:true });
-
-/* ── Hamburger / mobile menu ── */
-const ham = document.getElementById('ham');
-const mob = document.getElementById('mob');
-let menuOpen = false;
-ham.addEventListener('click', () => {
-  menuOpen = !menuOpen;
-  ham.classList.toggle('open', menuOpen);
-  mob.classList.toggle('open', menuOpen);
-  document.body.style.overflow = menuOpen ? 'hidden' : '';
-});
-mob.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', () => {
-    menuOpen = false;
-    ham.classList.remove('open');
-    mob.classList.remove('open');
-    document.body.style.overflow = '';
+  // NAV SCROLL
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
   });
-});
 
-/* ── Scroll reveal ── */
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
-}, { threshold: .06, rootMargin: '0px 0px -28px 0px' });
-document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+  // HAMBURGER
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  });
+  function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
 
-/* ── Counter animation ── */
-function runCount(el, to) {
-  const sup = el.querySelector('sup');
-  const suf = sup ? sup.outerHTML : '';
-  let n = 0; const step = to / 70;
-  const t = setInterval(() => {
-    n = Math.min(n + step, to);
-    el.innerHTML = Math.floor(n) + suf;
-    if (n >= to) clearInterval(t);
-  }, 20);
-}
-const cObs = new IntersectionObserver(entries => {
-  if (entries[0].isIntersecting) {
-    document.querySelectorAll('[data-to],[data-cnt]').forEach(el => {
-      const v = +(el.dataset.to || el.dataset.cnt);
-      if (v) runCount(el, v);
-    });
-    cObs.disconnect();
+  // SCROLL REVEAL
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => obs.observe(r));
+
+  // BENEFIT TABS
+  const benefitData = [
+    {
+      icon: '🏥', title: 'Quyền lợi Điều trị Nội trú',
+      desc: 'Chi trả toàn bộ chi phí điều trị nội trú bao gồm phẫu thuật, ICU, thuốc và chăm sóc y tế tại nhà sau xuất viện.',
+      items: [
+        'Phòng và giường bệnh: tối đa 5.5 triệu đ/ngày (gói Hoàn Hảo)',
+        'Phòng ICU theo chi phí y tế thực tế (tối đa 30 ngày/năm)',
+        'Phẫu thuật – theo chi phí y tế thực tế, không giới hạn',
+        'Điều trị trước nhập viện (30 ngày) và sau xuất viện (60 ngày)',
+        'Giường người thân khi NĐBH dưới 18 tuổi hoặc từ 60 tuổi trở lên',
+        'Chăm sóc y tế tại nhà: đến 1 triệu đ/ngày (tối đa 30 ngày/năm)'
+      ]
+    },
+    {
+      icon: '🤰', title: 'Quyền lợi Thai sản',
+      desc: 'Áp dụng cho NĐBH từ 18 đến 45 tuổi, tại Việt Nam. Bảo vệ toàn diện hành trình mang thai và sinh nở.',
+      items: [
+        'Khám thai: đến 3 triệu đ/lần (tối đa 8 lần/năm – gói Hoàn Hảo)',
+        'Phòng và giường bệnh thai sản: đến 5.5 triệu đ/ngày',
+        'Sinh thường hoặc sinh mổ theo chi phí y tế thực tế',
+        'Biến chứng thai sản theo chi phí y tế thực tế',
+        'Chăm sóc trẻ sơ sinh: tối đa 7 ngày sau khi sinh',
+        'Tỷ lệ chi trả: 50% (năm 1) → 80% (năm 2) → 100% (từ năm 3)'
+      ]
+    },
+    {
+      icon: '🎗️', title: 'Điều trị Ung thư & Ghép tạng',
+      desc: 'Chi trả toàn bộ chi phí điều trị ung thư theo thực tế, và hỗ trợ ghép tạng toàn diện.',
+      items: [
+        'Điều trị ung thư: theo chi phí y tế thực tế mỗi lần điều trị',
+        'Ghép tạng (tim, phổi, gan, tụy, thận, tủy xương): theo chi phí y tế',
+        'Hỗ trợ người hiến tạng: 50% chi phí phẫu thuật',
+        'Điều trị giảm nhẹ: đến 50 triệu đ (gói Toàn Diện và Hoàn Hảo)',
+        'Nhân đôi bảo vệ tại bệnh viện công sau khi hết hạn mức',
+        'Không giới hạn số lần điều trị trong suốt thời gian BHSK có hiệu lực'
+      ]
+    },
+    {
+      icon: '🦷', title: 'Quyền lợi Nha khoa',
+      desc: 'Tùy chọn bổ sung với phạm vi điều trị nha khoa toàn diện tại Việt Nam.',
+      items: [
+        'STBH: từ 1 triệu đến 10 triệu đ/năm hợp đồng',
+        'Khám, tư vấn, xét nghiệm và chẩn đoán',
+        'Chẩn đoán hình ảnh X-quang theo chỉ định',
+        'Cạo vôi răng: tối đa 2 lần/năm',
+        'Trám răng, nhổ răng, điều trị tủy, viêm nướu, nha chu',
+        'Bọc răng (loại trừ implant và cầu răng)',
+        'AIA Việt Nam chi trả 80% chi phí y tế'
+      ]
+    },
+    {
+      icon: '🏨', title: 'Quyền lợi Điều trị Ngoại trú',
+      desc: 'Tùy chọn bổ sung, áp dụng tại Việt Nam, giúp kiểm soát chi phí khám bệnh hàng ngày.',
+      items: [
+        'STBH: từ 6 triệu đến 48 triệu đ/năm hợp đồng',
+        'Khám bệnh: từ 600k đến 4.8 triệu/lần khám',
+        'Xét nghiệm và chẩn đoán hình ảnh theo chỉ định',
+        'Thuốc theo toa của bác sĩ',
+        'Vật lý trị liệu theo chỉ định',
+        'Tư vấn/Điều trị sức khỏe tâm thần (gói Toàn Diện, Hoàn Hảo)',
+        'AIA Việt Nam chi trả 80% chi phí y tế'
+      ]
+    },
+    {
+      icon: '🏛️', title: 'Nhân đôi bảo vệ tại Bệnh viện công',
+      desc: 'Quyền lợi đặc biệt: khi đã dùng hết hạn mức STBH trong năm, AIA tiếp tục chi trả gấp đôi.',
+      items: [
+        'Áp dụng khi đã chi trả hết toàn bộ STBH trong năm hợp đồng',
+        'Tự động kích hoạt khi điều trị tại bệnh viện công',
+        'Cộng thêm: từ 150 triệu (gói Cơ Bản) đến 1.2 tỷ đ (gói Hoàn Hảo)',
+        'Không áp dụng cho Quyền lợi Thai sản và Điều trị giảm nhẹ',
+        'Bảo vệ tối đa trong những ca bệnh nặng, chi phí cao',
+        'Hoạt động song song với bảo hiểm y tế nhà nước'
+      ]
+    }
+  ];
+
+  function renderBenefit(idx) {
+    const d = benefitData[idx];
+    document.getElementById('benefitDetail').innerHTML = `
+      <div class="benefit-detail-icon">${d.icon}</div>
+      <h3>${d.title}</h3>
+      <p>${d.desc}</p>
+      <ul class="benefit-items">${d.items.map(i => `<li>${i}</li>`).join('')}</ul>
+    `;
   }
-}, { threshold: .25 });
-const numSection = document.querySelector('.num-grid');
-if (numSection) cObs.observe(numSection);
 
-/* ── app-l h2 style (inline) ── */
-document.querySelectorAll('.app-l').forEach(el => {
-  el.style.cssText = 'font-size:clamp(32px,5.5vw,52px);font-weight:900;letter-spacing:-2px;color:var(--navy);line-height:.92;margin-bottom:12px';
-});
+  renderBenefit(0);
+
+  document.querySelectorAll('.benefit-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.benefit-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      renderBenefit(parseInt(tab.dataset.tab));
+    });
+  });
 </script>
 </body>
 </html>
