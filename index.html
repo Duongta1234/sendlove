@@ -35,17 +35,20 @@
   .section-title p{color:var(--text-muted);font-size:14px;margin-top:8px}
   .divider{width:64px;height:4px;background:var(--red);border-radius:2px;margin:14px auto 36px}
 
-  /* COMPARE */
-  .compare-wrap{max-width:900px;margin:0 auto}
-  .compare-header{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px}
-  .col-header{padding:20px 22px;border-radius:14px 14px 0 0;text-align:center}
+  /* COMPARE — shared */
+  .compare-wrap{max-width:920px;margin:0 auto}
+
+  /* sticky col headers (desktop) */
+  .compare-header{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px;position:sticky;top:0;z-index:10}
+  .col-header{padding:16px 20px;border-radius:14px 14px 0 0;text-align:center}
   .col-header.no{background:linear-gradient(135deg,#1f1f1f,#3a3a3a);color:#fff}
   .col-header.yes{background:linear-gradient(135deg,var(--red-dark),var(--red));color:#fff}
-  .col-header .icon-big{font-size:30px;display:block;margin-bottom:8px}
-  .col-header strong{display:block;font-size:15px;font-weight:700;margin-bottom:4px}
-  .col-header small{font-size:12px;opacity:0.75}
+  .col-header .icon-big{font-size:26px;display:block;margin-bottom:6px}
+  .col-header strong{display:block;font-size:14px;font-weight:700;margin-bottom:3px}
+  .col-header small{font-size:11px;opacity:0.75}
 
   .row-label{text-align:center;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--text-muted);padding:14px 0 4px}
+  .topic-label{display:none}
   .row-item{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:6px}
   .cell{padding:15px 17px;border-radius:var(--radius-sm);display:flex;align-items:flex-start;gap:11px;font-size:13.5px;line-height:1.6}
   .cell.bad{background:#fff;border:1px solid #e8e8e8}
@@ -53,6 +56,19 @@
   .icon-sm{flex-shrink:0;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;margin-top:1px;font-weight:700}
   .icon-sm.x{background:#2c2c2c;color:#fff}
   .icon-sm.check{background:var(--red);color:#fff}
+
+  /* ── MOBILE CARD LAYOUT ── */
+  @media(max-width:600px){
+    .compare-header{display:none}
+    .row-label{display:none}
+    .row-item{display:block;margin-bottom:14px;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #ebebeb;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
+    .topic-label{display:block;background:#f0eded;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#555;padding:8px 14px;border-bottom:1px solid #e8e0e0}
+    .cell{border-radius:0;border:none;border-bottom:1px solid #f0eded;font-size:13px;padding:13px 14px}
+    .cell:last-child{border-bottom:none}
+    .cell.bad{background:#fafafa}
+    .cell.good{background:#fff8f7}
+    .icon-sm{width:22px;height:22px;font-size:11px}
+  }
 
   /* CONDITIONS */
   .conditions{background:#fff;border-radius:var(--radius);padding:32px;max-width:600px;margin:0 auto;border:1.5px solid #ece8e8;box-shadow:0 4px 24px rgba(0,0,0,0.07)}
@@ -88,11 +104,18 @@
   .footer span{color:var(--red-mid);font-weight:600}
 
   @media(max-width:600px){
-    .compare-header,.row-item{grid-template-columns:1fr}
-    .row-label{display:none}
-    .col-header.yes,.col-header.no{border-radius:12px}
     .step:not(:last-child)::after{display:none}
     .hero-stats{gap:24px}
+    .cta-buttons{flex-direction:column;align-items:center}
+    .btn-primary,.btn-outline{width:100%;max-width:320px;text-align:center}
+  }
+  .mobile-legend{display:none}
+  @media(max-width:600px){
+    .mobile-legend{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;position:sticky;top:0;z-index:10;padding:10px 0 4px;background:var(--gray-bg)}
+    .ml-col{border-radius:8px;padding:9px 10px;text-align:center;font-size:11px;font-weight:700}
+    .ml-col.no{background:#2c2c2c;color:#fff}
+    .ml-col.yes{background:var(--red);color:#fff}
+    .ml-icon{font-size:14px;display:block;margin-bottom:2px}
   }
 </style>
 </head>
@@ -135,62 +158,78 @@
       </div>
     </div>
 
+    <!-- mobile sticky legend -->
+    <div class="mobile-legend">
+      <div class="ml-col no"><span class="ml-icon">✕</span>Không có BH</div>
+      <div class="ml-col yes"><span class="ml-icon">✓</span>Có thẻ + BH</div>
+    </div>
+
     <div class="row-label">1. Khi gặp rủi ro tử vong</div>
     <div class="row-item">
+      <span class="topic-label">1. Khi gặp rủi ro tử vong</span>
       <div class="cell bad"><div class="icon-sm x">✕</div><span>Gia đình mất nguồn thu nhập chính, dễ rơi vào khủng hoảng tài chính ngay lập tức</span></div>
       <div class="cell good"><div class="icon-sm check">✓</div><span>Gia đình nhận khoản tiền đủ lớn để ổn định cuộc sống, không bị xáo trộn</span></div>
     </div>
 
     <div class="row-label">2. Tàn tật, mất sức lao động</div>
     <div class="row-item">
+      <span class="topic-label">2. Tàn tật, mất sức lao động</span>
       <div class="cell bad"><div class="icon-sm x">✕</div><span>Không có thu nhập, phụ thuộc hoàn toàn vào gia đình, đánh mất sự tự chủ</span></div>
       <div class="cell good"><div class="icon-sm check">✓</div><span>Có tiền hỗ trợ dài hạn, duy trì cuộc sống và giữ phẩm giá cá nhân</span></div>
     </div>
 
     <div class="row-label">3. Bệnh hiểm nghèo</div>
     <div class="row-item">
+      <span class="topic-label">3. Bệnh hiểm nghèo</span>
       <div class="cell bad"><div class="icon-sm x">✕</div><span>Vừa đau bệnh, vừa mang áp lực tài chính khổng lồ kéo dài nhiều năm không dứt</span></div>
       <div class="cell good"><div class="icon-sm check">✓</div><span>Được chi trả khoản lớn + hỗ trợ chi phí điều trị chuyên sâu, tập trung chữa bệnh</span></div>
     </div>
 
     <div class="row-label">4. Chi phí khám chữa bệnh</div>
     <div class="row-item">
+      <span class="topic-label">4. Chi phí khám chữa bệnh</span>
       <div class="cell bad"><div class="icon-sm x">✕</div><span>Tự chi trả 100%, dễ "sốc viện phí" khi gặp ca bệnh nặng ngoài dự tính</span></div>
       <div class="cell good"><div class="icon-sm check">✓</div><span>Được chi trả phần lớn, giảm đáng kể gánh nặng tài chính cho toàn gia đình</span></div>
     </div>
 
     <div class="row-label">5. Khi cần nhập viện gấp</div>
     <div class="row-item">
+      <span class="topic-label">5. Khi cần nhập viện gấp</span>
       <div class="cell bad"><div class="icon-sm x">✕</div><span>Phải xoay tiền gấp, có thể trì hoãn điều trị vì không đủ tiền đặt cọc ban đầu</span></div>
       <div class="cell good"><div class="icon-sm check">✓</div><span>Có bảo lãnh viện phí trực tiếp, không cần chuẩn bị số tiền lớn trước khi vào viện</span></div>
     </div>
 
     <div class="row-label">6. Quyết định đi khám</div>
     <div class="row-item">
+      <span class="topic-label">6. Quyết định đi khám</span>
       <div class="cell bad"><div class="icon-sm x">✕</div><span>Hay trì hoãn vì sợ tốn tiền — bệnh phát hiện muộn, điều trị càng tốn kém hơn</span></div>
       <div class="cell good"><div class="icon-sm check">✓</div><span>Chủ động khám sớm, khám định kỳ, phát hiện bệnh từ giai đoạn sớm và dễ trị nhất</span></div>
     </div>
 
     <div class="row-label">7. Chất lượng điều trị</div>
     <div class="row-item">
+      <span class="topic-label">7. Chất lượng điều trị</span>
       <div class="cell bad"><div class="icon-sm x">✕</div><span>Chỉ được tiếp cận dịch vụ y tế phụ thuộc túi tiền, không chọn được bệnh viện tốt</span></div>
       <div class="cell good"><div class="icon-sm check">✓</div><span>Tự do chọn bệnh viện uy tín, dịch vụ cao cấp mà không lo chi phí vượt quá</span></div>
     </div>
 
     <div class="row-label">8. Tâm lý khi ốm đau</div>
     <div class="row-item">
+      <span class="topic-label">8. Tâm lý khi ốm đau</span>
       <div class="cell bad"><div class="icon-sm x">✕</div><span>Lo lắng kép: vừa đau bệnh, vừa căng thẳng vì tiền — ảnh hưởng nghiêm trọng tới hồi phục</span></div>
       <div class="cell good"><div class="icon-sm check">✓</div><span>Yên tâm vì đã có phương án tài chính, tập trung 100% cho việc hồi phục sức khoẻ</span></div>
     </div>
 
     <div class="row-label">9. Gánh nặng cho gia đình</div>
     <div class="row-item">
+      <span class="topic-label">9. Gánh nặng cho gia đình</span>
       <div class="cell bad"><div class="icon-sm x">✕</div><span>Gia đình phải gánh toàn bộ chi phí lớn, ảnh hưởng mọi kế hoạch tài chính dài hạn</span></div>
       <div class="cell good"><div class="icon-sm check">✓</div><span>Giảm áp lực tài chính cho người thân, bảo vệ toàn bộ nền tảng gia đình</span></div>
     </div>
 
     <div class="row-label">10. Rủi ro tài chính dài hạn</div>
     <div class="row-item">
+      <span class="topic-label">10. Rủi ro tài chính dài hạn</span>
       <div class="cell bad"><div class="icon-sm x">✕</div><span>Dễ rơi vào nợ nần, phải bán tài sản tích luỹ nhiều năm — mất đi thành quả cả đời</span></div>
       <div class="cell good"><div class="icon-sm check">✓</div><span>Được bảo vệ trước mọi biến cố lớn, giữ vững nền tảng tài chính bền vững cho gia đình</span></div>
     </div>
