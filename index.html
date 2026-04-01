@@ -1,311 +1,543 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>True Connect — Thẻ CSSK Trọn Đời</title>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  :root{
-    --red:#C0392B;--red-dark:#8B0000;--red-mid:#E74C3C;
-    --gray-bg:#F8F6F5;--white:#fff;
-    --text:#1a1a1a;--text-muted:#666;
-    --radius:14px;--radius-sm:8px;
-  }
-  body{font-family:'Be Vietnam Pro',sans-serif;background:var(--gray-bg);color:var(--text);min-height:100vh}
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap');
 
-  /* HERO */
-  .hero{background:linear-gradient(135deg,#6B0000 0%,#8B0000 40%,#C0392B 75%,#E74C3C 100%);padding:70px 24px 60px;text-align:center;position:relative;overflow:hidden}
-  .hero::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,0.05)}
-  .hero::after{content:'';position:absolute;bottom:-100px;left:-60px;width:350px;height:350px;border-radius:50%;background:rgba(255,255,255,0.04)}
-  .hero-badge{display:inline-block;background:rgba(255,255,255,0.18);border:1px solid rgba(255,255,255,0.3);color:#fff;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:7px 22px;border-radius:50px;margin-bottom:24px}
-  .hero h1{color:#fff;font-size:clamp(28px,5vw,46px);font-weight:800;line-height:1.2;margin-bottom:18px;position:relative;z-index:1}
-  .hero h1 em{display:block;font-size:clamp(14px,2.5vw,18px);font-weight:400;font-style:normal;opacity:0.85;margin-top:10px}
-  .hero-sub{color:rgba(255,255,255,0.88);font-size:15px;max-width:520px;margin:0 auto 36px;line-height:1.75;position:relative;z-index:1}
-  .hero-stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;position:relative;z-index:1}
-  .stat{text-align:center}
-  .stat-num{color:#fff;font-size:30px;font-weight:800;line-height:1}
-  .stat-lbl{color:rgba(255,255,255,0.7);font-size:12px;margin-top:4px;font-weight:500}
+.cmp-section {
+  width: 100%;
+  padding: 60px 20px;
+  background: #fafafa;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
 
-  /* SECTION */
-  .section{padding:56px 20px}
-  .section-title{text-align:center;margin-bottom:8px}
-  .section-title h2{font-size:clamp(22px,4vw,30px);font-weight:800;color:var(--red-dark)}
-  .section-title p{color:var(--text-muted);font-size:14px;margin-top:8px}
-  .divider{width:64px;height:4px;background:var(--red);border-radius:2px;margin:14px auto 36px}
+.cmp-head {
+  text-align: center;
+  margin-bottom: 44px;
+}
 
-  /* COMPARE — shared */
-  .compare-wrap{max-width:920px;margin:0 auto}
+.cmp-head .pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fff0f0;
+  border: 1.5px solid #f5b7b1;
+  color: #B03A2E;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  padding: 5px 14px 5px 10px;
+  border-radius: 40px;
+  margin-bottom: 16px;
+}
 
-  /* sticky col headers (desktop) */
-  .compare-header{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px;position:sticky;top:0;z-index:10}
-  .col-header{padding:16px 20px;border-radius:14px 14px 0 0;text-align:center}
-  .col-header.no{background:linear-gradient(135deg,#1f1f1f,#3a3a3a);color:#fff}
-  .col-header.yes{background:linear-gradient(135deg,var(--red-dark),var(--red));color:#fff}
-  .col-header .icon-big{font-size:26px;display:block;margin-bottom:6px}
-  .col-header strong{display:block;font-size:14px;font-weight:700;margin-bottom:3px}
-  .col-header small{font-size:11px;opacity:0.75}
+.cmp-head .pill-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #C0392B;
+  animation: blink 2s infinite;
+}
 
-  .row-label{text-align:center;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--text-muted);padding:14px 0 4px}
-  .topic-label{display:none}
-  .row-item{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:6px}
-  .cell{padding:15px 17px;border-radius:var(--radius-sm);display:flex;align-items:flex-start;gap:11px;font-size:13.5px;line-height:1.6}
-  .cell.bad{background:#fff;border:1px solid #e8e8e8}
-  .cell.good{background:#fff8f7;border:1px solid #f9cbc6}
-  .icon-sm{flex-shrink:0;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;margin-top:1px;font-weight:700}
-  .icon-sm.x{background:#2c2c2c;color:#fff}
-  .icon-sm.check{background:var(--red);color:#fff}
+@keyframes blink {
+  0%,100%{opacity:1} 50%{opacity:.3}
+}
 
-  /* ── MOBILE CARD LAYOUT ── */
-  @media(max-width:600px){
-    .compare-header{display:none}
-    .row-label{display:none}
-    .row-item{display:block;margin-bottom:14px;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #ebebeb;box-shadow:0 2px 10px rgba(0,0,0,0.05)}
-    .topic-label{display:block;background:#f0eded;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#555;padding:8px 14px;border-bottom:1px solid #e8e0e0}
-    .cell{border-radius:0;border:none;border-bottom:1px solid #f0eded;font-size:13px;padding:13px 14px}
-    .cell:last-child{border-bottom:none}
-    .cell.bad{background:#fafafa}
-    .cell.good{background:#fff8f7}
-    .icon-sm{width:22px;height:22px;font-size:11px}
-  }
+.cmp-head h2 {
+  font-size: clamp(20px, 3.5vw, 32px);
+  font-weight: 800;
+  color: #111;
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
 
-  /* CONDITIONS */
-  .conditions{background:#fff;border-radius:var(--radius);padding:32px;max-width:600px;margin:0 auto;border:1.5px solid #ece8e8;box-shadow:0 4px 24px rgba(0,0,0,0.07)}
-  .cond-item{display:flex;align-items:flex-start;gap:14px;padding:12px 0;border-bottom:1px dashed #f0e4e4}
-  .cond-item:last-child{border-bottom:none;padding-bottom:0}
-  .cond-dot{width:10px;height:10px;border-radius:50%;background:var(--red);flex-shrink:0;margin-top:5px}
-  .cond-text{font-size:14px;line-height:1.6}
+.cmp-head h2 mark {
+  background: none;
+  color: #C0392B;
+}
 
-  /* STEPS */
-  .steps{display:flex;justify-content:center;gap:0;flex-wrap:wrap;max-width:720px;margin:0 auto}
-  .step{flex:1;min-width:160px;text-align:center;padding:24px 14px;position:relative}
-  .step:not(:last-child)::after{content:'→';position:absolute;right:-10px;top:30px;color:var(--red);font-weight:800;font-size:20px}
-  .step-num{width:48px;height:48px;border-radius:50%;background:var(--red);color:#fff;font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;box-shadow:0 4px 14px rgba(192,57,43,0.35)}
-  .step-text{font-size:14px;font-weight:700;color:var(--text)}
-  .step-sub{font-size:12px;color:var(--text-muted);margin-top:4px}
+.cmp-head p {
+  font-size: 14px;
+  color: #999;
+  font-weight: 400;
+}
 
-  /* CTA */
-  .cta-section{background:linear-gradient(135deg,#6B0000,#8B0000 40%,#C0392B 100%);padding:72px 24px;text-align:center;position:relative;overflow:hidden}
-  .cta-section::before{content:'';position:absolute;inset:0;opacity:0.4;background-image:radial-gradient(circle at 20% 50%, rgba(255,255,255,0.08) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,255,255,0.06) 0%, transparent 40%)}
-  .cta-urgency{display:inline-block;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.28);color:#fff;font-size:13px;font-weight:500;padding:9px 22px;border-radius:50px;margin-bottom:28px;position:relative;z-index:1}
-  .cta-section h2{color:#fff;font-size:clamp(24px,4vw,36px);font-weight:800;margin-bottom:14px;position:relative;z-index:1;line-height:1.25}
-  .cta-section p{color:rgba(255,255,255,0.85);max-width:520px;margin:0 auto 36px;font-size:15px;line-height:1.75;position:relative;z-index:1}
-  .cta-buttons{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;position:relative;z-index:1}
-  .btn-primary{background:#fff;color:var(--red-dark);font-family:'Be Vietnam Pro',sans-serif;font-weight:700;font-size:16px;padding:18px 36px;border-radius:50px;border:none;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,0.25);transition:transform 0.15s,box-shadow 0.15s;text-decoration:none;display:inline-block}
-  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,0.3)}
-  .btn-outline{background:transparent;color:#fff;font-family:'Be Vietnam Pro',sans-serif;font-weight:600;font-size:15px;padding:18px 32px;border-radius:50px;border:2px solid rgba(255,255,255,0.55);cursor:pointer;transition:all 0.15s;text-decoration:none;display:inline-block}
-  .btn-outline:hover{background:rgba(255,255,255,0.12)}
-  .cta-note{color:rgba(255,255,255,0.55);font-size:12px;margin-top:22px;position:relative;z-index:1}
+/* CARD WRAPPER */
+.cmp-card {
+  max-width: 860px;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,.10);
+  border: 1px solid #eee;
+}
 
-  /* FOOTER */
-  .footer{background:#1a0000;padding:28px 24px;text-align:center}
-  .footer p{color:rgba(255,255,255,0.4);font-size:12px;line-height:1.7}
-  .footer span{color:var(--red-mid);font-weight:600}
+/* COL HEADER STRIP */
+.cmp-colheads {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
 
-  @media(max-width:600px){
-    .step:not(:last-child)::after{display:none}
-    .hero-stats{gap:24px}
-    .cta-buttons{flex-direction:column;align-items:center}
-    .btn-primary,.btn-outline{width:100%;max-width:320px;text-align:center}
-  }
-  .mobile-legend{display:none}
-  @media(max-width:600px){
-    .mobile-legend{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;position:sticky;top:0;z-index:10;padding:10px 0 4px;background:var(--gray-bg)}
-    .ml-col{border-radius:8px;padding:9px 10px;text-align:center;font-size:11px;font-weight:700}
-    .ml-col.no{background:#2c2c2c;color:#fff}
-    .ml-col.yes{background:var(--red);color:#fff}
-    .ml-icon{font-size:14px;display:block;margin-bottom:2px}
-  }
+.ch-feature {
+  background: #fff;
+  padding: 20px 22px;
+  border-bottom: 1px solid #f0f0f0;
+  border-right: 1px solid #f0f0f0;
+  display: flex;
+  align-items: flex-end;
+}
+
+.ch-feature span {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #bbb;
+}
+
+.ch-good {
+  background: #7B241C;
+  padding: 24px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border-right: 1px solid rgba(255,255,255,.1);
+  border-bottom: 3px solid #D4AC0D;
+}
+
+.ch-bad {
+  background: #fff;
+  padding: 24px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 3px solid #E74C3C;
+}
+
+.ch-icon-wrap {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+
+.ch-good .ch-icon-wrap { background: rgba(212,172,13,.15); }
+.ch-bad  .ch-icon-wrap { background: #fde8e8; }
+
+.ch-title {
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.ch-good .ch-title { color: #D4AC0D; }
+.ch-bad  .ch-title { color: #C0392B; }
+
+.ch-badge {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.ch-good .ch-badge { background: rgba(212,172,13,.15); color: rgba(255,255,255,.7); }
+.ch-bad  .ch-badge { background: #fde8e8; color: #C0392B; }
+
+/* ROWS */
+.cmp-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 1px solid #f5f5f5;
+  transition: background .15s;
+}
+
+.cmp-row:last-child { border-bottom: none; }
+.cmp-row:hover .cell-feat { background: #fffbfb; }
+.cmp-row:hover .cell-good { background: #f7f0ee; }
+.cmp-row:hover .cell-bad  { background: #fffbfb; }
+
+.cell-feat {
+  background: #fff;
+  padding: 15px 22px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-right: 1px solid #f0f0f0;
+}
+
+.feat-num {
+  width: 22px; height: 22px;
+  border-radius: 6px;
+  background: #fff0f0;
+  border: 1px solid #f5b7b1;
+  color: #C0392B;
+  font-size: 10px;
+  font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.feat-info { flex: 1; min-width: 0; }
+
+.feat-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.feat-sub {
+  font-size: 11px;
+  color: #bbb;
+  margin-top: 1px;
+  line-height: 1.4;
+}
+
+/* CHECK CELLS */
+.cell-good {
+  background: #fdf6f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid #f0f0f0;
+  padding: 12px;
+}
+
+.cell-bad {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
+
+.tick {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.tick-yes { background: #eaf8ef; color: #1a7a3c; }
+.tick-no  { background: #fde8e8; color: #C0392B; }
+
+/* CATEGORY DIVIDER */
+.cmp-divider {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background: #f9f9f9;
+  border-bottom: 1px solid #f0f0f0;
+  border-top: 1px solid #f0f0f0;
+}
+
+.div-label {
+  padding: 8px 22px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #C0392B;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border-right: 1px solid #f0f0f0;
+}
+
+.div-label::before {
+  content: '';
+  width: 14px; height: 2px;
+  background: #C0392B;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.div-empty {
+  border-right: 1px solid #f0f0f0;
+}
+
+/* FOOTER TOTALS */
+.cmp-total {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background: #111;
+}
+
+.total-label {
+  padding: 18px 22px;
+  border-right: 1px solid rgba(255,255,255,.08);
+  display: flex;
+  align-items: center;
+}
+
+.total-label span {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255,255,255,.5);
+  line-height: 1.4;
+}
+
+.total-good {
+  background: #7B241C;
+  padding: 18px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border-right: 1px solid rgba(255,255,255,.08);
+  border-top: 2px solid #D4AC0D;
+}
+
+.total-bad {
+  background: #1a1a1a;
+  padding: 18px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border-top: 2px solid #E74C3C;
+}
+
+.total-score {
+  font-size: 26px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.total-good .total-score { color: #D4AC0D; }
+.total-bad  .total-score { color: #E74C3C; }
+
+.total-desc {
+  font-size: 10px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.total-good .total-desc { color: rgba(255,255,255,.5); }
+.total-bad  .total-desc { color: rgba(255,255,255,.35); }
+
+/* MOBILE */
+@media (max-width: 640px) {
+  .cmp-section { padding: 40px 12px; }
+
+  .ch-feature { padding: 14px 12px; }
+  .ch-good, .ch-bad { padding: 16px 8px 14px; gap: 5px; }
+  .ch-icon-wrap { width: 34px; height: 34px; font-size: 14px; }
+  .ch-title { font-size: 10px; }
+  .ch-badge { display: none; }
+
+  .cell-feat { padding: 12px 10px; gap: 8px; }
+  .feat-title { font-size: 12px; white-space: normal; }
+  .feat-sub { display: none; }
+  .feat-num { width: 20px; height: 20px; font-size: 9px; border-radius: 5px; }
+
+  .tick { width: 26px; height: 26px; font-size: 12px; }
+  .cell-good, .cell-bad { padding: 10px 6px; }
+
+  .div-label { padding: 7px 10px; font-size: 8px; }
+
+  .total-label { padding: 14px 10px; }
+  .total-label span { font-size: 11px; }
+  .total-good, .total-bad { padding: 14px 8px; }
+  .total-score { font-size: 20px; }
+  .total-desc { font-size: 9px; }
+}
 </style>
-</head>
-<body>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-badge">True Connect — Bảo Vệ Toàn Diện</div>
-  <h1>
-    Bạn đang bảo vệ sức khoẻ<br>của mình như thế nào?
-    <em>Chỉ 1 sự cố có thể thay đổi tất cả — nếu bạn chưa có bảo hiểm</em>
-  </h1>
-  <p class="hero-sub">So sánh thực tế giữa người <strong>CÓ</strong> và <strong>KHÔNG CÓ</strong> thẻ bảo hiểm sức khoẻ — để bạn tự đưa ra quyết định đúng đắn nhất cho gia đình mình.</p>
-  <div class="hero-stats">
-    <div class="stat"><div class="stat-num">10</div><div class="stat-lbl">Rủi ro thực tế</div></div>
-    <div class="stat"><div class="stat-num">70 tuổi</div><div class="stat-lbl">Độ tuổi tham gia</div></div>
-    <div class="stat"><div class="stat-num">30 ngày</div><div class="stat-lbl">Thời gian chờ</div></div>
+<section class="cmp-section">
+
+  <div class="cmp-head">
+    <div class="pill">
+      <span class="pill-dot"></span>
+      So sánh thực tế
+    </div>
+    <h2>Cùng rủi ro — <mark>hai số phận</mark><br>hoàn toàn khác nhau</h2>
+    <p>10 tình huống thực tế, phân tích trung thực không tô vẽ</p>
   </div>
-</section>
 
-<!-- COMPARE SECTION -->
-<section class="section" style="background:var(--gray-bg)">
-  <div class="section-title">
-    <h2>So Sánh Thực Tế</h2>
-    <p>Khi rủi ro xảy ra — sự khác biệt hiện ra rõ ràng</p>
-  </div>
-  <div class="divider"></div>
+  <div class="cmp-card">
 
-  <div class="compare-wrap">
-    <div class="compare-header">
-      <div class="col-header no">
-        <span class="icon-big">✕</span>
-        <strong>Không có thẻ / Không có BH</strong>
-        <small>Tự lo 100% mọi rủi ro</small>
+    <!-- HEADER -->
+    <div class="cmp-colheads">
+      <div class="ch-feature"><span>Tình huống</span></div>
+      <div class="ch-good">
+        <div class="ch-icon-wrap">✅</div>
+        <div class="ch-title">Có Thẻ CSSK<br>+ Bảo Hiểm</div>
+        <div class="ch-badge">Được bảo vệ</div>
       </div>
-      <div class="col-header yes">
-        <span class="icon-big">✓</span>
-        <strong>Có thẻ CSSK + Bảo hiểm nhân thọ</strong>
-        <small>Được bảo vệ toàn diện</small>
+      <div class="ch-bad">
+        <div class="ch-icon-wrap">❌</div>
+        <div class="ch-title">Không có<br>Thẻ / BH</div>
+        <div class="ch-badge">Tự chịu rủi ro</div>
       </div>
     </div>
 
-    <!-- mobile sticky legend -->
-    <div class="mobile-legend">
-      <div class="ml-col no"><span class="ml-icon">✕</span>Không có BH</div>
-      <div class="ml-col yes"><span class="ml-icon">✓</span>Có thẻ + BH</div>
+    <!-- GROUP 1 -->
+    <div class="cmp-divider">
+      <div class="div-label">Rủi ro tính mạng</div>
+      <div class="div-empty"></div>
+      <div></div>
     </div>
 
-    <div class="row-label">1. Khi gặp rủi ro tử vong</div>
-    <div class="row-item">
-      <span class="topic-label">1. Khi gặp rủi ro tử vong</span>
-      <div class="cell bad"><div class="icon-sm x">✕</div><span>Gia đình mất nguồn thu nhập chính, dễ rơi vào khủng hoảng tài chính ngay lập tức</span></div>
-      <div class="cell good"><div class="icon-sm check">✓</div><span>Gia đình nhận khoản tiền đủ lớn để ổn định cuộc sống, không bị xáo trộn</span></div>
+    <div class="cmp-row">
+      <div class="cell-feat">
+        <div class="feat-num">1</div>
+        <div class="feat-info">
+          <div class="feat-title">Rủi ro tử vong</div>
+          <div class="feat-sub">Mất người trụ cột gia đình</div>
+        </div>
+      </div>
+      <div class="cell-good"><div class="tick tick-yes">✓</div></div>
+      <div class="cell-bad"><div class="tick tick-no">✗</div></div>
     </div>
 
-    <div class="row-label">2. Tàn tật, mất sức lao động</div>
-    <div class="row-item">
-      <span class="topic-label">2. Tàn tật, mất sức lao động</span>
-      <div class="cell bad"><div class="icon-sm x">✕</div><span>Không có thu nhập, phụ thuộc hoàn toàn vào gia đình, đánh mất sự tự chủ</span></div>
-      <div class="cell good"><div class="icon-sm check">✓</div><span>Có tiền hỗ trợ dài hạn, duy trì cuộc sống và giữ phẩm giá cá nhân</span></div>
+    <div class="cmp-row">
+      <div class="cell-feat">
+        <div class="feat-num">2</div>
+        <div class="feat-info">
+          <div class="feat-title">Tàn tật, mất sức lao động</div>
+          <div class="feat-sub">Hỗ trợ thu nhập dài hạn</div>
+        </div>
+      </div>
+      <div class="cell-good"><div class="tick tick-yes">✓</div></div>
+      <div class="cell-bad"><div class="tick tick-no">✗</div></div>
     </div>
 
-    <div class="row-label">3. Bệnh hiểm nghèo</div>
-    <div class="row-item">
-      <span class="topic-label">3. Bệnh hiểm nghèo</span>
-      <div class="cell bad"><div class="icon-sm x">✕</div><span>Vừa đau bệnh, vừa mang áp lực tài chính khổng lồ kéo dài nhiều năm không dứt</span></div>
-      <div class="cell good"><div class="icon-sm check">✓</div><span>Được chi trả khoản lớn + hỗ trợ chi phí điều trị chuyên sâu, tập trung chữa bệnh</span></div>
+    <!-- GROUP 2 -->
+    <div class="cmp-divider">
+      <div class="div-label">Chi phí y tế</div>
+      <div class="div-empty"></div>
+      <div></div>
     </div>
 
-    <div class="row-label">4. Chi phí khám chữa bệnh</div>
-    <div class="row-item">
-      <span class="topic-label">4. Chi phí khám chữa bệnh</span>
-      <div class="cell bad"><div class="icon-sm x">✕</div><span>Tự chi trả 100%, dễ "sốc viện phí" khi gặp ca bệnh nặng ngoài dự tính</span></div>
-      <div class="cell good"><div class="icon-sm check">✓</div><span>Được chi trả phần lớn, giảm đáng kể gánh nặng tài chính cho toàn gia đình</span></div>
+    <div class="cmp-row">
+      <div class="cell-feat">
+        <div class="feat-num">3</div>
+        <div class="feat-info">
+          <div class="feat-title">Bệnh hiểm nghèo</div>
+          <div class="feat-sub">Ung thư, tim mạch, đột quỵ…</div>
+        </div>
+      </div>
+      <div class="cell-good"><div class="tick tick-yes">✓</div></div>
+      <div class="cell-bad"><div class="tick tick-no">✗</div></div>
     </div>
 
-    <div class="row-label">5. Khi cần nhập viện gấp</div>
-    <div class="row-item">
-      <span class="topic-label">5. Khi cần nhập viện gấp</span>
-      <div class="cell bad"><div class="icon-sm x">✕</div><span>Phải xoay tiền gấp, có thể trì hoãn điều trị vì không đủ tiền đặt cọc ban đầu</span></div>
-      <div class="cell good"><div class="icon-sm check">✓</div><span>Có bảo lãnh viện phí trực tiếp, không cần chuẩn bị số tiền lớn trước khi vào viện</span></div>
+    <div class="cmp-row">
+      <div class="cell-feat">
+        <div class="feat-num">4</div>
+        <div class="feat-info">
+          <div class="feat-title">Chi phí khám chữa bệnh</div>
+          <div class="feat-sub">Viện phí, thuốc, phẫu thuật</div>
+        </div>
+      </div>
+      <div class="cell-good"><div class="tick tick-yes">✓</div></div>
+      <div class="cell-bad"><div class="tick tick-no">✗</div></div>
     </div>
 
-    <div class="row-label">6. Quyết định đi khám</div>
-    <div class="row-item">
-      <span class="topic-label">6. Quyết định đi khám</span>
-      <div class="cell bad"><div class="icon-sm x">✕</div><span>Hay trì hoãn vì sợ tốn tiền — bệnh phát hiện muộn, điều trị càng tốn kém hơn</span></div>
-      <div class="cell good"><div class="icon-sm check">✓</div><span>Chủ động khám sớm, khám định kỳ, phát hiện bệnh từ giai đoạn sớm và dễ trị nhất</span></div>
+    <div class="cmp-row">
+      <div class="cell-feat">
+        <div class="feat-num">5</div>
+        <div class="feat-info">
+          <div class="feat-title">Nhập viện khẩn cấp</div>
+          <div class="feat-sub">Bảo lãnh viện phí tức thì</div>
+        </div>
+      </div>
+      <div class="cell-good"><div class="tick tick-yes">✓</div></div>
+      <div class="cell-bad"><div class="tick tick-no">✗</div></div>
     </div>
 
-    <div class="row-label">7. Chất lượng điều trị</div>
-    <div class="row-item">
-      <span class="topic-label">7. Chất lượng điều trị</span>
-      <div class="cell bad"><div class="icon-sm x">✕</div><span>Chỉ được tiếp cận dịch vụ y tế phụ thuộc túi tiền, không chọn được bệnh viện tốt</span></div>
-      <div class="cell good"><div class="icon-sm check">✓</div><span>Tự do chọn bệnh viện uy tín, dịch vụ cao cấp mà không lo chi phí vượt quá</span></div>
+    <!-- GROUP 3 -->
+    <div class="cmp-divider">
+      <div class="div-label">Chất lượng sống</div>
+      <div class="div-empty"></div>
+      <div></div>
     </div>
 
-    <div class="row-label">8. Tâm lý khi ốm đau</div>
-    <div class="row-item">
-      <span class="topic-label">8. Tâm lý khi ốm đau</span>
-      <div class="cell bad"><div class="icon-sm x">✕</div><span>Lo lắng kép: vừa đau bệnh, vừa căng thẳng vì tiền — ảnh hưởng nghiêm trọng tới hồi phục</span></div>
-      <div class="cell good"><div class="icon-sm check">✓</div><span>Yên tâm vì đã có phương án tài chính, tập trung 100% cho việc hồi phục sức khoẻ</span></div>
+    <div class="cmp-row">
+      <div class="cell-feat">
+        <div class="feat-num">6</div>
+        <div class="feat-info">
+          <div class="feat-title">Chủ động khám định kỳ</div>
+          <div class="feat-sub">Phát hiện bệnh sớm, dễ điều trị</div>
+        </div>
+      </div>
+      <div class="cell-good"><div class="tick tick-yes">✓</div></div>
+      <div class="cell-bad"><div class="tick tick-no">✗</div></div>
     </div>
 
-    <div class="row-label">9. Gánh nặng cho gia đình</div>
-    <div class="row-item">
-      <span class="topic-label">9. Gánh nặng cho gia đình</span>
-      <div class="cell bad"><div class="icon-sm x">✕</div><span>Gia đình phải gánh toàn bộ chi phí lớn, ảnh hưởng mọi kế hoạch tài chính dài hạn</span></div>
-      <div class="cell good"><div class="icon-sm check">✓</div><span>Giảm áp lực tài chính cho người thân, bảo vệ toàn bộ nền tảng gia đình</span></div>
+    <div class="cmp-row">
+      <div class="cell-feat">
+        <div class="feat-num">7</div>
+        <div class="feat-info">
+          <div class="feat-title">Chất lượng điều trị</div>
+          <div class="feat-sub">Chọn bệnh viện tốt, dịch vụ cao</div>
+        </div>
+      </div>
+      <div class="cell-good"><div class="tick tick-yes">✓</div></div>
+      <div class="cell-bad"><div class="tick tick-no">✗</div></div>
     </div>
 
-    <div class="row-label">10. Rủi ro tài chính dài hạn</div>
-    <div class="row-item">
-      <span class="topic-label">10. Rủi ro tài chính dài hạn</span>
-      <div class="cell bad"><div class="icon-sm x">✕</div><span>Dễ rơi vào nợ nần, phải bán tài sản tích luỹ nhiều năm — mất đi thành quả cả đời</span></div>
-      <div class="cell good"><div class="icon-sm check">✓</div><span>Được bảo vệ trước mọi biến cố lớn, giữ vững nền tảng tài chính bền vững cho gia đình</span></div>
+    <div class="cmp-row">
+      <div class="cell-feat">
+        <div class="feat-num">8</div>
+        <div class="feat-info">
+          <div class="feat-title">Tâm lý khi ốm đau</div>
+          <div class="feat-sub">Yên tâm, không lo lắng kép</div>
+        </div>
+      </div>
+      <div class="cell-good"><div class="tick tick-yes">✓</div></div>
+      <div class="cell-bad"><div class="tick tick-no">✗</div></div>
     </div>
+
+    <!-- GROUP 4 -->
+    <div class="cmp-divider">
+      <div class="div-label">Tài chính gia đình</div>
+      <div class="div-empty"></div>
+      <div></div>
+    </div>
+
+    <div class="cmp-row">
+      <div class="cell-feat">
+        <div class="feat-num">9</div>
+        <div class="feat-info">
+          <div class="feat-title">Gia đình & người thân</div>
+          <div class="feat-sub">Giảm gánh nặng tài chính chung</div>
+        </div>
+      </div>
+      <div class="cell-good"><div class="tick tick-yes">✓</div></div>
+      <div class="cell-bad"><div class="tick tick-no">✗</div></div>
+    </div>
+
+    <div class="cmp-row">
+      <div class="cell-feat">
+        <div class="feat-num">10</div>
+        <div class="feat-info">
+          <div class="feat-title">Rủi ro tài chính dài hạn</div>
+          <div class="feat-sub">Tránh nợ nần, mất tài sản</div>
+        </div>
+      </div>
+      <div class="cell-good"><div class="tick tick-yes">✓</div></div>
+      <div class="cell-bad"><div class="tick tick-no">✗</div></div>
+    </div>
+
+    <!-- TOTALS -->
+    <div class="cmp-total">
+      <div class="total-label"><span>Kết quả<br>10 tình huống</span></div>
+      <div class="total-good">
+        <div class="total-score">10/10</div>
+        <div class="total-desc">Bảo vệ toàn diện</div>
+      </div>
+      <div class="total-bad">
+        <div class="total-score">0/10</div>
+        <div class="total-desc">Tự chịu rủi ro</div>
+      </div>
+    </div>
+
   </div>
 </section>
-
-<!-- CONDITIONS -->
-<section class="section" style="background:#fff;padding-top:44px;padding-bottom:44px">
-  <div class="section-title">
-    <h2>Điều Kiện Tham Gia</h2>
-    <p>Thẻ CSSK Trọn Đời — Đơn giản, nhanh chóng, ai cũng làm được</p>
-  </div>
-  <div class="divider"></div>
-  <div class="conditions">
-    <div class="cond-item">
-      <div class="cond-dot"></div>
-      <div class="cond-text"><strong>Độ tuổi tham gia:</strong> Từ 30 ngày tuổi đến 70 tuổi — bao phủ cả gia đình</div>
-    </div>
-    <div class="cond-item">
-      <div class="cond-dot"></div>
-      <div class="cond-text"><strong>Thời hạn hợp đồng:</strong> Tái tục hàng năm — linh hoạt, không ràng buộc dài hạn</div>
-    </div>
-    <div class="cond-item">
-      <div class="cond-dot"></div>
-      <div class="cond-text"><strong>Thời gian chờ:</strong> 30 ngày với bệnh thông thường / 90 ngày với bệnh đặc biệt</div>
-    </div>
-    <div class="cond-item">
-      <div class="cond-dot"></div>
-      <div class="cond-text"><strong>Thủ tục đăng ký:</strong> Đơn giản, nhanh chóng — không cần khám sức khoẻ ban đầu</div>
-    </div>
-  </div>
-</section>
-
-<!-- STEPS -->
-<section class="section" style="background:var(--gray-bg)">
-  <div class="section-title">
-    <h2>3 Bước Để Được Bảo Vệ Ngay</h2>
-    <p>Bắt đầu hành trình bảo vệ sức khoẻ ngay trong hôm nay</p>
-  </div>
-  <div class="divider"></div>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-text">Liên hệ tư vấn viên</div>
-      <div class="step-sub">Miễn phí, không áp lực</div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-text">Chọn gói phù hợp</div>
-      <div class="step-sub">Theo nhu cầu & ngân sách</div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-text">Được bảo vệ ngay</div>
-      <div class="step-sub">Hiệu lực sau 30 ngày</div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-section">
-  <div class="cta-urgency">⏰ Đừng để đến khi cần mới tiếc — hãy hành động ngay hôm nay</div>
-  <h2>Bạn Muốn Là Người Có Bảo Vệ<br>Hay Người Tự Lo Mọi Thứ?</h2>
-  <p>Mỗi ngày trôi qua mà không có bảo hiểm là một ngày bạn và gia đình đang đối mặt với rủi ro không được bảo vệ. Hãy để chúng tôi đồng hành cùng bạn.</p>
-  <div class="cta-buttons">
-    <a href="tel:0000000000" class="btn-primary">📞 Nhận Tư Vấn Miễn Phí</a>
-    <a href="#compare" class="btn-outline">Xem Lại So Sánh</a>
-  </div>
-  <p class="cta-note">Tư vấn miễn phí · Không ràng buộc · Hiệu lực nhanh chóng</p>
-</section>
-
-<!-- FOOTER -->
-<footer class="footer">
-  <p><span>True Connect</span> — Đồng hành bảo vệ sức khoẻ toàn diện cho bạn và gia đình<br>
-  © 2025 True Connect. Mọi quyền được bảo lưu.</p>
-</footer>
-
-</body>
-</html>
