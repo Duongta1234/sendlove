@@ -322,31 +322,40 @@
 .total-good .total-desc { color: rgba(255,255,255,.5); }
 .total-bad  .total-desc { color: rgba(255,255,255,.35); }
 
-/* MOBILE */
+/* MOBILE SCROLL */
 @media (max-width: 640px) {
-  .cmp-section { padding: 40px 12px; }
+  .cmp-section { padding: 40px 0; }
+  .cmp-head { padding: 0 16px; }
 
-  .ch-feature { padding: 14px 12px; }
-  .ch-good, .ch-bad { padding: 16px 8px 14px; gap: 5px; }
-  .ch-icon-wrap { width: 34px; height: 34px; font-size: 14px; }
-  .ch-title { font-size: 10px; }
-  .ch-badge { display: none; }
+  .cmp-scroll-hint {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 16px 10px;
+    font-size: 11px;
+    color: #bbb;
+    font-weight: 500;
+  }
 
-  .cell-feat { padding: 12px 10px; gap: 8px; }
-  .feat-title { font-size: 12px; white-space: normal; }
-  .feat-sub { display: none; }
-  .feat-num { width: 20px; height: 20px; font-size: 9px; border-radius: 5px; }
+  .cmp-scroll-hint svg { flex-shrink: 0; }
 
-  .tick { width: 26px; height: 26px; font-size: 12px; }
-  .cell-good, .cell-bad { padding: 10px 6px; }
+  .cmp-scroll-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 16px 12px;
+    scrollbar-width: none;
+  }
 
-  .div-label { padding: 7px 10px; font-size: 8px; }
+  .cmp-scroll-wrap::-webkit-scrollbar { display: none; }
 
-  .total-label { padding: 14px 10px; }
-  .total-label span { font-size: 11px; }
-  .total-good, .total-bad { padding: 14px 8px; }
-  .total-score { font-size: 20px; }
-  .total-desc { font-size: 9px; }
+  .cmp-card {
+    min-width: 560px;
+    border-radius: 14px;
+  }
+}
+
+@media (min-width: 641px) {
+  .cmp-scroll-hint { display: none; }
 }
 </style>
 
@@ -361,6 +370,14 @@
     <p>10 tình huống thực tế, phân tích trung thực không tô vẽ</p>
   </div>
 
+  <div class="cmp-scroll-hint">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+      <path d="M2 7h10M8 3l4 4-4 4" stroke="#bbb" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Vuốt ngang để xem đầy đủ
+  </div>
+
+  <div class="cmp-scroll-wrap">
   <div class="cmp-card">
 
     <!-- HEADER -->
@@ -539,5 +556,6 @@
       </div>
     </div>
 
+  </div>
   </div>
 </section>
