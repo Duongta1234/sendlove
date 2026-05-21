@@ -462,7 +462,34 @@ margin-bottom:28px;
 flex-wrap:wrap;
 justify-content:center
 }
+/* HIỆU ỨNG LÊN XUỐNG CHO KHỐI "CHỈ CÒN 12 SUẤT" */
 
+.ec-slot-alert{
+  animation: slotFloating 2.8s ease-in-out infinite;
+  transform-origin:center;
+}
+
+@keyframes slotFloating{
+  0%{
+    transform:translateY(0px);
+  }
+
+  25%{
+    transform:translateY(-8px);
+  }
+
+  50%{
+    transform:translateY(0px);
+  }
+
+  75%{
+    transform:translateY(8px);
+  }
+
+  100%{
+    transform:translateY(0px);
+  }
+}
 /* MOBILE */
 @media(max-width:580px){
 
