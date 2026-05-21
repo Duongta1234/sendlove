@@ -30,73 +30,106 @@
 .ec-progress-track{width:100%;height:10px;background:rgba(255,255,255,.1);border-radius:10px;overflow:hidden}
 .ec-progress-fill{height:100%;border-radius:10px;background:linear-gradient(90deg,#F5A61B,#FFD740);box-shadow:0 0 10px rgba(245,166,27,.5);transition:width 1s ease}
 .ec-expired{display:none;color:#FF6B6B;font-size:1rem;font-weight:700;background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.3);border-radius:14px;padding:16px 24px;margin-bottom:28px}
+
+/* ── DIVIDER ── */
 .ec-divider{display:flex;align-items:center;gap:12px;margin-bottom:20px}
 .ec-divider::before,.ec-divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.15)}
 .ec-divider-label{display:inline-flex;align-items:center;gap:8px;color:#FFD740;font-size:.82rem;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;white-space:nowrap}
 .gift-icon{animation:ecShake 2.8s ease-in-out infinite;display:inline-block}
 @keyframes ecShake{0%,100%{transform:rotate(0)}10%{transform:rotate(-20deg)}20%{transform:rotate(20deg)}30%{transform:rotate(-12deg)}40%{transform:rotate(12deg)}50%{transform:rotate(0)}}
+
+/* ── PROMO ROW ── */
 .ec-promo-row{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:0;margin-bottom:16px;width:100%}
 .ec-plus{display:flex;align-items:center;justify-content:center;color:#FFD740;font-size:1.8rem;font-weight:900;padding:0 8px;text-shadow:0 0 12px rgba(255,215,64,.5);flex-shrink:0}
+
+/* ── ECP CARD BASE ── */
 .ecp{border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.25);transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column;width:100%}
 .ecp:hover{transform:translateY(-5px);box-shadow:0 14px 36px rgba(0,0,0,.35)}
-.ecp-head{padding:16px 10px 20px;display:flex;flex-direction:column;align-items:center;gap:8px}
-.ecp-badge{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.5);font-size:.75rem;font-weight:800;color:#fff}
+
+/* head */
+.ecp-head{padding:16px 10px 18px;display:flex;flex-direction:column;align-items:center;gap:8px;position:relative}
+.ecp-badge{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.5);font-size:.75rem;font-weight:800;color:#fff;flex-shrink:0}
 .ecp-name{font-size:.72rem;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:#fff;text-align:center;line-height:1.3}
-.ecp-emoji{font-size:2.4rem;line-height:1;display:block;filter:drop-shadow(0 2px 6px rgba(0,0,0,.25))}
-.ecp-body{background:#fff;flex:1;padding:16px 10px 18px;display:flex;flex-direction:column;align-items:center;gap:5px}
+.ecp-emoji{font-size:2.2rem;line-height:1;display:block;filter:drop-shadow(0 2px 6px rgba(0,0,0,.3))}
+
+/* body */
+.ecp-body{background:#fff;flex:1;padding:16px 12px 18px;display:flex;flex-direction:column;align-items:center;gap:5px}
 .ecp-amount{font-size:clamp(1.1rem,3vw,1.5rem);font-weight:900;line-height:1.1;text-align:center;white-space:nowrap}
 .ecp-desc{font-size:clamp(.65rem,1.5vw,.76rem);color:#555;line-height:1.5;text-align:center}
 .ecp-chip{display:inline-block;font-size:.65rem;font-weight:700;padding:3px 10px;border-radius:50px;margin-top:4px}
+
+/* ── MÀU TỪNG THẺ ── */
 .ecp-1 .ecp-head{background:linear-gradient(160deg,#C62828,#EF5350)}
 .ecp-1 .ecp-amount{color:#C62828}
 .ecp-1 .ecp-chip{background:#FFF3E0;color:#BF360C}
+
 .ecp-2 .ecp-head{background:linear-gradient(160deg,#1B5E20,#43A047)}
 .ecp-2 .ecp-amount{color:#2E7D32}
 .ecp-2 .ecp-chip{background:#E8F5E9;color:#1B5E20}
+
 .ecp-3 .ecp-head{background:linear-gradient(160deg,#0D47A1,#1976D2)}
 .ecp-3 .ecp-amount{color:#1565C0}
 .ecp-3 .ecp-chip{background:#E3F2FD;color:#0D47A1}
+
+/* ── NOTE ── */
 .ec-promo-note{display:inline-flex;align-items:center;gap:7px;background:rgba(245,166,27,.1);border:1px dashed rgba(245,166,27,.35);border-radius:50px;padding:8px 20px;font-size:.78rem;color:#FFD740;font-weight:600;margin-bottom:28px;flex-wrap:wrap;justify-content:center}
-.ec-cta-wrap{display:flex;flex-direction:column;align-items:center;gap:10px}
-.ec-cta{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#F5A61B,#E65100);color:#fff;font-weight:900;font-size:1rem;padding:15px 40px;border-radius:50px;text-decoration:none;box-shadow:0 6px 24px rgba(230,81,0,.45);transition:transform .2s,box-shadow .2s;text-transform:uppercase;letter-spacing:.4px}
-.ec-cta:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(230,81,0,.55)}
-.ec-cta .arrow{transition:transform .2s}
-.ec-cta:hover .arrow{transform:translateX(5px)}
-.ec-slots{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,.55);font-size:.8rem;font-weight:600}
-.ec-slots b{background:#F5A61B;color:#fff;font-size:.82rem;font-weight:900;padding:2px 10px;border-radius:50px}
+
+/* ── MOBILE ── */
 @media(max-width:580px){
   .enroll-countdown{padding:36px 14px}
   .ec-countdown{gap:4px}
   .ec-box{border-radius:12px;padding:12px 4px 10px}
   .ec-colon{font-size:1.2rem;margin-bottom:16px}
+
+  /* stack dọc, mỗi card nằm ngang */
   .ec-promo-row{grid-template-columns:1fr;gap:10px}
-  .ec-plus{font-size:1.4rem;padding:0}
+  .ec-plus{font-size:1.4rem;padding:4px 0}
+
   .ecp{flex-direction:row;border-radius:14px}
-  .ecp-head{flex-direction:row;padding:14px;width:120px;flex-shrink:0;border-radius:14px 0 0 14px;gap:10px;justify-content:flex-start}
-  .ecp-emoji{font-size:1.8rem}
-  .ecp-name{font-size:.65rem;text-align:left}
-  .ecp-badge{width:24px;height:24px;font-size:.65rem;flex-shrink:0}
-  .ecp-body{padding:12px 14px;align-items:flex-start;border-radius:0 14px 14px 0}
-  .ecp-amount{font-size:1.15rem;white-space:normal}
-  .ecp-desc{font-size:.73rem;text-align:left}
-  .ecp-chip{font-size:.63rem}
-  .ec-cta{font-size:.88rem;padding:13px 20px;width:100%;justify-content:center}
+
+  .ecp-head{
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:14px 10px;
+    width:110px;
+    flex-shrink:0;
+    border-radius:14px 0 0 14px;
+    gap:6px;
+  }
+  .ecp-emoji{font-size:1.7rem}
+  .ecp-name{font-size:.63rem;text-align:center}
+  .ecp-badge{width:24px;height:24px;font-size:.65rem}
+
+  .ecp-body{
+    padding:12px 14px;
+    align-items:flex-start;
+    border-radius:0 14px 14px 0;
+  }
+  .ecp-amount{font-size:1.2rem;white-space:normal;text-align:left}
+  .ecp-desc{font-size:.72rem;text-align:left}
+  .ecp-chip{font-size:.62rem}
 }
 </style>
 
 <section class="enroll-countdown">
   <div class="ec-inner">
+
     <div class="ec-tag"><span class="blink"></span>ĐANG MỞ TUYỂN SINH</div>
+
     <h2 class="ec-title">Thời Gian Tuyển Sinh<br><span>Khoá Bán Trú Hè 2026</span></h2>
+
     <div class="ec-period">
       <strong>📅 10/04/2026</strong><span class="sep"></span><strong>🏁 25/05/2026</strong>
     </div>
+
     <div class="ec-progress-wrap">
       <div class="ec-progress-label">
         <span>10/04/2026</span><span id="ec-pct">0%</span><span>25/05/2026</span>
       </div>
       <div class="ec-progress-track"><div class="ec-progress-fill" id="ec-fill" style="width:0%"></div></div>
     </div>
+
     <div class="ec-countdown" id="ec-countdown">
       <div class="ec-box"><span class="ec-num" id="ec-days">00</span><span class="ec-label">Ngày</span></div>
       <div class="ec-colon">:</div>
@@ -106,13 +139,18 @@
       <div class="ec-colon">:</div>
       <div class="ec-box urgent"><span class="ec-num" id="ec-secs">00</span><span class="ec-label">Giây</span></div>
     </div>
-    <div class="ec-expired" id="ec-expired">🚫 Đã hết thời gian tuyển sinh. Vui lòng liên hệ trực tiếp để biết thêm thông tin.</div>
+
+    <div class="ec-expired" id="ec-expired">
+      🚫 Đã hết thời gian tuyển sinh. Vui lòng liên hệ trực tiếp để biết thêm thông tin.
+    </div>
 
     <div class="ec-divider">
       <span class="ec-divider-label"><span class="gift-icon">🎁</span>ƯU ĐÃI ĐẶC BIỆT</span>
     </div>
 
     <div class="ec-promo-row">
+
+      <!-- Thẻ 1 – ĐỎ -->
       <div class="ecp ecp-1">
         <div class="ecp-head">
           <div class="ecp-badge">01</div>
@@ -128,6 +166,7 @@
 
       <div class="ec-plus">+</div>
 
+      <!-- Thẻ 2 – XANH LÁ -->
       <div class="ecp ecp-2">
         <div class="ecp-head">
           <div class="ecp-badge">02</div>
@@ -143,6 +182,7 @@
 
       <div class="ec-plus">+</div>
 
+      <!-- Thẻ 3 – XANH DƯƠNG -->
       <div class="ecp ecp-3">
         <div class="ecp-head">
           <div class="ecp-badge">03</div>
@@ -155,13 +195,13 @@
           <span class="ecp-chip">mỗi bé</span>
         </div>
       </div>
+
     </div>
 
     <div class="ec-promo-note">
       ⚠️ Mỗi học sinh được áp dụng tối đa <strong style="color:#fff;margin:0 4px">2 ưu đãi</strong>
     </div>
 
-   
   </div>
 </section>
 
