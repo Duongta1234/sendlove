@@ -38,21 +38,19 @@
 .gift-icon{animation:ecShake 2.8s ease-in-out infinite;display:inline-block}
 @keyframes ecShake{0%,100%{transform:rotate(0)}10%{transform:rotate(-20deg)}20%{transform:rotate(20deg)}30%{transform:rotate(-12deg)}40%{transform:rotate(12deg)}50%{transform:rotate(0)}}
 
-/* ── PROMO ROW ── */
+/* ── PROMO ROW (desktop: 3 cột) ── */
 .ec-promo-row{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:0;margin-bottom:16px;width:100%}
 .ec-plus{display:flex;align-items:center;justify-content:center;color:#FFD740;font-size:1.8rem;font-weight:900;padding:0 8px;text-shadow:0 0 12px rgba(255,215,64,.5);flex-shrink:0}
 
-/* ── ECP CARD BASE ── */
+/* ── CARD BASE ── */
 .ecp{border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.25);transition:transform .25s,box-shadow .25s;display:flex;flex-direction:column;width:100%}
 .ecp:hover{transform:translateY(-5px);box-shadow:0 14px 36px rgba(0,0,0,.35)}
 
-/* head */
-.ecp-head{padding:16px 10px 18px;display:flex;flex-direction:column;align-items:center;gap:8px;position:relative}
+.ecp-head{padding:16px 10px 18px;display:flex;flex-direction:column;align-items:center;gap:8px}
 .ecp-badge{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.25);border:2px solid rgba(255,255,255,.5);font-size:.75rem;font-weight:800;color:#fff;flex-shrink:0}
 .ecp-name{font-size:.72rem;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:#fff;text-align:center;line-height:1.3}
 .ecp-emoji{font-size:2.2rem;line-height:1;display:block;filter:drop-shadow(0 2px 6px rgba(0,0,0,.3))}
 
-/* body */
 .ecp-body{background:#fff;flex:1;padding:16px 12px 18px;display:flex;flex-direction:column;align-items:center;gap:5px}
 .ecp-amount{font-size:clamp(1.1rem,3vw,1.5rem);font-weight:900;line-height:1.1;text-align:center;white-space:nowrap}
 .ecp-desc{font-size:clamp(.65rem,1.5vw,.76rem);color:#555;line-height:1.5;text-align:center}
@@ -74,41 +72,68 @@
 /* ── NOTE ── */
 .ec-promo-note{display:inline-flex;align-items:center;gap:7px;background:rgba(245,166,27,.1);border:1px dashed rgba(245,166,27,.35);border-radius:50px;padding:8px 20px;font-size:.78rem;color:#FFD740;font-weight:600;margin-bottom:28px;flex-wrap:wrap;justify-content:center}
 
-/* ── MOBILE ── */
+/* ══════════════════════
+   MOBILE: full-width cards
+══════════════════════ */
 @media(max-width:580px){
-  .enroll-countdown{padding:36px 14px}
-  .ec-countdown{gap:4px}
+  .enroll-countdown{padding:36px 14px;border-radius:18px}
+  .ec-title{font-size:20px}
+  .ec-period{font-size:.8rem;padding:8px 16px;gap:8px;margin:12px 0 24px}
+  .ec-countdown{gap:4px;margin-bottom:24px}
   .ec-box{border-radius:12px;padding:12px 4px 10px}
   .ec-colon{font-size:1.2rem;margin-bottom:16px}
+  .ec-progress-wrap{margin-bottom:24px}
 
-  /* stack dọc, mỗi card nằm ngang */
-  .ec-promo-row{grid-template-columns:1fr;gap:10px}
-  .ec-plus{font-size:1.4rem;padding:4px 0}
+  /* mỗi card chiếm full width, xếp dọc */
+  .ec-promo-row{
+    grid-template-columns:1fr;
+    gap:0;
+    margin-bottom:14px;
+  }
 
-  .ecp{flex-direction:row;border-radius:14px}
+  /* dấu + nhỏ gọn giữa 2 card */
+  .ec-plus{
+    font-size:1.3rem;
+    padding:6px 0;
+    line-height:1;
+  }
+
+  /* card full width, layout NGANG: head trái – body phải */
+  .ecp{
+    flex-direction:row;
+    border-radius:16px;
+    width:100%;
+    min-height:90px;
+  }
 
   .ecp-head{
     flex-direction:column;
     align-items:center;
     justify-content:center;
-    padding:14px 10px;
-    width:110px;
+    padding:16px 12px;
+    width:115px;
+    min-width:115px;
     flex-shrink:0;
-    border-radius:14px 0 0 14px;
+    border-radius:16px 0 0 16px;
     gap:6px;
   }
-  .ecp-emoji{font-size:1.7rem}
-  .ecp-name{font-size:.63rem;text-align:center}
+  .ecp-emoji{font-size:1.9rem}
   .ecp-badge{width:24px;height:24px;font-size:.65rem}
+  .ecp-name{font-size:.62rem;text-align:center;letter-spacing:.5px}
 
   .ecp-body{
-    padding:12px 14px;
+    flex:1;
+    padding:14px 16px;
     align-items:flex-start;
-    border-radius:0 14px 14px 0;
+    justify-content:center;
+    border-radius:0 16px 16px 0;
+    gap:4px;
   }
-  .ecp-amount{font-size:1.2rem;white-space:normal;text-align:left}
-  .ecp-desc{font-size:.72rem;text-align:left}
-  .ecp-chip{font-size:.62rem}
+  .ecp-amount{font-size:1.3rem;text-align:left;white-space:nowrap}
+  .ecp-desc{font-size:.74rem;text-align:left;color:#444}
+  .ecp-chip{font-size:.65rem;padding:2px 9px}
+
+  .ec-promo-note{font-size:.73rem;padding:7px 14px;margin-bottom:20px}
 }
 </style>
 
@@ -150,7 +175,6 @@
 
     <div class="ec-promo-row">
 
-      <!-- Thẻ 1 – ĐỎ -->
       <div class="ecp ecp-1">
         <div class="ecp-head">
           <div class="ecp-badge">01</div>
@@ -166,7 +190,6 @@
 
       <div class="ec-plus">+</div>
 
-      <!-- Thẻ 2 – XANH LÁ -->
       <div class="ecp ecp-2">
         <div class="ecp-head">
           <div class="ecp-badge">02</div>
@@ -182,7 +205,6 @@
 
       <div class="ec-plus">+</div>
 
-      <!-- Thẻ 3 – XANH DƯƠNG -->
       <div class="ecp ecp-3">
         <div class="ecp-head">
           <div class="ecp-badge">03</div>
