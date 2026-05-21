@@ -1,561 +1,844 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tuyển Sinh Bán Trú Hè 2026 – Trung Tâm Phát Triển Trí Tuệ Trẻ Happy Ka</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap');
-
-.cmp-section {
-  width: 100%;
-  padding: 60px 20px;
-  background: #fafafa;
-  font-family: 'Be Vietnam Pro', sans-serif;
-}
-
-.cmp-head {
-  text-align: center;
-  margin-bottom: 44px;
-}
-
-.cmp-head .pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: #fff0f0;
-  border: 1.5px solid #f5b7b1;
-  color: #B03A2E;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  padding: 5px 14px 5px 10px;
-  border-radius: 40px;
-  margin-bottom: 16px;
-}
-
-.cmp-head .pill-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: #C0392B;
-  animation: blink 2s infinite;
-}
-
-@keyframes blink {
-  0%,100%{opacity:1} 50%{opacity:.3}
-}
-
-.cmp-head h2 {
-  font-size: clamp(20px, 3.5vw, 32px);
-  font-weight: 800;
-  color: #111;
-  line-height: 1.3;
-  margin-bottom: 10px;
-}
-
-.cmp-head h2 mark {
-  background: none;
-  color: #C0392B;
-}
-
-.cmp-head p {
-  font-size: 14px;
-  color: #999;
-  font-weight: 400;
-}
-
-/* CARD WRAPPER */
-.cmp-card {
-  max-width: 860px;
-  margin: 0 auto;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 8px 40px rgba(0,0,0,.10);
-  border: 1px solid #eee;
-}
-
-/* COL HEADER STRIP */
-.cmp-colheads {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
-.ch-feature {
-  background: #fff;
-  padding: 20px 22px;
-  border-bottom: 1px solid #f0f0f0;
-  border-right: 1px solid #f0f0f0;
-  display: flex;
-  align-items: flex-end;
-}
-
-.ch-feature span {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: #bbb;
-}
-
-.ch-good {
-  background: #7B241C;
-  padding: 24px 16px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  border-right: 1px solid rgba(255,255,255,.1);
-  border-bottom: 3px solid #D4AC0D;
-}
-
-.ch-bad {
-  background: #fff;
-  padding: 24px 16px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  border-bottom: 3px solid #E74C3C;
-}
-
-.ch-icon-wrap {
-  width: 44px; height: 44px;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
-}
-
-.ch-good .ch-icon-wrap { background: rgba(212,172,13,.15); }
-.ch-bad  .ch-icon-wrap { background: #fde8e8; }
-
-.ch-title {
-  font-size: 12px;
-  font-weight: 800;
-  text-align: center;
-  line-height: 1.4;
-}
-
-.ch-good .ch-title { color: #D4AC0D; }
-.ch-bad  .ch-title { color: #C0392B; }
-
-.ch-badge {
-  font-size: 10px;
-  font-weight: 600;
-  padding: 3px 10px;
-  border-radius: 20px;
-}
-
-.ch-good .ch-badge { background: rgba(212,172,13,.15); color: rgba(255,255,255,.7); }
-.ch-bad  .ch-badge { background: #fde8e8; color: #C0392B; }
-
-/* ROWS */
-.cmp-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  border-bottom: 1px solid #f5f5f5;
-  transition: background .15s;
-}
-
-.cmp-row:last-child { border-bottom: none; }
-.cmp-row:hover .cell-feat { background: #fffbfb; }
-.cmp-row:hover .cell-good { background: #f7f0ee; }
-.cmp-row:hover .cell-bad  { background: #fffbfb; }
-
-.cell-feat {
-  background: #fff;
-  padding: 15px 22px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  border-right: 1px solid #f0f0f0;
-}
-
-.feat-num {
-  width: 22px; height: 22px;
-  border-radius: 6px;
-  background: #fff0f0;
-  border: 1px solid #f5b7b1;
-  color: #C0392B;
-  font-size: 10px;
-  font-weight: 800;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-
-.feat-info { flex: 1; min-width: 0; }
-
-.feat-title {
-  font-size: 13px;
-  font-weight: 700;
-  color: #1a1a1a;
-  line-height: 1.4;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.feat-sub {
-  font-size: 11px;
-  color: #bbb;
-  margin-top: 1px;
-  line-height: 1.4;
-}
-
-/* CHECK CELLS */
-.cell-good {
-  background: #fdf6f4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-right: 1px solid #f0f0f0;
-  padding: 12px;
-}
-
-.cell-bad {
-  background: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px;
-}
-
-.tick {
-  width: 32px; height: 32px;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 15px;
-  font-weight: 800;
-  flex-shrink: 0;
-}
-
-.tick-yes { background: #eaf8ef; color: #1a7a3c; }
-.tick-no  { background: #fde8e8; color: #C0392B; }
-
-/* CATEGORY DIVIDER */
-.cmp-divider {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  background: #f9f9f9;
-  border-bottom: 1px solid #f0f0f0;
-  border-top: 1px solid #f0f0f0;
-}
-
-.div-label {
-  padding: 8px 22px;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: #C0392B;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  border-right: 1px solid #f0f0f0;
-}
-
-.div-label::before {
-  content: '';
-  width: 14px; height: 2px;
-  background: #C0392B;
-  border-radius: 2px;
-  flex-shrink: 0;
-}
-
-.div-empty {
-  border-right: 1px solid #f0f0f0;
-}
-
-/* FOOTER TOTALS */
-.cmp-total {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  background: #111;
-}
-
-.total-label {
-  padding: 18px 22px;
-  border-right: 1px solid rgba(255,255,255,.08);
-  display: flex;
-  align-items: center;
-}
-
-.total-label span {
-  font-size: 12px;
-  font-weight: 700;
-  color: rgba(255,255,255,.5);
-  line-height: 1.4;
-}
-
-.total-good {
-  background: #7B241C;
-  padding: 18px 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  border-right: 1px solid rgba(255,255,255,.08);
-  border-top: 2px solid #D4AC0D;
-}
-
-.total-bad {
-  background: #1a1a1a;
-  padding: 18px 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  border-top: 2px solid #E74C3C;
-}
-
-.total-score {
-  font-size: 26px;
-  font-weight: 800;
-  line-height: 1;
-}
-
-.total-good .total-score { color: #D4AC0D; }
-.total-bad  .total-score { color: #E74C3C; }
-
-.total-desc {
-  font-size: 10px;
-  font-weight: 500;
-  text-align: center;
-}
-
-.total-good .total-desc { color: rgba(255,255,255,.5); }
-.total-bad  .total-desc { color: rgba(255,255,255,.35); }
-
-/* MOBILE SCROLL */
-@media (max-width: 640px) {
-  .cmp-section { padding: 40px 0; }
-  .cmp-head { padding: 0 16px; }
-
-  .cmp-scroll-hint {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 0 16px 10px;
-    font-size: 11px;
-    color: #bbb;
-    font-weight: 500;
+  :root {
+    --blue-dark: #0D47A1;
+    --blue-main: #1565C0;
+    --blue-mid: #1976D2;
+    --blue-light: #E3F2FD;
+    --blue-pale: #F0F7FF;
+    --gold: #F9A825;
+    --gold-dark: #F57F17;
+    --gold-light: #FFF8E1;
+    --teal: #00838F;
+    --teal-light: #E0F7FA;
+    --white: #FFFFFF;
+    --text-dark: #0D2444;
+    --text-mid: #1A3A5C;
+    --text-soft: #4A6080;
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 40px;
+    --shadow-soft: 0 4px 24px rgba(21,101,192,0.10);
+    --shadow-card: 0 2px 16px rgba(21,101,192,0.08);
   }
 
-  .cmp-scroll-hint svg { flex-shrink: 0; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  .cmp-scroll-wrap {
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    color: var(--text-dark);
+    background: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── TOPBAR ─── */
+  .topbar {
+    background: var(--blue-dark);
+    color: #fff;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 13.5px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  .topbar span { color: var(--gold); }
+
+  /* ─── NAVBAR ─── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--blue-light);
+    padding: 12px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+  }
+  .nav-brand {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .nav-logo-box {
+    width: 46px; height: 46px;
+    background: linear-gradient(135deg, var(--blue-main), var(--blue-dark));
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800; font-size: 18px; color: #fff;
+    letter-spacing: -1px;
+  }
+  .nav-title { 
+    font-family: 'Baloo 2', sans-serif; 
+    font-weight: 700; font-size: 15px; 
+    color: var(--blue-dark); line-height: 1.2;
+  }
+  .nav-title small { display: block; font-size: 11.5px; font-weight: 500; color: var(--text-soft); }
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--text-mid);
+    font-weight: 600; font-size: 14px;
+    transition: color .2s;
+  }
+  .nav-links a:hover { color: var(--blue-main); }
+  .nav-cta {
+    background: var(--gold);
+    color: var(--blue-dark);
+    font-weight: 700; font-size: 14px;
+    padding: 10px 22px; border-radius: var(--radius-xl);
+    text-decoration: none;
+    transition: background .2s, transform .15s;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--gold-dark); color: #fff; transform: scale(1.04); }
+  .hamburger { display: none; background: none; border: none; cursor: pointer; }
+  .hamburger span {
+    display: block; width: 24px; height: 2.5px;
+    background: var(--blue-dark); border-radius: 3px; margin: 5px 0;
+    transition: .3s;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: linear-gradient(160deg, var(--blue-dark) 0%, var(--blue-main) 55%, #1E88E5 100%);
+    color: #fff;
+    padding: 80px 40px 60px;
+    position: relative; overflow: hidden;
+    text-align: center;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -80px; right: -80px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: rgba(249,168,37,0.12);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -60px; left: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(249,168,37,0.2);
+    border: 1.5px solid var(--gold);
+    color: var(--gold);
+    font-size: 13px; font-weight: 700;
+    padding: 6px 18px; border-radius: 100px;
+    margin-bottom: 22px; letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: clamp(32px, 6vw, 58px);
+    font-weight: 800; line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .hero h1 .accent { color: var(--gold); }
+  .hero-sub {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: clamp(18px, 3vw, 26px);
+    font-weight: 600; color: #B3D9FF;
+    margin-bottom: 28px;
+  }
+  .hero-desc {
+    max-width: 640px; margin: 0 auto 36px;
+    font-size: 16px; color: rgba(255,255,255,0.82);
+    line-height: 1.75;
+  }
+  .hero-stats {
+    display: flex; flex-wrap: wrap;
+    justify-content: center; gap: 16px;
+    margin-bottom: 40px;
+  }
+  .hero-stat {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: var(--radius-md);
+    padding: 14px 24px; min-width: 150px;
+  }
+  .hero-stat .num {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 26px; font-weight: 800; color: var(--gold);
+    display: block;
+  }
+  .hero-stat .lbl { font-size: 12.5px; color: rgba(255,255,255,0.75); }
+  .hero-buttons { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+  .btn-primary {
+    background: var(--gold); color: var(--blue-dark);
+    font-weight: 800; font-size: 16px;
+    padding: 16px 36px; border-radius: var(--radius-xl);
+    text-decoration: none; transition: .2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--gold-dark); color: #fff; transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: #fff;
+    font-weight: 700; font-size: 15px;
+    padding: 15px 32px; border-radius: var(--radius-xl);
+    border: 2px solid rgba(255,255,255,0.5);
+    text-decoration: none; transition: .2s;
+  }
+  .btn-outline:hover { background: rgba(255,255,255,0.15); border-color: #fff; }
+
+  /* ─── WAVE ─── */
+  .wave-divider svg { display: block; width: 100%; }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 72px 40px; }
+  .section-label {
+    font-size: 12.5px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 1.5px;
+    color: var(--blue-main); margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 800; color: var(--text-dark);
+    line-height: 1.2; margin-bottom: 14px;
+  }
+  .section-sub {
+    font-size: 16px; color: var(--text-soft);
+    max-width: 580px; margin-bottom: 48px; line-height: 1.7;
+  }
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  /* ─── WHY SECTION ─── */
+  .why { background: var(--blue-pale); }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px; margin-top: 16px;
+  }
+  .why-card {
+    background: #fff;
+    border-radius: var(--radius-lg);
+    padding: 28px 24px;
+    border: 1.5px solid var(--blue-light);
+    transition: transform .25s, box-shadow .25s;
+  }
+  .why-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-soft); }
+  .why-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; margin-bottom: 16px;
+  }
+  .why-card h3 {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 17px; font-weight: 700;
+    color: var(--text-dark); margin-bottom: 8px;
+  }
+  .why-card p { font-size: 14px; color: var(--text-soft); line-height: 1.65; }
+
+  /* ─── CURRICULUM ─── */
+  .curriculum-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+  }
+  .curr-item {
+    border-radius: var(--radius-md);
+    padding: 22px 18px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: transform .2s;
+  }
+  .curr-item:hover { transform: scale(1.04); }
+  .curr-item .curr-icon { font-size: 36px; margin-bottom: 10px; display: block; }
+  .curr-item h4 {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 15px; font-weight: 700; margin-bottom: 4px;
+  }
+  .curr-item p { font-size: 12.5px; line-height: 1.5; }
+  .c1 { background: #E3F2FD; border-color: #90CAF9; color: var(--blue-dark); }
+  .c2 { background: #FFF8E1; border-color: #FFE082; color: #5D4037; }
+  .c3 { background: #E8F5E9; border-color: #A5D6A7; color: #1B5E20; }
+  .c4 { background: #FCE4EC; border-color: #F48FB1; color: #880E4F; }
+  .c5 { background: #E0F7FA; border-color: #80DEEA; color: #006064; }
+  .c6 { background: #EDE7F6; border-color: #CE93D8; color: #4A148C; }
+
+  /* ─── TIMELINE ─── */
+  .info-section { background: var(--blue-pale); }
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .info-card {
+    background: #fff; border-radius: var(--radius-lg);
+    padding: 28px 24px;
+    border-left: 5px solid var(--blue-main);
+    box-shadow: var(--shadow-card);
+  }
+  .info-card.gold { border-left-color: var(--gold); }
+  .info-card.teal { border-left-color: var(--teal); }
+  .info-card-title {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 14px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--text-soft);
+    margin-bottom: 10px;
+  }
+  .info-card-val {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 22px; font-weight: 800; color: var(--blue-dark);
+    line-height: 1.3;
+  }
+  .info-card.gold .info-card-val { color: var(--gold-dark); }
+  .info-card.teal .info-card-val { color: var(--teal); }
+  .info-card-note { font-size: 13px; color: var(--text-soft); margin-top: 6px; }
+
+  /* ─── TIMETABLE ─── */
+  .timetable-wrapper {
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding: 0 16px 12px;
-    scrollbar-width: none;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    border: 1.5px solid var(--blue-light);
+  }
+  table { border-collapse: collapse; width: 100%; min-width: 700px; }
+  thead th {
+    background: var(--blue-dark); color: #fff;
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 14px; font-weight: 700;
+    padding: 14px 12px; text-align: center;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  thead th:first-child { background: var(--blue-dark); border-radius: 0; }
+  tbody td {
+    text-align: center; vertical-align: middle;
+    padding: 10px 8px; font-size: 13.5px;
+    border: 1px solid #E8EFF8;
+    font-weight: 600;
+  }
+  tbody tr:nth-child(odd) td { background: var(--blue-pale); }
+  tbody tr:nth-child(even) td { background: #fff; }
+  .time-col { font-weight: 700; color: var(--blue-main); background: #EBF3FF !important; font-size: 13px; white-space: nowrap; }
+  .td-blue { color: var(--blue-dark); background: #DCEEFB !important; }
+  .td-red { color: #B71C1C; background: #FFEBEE !important; }
+  .td-green { color: #1B5E20; background: #E8F5E9 !important; }
+  .td-gold { color: #5D4037; background: #FFF8E1 !important; }
+  .td-teal { color: #006064; background: #E0F7FA !important; }
+  .td-purple { color: #4A148C; background: #F3E5F5 !important; }
+  .td-span { color: var(--text-mid); background: #F5F5F5 !important; font-style: italic; font-weight: 500; font-size: 13px; }
+  tbody tr:hover td { filter: brightness(0.96); }
+
+  /* ─── FEE ─── */
+  .fee-section { background: var(--blue-pale); }
+  .fee-table-wrap {
+    overflow-x: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    border: 2px solid var(--blue-light);
+    max-width: 680px; margin: 0 auto 32px;
+  }
+  .fee-table { width: 100%; min-width: 420px; border-collapse: collapse; }
+  .fee-table thead th {
+    background: var(--blue-main); color: #fff;
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 14px; font-weight: 700;
+    padding: 14px 20px; text-align: left;
+    border-bottom: 2px solid var(--blue-dark);
+  }
+  .fee-table thead th:last-child { text-align: right; }
+  .fee-table tbody td {
+    padding: 13px 20px; font-size: 14.5px;
+    border-bottom: 1px solid #E3EEF8;
+    background: #fff; text-align: left;
+  }
+  .fee-table tbody td:last-child { text-align: right; font-weight: 700; color: var(--blue-dark); }
+  .fee-table tbody tr:nth-child(odd) td { background: var(--blue-pale); }
+  .fee-total td { background: var(--blue-dark) !important; color: #fff !important; font-family: 'Baloo 2', sans-serif; font-size: 16px !important; font-weight: 800 !important; }
+  .fee-notes {
+    max-width: 680px; margin: 0 auto;
+    background: var(--gold-light);
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--gold);
+    padding: 20px 24px;
+  }
+  .fee-notes p { font-size: 14px; color: var(--text-mid); line-height: 1.75; margin-bottom: 4px; }
+  .fee-notes strong { color: var(--blue-dark); }
+
+  /* ─── BOOKING BOX ─── */
+  .booking-section {
+    background: linear-gradient(135deg, var(--blue-dark), var(--blue-main));
+    color: #fff; text-align: center;
+  }
+  .booking-section .section-title { color: #fff; }
+  .booking-section .section-label { color: var(--gold); }
+  .booking-box {
+    display: inline-flex; flex-wrap: wrap;
+    gap: 20px; justify-content: center;
+    margin-top: 36px;
+  }
+  .booking-item {
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(255,255,255,0.22);
+    border-radius: var(--radius-lg);
+    padding: 24px 32px; min-width: 200px;
+    text-align: center;
+  }
+  .booking-item .b-icon { font-size: 32px; margin-bottom: 10px; }
+  .booking-item .b-label { font-size: 12px; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-bottom: 6px; }
+  .booking-item .b-val { font-family: 'Baloo 2', sans-serif; font-size: 20px; font-weight: 800; color: var(--gold); }
+  .booking-cta-area { margin-top: 40px; }
+  .booking-note { font-size: 14px; color: rgba(255,255,255,0.75); margin-top: 16px; line-height: 1.7; }
+  .booking-note strong { color: var(--gold); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--text-dark);
+    color: rgba(255,255,255,0.8);
+    text-align: center; padding: 36px 20px;
+  }
+  footer .f-name {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: 18px; font-weight: 800; color: #fff;
+    margin-bottom: 8px;
+  }
+  footer .f-info { font-size: 14px; line-height: 2; }
+  footer .f-info span { color: var(--gold); font-weight: 700; }
+  footer .f-copy { font-size: 12.5px; margin-top: 20px; color: rgba(255,255,255,0.4); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 12px 20px; }
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .hamburger { display: block; }
+    section { padding: 52px 20px; }
+    .hero { padding: 60px 20px 48px; }
+    .hero-stat { min-width: 130px; }
+  }
+  @media (max-width: 500px) {
+    .hero h1 { font-size: 28px; }
+    .section-title { font-size: 24px; }
+    .hero-stats { gap: 10px; }
+    .btn-primary, .btn-outline { padding: 13px 24px; font-size: 14px; }
   }
 
-  .cmp-scroll-wrap::-webkit-scrollbar { display: none; }
-
-  .cmp-card {
-    min-width: 560px;
-    border-radius: 14px;
+  /* ─── SCROLL ANIMATION ─── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .6s ease, transform .6s ease;
   }
-}
+  .fade-up.visible {
+    opacity: 1; transform: translateY(0);
+  }
+  .delay-1 { transition-delay: .1s; }
+  .delay-2 { transition-delay: .2s; }
+  .delay-3 { transition-delay: .3s; }
+  .delay-4 { transition-delay: .4s; }
 
-@media (min-width: 641px) {
-  .cmp-scroll-hint { display: none; }
-}
+  /* ─── FLOATING HOTLINE ─── */
+  .float-hotline {
+    position: fixed; bottom: 28px; right: 24px; z-index: 200;
+    background: var(--gold); color: var(--blue-dark);
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800; font-size: 14px;
+    padding: 13px 22px; border-radius: var(--radius-xl);
+    text-decoration: none;
+    box-shadow: 0 6px 24px rgba(249,168,37,0.45);
+    display: flex; align-items: center; gap: 8px;
+    transition: .2s;
+    animation: pulse 2.5s infinite;
+  }
+  .float-hotline:hover { background: var(--gold-dark); color: #fff; transform: scale(1.06); }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 6px 24px rgba(249,168,37,0.45); }
+    50% { box-shadow: 0 6px 36px rgba(249,168,37,0.65); }
+  }
 </style>
+</head>
+<body>
 
-<section class="cmp-section">
+<!-- TOPBAR -->
+<div class="topbar">
+  🌟 Tuyển sinh Bán Trú Hè 2026 – Đăng ký sớm giữ chỗ! Hotline: <span>0372.131.114</span>
+</div>
 
-  <div class="cmp-head">
-    <div class="pill">
-      <span class="pill-dot"></span>
-      So sánh thực tế
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-box">HK</div>
+    <div class="nav-title">
+      Happy Ka
+      <small>Phát Triển Trí Tuệ Trẻ – Phú Thọ</small>
     </div>
-    <h2>Cùng rủi ro — <mark>hai số phận</mark><br>hoàn toàn khác nhau</h2>
-    <p>10 tình huống thực tế, phân tích trung thực không tô vẽ</p>
   </div>
+  <ul class="nav-links">
+    <li><a href="#chuong-trinh">Chương trình</a></li>
+    <li><a href="#lich-hoc">Lịch học</a></li>
+    <li><a href="#hoc-phi">Học phí</a></li>
+    <li><a href="#dang-ky">Đăng ký</a></li>
+  </ul>
+  <a href="tel:0372131114" class="nav-cta">📞 Liên hệ ngay</a>
+  <button class="hamburger" onclick="this.nextElementSibling && null" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
-  <div class="cmp-scroll-hint">
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-      <path d="M2 7h10M8 3l4 4-4 4" stroke="#bbb" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    Vuốt ngang để xem đầy đủ
-  </div>
-
-  <div class="cmp-scroll-wrap">
-  <div class="cmp-card">
-
-    <!-- HEADER -->
-    <div class="cmp-colheads">
-      <div class="ch-feature"><span>Tình huống</span></div>
-      <div class="ch-good">
-        <div class="ch-icon-wrap">✅</div>
-        <div class="ch-title">Có Thẻ CSSK<br>+ Bảo Hiểm</div>
-        <div class="ch-badge">Được bảo vệ</div>
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">Hè 2026 · Dành cho học sinh 2019 & 2020</div>
+    <h1>Bán Trú Hè –<br><span class="accent">Kỳ Nghỉ Thông Minh!</span></h1>
+    <p class="hero-sub">Trung Tâm Phát Triển Trí Tuệ Trẻ Happy Ka</p>
+    <p class="hero-desc">
+      Giúp trẻ có một kỳ nghỉ đầy ý nghĩa, bổ ích — học tập, vui chơi, khám phá và rèn luyện kỹ năng trong môi trường an toàn, chuyên nghiệp.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="num">1/6</span>
+        <span class="lbl">Ngày khai giảng</span>
       </div>
-      <div class="ch-bad">
-        <div class="ch-icon-wrap">❌</div>
-        <div class="ch-title">Không có<br>Thẻ / BH</div>
-        <div class="ch-badge">Tự chịu rủi ro</div>
+      <div class="hero-stat">
+        <span class="num">23/8</span>
+        <span class="lbl">Ngày bế giảng</span>
       </div>
-    </div>
-
-    <!-- GROUP 1 -->
-    <div class="cmp-divider">
-      <div class="div-label">Rủi ro tính mạng</div>
-      <div class="div-empty"></div>
-      <div></div>
-    </div>
-
-    <div class="cmp-row">
-      <div class="cell-feat">
-        <div class="feat-num">1</div>
-        <div class="feat-info">
-          <div class="feat-title">Rủi ro tử vong</div>
-          <div class="feat-sub">Mất người trụ cột gia đình</div>
-        </div>
+      <div class="hero-stat">
+        <span class="num">3 lớp</span>
+        <span class="lbl">Chỉ tiêu tuyển sinh</span>
       </div>
-      <div class="cell-good"><div class="tick tick-yes">✓</div></div>
-      <div class="cell-bad"><div class="tick tick-no">✗</div></div>
-    </div>
-
-    <div class="cmp-row">
-      <div class="cell-feat">
-        <div class="feat-num">2</div>
-        <div class="feat-info">
-          <div class="feat-title">Tàn tật, mất sức lao động</div>
-          <div class="feat-sub">Hỗ trợ thu nhập dài hạn</div>
-        </div>
-      </div>
-      <div class="cell-good"><div class="tick tick-yes">✓</div></div>
-      <div class="cell-bad"><div class="tick tick-no">✗</div></div>
-    </div>
-
-    <!-- GROUP 2 -->
-    <div class="cmp-divider">
-      <div class="div-label">Chi phí y tế</div>
-      <div class="div-empty"></div>
-      <div></div>
-    </div>
-
-    <div class="cmp-row">
-      <div class="cell-feat">
-        <div class="feat-num">3</div>
-        <div class="feat-info">
-          <div class="feat-title">Bệnh hiểm nghèo</div>
-          <div class="feat-sub">Ung thư, tim mạch, đột quỵ…</div>
-        </div>
-      </div>
-      <div class="cell-good"><div class="tick tick-yes">✓</div></div>
-      <div class="cell-bad"><div class="tick tick-no">✗</div></div>
-    </div>
-
-    <div class="cmp-row">
-      <div class="cell-feat">
-        <div class="feat-num">4</div>
-        <div class="feat-info">
-          <div class="feat-title">Chi phí khám chữa bệnh</div>
-          <div class="feat-sub">Viện phí, thuốc, phẫu thuật</div>
-        </div>
-      </div>
-      <div class="cell-good"><div class="tick tick-yes">✓</div></div>
-      <div class="cell-bad"><div class="tick tick-no">✗</div></div>
-    </div>
-
-    <div class="cmp-row">
-      <div class="cell-feat">
-        <div class="feat-num">5</div>
-        <div class="feat-info">
-          <div class="feat-title">Nhập viện khẩn cấp</div>
-          <div class="feat-sub">Bảo lãnh viện phí tức thì</div>
-        </div>
-      </div>
-      <div class="cell-good"><div class="tick tick-yes">✓</div></div>
-      <div class="cell-bad"><div class="tick tick-no">✗</div></div>
-    </div>
-
-    <!-- GROUP 3 -->
-    <div class="cmp-divider">
-      <div class="div-label">Chất lượng sống</div>
-      <div class="div-empty"></div>
-      <div></div>
-    </div>
-
-    <div class="cmp-row">
-      <div class="cell-feat">
-        <div class="feat-num">6</div>
-        <div class="feat-info">
-          <div class="feat-title">Chủ động khám định kỳ</div>
-          <div class="feat-sub">Phát hiện bệnh sớm, dễ điều trị</div>
-        </div>
-      </div>
-      <div class="cell-good"><div class="tick tick-yes">✓</div></div>
-      <div class="cell-bad"><div class="tick tick-no">✗</div></div>
-    </div>
-
-    <div class="cmp-row">
-      <div class="cell-feat">
-        <div class="feat-num">7</div>
-        <div class="feat-info">
-          <div class="feat-title">Chất lượng điều trị</div>
-          <div class="feat-sub">Chọn bệnh viện tốt, dịch vụ cao</div>
-        </div>
-      </div>
-      <div class="cell-good"><div class="tick tick-yes">✓</div></div>
-      <div class="cell-bad"><div class="tick tick-no">✗</div></div>
-    </div>
-
-    <div class="cmp-row">
-      <div class="cell-feat">
-        <div class="feat-num">8</div>
-        <div class="feat-info">
-          <div class="feat-title">Tâm lý khi ốm đau</div>
-          <div class="feat-sub">Yên tâm, không lo lắng kép</div>
-        </div>
-      </div>
-      <div class="cell-good"><div class="tick tick-yes">✓</div></div>
-      <div class="cell-bad"><div class="tick tick-no">✗</div></div>
-    </div>
-
-    <!-- GROUP 4 -->
-    <div class="cmp-divider">
-      <div class="div-label">Tài chính gia đình</div>
-      <div class="div-empty"></div>
-      <div></div>
-    </div>
-
-    <div class="cmp-row">
-      <div class="cell-feat">
-        <div class="feat-num">9</div>
-        <div class="feat-info">
-          <div class="feat-title">Gia đình & người thân</div>
-          <div class="feat-sub">Giảm gánh nặng tài chính chung</div>
-        </div>
-      </div>
-      <div class="cell-good"><div class="tick tick-yes">✓</div></div>
-      <div class="cell-bad"><div class="tick tick-no">✗</div></div>
-    </div>
-
-    <div class="cmp-row">
-      <div class="cell-feat">
-        <div class="feat-num">10</div>
-        <div class="feat-info">
-          <div class="feat-title">Rủi ro tài chính dài hạn</div>
-          <div class="feat-sub">Tránh nợ nần, mất tài sản</div>
-        </div>
-      </div>
-      <div class="cell-good"><div class="tick tick-yes">✓</div></div>
-      <div class="cell-bad"><div class="tick tick-no">✗</div></div>
-    </div>
-
-    <!-- TOTALS -->
-    <div class="cmp-total">
-      <div class="total-label"><span>Kết quả<br>10 tình huống</span></div>
-      <div class="total-good">
-        <div class="total-score">10/10</div>
-        <div class="total-desc">Bảo vệ toàn diện</div>
-      </div>
-      <div class="total-bad">
-        <div class="total-score">0/10</div>
-        <div class="total-desc">Tự chịu rủi ro</div>
+      <div class="hero-stat">
+        <span class="num">160k</span>
+        <span class="lbl">Chi phí / ngày</span>
       </div>
     </div>
-
-  </div>
+    <div class="hero-buttons">
+      <a href="#dang-ky" class="btn-primary">🎒 Đăng ký giữ chỗ ngay</a>
+      <a href="#hoc-phi" class="btn-outline">Xem học phí</a>
+    </div>
   </div>
 </section>
+
+<!-- Wave -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1200 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="height:48px;">
+    <path d="M0,0 C300,60 900,0 1200,50 L1200,0 Z" fill="#1565C0"/>
+  </svg>
+</div>
+
+<!-- WHY -->
+<section class="why" id="chuong-trinh">
+  <div class="container">
+    <div class="section-label">Tại sao chọn Happy Ka?</div>
+    <h2 class="section-title">Phụ huynh yên tâm<br>khi con được:</h2>
+    <div class="why-grid">
+      <div class="why-card fade-up">
+        <div class="why-icon" style="background:#E3F2FD;">📚</div>
+        <h3>Rèn phẩm chất & kỹ năng sống</h3>
+        <p>Chương trình tích hợp phát triển tư duy, tự lập, tự giác và tinh thần trách nhiệm từ nhỏ.</p>
+      </div>
+      <div class="why-card fade-up delay-1">
+        <div class="why-icon" style="background:#FFF8E1;">💡</div>
+        <h3>Có phương pháp & cảm hứng học</h3>
+        <p>Giáo viên truyền cảm hứng, tạo động lực học tập qua các hoạt động thực tế và trò chơi.</p>
+      </div>
+      <div class="why-card fade-up delay-2">
+        <div class="why-icon" style="background:#FCE4EC;">📵</div>
+        <h3>Tránh xa tivi, điện thoại</h3>
+        <p>Các hoạt động vui chơi, thư giãn sáng tạo thay thế hoàn toàn màn hình điện tử.</p>
+      </div>
+      <div class="why-card fade-up delay-3">
+        <div class="why-icon" style="background:#E0F7FA;">🌍</div>
+        <h3>Học Tiếng Anh với GV nước ngoài</h3>
+        <p>Tiếp xúc giao tiếp thực tế với giáo viên nước ngoài qua chương trình Tiếng Anh Popodoo.</p>
+      </div>
+      <div class="why-card fade-up delay-1">
+        <div class="why-icon" style="background:#E8F5E9;">✅</div>
+        <h3>Ôn tập Toán, Tiếng Việt</h3>
+        <p>Củng cố và bổ sung kiến thức nền, sẵn sàng bước vào năm học mới tự tin.</p>
+      </div>
+      <div class="why-card fade-up delay-2">
+        <div class="why-icon" style="background:#EDE7F6;">🏕️</div>
+        <h3>Dã ngoại cuối khoá hấp dẫn</h3>
+        <p>Tặng 01 hoạt động dã ngoại kết thúc khoá học – kỷ niệm đáng nhớ cho các bé!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section id="noi-dung">
+  <div class="container">
+    <div class="section-label">Nội dung học tập</div>
+    <h2 class="section-title">Chương trình toàn diện<br>cho bé yêu</h2>
+    <p class="section-sub">Phối hợp kiến thức nền tảng và kỹ năng mềm, giúp trẻ phát triển toàn diện cả trí tuệ lẫn nhân cách.</p>
+    <div class="curriculum-grid">
+      <div class="curr-item c1 fade-up">
+        <span class="curr-icon">🔢</span>
+        <h4>Toán học</h4>
+        <p>Ôn tập, luyện tư duy logic theo phương pháp mới</p>
+      </div>
+      <div class="curr-item c2 fade-up delay-1">
+        <span class="curr-icon">📖</span>
+        <h4>Tiếng Việt</h4>
+        <p>Luyện chữ, đọc sách, trau dồi ngôn ngữ</p>
+      </div>
+      <div class="curr-item c3 fade-up delay-2">
+        <span class="curr-icon">🌏</span>
+        <h4>Tiếng Anh</h4>
+        <p>Giao tiếp thực tế với GV nước ngoài – Popodoo</p>
+      </div>
+      <div class="curr-item c4 fade-up delay-3">
+        <span class="curr-icon">🎤</span>
+        <h4>MC Nhí</h4>
+        <p>Rèn tự tin, biểu đạt trước đám đông</p>
+      </div>
+      <div class="curr-item c5 fade-up delay-1">
+        <span class="curr-icon">💃</span>
+        <h4>Nhảy hiện đại</h4>
+        <p>Vận động, thể chất kết hợp nghệ thuật sáng tạo</p>
+      </div>
+      <div class="curr-item c6 fade-up delay-2">
+        <span class="curr-icon">🧠</span>
+        <h4>Kỹ năng sống</h4>
+        <p>Thủ công, đọc sách, tự lập và kỹ năng xã hội</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO CARDS -->
+<section class="info-section">
+  <div class="container">
+    <div class="section-label">Thông tin tuyển sinh</div>
+    <h2 class="section-title">Chi tiết chương trình Hè 2026</h2>
+    <div class="info-grid">
+      <div class="info-card fade-up">
+        <div class="info-card-title">📅 Thời gian học</div>
+        <div class="info-card-val">01/6 – 23/8/2026</div>
+        <div class="info-card-note">Học từ Thứ 2 đến Thứ 7</div>
+      </div>
+      <div class="info-card gold fade-up delay-1">
+        <div class="info-card-title">📝 Thời gian tuyển sinh</div>
+        <div class="info-card-val">10/4 – 25/5/2025</div>
+        <div class="info-card-note">Đăng ký sớm để giữ suất học</div>
+      </div>
+      <div class="info-card teal fade-up delay-2">
+        <div class="info-card-title">🎯 Chỉ tiêu tuyển sinh</div>
+        <div class="info-card-val">24 hs (2019) · 12 hs (2018)</div>
+        <div class="info-card-note">24 em 2020 – 2 lớp · 12 em 2018 – 1 lớp</div>
+      </div>
+      <div class="info-card fade-up delay-3">
+        <div class="info-card-title">📍 Địa chỉ trung tâm</div>
+        <div class="info-card-val" style="font-size:17px;">Số 72 Đinh Tiên Hoàng</div>
+        <div class="info-card-note">P. Hùng Vương – Tx Phú Thọ (cạnh MN Hoa Anh Đào)</div>
+      </div>
+      <div class="info-card gold fade-up delay-1">
+        <div class="info-card-title">👕 Quà tặng kèm</div>
+        <div class="info-card-val">Áo đồng phục</div>
+        <div class="info-card-note">+ 01 hoạt động dã ngoại cuối khoá hấp dẫn</div>
+      </div>
+      <div class="info-card teal fade-up delay-2">
+        <div class="info-card-title">🎓 Độ tuổi</div>
+        <div class="info-card-val">Sinh năm 2019 & 2020</div>
+        <div class="info-card-note">Chương trình phù hợp lứa tuổi mầm non – tiểu học</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMETABLE -->
+<section id="lich-hoc">
+  <div class="container">
+    <div class="section-label">Thời khoá biểu</div>
+    <h2 class="section-title">Lịch học hàng tuần</h2>
+    <p class="section-sub">Từ 1/6 đến 23/8/2026 — Chương trình cân bằng giữa học tập, vận động và nghỉ ngơi.</p>
+    <div class="timetable-wrapper fade-up">
+      <table>
+        <thead>
+          <tr>
+            <th>Thời gian</th>
+            <th>Thứ 2</th>
+            <th>Thứ 3</th>
+            <th>Thứ 4</th>
+            <th>Thứ 5</th>
+            <th>Thứ 6</th>
+            <th>Thứ 7</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="time-col">7:00 – 8:00</td>
+            <td class="td-teal">Đón trẻ</td>
+            <td class="td-teal">Đón trẻ</td>
+            <td class="td-teal">Đón trẻ</td>
+            <td class="td-teal">Đón trẻ</td>
+            <td class="td-teal">Đón trẻ</td>
+            <td class="td-gold" rowspan="2" style="vertical-align:middle;">Kiểm tra<br>Toán &<br>Tiếng Việt</td>
+          </tr>
+          <tr>
+            <td class="time-col">8:00 – 8:30</td>
+            <td class="td-green">Tập thể dục buổi sáng</td>
+            <td class="td-green">Tập thể dục buổi sáng</td>
+            <td class="td-green">Tập thể dục buổi sáng</td>
+            <td class="td-green">Tập thể dục buổi sáng</td>
+            <td class="td-green">Tập thể dục buổi sáng</td>
+          </tr>
+          <tr>
+            <td class="time-col">8:30 – 10:30</td>
+            <td class="td-blue">📐 TOÁN</td>
+            <td class="td-red">📝 TIẾNG VIỆT</td>
+            <td class="td-blue">📐 TOÁN</td>
+            <td class="td-red">📝 TIẾNG VIỆT</td>
+            <td class="td-red">📝 TIẾNG VIỆT</td>
+            <td class="td-purple">Kỹ năng sống</td>
+          </tr>
+          <tr>
+            <td class="time-col">10:30 – 14:00</td>
+            <td class="td-span" colspan="6">🍽️ Ăn trưa · Ngủ trưa · Ăn chiều</td>
+          </tr>
+          <tr>
+            <td class="time-col">14:00 – 14:30</td>
+            <td class="td-green">Vận động</td>
+            <td class="td-purple">MC Nhí</td>
+            <td class="td-purple">Kỹ năng sống</td>
+            <td class="td-green">Vận động</td>
+            <td class="td-purple">MC Nhí</td>
+            <td class="td-purple" rowspan="2" style="vertical-align:middle;">Kỹ năng sống</td>
+          </tr>
+          <tr>
+            <td class="time-col">14:30 – 16:00</td>
+            <td class="td-teal">🌍 Tiếng Anh Popodoo</td>
+            <td class="td-purple">MC Nhí</td>
+            <td class="td-purple">Kỹ năng sống</td>
+            <td class="td-teal">🌍 Tiếng Anh Popodoo</td>
+            <td class="td-purple">MC Nhí</td>
+          </tr>
+          <tr>
+            <td class="time-col">16:00 – 16:30</td>
+            <td class="td-span" colspan="6">🏠 Trả trẻ</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- FEE -->
+<section class="fee-section" id="hoc-phi">
+  <div class="container" style="text-align:center;">
+    <div class="section-label">Biểu học phí</div>
+    <h2 class="section-title">Minh bạch – Rõ ràng – Trọn gói</h2>
+    <p class="section-sub" style="margin: 0 auto 36px;">Toàn bộ chi phí cho cả khoá học từ 01/6 đến 23/8/2026.</p>
+    <div class="fee-table-wrap fade-up">
+      <table class="fee-table">
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Khoản thu</th>
+            <th>Mức thu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="text-align:center; font-weight:700; color:var(--blue-main);">1</td>
+            <td>Học phí (Thứ 2 – 7 · 110k/ngày)</td>
+            <td>7.560.000đ</td>
+          </tr>
+          <tr>
+            <td style="text-align:center; font-weight:700; color:var(--blue-main);">2</td>
+            <td>Tiền ăn (bữa trưa, chiều · 40k/ngày)</td>
+            <td>2.880.000đ</td>
+          </tr>
+          <tr>
+            <td style="text-align:center; font-weight:700; color:var(--blue-main);">3</td>
+            <td>Tiền trông trưa (10k/ngày)</td>
+            <td>720.000đ</td>
+          </tr>
+          <tr>
+            <td style="text-align:center; font-weight:700; color:var(--blue-main);">4</td>
+            <td>Học liệu (cả khoá)</td>
+            <td>360.000đ</td>
+          </tr>
+          <tr class="fee-total">
+            <td colspan="2">💰 Tổng cộng cả khoá</td>
+            <td>11.520.000đ</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="fee-notes fade-up">
+      <p>💡 <strong>Tính ra chỉ 160.000đ/ngày</strong> – bao gồm học tập, ăn trưa, ăn chiều, trông trưa và nghỉ ngơi!</p>
+      <p>📌 <strong>Phí đặt chỗ:</strong> 1.000.000đ/học sinh (thanh toán khi đăng ký để giữ suất)</p>
+      <p>📌 <strong>Tặng 01 áo đồng phục</strong> khi con tham gia khoá học</p>
+      <p>📌 <strong>Tặng 01 hoạt động dã ngoại</strong> cuối khoá hấp dẫn</p>
+      <p>⚠️ Sau khi khoá học bắt đầu, không giải quyết hoàn học phí với trường hợp nghỉ học.</p>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING / CTA -->
+<section class="booking-section" id="dang-ky">
+  <div class="container">
+    <div class="section-label">Đăng ký ngay</div>
+    <h2 class="section-title">Giữ suất cho con<br>ngay hôm nay!</h2>
+    <p style="color:rgba(255,255,255,0.8); font-size:16px; max-width:520px; margin:0 auto 12px; line-height:1.7;">
+      Số lượng có hạn, tuyển sinh sẽ đóng khi đủ chỉ tiêu. Đặt chỗ sớm để con không bỏ lỡ kỳ nghỉ hè ý nghĩa!
+    </p>
+    <div class="booking-box">
+      <div class="booking-item">
+        <div class="b-icon">📞</div>
+        <div class="b-label">Hotline</div>
+        <div class="b-val">0372.131.114</div>
+      </div>
+      <div class="booking-item">
+        <div class="b-icon">🏦</div>
+        <div class="b-label">Chuyển khoản MB Bank</div>
+        <div class="b-val">STK: 0372.131.114</div>
+      </div>
+      <div class="booking-item">
+        <div class="b-icon">📍</div>
+        <div class="b-label">Địa chỉ</div>
+        <div class="b-val" style="font-size:15px;">Số 72 Đinh Tiên Hoàng</div>
+      </div>
+    </div>
+    <div class="booking-cta-area">
+      <a href="tel:0372131114" class="btn-primary" style="font-size:18px; padding:18px 48px;">
+        📞 Gọi ngay: 0372.131.114
+      </a>
+      <p class="booking-note">
+        Nội dung chuyển khoản: <strong>Họ và tên – Năm sinh – Số điện thoại</strong><br>
+        Nhận hỗ trợ tư vấn trực tiếp tại: <strong>Số 72 Đinh Tiên Hoàng, P. Hùng Vương, Tx Phú Thọ</strong>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-name">🎓 Trung Tâm Phát Triển Trí Tuệ Trẻ Happy Ka</div>
+  <div class="f-info">
+    📍 Số 72 Đinh Tiên Hoàng – P. Hùng Vương – Tx Phú Thọ<br>
+    📞 Hotline: <span>0372.131.114</span><br>
+    ⏰ Giờ làm việc: Thứ 2 – Thứ 7, 7:00 – 17:00
+  </div>
+  <div class="f-copy">© 2026 Happy Ka · Phát triển trí tuệ – Nuôi dưỡng tương lai</div>
+</footer>
+
+<!-- FLOATING HOTLINE -->
+<a href="tel:0372131114" class="float-hotline">
+  📞 Gọi ngay
+</a>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
